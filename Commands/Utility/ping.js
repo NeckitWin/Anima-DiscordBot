@@ -5,8 +5,8 @@ console.log("ping.js загружен✅")
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
-        .setDescription('Проверка задержки бота'),
+        .setDescription('Replies with Pong!'),
     async execute(interaction) {
-        await interaction.reply(`Задержка: ${interaction.client.ws.ping} мс`);
+        await interaction.reply('Pong!');
     },
 };
