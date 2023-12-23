@@ -1,6 +1,6 @@
-const {SlashCommandBuilder} = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
-console.log("user.js загружен✅")
+console.log("user.js загружен✅");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,7 +15,7 @@ module.exports = {
             color: 0x0099ff,
             title: `Информация о пользователе ${user.username}`,
             thumbnail: {
-                url: user.displayAvatarURL({dynamic: true}),
+                url: user.displayAvatarURL({ dynamic: true }),
             },
             fields: [
                 {
@@ -24,14 +24,9 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: 'Тег пользователя',
-                    value: user.tag,
-                    inline: true,
-                },
-                {
                     name: 'ID пользователя',
                     value: user.id,
-                    inline: true,
+                    inline: false,
                 },
                 {
                     name: 'Дата создания аккаунта',
@@ -43,12 +38,8 @@ module.exports = {
                     value: member.joinedAt,
                     inline: true,
                 },
-                {
-                    name: 'Высшая роль',
-                    value: member.roles.highest,
-                    inline: true,
-                },
             ],
-        }
-    }
+        };
+        interaction.reply({ embeds: [embed] });
+    },
 };
