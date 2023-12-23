@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-console.log("user.js загружен✅");
+console.log("bot.js загружен✅");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,7 +26,7 @@ module.exports = {
                 },
                 {
                     name: 'Когда я была создана',
-                    value: interaction.client.user.createdAt.substr(0, 9),
+                    value: interaction.client.user.createdAt,
                     inline: true,
                 }
             ],

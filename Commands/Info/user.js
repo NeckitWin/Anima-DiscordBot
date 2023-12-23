@@ -30,12 +30,12 @@ module.exports = {
                 },
                 {
                     name: 'Дата создания аккаунта',
-                    value: user.createdAt,
+                    value: user.createdAt.toDateString(),
                     inline: true,
                 },
                 {
                     name: 'Дата входа на сервер',
-                    value: member.joinedAt,
+                    value: member.joinedAt.toDateString(),
                     inline: true,
                 },
             ],
