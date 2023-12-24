@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-console.log("user.js загружен✅");
+console.log("command Info/user.js loaded✅");
 
 module.exports = {
     data: new SlashCommandBuilder()

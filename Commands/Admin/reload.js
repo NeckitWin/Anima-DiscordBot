@@ -9,6 +9,8 @@ const {SlashCommandBuilder} = require('discord.js');
 // Нужно создать config.json в папке Data и вставить туда следующее:
 // {"token": "Токен бота", "clientId": "ID бота"}
 
+console.log("command Admin/reload.js loaded✅");
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('reload')
@@ -50,7 +52,7 @@ module.exports = {
                 console.error(error);
             }
         })();
-        await interaction.reply({content:'Commands successfully registered!', ephemeral: true});
+        await interaction.reply({content:'Commands successfully registered!✅', ephemeral: true});
     },
 
 }

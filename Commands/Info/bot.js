@@ -2,7 +2,7 @@
 
 const { SlashCommandBuilder } = require("discord.js");
 
-console.log("bot.js загружен✅");
+console.log("command Info/bot.js loaded✅");
 
 module.exports = {
     data: new SlashCommandBuilder()

@@ -26,7 +26,7 @@ for (const folder of commandFolders) {
 }
 
 bot.on("ready", () => {
-    console.log('Bot is ready!');
+    console.log('Bot is ready!✅');
 });
 
 bot.on(Events.InteractionCreate, async interaction => {
