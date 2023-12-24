@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const perm = require('../../Data/perm.json');
 
 console.log("command Moder/clear.js loaded✅");
 
@@ -27,14 +28,38 @@ module.exports = {
         const amount = interaction.options.getInteger('amount');
         // Проверяем, есть ли у пользователя права на удаление сообщений
         if (!member.permissions.has('ManageMessages')) {
-            return interaction.reply({ content: 'You dont have permissions to use this command', ephemeral: true });
+            const response = {
+                'ru': perm.ru,
+                'pl': perm.pl,
+                'uk': perm.uk,
+                'default': perm.default
+            };
+            const locale = interaction.locale && response.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
+            const replyMessage = response[locale];
+            return interaction.reply(replyMessage);
         }
         // Проверяем, что количество сообщений находится в диапазоне от 1 до 100
         if (amount <= 0 || amount > 100) {
-            await interaction.reply({ content: 'You need to input a number between 1 and 100.', ephemeral: true });
+            const response = {
+                'ru': 'Количество сообщений должно быть в диапазоне от 1 до 100',
+                'pl': 'Liczba wiadomości musi być w zakresie od 1 do 100',
+                'uk': 'Кількість повідомлень повинна бути в діапазоні від 1 до 100',
+                'default': 'Amount of messages must be in range from 1 to 100'
+            };
+            const locale = interaction.locale && response.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
+            const replyMessage = response[locale];
+            return interaction.reply(replyMessage);
         } else { // Если все проверки пройдены, удаляем сообщения и отвечаем пользователю
             await interaction.channel.bulkDelete(amount, true);
-            await interaction.reply({ content: `Deleted ${amount} messages.`, ephemeral: true });
+            const response = {
+                'ru': `Удалено ${amount} сообщений`,
+                'pl': `Usunięto ${amount} wiadomości`,
+                'uk': `Видалено ${amount} повідомлень`,
+                'default': `${amount} messages deleted`
+            };
+            const locale = interaction.locale && response.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
+            const replyMessage = response[locale];
+            await interaction.reply(replyMessage);
         }
     },
 };

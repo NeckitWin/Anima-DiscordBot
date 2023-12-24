@@ -16,9 +16,9 @@ module.exports = {
             'default': 'Test command works!'
         };
 
-        const locale = interaction.locale || 'default';
+        const locale = interaction.locale && responses.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
         const replyMessage = responses[locale];
 
-        interaction.reply(replyMessage);
+        await interaction.reply(replyMessage);
     },
 }
