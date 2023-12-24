@@ -12,12 +12,12 @@ const {SlashCommandBuilder} = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('reload')
-        .setDescription('Обновление команд'),
+        .setDescription('Register all commands'),
     async execute(interaction) {
         allowedUserIds = ['429562004399980546', '321908057187549185'];
 
         if (!allowedUserIds.includes(interaction.user.id)) {
-            return interaction.reply('У вас нет разрешения выполнить эту команду.');
+            return interaction.reply('You are not allowed to use this command');
         }
 
         const commands = [];
@@ -50,7 +50,7 @@ module.exports = {
                 console.error(error);
             }
         })();
-        await interaction.reply('Успешно!');
+        await interaction.reply({content:'Commands successfully registered!', ephemeral: true});
     },
 
 }
