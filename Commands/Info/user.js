@@ -5,22 +5,24 @@ console.log("command Info/user.js loaded✅");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('user')
-        .setDescription('Показывает информацию о пользователе или о пользователе, которого упомянули')
+        .setNameLocalizations({ ru: 'пользователь', pl: 'użytkownik', uk: 'користувач' })
+        .setDescription('Shows information about a user or about a user that was mentioned')
+        .setDescriptionLocalizations({ru: "Показывает информацию о пользователе или о пользователе, которого упомянули", pl: "Pokazuje informacje o użytkowniku lub o użytkowniku, którego wspomniano", uk: "Показує інформацію про користувача або про користувача, якого згадали"})
         .addUserOption(option => option.setName('user').setDescription('Пользователь, о котором нужна информация')),
     async execute(interaction) {
         try {
             const user = interaction.options.getUser('user') || interaction.user;
-            await user.fetch({ force: true });
+            await user.fetch();
             const member = interaction.guild.members.cache.get(user.id);
 
             const embed = {
                 color: 0x0099ff,
                 title: `Информация о пользователе ${user.username}`,
                 thumbnail: {
-                    url: user.displayAvatarURL({ dynamic: true }),
+                    url: user.displayAvatarURL(),
                 },
                 image: {
-                    url: user.bannerURL({ dynamic: true, size: 4096 }),
+                    url: user.bannerURL({ size: 4096 }),
                 },
                 fields: [
                     { name: 'Имя пользователя', value: user.username, inline: true },
