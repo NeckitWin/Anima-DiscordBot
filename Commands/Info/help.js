@@ -18,15 +18,24 @@ module.exports = {
             fields: [
                 {
                     name: 'Информация',
-                    value: 'user, bot',
-                    inline: true,
+                    value: '</help:1188221601343357056>, </bot:1188217557883293727> </user:1187805713536405584>',
+                    inline: false,
+                },
+                {
+                    name: 'Модерация',
+                    value: '</clear:1188291249225084958>',
+                    inline: false,
                 },
                 {
                     name: 'Утилиты',
-                    value: 'ping, test',
-                    inline: true,
-                },
+                    value: '</test:1188217557883293730>',
+                    inline: false,
+                }
             ],
+            author: {
+                name: `Запрос от ` + interaction.user.displayName,
+                icon_url: interaction.user.displayAvatarURL(),
+            },
         };
         interaction.reply({ embeds: [embed] });
     }
