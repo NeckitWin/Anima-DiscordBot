@@ -14,7 +14,7 @@ module.exports = {
         const locale = interaction.guild?.preferredLocale || 'default';
         const embed = {
             color: 0x0099ff,
-            title: `List of commands`,
+            title: 'List of commands',
             titleLocalizations: { ru: 'Список команд', pl: 'Lista komend', uk: 'Список команд' },
             thumbnail: {
                 url: interaction.client.user.displayAvatarURL(),
