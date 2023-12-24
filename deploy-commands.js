@@ -3,6 +3,8 @@ const path = require('path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token, clientId } = require('./Data/config.json');
+// Нужно создать config.json в папке Data и вставить туда следующее:
+// {"token": "Токен бота", "clientId": "ID бота"}
 
 const commands = [];
 const foldersPath = path.join(__dirname, 'Commands');

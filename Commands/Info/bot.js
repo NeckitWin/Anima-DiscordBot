@@ -1,3 +1,5 @@
+// Команда "bot" показывает информацию о боте
+
 const { SlashCommandBuilder } = require("discord.js");
 
 console.log("bot.js загружен✅");

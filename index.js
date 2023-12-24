@@ -3,7 +3,7 @@ const path = require('node:path');
 const {Client, Events, GatewayIntentBits, Collection} = require('discord.js')
 const {token} = require('./Data/config.json')
 
-const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
+const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
 
 bot.commands = new Collection();
 
@@ -26,7 +26,7 @@ for (const folder of commandFolders) {
 }
 
 bot.on("ready", () => {
-    console.log('Бот успешно запущен!');
+    console.log('Bot is ready!');
 });
 
 bot.on(Events.InteractionCreate, async interaction => {
@@ -50,5 +50,19 @@ bot.on(Events.InteractionCreate, async interaction => {
         }
     }
 });
+
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+    const filePath = path.join(eventsPath, file);
+    const event = require(filePath);
+    if (event.once) {
+        bot.once(event.name, (...args) => event.execute(...args));
+    } else {
+        bot.on(event.name, (...args) => event.execute(...args));
+    }
+}
+
 
 bot.login(token);
