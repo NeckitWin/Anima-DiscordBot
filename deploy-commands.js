@@ -3,8 +3,6 @@ const path = require('path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token, clientId } = require('./Data/config.json');
-// Нужно создать config.json в папке Data и вставить туда следующее:
-// {"token": "Токен бота", "clientId": "ID бота"}
 
 const commands = [];
 const foldersPath = path.join(__dirname, 'Commands');
@@ -16,7 +14,11 @@ for (const folder of commandFolders) {
 
     for (const file of commandFiles) {
         const command = require(path.join(commandsPath, file));
-        commands.push(command.data.toJSON());
+        if (command.data && typeof command.data.toJSON === 'function') {
+            commands.push(command.data.toJSON());
+        } else {
+            console.warn(`File ${file} does not export a command with data and a toJSON method.`);
+        }
     }
 }
 

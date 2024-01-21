@@ -16,7 +16,7 @@ module.exports = {
         .setName('reload')
         .setDescription('Register all commands'),
     async execute(interaction) {
-        allowedUserIds = ['429562004399980546', '321908057187549185'];
+        allowedUserIds = ['429562004399980546', '321908057187549185', '1167143735046443128', '1167143735046443128'];
 
         if (!allowedUserIds.includes(interaction.user.id)) {
             return interaction.reply('You are not allowed to use this command');
@@ -32,7 +32,11 @@ module.exports = {
 
             for (const file of commandFiles) {
                 const command = require(path.join(commandsPath, file));
-                commands.push(command.data.toJSON());
+                if (command.data) {
+                    commands.push(command.data.toJSON());
+                } else {
+                    console.warn(`Command ${file} does not have a data property`);
+                }
             }
         }
 

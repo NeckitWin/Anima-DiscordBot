@@ -17,28 +17,28 @@ module.exports = {
             },
             fields: [
                 {
-                    name: "My name is Anima",
+                    name: "My name is " + interaction.client.user.username,
                     value: '',
-                    inline: false,
+                    inline: true,
                 },
                 {
                     name: 'My ID',
-                    value: interaction.client.user.id,
+                    value: "```"+interaction.client.user.id+"```",
                     inline: false,
                 },
                 {
                     name: "Number of servers",
-                    value: interaction.client.guilds.cache.size,
+                    value: "```"+interaction.client.guilds.cache.size+"```",
                     inline: true,
                 },
                 {
                     name:"Number of users",
-                    value: interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0),
+                    value: "```"+interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)+"```",
                     inline: true,
                 },
                 {
                     name: "When I was created",
-                    value: interaction.client.user.createdAt.toLocaleTimeString("pl-PL", { timeZone: "Europe/Warsaw", day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
+                    value: "```"+interaction.client.user.createdAt.toLocaleTimeString("pl-PL", { timeZone: "Europe/Warsaw", day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' })+"```",
                     inline: true,
                 },
                 {

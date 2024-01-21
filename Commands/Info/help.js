@@ -17,17 +17,17 @@ module.exports = {
             },
             fields: [
                 {
-                    name: 'Info',
+                    name: 'Информация',
                     value: '</help:1188221601343357056>, </bot:1188217557883293727> </user:1187805713536405584> </avatar_banner:1188538123521642586>',
                     inline: false,
                 },
                 {
-                    name: 'Moderation',
+                    name: 'Модерация',
                     value: '</clear:1188291249225084958>',
                     inline: false,
                 },
                 {
-                    name: 'Utility',
+                    name: 'Утилиты',
                     value: '</test:1188217557883293730>',
                     inline: false,
                 }
