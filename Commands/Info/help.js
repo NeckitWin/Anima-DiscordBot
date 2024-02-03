@@ -33,7 +33,7 @@ module.exports = {
                 },
                 {
                     name: 'Утилиты',
-                    value: '</test:1198654073763790865>',
+                    value: '</ping:1203342242761146389>',
                     inline: false,
                 }
             ],
