@@ -8,37 +8,48 @@ module.exports = {
         .setDescriptionLocalizations({ ru: 'Забанить пользователя с причиной и на определенное время', pl: 'Zbanuj użytkownika z powodem i na określony czas', uk: 'Забанувати користувача з причиною і на певний час' })
         .addUserOption(option =>
             option.setName('user')
+                .setNameLocalizations({ ru: 'пользователь', pl: 'użytkownik', uk: 'користувач'})
                 .setDescription('The user to ban')
+                .setDescriptionLocalizations({ru: 'пользователь, которого хотите забанить', pl: 'użytkownik do zbanowania', uk: 'користувач, якого хочете забанити'})
                 .setRequired(true))
         .addStringOption(option =>
             option.setName('reason')
+                .setNameLocalizations({ ru: 'причина', pl: 'przyczyna', uk: 'причина'})
                 .setDescription('The reason for the ban')
+                .setDescriptionLocalizations({ ru: 'причина бана', pl: 'powód zbanowania', uk: 'причина бану'})
                 .setRequired(true))
         .addIntegerOption(option =>
-            option.setName('duration')
-                .setDescription('The duration of the ban in minutes')
+            option.setName('time')
+                .setNameLocalizations({ ru: 'время', pl: 'czas', uk: 'час'})
+                .setDescription('In minutes')
+                .setDescriptionLocalizations({ ru: 'время в минутах', pl: 'czas w minutach', uk: 'час в хвилинах'})
                 .setRequired(true))
         .addBooleanOption(option =>
-            option.setName('delete_messages')
+            option.setName('delete-messages')
+                .setNameLocalizations({ ru: 'удалить-сообщения', pl: 'usunąć-wiadomości', uk: 'видалити-повідомлення'})
                 .setDescription('Whether to delete the user\'s messages')
+                .setDescriptionLocalizations({ ru: 'удалить сообщения пользователя', pl: 'czy usunąć wiadomości użytkownika', uk: 'видалити повідомлення користувача'})
                 .setRequired(true)),
     async execute(interaction) {
+        const member = await interaction.guild.members.fetch(interaction.user.id);
+
+        if (!member.permissions.has('BAN_MEMBERS')){
+            return interaction.reply({ content: 'You dont have permission to use this command.', ephemeral: true });
+        }
+
         const user = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');
-        const duration = interaction.options.getInteger('duration');
+        const time = interaction.options.getInteger('time');
         const deleteMessages = interaction.options.getBoolean('delete_messages');
 
-        // Ban the user
         await interaction.guild.members.ban(user, { reason });
 
-        // Delete the user's messages if the option is true
         if (deleteMessages) {
             const messages = await interaction.channel.messages.fetch({ limit: 100 });
             const userMessages = messages.filter(message => message.author.id === user.id);
             await interaction.channel.bulkDelete(userMessages);
         }
 
-        // Create an embed message
         const embed = {
             color: 65407, // Changed color from '#0099ff' to 65407
             title: 'User Banned',
@@ -48,7 +59,7 @@ module.exports = {
             fields: [
                 {
                     name: 'User',
-                    value: user.tag,
+                    value: "```"+user.name+"```",
                     inline: true,
                 },
                 {
@@ -63,7 +74,7 @@ module.exports = {
                 },
                 {
                     name: 'Duration',
-                    value: "```"+`${duration} minutes`+"```",
+                    value: "```"+`${time} minutes`+"```",
                     inline: true,
                 },
                 {
@@ -80,12 +91,10 @@ module.exports = {
             timestamp: new Date(),
         };
 
-        // Send a reply
         await interaction.reply({ embeds: [embed] });
 
-        // Unban the user after the duration
         setTimeout(async () => {
             await interaction.guild.members.unban(user, 'Temporary ban duration expired');
-        }, duration * 60 * 1000); // Convert duration from minutes to milliseconds
+        }, time * 60 * 1000);
     },
 };
