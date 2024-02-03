@@ -1,19 +1,19 @@
 const {SlashCommandBuilder} = require('discord.js');
 
-console.log("command test.js loaded✅")
+console.log("command ping.js loaded✅")
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('test')
+        .setName('ping')
         .setDescription('Test command')
-        .setNameLocalizations({ru:'тест',pl:'test',uk:'тест'})
+        .setNameLocalizations({ru:'пинг',pl:'ping',uk:'пінг'})
         .setDescriptionLocalizations({ru:'Тестовая команда',pl:'Testowa komenda',uk:'Тестова команда'}),
     async execute(interaction) {
         const responses = {
-            'ru': 'Тестовая команда работает!',
-            'pl': 'Testowa komenda działa!',
-            'uk': 'Тестова команда працює!',
-            'default': 'Test command works!'
+            default: 'Pong! ' + interaction.client.ws.ping + 'ms',
+            ru: 'Понг! ' + interaction.client.ws.ping + 'мс',
+            pl: 'Pong! ' + interaction.client.ws.ping + 'ms',
+            uk: 'Понг! ' + interaction.client.ws.ping + 'мс',
         };
 
         const locale = interaction.locale && responses.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
