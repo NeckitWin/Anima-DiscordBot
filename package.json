@@ -1,5 +1,5 @@
 {
-  "name": "elaine-discorbot",
+  "name": "anima-discorbot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,10 +8,11 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "NeckitWin & Enisey23",
+  "author": "NeckitWin",
   "license": "LGPL-3.0-only",
   "dependencies": {
     "discord.js": "^14.14.1",
+    "node-localstorage": "^3.0.5",
     "nodemon": "^3.0.2"
   }
 }

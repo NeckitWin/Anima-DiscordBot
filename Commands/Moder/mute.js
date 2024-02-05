@@ -1,11 +1,11 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('mute')
         .setNameLocalizations({ ru: 'мут', pl: 'wycisz', uk: 'мут' })
-        .setDescription('Mute a user with a reason and for a certain time')
-        .setDescriptionLocalizations({ ru: 'Замутить пользователя с причиной и на определенное время', pl: 'Wycisz użytkownika z powodem i na określony czas', uk: 'Замутити користувача з причиною і на певний час' })
+        .setDescription('Mute a user for a certain time')
+        .setDescriptionLocalizations({ ru: 'Замутить пользователя на определенное время', pl: 'Wycisz użytkownika na określony czas', uk: 'Замутити користувача на певний час' })
         .addUserOption(option =>
             option.setName('user')
                 .setNameLocalizations({ ru: 'пользователь', pl: 'użytkownik', uk: 'користувач'})
@@ -14,9 +14,9 @@ module.exports = {
                 .setRequired(true))
         .addStringOption(option =>
             option.setName('reason')
-                .setNameLocalizations({ ru: 'причина', pl: 'przyczyna', uk: 'причина'})
+                .setNameLocalizations({ ru: 'причина', pl: 'powód', uk: 'причина'})
                 .setDescription('The reason for the mute')
-                .setDescriptionLocalizations({ ru: 'причина мута', pl: 'powód wyciszenia', uk: 'причина муту'})
+                .setDescriptionLocalizations({ ru: 'Причина мута', pl: 'Powód wyciszenia', uk: 'Причина муту'})
                 .setRequired(true))
         .addIntegerOption(option =>
             option.setName('duration')
@@ -25,19 +25,19 @@ module.exports = {
                 .setDescriptionLocalizations({ ru: 'длительность мута в минутах', pl: 'czas trwania wyciszenia w minutach', uk: 'тривалість муту в хвилинах'})
                 .setRequired(true)),
     async execute(interaction) {
+        const member = await interaction.guild.members.fetch(interaction.user.id);
+
+        if (!member.permissions.has('ModerateMembers')){
+            return interaction.reply({ content: 'You dont have permission to use this command.', ephemeral: true });
+        }
         const user = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');
         const duration = interaction.options.getInteger('duration');
 
         // Mute the user
-        const member = interaction.guild.members.cache.get(user.id);
-        const muteRole = interaction.guild.roles.cache.find(role => role.name === 'Muted');
-        if (!muteRole) {
-            return interaction.reply('Role "Muted" does not exist. Please create it and try again.');
-        }
-        await member.voice.setChannel(null, reason); // Move the user out of their current voice channel
+        const memberToMute = interaction.guild.members.cache.get(user.id);
+        await memberToMute.timeout(duration * 60 * 1000); // Mute the user for the specified duration
 
-        // Create an embed message
         const embed = {
             color: 65407, // Changed color from '#0099ff' to 65407
             title: 'User Muted',
@@ -47,7 +47,7 @@ module.exports = {
             fields: [
                 {
                     name: 'User',
-                    value: user.tag,
+                    value: "```"+user.username+"```",
                     inline: true,
                 },
                 {
@@ -67,21 +67,13 @@ module.exports = {
                 },
                 {
                     name: 'Muted By',
-                    value: "```"+interaction.user.name+"```",
+                    value: "```"+interaction.user.username+"```",
                     inline: true,
                 },
             ],
             timestamp: new Date(),
         };
 
-        // Send a reply
         await interaction.reply({ embeds: [embed] });
-
-        // Unmute the user after the duration
-        setTimeout(async () => {
-            if (!member.voice.channel) {
-                await member.voice.setChannel(muteRole, 'Temporary mute duration expired');
-            }
-        }, duration * 60 * 1000); // Convert duration from minutes to milliseconds
     },
 };

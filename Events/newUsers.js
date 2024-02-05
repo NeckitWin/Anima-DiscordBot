@@ -1,6 +1,6 @@
 const { Events } = require('discord.js');
 
-console.log("event new-users loaded✅")
+console.log("Events/newUsers loaded✅")
 
 module.exports = {
     name: Events.GuildMemberAdd,

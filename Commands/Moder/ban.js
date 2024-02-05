@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionsBitField} = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -33,7 +33,7 @@ module.exports = {
     async execute(interaction) {
         const member = await interaction.guild.members.fetch(interaction.user.id);
 
-        if (!member.permissions.has('BAN_MEMBERS')){
+        if (!member.permissions.has('BanMembers')){
             return interaction.reply({ content: 'You dont have permission to use this command.', ephemeral: true });
         }
 
