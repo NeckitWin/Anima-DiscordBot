@@ -1,10 +1,13 @@
 const { Events, MessageEmbed } = require('discord.js');
+const { greetings } = require('../Data/greetings.json');
 
 console.log("Events/newUsers loaded✅")
 
 module.exports = {
     name: Events.GuildMemberAdd,
     async execute(member) {
+        randomGreeting = greetings[Math.floor(Math.random() * (greetings.length-1))];
+
         try {
             const systemChannel = member.guild.systemChannel;
             console.log("get channel")
@@ -12,17 +15,17 @@ module.exports = {
                 const embed = {
                     color: 65407,
                     title: 'Добро пожаловать на наш сервер!',
-                    description: `${member}, тут вам рады!`,
+                    description: `Привет, ${member}! ознакомьтесь с правилами! \n И приступайте к общению!`,
                     thumbnail: {
                         url: member.user.displayAvatarURL({ dynamic: true }),
                     },
                     image: {
-                        url: 'https://i.pinimg.com/originals/c2/e2/1a/c2e21a9d8e17c1d335166dbcbe0bd1bf.gif'
+                        url: randomGreeting,
                     },
                     timestamp: new Date(),
                 };
 
-                systemChannel.send({ embeds: [embed] });
+                systemChannel.send({  embeds: [embed] , content: `||${member}||`});
             } else {
                 console.log("Не найдено системного канала");
             }
