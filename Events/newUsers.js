@@ -1,4 +1,4 @@
-const { Events } = require('discord.js');
+const { Events, MessageEmbed } = require('discord.js');
 
 console.log("Events/newUsers loaded✅")
 
@@ -9,8 +9,21 @@ module.exports = {
             const systemChannel = member.guild.systemChannel;
             console.log("get channel")
             if (systemChannel) {
-                systemChannel.send(`Привет, ${member}! Добро пожаловать на сервер!`);
-            }else {
+                const embed = {
+                    color: 65407,
+                    title: 'Добро пожаловать на наш сервер!',
+                    description: `${member}, тут вам рады!`,
+                    thumbnail: {
+                        url: member.user.displayAvatarURL({ dynamic: true }),
+                    },
+                    image: {
+                        url: 'https://i.pinimg.com/originals/c2/e2/1a/c2e21a9d8e17c1d335166dbcbe0bd1bf.gif'
+                    },
+                    timestamp: new Date(),
+                };
+
+                systemChannel.send({ embeds: [embed] });
+            } else {
                 console.log("Не найдено системного канала");
             }
         } catch (error) {
