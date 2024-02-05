@@ -11,13 +11,13 @@ module.exports = {
     async execute(interaction) {
         const embed = {
             color: 0xd40e3e,
-            title: "Info about Animabot",
+            title: "Info about bot Anima",
             thumbnail: {
                 url: interaction.client.user.displayAvatarURL(),
             },
             fields: [
                 {
-                    name: "My name is " + interaction.client.user.username,
+                    name: "My name is " + `${interaction.client.user.username} 🤖`,
                     value: '',
                     inline: true,
                 },
@@ -28,12 +28,12 @@ module.exports = {
                 },
                 {
                     name: "Number of servers",
-                    value: "```"+interaction.client.guilds.cache.size+"```",
+                    value: "```"+"🌐"+interaction.client.guilds.cache.size+"```",
                     inline: true,
                 },
                 {
                     name:"Number of users",
-                    value: "```"+interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)+"```",
+                    value: "```"+"👤"+interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)+"```",
                     inline: true,
                 },
                 {
@@ -42,13 +42,8 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: "My developers",
-                    nameLocalizations:{
-                        ru: 'Мои разработчики',
-                        pl: 'Moi programiści',
-                        uk: 'Мої розробники'
-                    },
-                    value: "<@429562004399980546> ([NeckitWin](https://github.com/NeckitWin)) , <@321908057187549185> ([Enisey23](https://github.com/Enisey23))",
+                    name: "My owner",
+                    value: "<@429562004399980546> ([NeckitWin](https://github.com/NeckitWin))",
                     inline: false,
                 },
                 {
