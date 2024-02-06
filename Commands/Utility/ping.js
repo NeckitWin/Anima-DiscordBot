@@ -1,6 +1,6 @@
 const {SlashCommandBuilder} = require('discord.js');
 
-console.log("command ping.js loaded✅")
+console.log("command Utility/ping.js loaded✅");
 
 module.exports = {
     data: new SlashCommandBuilder()

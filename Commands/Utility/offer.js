@@ -1,5 +1,7 @@
 const {SlashCommandBuilder, MessageEmbed, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require('discord.js');
 
+console.log("command Utility/offer.js loaded✅");
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('offer')
