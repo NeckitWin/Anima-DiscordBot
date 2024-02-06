@@ -6,7 +6,7 @@ const {LocalStorage} = require('node-localstorage');
 // Создайте экземпляр LocalStorage. Если каталог 'data' не существует, он будет создан.
 const localStorage = new LocalStorage('./data');
 
-console.log("Events/buttonsClick loaded✅");
+console.log("Events/buttonsClickOffer loaded✅");
 
 let reactions = {};
 
