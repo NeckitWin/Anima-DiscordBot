@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 
 console.log("command Info/bot.js loaded✅");
 
@@ -9,6 +9,24 @@ module.exports = {
         .setDescription('Shows information about the bot')
         .setDescriptionLocalizations({ ru: 'Показывает информацию о боте', pl: 'Pokazuje informacje o bocie', uk: 'Показує інформацію про бота' }),
     async execute(interaction) {
+        const ButtonServer = new ButtonBuilder()
+            .setLabel("Discord Server")
+            .setURL("https://discord.com/invite/JxNyZAsYpA")
+            .setStyle(ButtonStyle.Link);
+
+        const ButtonWebSite = new ButtonBuilder()
+            .setLabel("Website")
+            .setURL("https://neckitwin.github.io/")
+            .setStyle(ButtonStyle.Link);
+
+        const ButtonGitHub = new ButtonBuilder()
+            .setLabel("Source Code")
+            .setURL("https://github.com/NeckitWin/Anima-DiscordBot")
+            .setStyle(ButtonStyle.Link);
+
+        const rowLinksForBot = new ActionRowBuilder()
+            .addComponents(ButtonServer, ButtonWebSite, ButtonGitHub);
+
         const embed = {
             color: 0xd40e3e,
             title: "Info about bot Anima",
@@ -58,6 +76,6 @@ module.exports = {
                 },
             ],
         };
-        interaction.reply({ embeds: [embed] });
+        interaction.reply({ embeds: [embed], components: [rowLinksForBot]});
     }
 };
