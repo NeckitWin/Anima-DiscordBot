@@ -1,14 +1,37 @@
-const { SlashCommandBuilder } = require("discord.js");
+const {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 
 console.log("command Info/help.js loaded✅");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('help')
-        .setNameLocalizations({ ru: 'помощь', pl: 'pomoc', uk: 'допомога' })
+        .setNameLocalizations({ru: 'помощь', pl: 'pomoc', uk: 'допомога'})
         .setDescription('Shows list of commands')
-        .setDescriptionLocalizations({ ru: 'Показывает список команд', pl: 'Pokazuje listę komend', uk: 'Показує список команд' }),
+        .setDescriptionLocalizations({
+            ru: 'Показывает список команд',
+            pl: 'Pokazuje listę komend',
+            uk: 'Показує список команд'
+        }),
     async execute(interaction) {
+        // Создаём кнопочку
+        const ButtonServer = new ButtonBuilder()
+            .setLabel("Discord Server")
+            .setURL("https://discord.com/invite/JxNyZAsYpA")
+            .setStyle(ButtonStyle.Link);
+
+        const ButtonWebSite = new ButtonBuilder()
+            .setLabel("Website")
+            .setURL("https://neckitwin.github.io/")
+            .setStyle(ButtonStyle.Link);
+
+        const ButtonGitHub = new ButtonBuilder()
+            .setLabel("Source Code")
+            .setURL("https://github.com/NeckitWin/Anima-DiscordBot")
+            .setStyle(ButtonStyle.Link);
+
+        const rowLinksForHelp = new ActionRowBuilder()
+            .addComponents(ButtonServer, ButtonWebSite, ButtonGitHub);
+
         const embed = {
             color: interaction.user.color,
             title: 'List of commands',
@@ -28,7 +51,7 @@ module.exports = {
                 },
                 {
                     name: 'Модерация',
-                    value: '</clear:1198654073763790864>, </mute:1198673150691520694>, </ban:1198661669031776396>',
+                    value: '</clear:1198654073763790864>, </mute:1203345821853290536>, </ban:1198661669031776396>',
                     inline: false,
                 },
                 {
@@ -42,6 +65,6 @@ module.exports = {
                 icon_url: interaction.user.displayAvatarURL(),
             },
         };
-        interaction.reply({ embeds: [embed] });
+        interaction.reply({embeds: [embed], components: [rowLinksForHelp]});
     },
 };

@@ -29,10 +29,10 @@ module.exports = {
         // Проверяем, есть ли у пользователя права на удаление сообщений
         if (!member.permissions.has('ManageMessages')) {
             const response = {
+                'default': perm.default,
                 'ru': perm.ru,
                 'pl': perm.pl,
-                'uk': perm.uk,
-                'default': perm.default
+                'uk': perm.uk
             };
             const locale = interaction.locale && response.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
             const replyMessage = response[locale];
@@ -52,10 +52,10 @@ module.exports = {
         } else { // Если все проверки пройдены, удаляем сообщения и отвечаем пользователю
             await interaction.channel.bulkDelete(amount, true);
             const response = {
+                'default': `${amount} messages deleted`,
                 'ru': `Удалено ${amount} сообщений`,
                 'pl': `Usunięto ${amount} wiadomości`,
-                'uk': `Видалено ${amount} повідомлень`,
-                'default': `${amount} messages deleted`
+                'uk': `Видалено ${amount} повідомлень`
             };
             const locale = interaction.locale && response.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
             const replyMessage = response[locale];
