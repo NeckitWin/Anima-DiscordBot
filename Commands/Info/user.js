@@ -25,8 +25,8 @@ module.exports = {
                     url: user.bannerURL({ size: 4096 }),
                 },
                 fields: [
-                    { name: 'Имя пользователя', value: "```"+user.username+"```", inline: true },
-                    { name: 'ID пользователя', value: "```"+user.id+"```", inline: false },
+                    { name: '👤 Имя пользователя', value: "```"+user.username+"```", inline: true },
+                    { name: '🔢  ID пользователя', value: "```"+user.id+"```", inline: false },
                     { name: 'Дата создания', value: "```"+user.createdAt.toDateString()+"```", inline: true },
                     { name: 'Дата входа на сервер', value: "```"+member.joinedAt.toDateString()+"```", inline: true },
                     { name: 'Роли', value: member.roles.cache.map(role => role.toString()).join(' '), inline: false },

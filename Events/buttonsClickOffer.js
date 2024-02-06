@@ -1,4 +1,4 @@
-// Events/buttonsClick.js
+// Events/buttonsClickOffer.js
 const {Interaction, MessageButton, MessageActionRow, ButtonStyle, MessageEmbed, ButtonBuilder, ActionRowBuilder} = require('discord.js');
 const {LocalStorage} = require('node-localstorage');
 
