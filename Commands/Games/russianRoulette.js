@@ -25,6 +25,9 @@ module.exports = {
         let user = interaction.options.getUser('user');
         let bullets = interaction.options.getInteger('bullets');
 
+        module.exports.bullets = bullets;
+
+        console.log(user.id)
         if (bullets < 1 || bullets > 6) {
             return interaction.reply({ content: 'Выберите число пуль от 1 до 6.', ephemeral: true });
         }
@@ -80,13 +83,5 @@ module.exports = {
             components: [rowRussianRoulette],
             ephemeral: false
         });
-
-        console.log(user.id)
-
-        module.exports.getData = () => {
-            return {
-                userRR: user.id,
-            }
-        }
     }
 }
