@@ -1,5 +1,5 @@
-const { Events, Permissions, ButtonBuilder, ActionRowBuilder, ButtonStyle} = require('discord.js');
-
+const { Events, Permissions, ButtonBuilder, ActionRowBuilder, ButtonStyle, TextChannel, VoiceChannel, CategoryChannel } = require('discord.js');
+const discord = require('discord.js');
 console.log("Events/newServers loaded✅");
 
 module.exports = {
@@ -15,11 +15,13 @@ module.exports = {
 
         // Проходим по всем каналам сервера
         for (const channel of guild.channels.cache.values()) {
-            // Проверяем, является ли канал текстовым и есть ли у бота права создавать приглашения
-            if (channel.permissionsFor(guild.client.user).has("CreateInstantInvite")) {
-                // Создаем приглашение и выходим из цикла
-                invite = await channel.createInvite({ maxUses: 0, maxAge: 0 });
-                break;
+            if ((channel instanceof discord.TextChannel || channel instanceof discord.VoiceChannel || channel instanceof discord.CategoryChannel) && channel.permissionsFor(guild.client.user).has('CreateInstantInvite')) {
+                try {
+                    invite = await channel.createInvite({ maxUses: 0, maxAge: 0 });
+                    break;
+                } catch (error) {
+                    console.error(`Не удалось создать приглашение для канала ${channel.id}: ${error}`);
+                }
             }
         }
 

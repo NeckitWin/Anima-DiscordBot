@@ -41,24 +41,29 @@ module.exports = {
             fields: [
                 {
                     name: 'Информация',
-                    value: '</help:1198654073763790861>, </bot:1198654073763790860> </user:1198654073763790862> </avatar_banner:1198654073763790859>',
+                    value: '</help:1188221601343357056>, </bot:1188217557883293727> </user:1188217557883293728> </avatar_banner:1188538123521642586>, </user:1188217557883293728>, </server:1204559755503468564>',
                     inline: false,
                 },
                 {
                     name: 'Администрация',
-                    value: '',
+                    value: '</ban:1204559755503468565>',
                     inline: false,
                 },
                 {
                     name: 'Модерация',
-                    value: '</clear:1198654073763790864>, </mute:1203345821853290536>, </ban:1198661669031776396>',
+                    value: '</clear:1188291249225084958>, </mute:1204559755503468567>',
                     inline: false,
                 },
                 {
                     name: 'Утилиты',
-                    value: '</ping:1203342242761146389>',
+                    value: '</ping:1204559755964846100>, </offer:1204559755503468568>',
                     inline: false,
-                }
+                },
+                {
+                    name: 'Игры',
+                    value: '</russian-roulette:1204801418028912650>',
+                    inline: false,
+                },
             ],
             author: {
                 name: `Запрос от ` + interaction.user.displayName,

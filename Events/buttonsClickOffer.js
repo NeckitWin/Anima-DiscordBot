@@ -1,5 +1,5 @@
 // Events/buttonsClickOffer.js
-const {Interaction, MessageButton, MessageActionRow, ButtonStyle, MessageEmbed, ButtonBuilder, ActionRowBuilder} = require('discord.js');
+const { Interaction, MessageButton, MessageActionRow, ButtonStyle, MessageEmbed, ButtonBuilder, ActionRowBuilder } = require('discord.js');
 const {LocalStorage} = require('node-localstorage');
 
 // npm install node-localstorage
@@ -18,18 +18,19 @@ if (localStorage.getItem('reactions')) {
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
-        if (interaction.isButton()){
+
+        if (interaction.isButton() && (interaction.customId === 'like' || interaction.customId === 'dislike')) {
             const messageId = interaction.message.id;
             const userId = interaction.user.id;
 
             if (!reactions[messageId]) {
-                reactions[messageId] = { likes: 0, dislikes: 0, voters: {} };
+                reactions[messageId] = {likes: 0, dislikes: 0, voters: {}};
             }
 
             const previousVote = reactions[messageId].voters[userId];
 
             if (interaction.customId === previousVote) {
-                return interaction.reply({ content: 'You have already voted!', ephemeral: true });
+                return interaction.reply({content: 'You have already voted!', ephemeral: true});
             }
 
             if (interaction.customId === 'like') {
@@ -62,7 +63,7 @@ module.exports = {
             const row = new ActionRowBuilder()
                 .addComponents(like, dislike);
 
-            await interaction.update({ components: [row] });
+            await interaction.update({components: [row]});
 
             // Сохранение данных в LocalStorage после каждого обновления
             localStorage.setItem('reactions', JSON.stringify(reactions));
