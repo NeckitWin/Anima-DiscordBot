@@ -1,11 +1,12 @@
-const {Events, ActionRowBuilder, SelectMenuBuilder, EmbedBuilder} = require('discord.js');
+const {Events, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder} = require('discord.js');
+const {rowForHelpEx} = require('../Commands/Info/help.js');
 
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
         // Обработка выбора меню
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {
-            const menuHelpEvent = new SelectMenuBuilder()
+            const menuHelpEvent = new StringSelectMenuBuilder()
                 .setCustomId('menuHelp')
                 .setPlaceholder('Узнать поподробнее о командах')
                 .addOptions([
@@ -52,10 +53,8 @@ module.exports = {
             const selectedOption = interaction.values[0];
             let embed;
 
-            // Обработка выбранной опции
             switch (selectedOption) {
                 case 'info':
-                    // Обработка выбора "Информация"
                     embed = new EmbedBuilder()
                         .setTitle('Информационные команды 📚')
                         .setDescription("</help:1188221601343357056> - Показывает список команд \n" +
@@ -66,13 +65,11 @@ module.exports = {
                             "</server:1204559755503468564> - Показывает информацию о сервере");
                     break;
                 case 'admin':
-                    // Обработка выбора "Администрация"
                     embed = new EmbedBuilder()
                         .setTitle('Команды для администрации 👑')
                         .setDescription("</ban:1204559755503468565> - Банит пользователя");
                     break;
                 case 'moderation':
-                    // Обработка выбора "Модерация"
                     embed = new EmbedBuilder()
                         .setTitle('Команды для модерации 👮‍♂️')
                         .setDescription("</ban:1204559755503468565> - Банит пользователя \n" +
@@ -81,20 +78,17 @@ module.exports = {
                         "</clear:1188291249225084958> - Очищает чат на определенное количество сообщений");
                     break;
                 case 'utils':
-                    // Обработка выбора "Утилиты"
                     embed = new EmbedBuilder()
                         .setTitle('Команды для утилит 🔧')
                         .setDescription("</ping:1204559755964846100> - Показывает пинг бота \n" +
                             "</offer:1204559755503468568> - Предложить идею на голосование");
                     break;
                 case 'games':
-                    // Обработка выбора "Игры"
                     embed = new EmbedBuilder()
                         .setTitle('Команды для игр 🎮')
                         .setDescription("</russian-roulette:1204801418028912650> - Игра в русскую рулетку");
                     break;
                 case 'fun':
-                    // Обработка выбора "Веселье"
                     embed = new EmbedBuilder()
                         .setTitle('Веселые команды 🎉')
                         .setDescription("</randomanime:> - Показывает случайное аниме");

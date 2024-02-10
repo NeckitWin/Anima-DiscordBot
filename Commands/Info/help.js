@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, SelectMenuBuilder} = require("discord.js");
+const {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, StringSelectMenuBuilder} = require("discord.js");
 
 console.log("command Info/help.js loaded✅");
 
@@ -13,7 +13,7 @@ module.exports = {
             uk: 'Показує список команд'
         }),
     async execute(interaction) {
-        const menuHelp = new SelectMenuBuilder()
+        const menuHelp = new StringSelectMenuBuilder()
             .setCustomId('menuHelp')
             .setPlaceholder('Узнать поподробнее о командах')
             .addOptions([
