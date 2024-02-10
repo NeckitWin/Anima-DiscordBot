@@ -20,6 +20,7 @@ module.exports = {
                         color: 65407,
                         title: 'Игра началась!',
                         description: `Выберите очередность пули и прокрутите барабан.`,
+                        image: {url: "https://media1.tenor.com/m/fklGVnlUSFQAAAAd/russian-roulette.gif"},
                     }
                     const rowBullets = new ActionRowBuilder()
                         .addComponents(
@@ -32,12 +33,12 @@ module.exports = {
                     await interaction.update({embeds: [embed], components: [rowBullets]});
                 } else {
                     return interaction.reply({
-                        content: 'Вы не можете принять игру, потому-что вы не участвуете в ней.',
+                        content: 'Вы не можете принять игру, она не была вам предложена.',
                         ephemeral: true
                     });
                 }
             } else if (interaction.customId === 'rejectRR') {
-                if (interaction.user.id === interaction.message.mentions.users.first().id) {
+                if (interaction.user.id === participantId || interaction.user.id === ownerId) {
                     return interaction.update({content: 'Игра отклонена.', components: [], embeds: []});
                 } else {
                     return interaction.reply({
@@ -52,12 +53,11 @@ module.exports = {
             global.bullets = bullets;
             const winRate = (5 - bullets) / 5 * 100;
 
-            console.log(bullets);
-
             const embed = {
                 color: 65407,
                 title: 'Игра началась!',
-                description: `Вероятность выигрыша: ${winRate.toFixed(2)}%. Количество пуль: ${bullets}.`,
+                description: `Вероятность выигрыша: ${winRate.toFixed(2)}%. Очередность пули в барабане: ${bullets}.`,
+                image: {url: "https://media1.tenor.com/m/cFiADUaTHvAAAAAC/reload-cartoon.gif"},
             }
             const shot = new ButtonBuilder()
                 .setCustomId('shot')
@@ -72,18 +72,24 @@ module.exports = {
         if (interaction.isButton() && (interaction.customId === 'shot')) {
             let randomNum = Math.floor(Math.random() * 5) + 1;
             if (randomNum === global.bullets) {
+                const embedEnd = {
+                    color: 65407,
+                    title: 'Игра окончена!',
+                    description: `Поздравляем победителя!`,
+                    image: {url: "https://media1.tenor.com/m/a32y8NjpL-EAAAAC/buckshot-roulette.gif"},
+                }
                 return interaction.update({
                     content: `${interaction.user} проиграл!`,
                     components: [],
-                    embeds: [],
+                    embeds: [embedEnd],
                     ephemeral: false
                 });
             } else {
-                if (global.bullets >= 1) {
                     const embed = {
                         color: 65407,
                         title: 'Участник выжил!',
-                        description: `Количество пуль: ${global.bullets}.`,
+                        description: `Очередь пули в барабане: ${global.bullets}. \n \*Прокрутка барабана...\*`,
+                        image: {url: "https://media1.tenor.com/m/VWbgqoZOPawAAAAd/buckshot-roulette.gif"},
                     }
                     const shot = new ButtonBuilder()
                         .setCustomId('shot')
@@ -98,20 +104,19 @@ module.exports = {
                     } else {
                         nextPlayerId = global.ownerGameId;
                     }
+
+                    // if (interaction.user.id !== global.ownerGameId){
+                    //     return interaction.reply({
+                    //         content: "Сейчас не ваша очередь!",
+                    //         ephemeral: true
+                    //     })
+                    // }
                     return interaction.update({
                         content: `Вы выжили! Следующий игрок: <@${nextPlayerId}>`,
                         embeds: [embed],
                         components: [rowSecondShot],
                         ephemeral: false
                     });
-                } else {
-                    return interaction.update({
-                        content: 'Игра окончена! Все выжили',
-                        components: [],
-                        embeds: [],
-                        ephemeral: false
-                    });
-                }
             }
         }
     }
