@@ -1,9 +1,7 @@
-// Events/buttonsClickOffer.js
 const { Interaction, MessageButton, MessageActionRow, ButtonStyle, MessageEmbed, ButtonBuilder, ActionRowBuilder } = require('discord.js');
 const {LocalStorage} = require('node-localstorage');
 
 // npm install node-localstorage
-// Создайте экземпляр LocalStorage. Если каталог 'data' не существует, он будет создан.
 const localStorage = new LocalStorage('./data');
 
 console.log("Events/buttonsClickOffer loaded✅");
@@ -45,7 +43,6 @@ module.exports = {
                 }
             }
 
-            // Запись голоса пользователя
             reactions[messageId].voters[userId] = interaction.customId;
 
             const like = new ButtonBuilder()

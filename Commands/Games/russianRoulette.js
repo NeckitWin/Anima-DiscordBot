@@ -13,31 +13,14 @@ module.exports = {
                 .setNameLocalizations({ru: 'пользователь', pl: 'użytkownik', uk: 'користувач'})
                 .setDescription('The user to play with')
                 .setDescriptionLocalizations({ru: 'пользователь, с которым хотите поиграть', pl: 'użytkownik, z którym chcesz zagrać', uk: 'користувач, з яким хочете зіграти'})
-                .setRequired(true))
-        .addIntegerOption(option =>
-            option.setName('bullets')
-                .setNameLocalizations({ru: 'пули', pl: 'kule', uk: 'кулі'})
-                .setDescription('Number of bullets in the gun')
-                .setDescriptionLocalizations({ ru: 'Количество пуль в револьвере', pl: 'Liczba kul w rewolwerze', uk: 'Кількість куль в револьвері'})
                 .setRequired(true)),
 
     async execute(interaction) {
         let user = interaction.options.getUser('user');
-        let bullets = interaction.options.getInteger('bullets');
-
-        module.exports.bullets = bullets;
-
-        console.log(user.id)
-        if (bullets < 1 || bullets > 6) {
-            return interaction.reply({ content: 'Выберите число пуль от 1 до 6.', ephemeral: true });
-        }
-
-        if (bullets === 6) {
-            return interaction.reply({ content: 'Вы не можете выбрать 6 пуль, потому-что это приводит к мгновенному поражению.', ephemeral: true });
-        }
-
-        // Шанс проигрыша
-        const chanceOfLosing = (bullets / 6) * 100;
+        let ownerGameId = interaction.user.id;
+        let participantId = user.id;
+        global.ownerGameId = ownerGameId;
+        global.participantId = participantId;
 
         const ButtonAccept = new ButtonBuilder()
             .setCustomId('acceptRR')
@@ -61,19 +44,9 @@ module.exports = {
                 {
                     // правила
                     name: '📜 Правила',
-                    value: "```Игроки по очереди нажимают на спусковой крючок. Если револьвер выстрелит, то игрок проиграл.```",
+                    value: "```Игроки выбирают количество пуль и по очереди нажимают на спусковой крючок. Если револьвер выстрелит, то игрок проиграл.```",
                     inline: false,
-                },
-                {
-                    name: '🔫 Пуль в револьвере',
-                    value: "```"+bullets+"```",
-                    inline: true,
-                },
-                {
-                    name: '💥 Шанс проигрыша',
-                    value: "```"+chanceOfLosing.toFixed(2)+"%```",
-                    inline: true,
-                },
+                }
             ],
         }
 
