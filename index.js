@@ -30,6 +30,8 @@ client.on("ready", () => {
     console.log('Bot is ready!✅');
     // change avatar
     // client.user.edit({ avatar: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDczeXRsMnJydzR4NDJqN2Vxa3NlY2hiYXd2ZTIxanE3Z2NucmZwbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TKb8rKIEF35mG7y2FY/giphy.gif" })
+    // Поменять описание профиля
+    client.user.setPresence({ activities: [{ name: '🎉🎉🎉', type: 'PLAYING' }], status: 'online' });
 });
 
 client.on(Events.InteractionCreate, async interaction => {
