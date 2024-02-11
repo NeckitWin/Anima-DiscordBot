@@ -6,6 +6,9 @@ module.exports = {
     async execute(interaction) {
         // Обработка выбора меню
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {
+            if (interaction.user.id !== interaction.message.interaction.user.id) {
+                return await interaction.reply({content: 'Эту команду выбрать может только тот, кто её вызвал', ephemeral: true});
+            }
             const menuHelpEvent = new StringSelectMenuBuilder()
                 .setCustomId('menuHelp')
                 .setPlaceholder('Узнать поподробнее о командах')
