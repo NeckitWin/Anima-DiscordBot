@@ -13,6 +13,7 @@
   "dependencies": {
     "discord.js": "^14.14.1",
     "node-localstorage": "^3.0.5",
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "openai": "^4.27.0"
   }
 }
