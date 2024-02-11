@@ -10,7 +10,9 @@ module.exports = {
     name: 'messageCreate',
     async execute(message) {
         const OwnerId = "429562004399980546";
-        if (((message.content.toLowerCase().startsWith('anima')) || (message.content.toLowerCase().startsWith('анима'))) || ((message.reference) && (message.author.id === OwnerId))) {
+        const BotId = "1165781260203986994";
+        const repliedMessage = await message.channel.messages.fetch(message.reference.messageId);
+        if (((message.content.toLowerCase().startsWith('anima')) || (message.content.toLowerCase().startsWith('анима'))) || ((repliedMessage.author.id === BotId) && (message.author.id === OwnerId))) {
             const openai = new OpenAI();
             if (message.author.id !== OwnerId) return;
             if (message.author.bot) return;
