@@ -25,7 +25,7 @@ module.exports = {
                     const command = require(`${commandsFolder}/${file}`);
 
                     // Если имя команды совпадает с именем файла (без расширения), выполнить команду
-                    if (commandName === file.slice(0, -3)) {
+                    if (commandName === command.data.name) {
                         command.execute(message, args);
                         break;
                     }
