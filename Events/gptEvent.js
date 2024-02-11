@@ -11,7 +11,6 @@ module.exports = {
     async execute(message) {
         const OwnerId = "429562004399980546";
         const BotId = config.clientId;
-        console.log(BotId);
         let repliedMessage;
         if (message.reference){
             repliedMessage = await message.channel.messages.fetch(message.reference.messageId);
