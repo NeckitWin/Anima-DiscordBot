@@ -6,6 +6,8 @@ module.exports = {
         description: 'Owner command',
     },
     async execute(message) {
+        if (message.author.id !== '429562004399980546') return;
+
         try {
             const servers = message.client.guilds.cache.map(guild => "🎯"+guild.name+":"+"```js\n"+ guild.memberCount+" участников```").join("\n");
             const embed = new EmbedBuilder()
