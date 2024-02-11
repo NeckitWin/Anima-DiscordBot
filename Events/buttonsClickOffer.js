@@ -2,7 +2,7 @@ const { Interaction, MessageButton, MessageActionRow, ButtonStyle, MessageEmbed,
 const {LocalStorage} = require('node-localstorage');
 
 // npm install node-localstorage
-const localStorage = new LocalStorage('./data');
+const localStorage = new LocalStorage('./Data');
 
 console.log("Events/buttonsClickOffer loaded✅");
 

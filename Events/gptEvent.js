@@ -9,13 +9,11 @@ console.log("event gptEvent.js loaded✅");
 module.exports = {
     name: 'messageCreate',
     async execute(message) {
-        if ((message.content.toLowerCase().startsWith('anima')) || (message.content.toLowerCase().startsWith('анима')) || (message.reference && message.author.id === "429562004399980546")) {
+        const OwnerId = "429562004399980546";
+        if (((message.content.toLowerCase().startsWith('anima')) || (message.content.toLowerCase().startsWith('анима'))) || ((message.reference) && (message.author.id === OwnerId))) {
             const openai = new OpenAI();
-            const myId = "429562004399980546";
-            // Разрешить только мне пользоваться
-            if (message.author.id !== myId) return;
+            if (message.author.id !== OwnerId) return;
             if (message.author.bot) return;
-            if (message.content.startsWith('!')) return;
             try {
                 let conversationLog = [
                     {
