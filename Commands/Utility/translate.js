@@ -7,6 +7,12 @@ module.exports = {
         .setDescription('Translate text')
         .addStringOption(option =>
             option.setName('language')
+                .addChoices(
+                    {name:'english', value:'en'},
+                    {name:'русский', value:'ru'},
+                    {name:'polski', value:'pl'},
+                    {name:'japanese', value:'ja'},
+                )
                 .setDescription('The language to translate to')
                 .setRequired(true))
         .addStringOption(option =>
