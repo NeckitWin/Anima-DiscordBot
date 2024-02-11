@@ -10,7 +10,8 @@ module.exports = {
     name: 'messageCreate',
     async execute(message) {
         const OwnerId = "429562004399980546";
-        const BotId = "1165781260203986994";
+        const BotId = config.clientId;
+        console.log(BotId);
         let repliedMessage;
         if (message.reference){
             repliedMessage = await message.channel.messages.fetch(message.reference.messageId);
