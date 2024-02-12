@@ -9,14 +9,14 @@ const {SlashCommandBuilder} = require('discord.js');
 // Нужно создать config.json в папке Data и вставить туда следующее:
 // {"token": "Токен бота", "clientId": "ID бота"}
 
-console.log("command Admin/reload.js loaded✅");
+console.log("command Owner/reload.js loaded✅");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('reload')
         .setDescription('Register all commands'),
     async execute(interaction) {
-        allowedUserIds = ['429562004399980546', '321908057187549185', '1167143735046443128', '1167143735046443128'];
+        allowedUserIds = ['429562004399980546'];
 
         if (!allowedUserIds.includes(interaction.user.id)) {
             return interaction.reply('You are not allowed to use this command');

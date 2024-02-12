@@ -1,0 +1,32 @@
+const {Events, ModalBuilder, TextInputBuilder, TextInputStyle} = require('discord.js');
+// modal submit command for admin / technical problem
+console.log("Events/modalTP.js loaded✅");
+
+module.exports = {
+    name: 'interactionCreate',
+    async execute(interaction) {
+        if (interaction.isModalSubmit() && interaction.customId === 'modalTP') {
+            const topic = interaction.fields.getTextInputValue('topicTP');
+            const description = interaction.fields.getTextInputValue('descriptionTP');
+            const OwnerServerID = '984079879802876035';
+            const ChannelTPID = '1206389800299667527';
+            const guild = await interaction.client.guilds.fetch(OwnerServerID);
+            const channel = await guild.channels.fetch(ChannelTPID);
+
+            const embed = {
+                color: 0x0099ff,
+                title: `Тема: ${topic}`,
+                description: "Описание:\n"+"``` \n"+description+"```",
+                timestamp: new Date(),
+                footer: {
+                    text: `ID: ${interaction.user.id}`,
+                },
+            };
+
+            await channel.send({ embeds: [embed] });
+
+            await interaction.reply({ content: 'Большое спасибо за то, что сообщили о ошибке!', ephemeral: true });
+        }
+    }
+
+}
