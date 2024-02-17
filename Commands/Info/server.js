@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-console.log("command Info/server.js loaded✅");
+console.log("command Info/mods.js loaded✅");
 
 module.exports = {
     data: new SlashCommandBuilder()

@@ -11,20 +11,22 @@ module.exports = {
     async execute(message) {
         const OwnerId = "429562004399980546";
         const BotId = config.clientId;
+        const MaxMessageLength = 1990;
         let repliedMessage;
         if (message.reference){
             repliedMessage = await message.channel.messages.fetch(message.reference.messageId);
         }
-        if (((message.content.toLowerCase().startsWith('anima')) || (message.content.toLowerCase().startsWith('анима'))) || ((message.reference) && (repliedMessage.author.id === BotId) && (message.author.id === OwnerId))) {
+        if (((message.content.toLowerCase().startsWith('anima,')) || (message.content.toLowerCase().startsWith('анима,'))) || ((message.reference) && (repliedMessage.author.id === BotId) && (message.author.id === OwnerId))) {
             const openai = new OpenAI();
             if (message.author.id !== OwnerId) return;
             if (message.author.bot) return;
             try {
                 let conversationLog = [
                     {
-                        "role": "system",
-                        "content": "Ты - Discord бот женского рода, тебя зовут Anima, ты любишь анима и разговариваешь очень мило, добавляешь к своим предложениям: ('Няяя','Мяу','Эххь' и подобные милые фразы, введи себя как аниме милая девочка), и ты должна общаться на том языке, на котором к тебе обращаются. У тебя есть один хозяин - NeckitWin, только он к тебе и может обращаться. Обращайся к нему по имени 'Никита'"
+                        role: "system",
+                        content: "Ты - Discord бот женского рода, тебя зовут Anima, ты любишь анима и разговариваешь очень мило, добавляешь к своим предложениям: ('Няяя','Мяу','Эххь' и подобные милые фразы, введи себя как аниме милая девочка), и ты должна общаться на том языке, на котором к тебе обращаются. У тебя есть один хозяин - NeckitWin, только он к тебе и может обращаться. Обращайся к нему по имени 'Никита'"
                     },
+                    {role: "system", content: "Если твоё сообщение содержит код, текст для программирования, или подобное, то обязательно возьми его в тильды, чтобы выделать, пример ```язык\n код```"},
                     {"role": "user", "content": message.content}
                 ];
 
@@ -40,7 +42,21 @@ module.exports = {
                     messages: conversationLog
                 })
 
-                message.reply(result.choices[0].message.content);
+                let response = result.choices[0].message.content;
+
+                if (response.length > MaxMessageLength){
+                    let chunks = [];
+                    for (let i = 0; i < response.length; i += MaxMessageLength) {
+                        chunks.push(response.slice(i, i + MaxMessageLength));
+                    }
+
+                    for (let chunk of chunks){
+                        await message.reply(chunk);
+                    }
+                } else {
+                    await message.reply(response);
+                }
+
             } catch (error) {
                 console.error(error);
                 console.log("Error in gptEvent.js");

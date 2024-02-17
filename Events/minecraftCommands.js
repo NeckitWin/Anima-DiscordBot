@@ -13,7 +13,7 @@ module.exports = {
         const commandName = args.shift().toLowerCase();
 
         // Путь к папке с командами
-        const commandsFolder = path.join(__dirname, '../CommandsNoSlash');
+        const commandsFolder = path.join(__dirname, '../ArcaneWorld');
 
         // Чтение файлов из папки с командами
         fs.readdir(commandsFolder, (err, files) => {
@@ -25,13 +25,10 @@ module.exports = {
                     const command = require(`${commandsFolder}/${file}`);
 
                     // Если имя команды совпадает с именем файла (без расширения), выполнить команду
-                    if (command && command.name) {
-                        if (commandName === command.name) {
-                            command.execute(message, args);
-                            break;
-                        }
+                    if (commandName === command.data.name) {
+                        command.execute(message, args);
+                        break;
                     }
-
                 }
             }
         });

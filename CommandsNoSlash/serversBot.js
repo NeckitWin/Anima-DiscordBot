@@ -2,7 +2,7 @@ const {CommandInteraction, EmbedBuilder} = require('discord.js');
 
 module.exports = {
     data: {
-        name: 'servers',
+        name: 'serversbot',
         description: 'Owner command',
     },
     async execute(message) {
