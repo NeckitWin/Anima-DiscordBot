@@ -16,7 +16,11 @@ module.exports = {
             const embed = {
                 color: 0x0099ff,
                 title: `Тема: ${topic}`,
-                description: "Описание:\n"+"``` \n"+description+"```",
+                description: "Описание:\n"+"```\n"+description+"```",
+                author: {
+                    name: interaction.user.tag,
+                    icon_url: interaction.user.displayAvatarURL({dynamic: true}),
+                },
                 timestamp: new Date(),
                 footer: {
                     text: `ID: ${interaction.user.id}`,

@@ -39,8 +39,6 @@ module.exports = {
 
         modal.addComponents(rowTopicTP, rowDescriptionTP);
 
-        await interaction.showModal(modal)
-
-        console.log(topic.value, description.value);
+        await interaction.showModal(modal);
     }
 }

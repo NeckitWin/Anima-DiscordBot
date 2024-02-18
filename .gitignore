@@ -5,3 +5,4 @@ Data/reactions
 ArcaneWorld
 ArcaneWorld/
 Events/minecraftCommands.js
+CommandsNoSlash/gemini.js
