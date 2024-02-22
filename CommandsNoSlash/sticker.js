@@ -1,7 +1,5 @@
 const {CommandInteraction, AttachmentBuilder} = require('discord.js');
 
-
-
 module.exports = {
     name: 'sticker',
     description: 'Отправить стикер',

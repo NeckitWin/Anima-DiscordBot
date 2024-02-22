@@ -2,6 +2,7 @@ Data/config.json
 node_modules
 .idea
 Data/reactions
+Data/mysql.json
 ArcaneWorld
 ArcaneWorld/
 Events/minecraftCommands.js
