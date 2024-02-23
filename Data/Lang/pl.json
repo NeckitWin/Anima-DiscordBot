@@ -1,3 +1,8 @@
 {
-  "test":"testowa komenda"
+  "test":"testowa komenda",
+  "newUsers": {
+    "title": "Witamy na naszym serwerze!",
+    "description": "Mam nadzieję, że spodoba Ci się tutaj i znajdziesz wielu interesujących ludzi i tematów do rozmów.",
+    "value": "Proszę zapoznać się z zasadami serwera:"
+  }
 }

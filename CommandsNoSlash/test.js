@@ -12,7 +12,6 @@ module.exports = {
         try {
             const preferredLang = message.guild.preferredLocale;
 
-            // Проверка на доступность языка
             if (!lang.hasOwnProperty(preferredLang)) {
                 message.reply(lang.en.test);
                 return;

@@ -1,3 +1,8 @@
 {
-  "test":"Test command"
+  "test":"Test command",
+  "newUsers": {
+    "title": "Welcome to our server!",
+    "description": "I hope you have a great time here and make lots of new friends!",
+    "value": "Make sure you are aware of the server rules:"
+  }
 }
