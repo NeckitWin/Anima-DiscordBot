@@ -97,7 +97,7 @@ module.exports = {
                 case 'fun':
                     embed = new EmbedBuilder()
                         .setTitle('Веселые команды 🎉')
-                        .setDescription("</randomanime:> - Показывает случайное аниме");
+                        .setDescription("</randomanime.json:> - Показывает случайное аниме");
                     break;
             }
             await interaction.update({embeds: [embed], components: [rowForHelpEvent]});

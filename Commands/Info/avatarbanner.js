@@ -4,8 +4,8 @@ console.log("command Info/avatarbanner.js loaded✅")
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('avatar_banner')
-        .setNameLocalizations({ ru: 'аватар_баннер', pl: 'awatar_banner', uk: 'аватар_банер' })
+        .setName('avatar-banner')
+        .setNameLocalizations({ ru: 'аватар-баннер', pl: 'awatar-banner', uk: 'аватар-банер' })
         .setDescription('Shows avatar and banner of a user or of a user that was mentioned)')
         .setDescriptionLocalizations({ ru: 'Показывает аватарку и баннер пользователя', pl: 'Pokazuje awatar i baner użytkownika', uk: 'Показує аватар і банер користувача' })
         .addUserOption(option => option.setName('user').setDescription('Пользователь')),
