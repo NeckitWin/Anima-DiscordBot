@@ -1,10 +1,8 @@
 const {CommandInteraction, EmbedBuilder} = require('discord.js');
 
 module.exports = {
-    data: {
         name: 'serversbot',
         description: 'Owner command',
-    },
     async execute(message) {
         if (message.author.id !== '429562004399980546') return;
 

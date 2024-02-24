@@ -23,8 +23,6 @@ module.exports = {
             for (const file of files) {
                 if (file.endsWith('.js')) {
                     const command = require(`${commandsFolder}/${file}`);
-
-                    // Если имя команды совпадает с именем файла (без расширения), выполнить команду
                     if (command && command.name) {
                         if (commandName === command.name) {
                             command.execute(message, args);
