@@ -14,14 +14,13 @@ module.exports = {
         let owner = await guild.fetchOwner();
 
         // Проходим по всем каналам сервера
-        for (const channel of guild.channels.cache.values()) {
-            if ((channel instanceof discord.TextChannel || channel instanceof discord.VoiceChannel || channel instanceof discord.CategoryChannel) && channel.permissionsFor(guild.client.user).has('CreateInstantInvite')) {
-                try {
-                    invite = await channel.createInvite({ maxUses: 0, maxAge: 0 });
-                    break;
-                } catch (error) {
-                    console.error(`Не удалось создать приглашение для канала ${channel.id}: ${error}`);
-                }
+        const channel = guild.channels.cache.find(channel => channel.type === 'GUILD_TEXT' && channel.permissionsFor(guild.client.user).has('CreateInstantInvite'));
+
+        if (channel) {
+            try {
+                invite = await channel.createInvite({ maxUses: 0, maxAge: 0 });
+            } catch (error) {
+                console.error(`Не удалось создать приглашение для канала ${channel.id}: ${error}`);
             }
         }
 
