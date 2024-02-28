@@ -2,12 +2,12 @@ const {CommandInteraction, AttachmentBuilder} = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 
-console.log("test");
-
 module.exports = {
         name: 'code',
         description: 'give command',
         async execute(message) {
+            if(message.author.id !== '429562004399980546') return;
+
             let args = message.content.slice(5).trim().split(/ +/);
             let name = args[0];
 
