@@ -4,5 +4,18 @@
     "title": "Witamy na naszym serwerze!",
     "description": "Mam nadzieję, że spodoba Ci się tutaj i znajdziesz wielu interesujących ludzi i tematów do rozmów.",
     "value": "Proszę zapoznać się z zasadami serwera:"
+  },
+  "weather": {
+    "title": "Pogoda",
+    "description1": "Miasto",
+    "description2": "Prognoza pogody",
+    "feelslike": "temperatura odczuwalna",
+    "min": "minimalna temperatura",
+    "max": "maksymalna temperatura",
+    "humidity": "wilgotność",
+    "pressure": "ciśnienie",
+    "wind": "prędkość wiatru",
+    "clouds": "zachmurzenie"
   }
+
 }
