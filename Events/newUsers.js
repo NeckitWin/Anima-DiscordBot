@@ -18,20 +18,23 @@ module.exports = {
             if (member.guild.rulesChannelId === null || member.guild.rulesChannelId === undefined) return console.log("Rules channel is not set!");
             let ChannelRulesId = member.guild.rulesChannelId;
 
-            const preferredLang = member.guild.preferredLocale;
+            let preferredLang = message.guild.preferredLocale;
+            if (!lang.hasOwnProperty(preferredLang)) {
+                preferredLang = 'en';
+            }
+            let local = lang[preferredLang].newUsers;
 
             const embed = new EmbedBuilder()
-                .setTitle(lang[preferredLang].newUsersT)
-                .setDescription(lang[preferredLang].newUsersD)
+                .setTitle(local.title)
+                .setDescription(local.description)
                 .setColor('DarkRed')
-                //avatar user
                 .setThumbnail(member.user.displayAvatarURL())
                 .setImage(randomGreeting);
 
             if (ChannelRulesId !== null) {
                 embed.addFields({
                     name: " ",
-                    value: `${lang[preferredLang].newUsersV}\n<#${ChannelRulesId}>`,
+                    value: `${local.value}\n<#${ChannelRulesId}>`,
                     inline: false
                 });
             }
