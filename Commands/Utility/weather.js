@@ -1,10 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const axios = require('axios');
-const en = require('../../Data/Lang/en.json');
-const ru = require('../../Data/Lang/ru.json');
-const uk = require('../../Data/Lang/uk.json');
-const pl = require('../../Data/Lang/pl.json');
-const lang = {ru, en, uk, pl};
+const lang = require('../../Data/Lang/lang');
 
 console.log("command weather loaded");
 
@@ -29,6 +25,7 @@ module.exports = {
             })
             .setRequired(true)),
     async execute(interaction) {
+        console.log(lang);
         try {
             let preferredLang = interaction.guild.preferredLocale;
             if (!lang.hasOwnProperty(preferredLang)) {
