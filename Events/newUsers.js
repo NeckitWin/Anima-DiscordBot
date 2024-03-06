@@ -1,11 +1,7 @@
 // Message for new users in system channel
 const {Events, Permissions, EmbedBuilder} = require('discord.js');
 const {greetings} = require('../Data/greetings.json');
-const en = require('../Data/Lang/en.json');
-const ru = require('../Data/Lang/ru.json');
-const uk = require('../Data/Lang/uk.json');
-const pl = require('../Data/Lang/pl.json');
-const lang = {ru, en, uk, pl};
+const lang = require('../Data/Lang/lang')
 
 console.log("Events/newUsers loaded✅")
 
@@ -17,7 +13,7 @@ module.exports = {
             if (member.guild.systemChannelId === null || member.guild.systemChannelId === undefined) return console.log("System channel is not set!");
             const ChannelSystem = await member.guild.channels.fetch(member.guild.systemChannelId);
             if (!ChannelSystem.permissionsFor(member.client.user).has("SendMessages")) {
-                return member.reply("I don't have permissions to write in this channel!");
+                return console.log("I don't have permissions to write in this channel!");
             }
             if (member.guild.rulesChannelId === null || member.guild.rulesChannelId === undefined) return console.log("Rules channel is not set!");
             let ChannelRulesId = member.guild.rulesChannelId;

@@ -25,13 +25,12 @@ module.exports = {
             })
             .setRequired(true)),
     async execute(interaction) {
-        console.log(lang);
         try {
             let preferredLang = interaction.guild.preferredLocale;
             if (!lang.hasOwnProperty(preferredLang)) {
                 preferredLang = 'en';
             }
-            let info
+            let info;
             let local = lang[preferredLang].weather;
             const city = interaction.options.getString('city');
             await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3d9de74844d28377e81415151cbe6a66`)

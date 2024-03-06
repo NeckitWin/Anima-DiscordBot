@@ -1,22 +1,16 @@
-const {CommandInteraction, AttachmentBuilder, EmbedBuilder} = require('discord.js');
-const en = require('../Data/Lang/en.json');
-const ru = require('../Data/Lang/ru.json');
-const uk = require('../Data/Lang/uk.json');
-const pl = require('../Data/Lang/pl.json');
-const lang = {ru, en, uk, pl};
+const {CommandInteraction, AttachmentBuilder, EmbedBuilder, PermissionsBitField} = require('discord.js');
+const lang = require('../Data/Lang/lang');
 
 module.exports = {
     name: 'test',
-    description: 'Тестовая команда',
+    description: 'Тest command',
     async execute(message) {
         try {
-            const preferredLang = message.guild.preferredLocale;
-
+            if(!message.channel.permissionsFor(message.client.user).has("ReadMessageHistory", "SendMessages")) return;
+            let preferredLang = message.guild.preferredLocale;
             if (!lang.hasOwnProperty(preferredLang)) {
-                message.reply(lang.en.test);
-                return;
+                preferredLang = 'en';
             }
-
             message.reply(lang[preferredLang].test);
         } catch (error) {
             console.error('Ошибка при использовании команды test:', error);
