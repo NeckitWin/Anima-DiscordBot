@@ -3,7 +3,10 @@ node_modules
 .idea
 Data/reactions
 Data/mysql.json
+Data/databd.json
 ArcaneWorld
 ArcaneWorld/
 Events/minecraftCommands.js
 CommandsNoSlash/gemini.js
+
+CommandsNoSlash/mysql.js
