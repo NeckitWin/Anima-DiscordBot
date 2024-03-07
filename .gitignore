@@ -1,6 +1,7 @@
 Data/config.json
 node_modules
 .idea
+Events/miniloggs.js
 Data/reactions
 Data/mysql.json
 Data/databd.json
