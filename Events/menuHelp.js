@@ -1,51 +1,60 @@
 const {Events, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder} = require('discord.js');
 const {rowForHelpEx} = require('../Commands/Info/help.js');
+const lang = require('../Data/Lang');
 
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
-        // Обработка выбора меню
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {
             if (interaction.user.id !== interaction.message.interaction.user.id) {
-                return await interaction.reply({content: 'Эту команду выбрать может только тот, кто её вызвал', ephemeral: true});
+                return await interaction.reply({
+                    content: 'Эту команду выбрать может только тот, кто её вызвал',
+                    ephemeral: true
+                });
             }
+            let preferredLang = interaction.guild.preferredLocale;
+            if (!lang.hasOwnProperty(preferredLang)) {
+                preferredLang = 'en';
+            }
+            let local = lang[preferredLang].menuhelp;
+            let localinfo = lang[preferredLang].commandsdesc;
             const menuHelpEvent = new StringSelectMenuBuilder()
                 .setCustomId('menuHelp')
-                .setPlaceholder('Узнать поподробнее о командах')
+                .setPlaceholder(local.placeholder)
                 .addOptions([
                     {
-                        label: 'Информация',
-                        description: 'Информационные команды',
+                        label: `${local.info.label}`,
+                        description: `${local.info.description}`,
                         value: 'info',
                         emoji: '📚',
                     },
                     {
-                        label: 'Администрация',
-                        description: 'Команды для администрации',
+                        label: `${local.admin.label}`,
+                        description: `${local.admin.description}`,
                         value: 'admin',
                         emoji: '👑',
                     },
                     {
-                        label: 'Модерация',
-                        description: 'Команды для модерации',
+                        label: `${local.moder.label}`,
+                        description: `${local.moder.description}`,
                         value: 'moderation',
                         emoji: '👮‍♂️',
                     },
                     {
-                        label: 'Утилиты',
-                        description: 'Команды для утилит',
+                        label: `${local.util.label}`,
+                        description: `${local.util.description}`,
                         value: 'utils',
                         emoji: '🔧',
                     },
                     {
-                        label: 'Игры',
-                        description: 'Команды для игр',
+                        label: `${local.games.label}`,
+                        description: `${local.games.description}`,
                         value: 'games',
                         emoji: '🎮',
                     },
                     {
-                        label: 'Веселье',
-                        description: 'Веселые команды',
+                        label: `${local.fun.label}`,
+                        description: `${local.fun.description}`,
                         value: 'fun',
                         emoji: '🎉',
                     },
@@ -59,45 +68,45 @@ module.exports = {
             switch (selectedOption) {
                 case 'info':
                     embed = new EmbedBuilder()
-                        .setTitle('Информационные команды 📚')
-                        .setDescription("</help:1188221601343357056> - Показывает список команд \n" +
-                            "</bot:1188217557883293727> - Показывает информацию о боте \n" +
-                            "</user:1188217557883293728> - Показывает информацию о пользователе \n" +
-                            "</avatar_banner:1188538123521642586> - Показывает аватарку пользователя \n" +
-                            "</user:1188217557883293728> - Показывает информацию о пользователе \n" +
-                            "</server:1204559755503468564> - Показывает информацию о сервере \n" +
-                            "</role:1206219274444734569> - Показывает информацию о роли");
+                        .setTitle(`${local.info.description} 📚`)
+                        .setDescription(`</help:1188221601343357056> - ${localinfo.info[0]} \n` +
+                            `</bot:1188217557883293727> - ${localinfo.info[1]} \n` +
+                            `</user:1188217557883293728> - ${localinfo.info[2]} \n` +
+                            `</avatar-banner:1212862481677164635> - ${localinfo.info[3]} \n` +
+                            `</user:1188217557883293728> - ${localinfo.info[4]} \n` +
+                            `</server:1204559755503468564> - ${localinfo.info[5]} \n` +
+                            `</role:1206219274444734569> - ${localinfo.info[6]}`);
                     break;
                 case 'admin':
                     embed = new EmbedBuilder()
-                        .setTitle('Команды для администрации 👑')
-                        .setDescription("</ban:1204559755503468565> - Банит пользователя");
+                        .setTitle(`${local.admin.description} 👑`)
+                        .setDescription(`</ban:1204559755503468565> - ${localinfo.admin[0]} \n`);
                     break;
                 case 'moderation':
                     embed = new EmbedBuilder()
-                        .setTitle('Команды для модерации 👮‍♂️')
-                        .setDescription("</ban:1204559755503468565> - Банит пользователя \n" +
-                            "</kick:1204559755503468566> - Кикает пользователя \n" +
-                        "</mute:1204559755503468567> - Мутит пользователя \n" +
-                        "</clear:1188291249225084958> - Очищает чат на определенное количество сообщений");
+                        .setTitle(`${local.moder.description} 👮‍♂️`)
+                        .setDescription(`</ban:1204559755503468565> - ${localinfo.moder[0]} \n` +
+                            `</kick:1204559755503468566> - ${localinfo.moder[1]} \n` +
+                            `</mute:1204559755503468567> - ${localinfo.moder[2]} \n` +
+                            `</clear:1188291249225084958> - ${localinfo.moder[3]}`);
                     break;
                 case 'utils':
                     embed = new EmbedBuilder()
-                        .setTitle('Команды для утилит 🔧')
-                        .setDescription("</calc:1206292565553315870> - Калькулятор \n" +
-                            "</offer:1204559755503468568> - Предложить идею на голосование \n" +
-                            "</translate:1206292565553315871> - Переводит текст \n" +
-                            "</ping:1204559755964846100> - Показывает пинг бота");
+                        .setTitle(`${local.util.description} 🔧`)
+                        .setDescription(`</calc:1206292565553315870> - ${localinfo.util[0]} \n` +
+                            `</offer:1204559755503468568> - ${localinfo.util[1]} \n` +
+                            `</translate:1206292565553315871> - ${localinfo.util[2]} \n` +
+                            `</ping:1204559755964846100> - ${localinfo.util[3]}`);
                     break;
                 case 'games':
                     embed = new EmbedBuilder()
-                        .setTitle('Команды для игр 🎮')
-                        .setDescription("</russian-roulette:1204801418028912650> - Игра в русскую рулетку");
+                        .setTitle(`${local.games.description} 🎮`)
+                        .setDescription(`</russian-roulette:1204801418028912650> - ${localinfo.games[0]}`);
                     break;
                 case 'fun':
                     embed = new EmbedBuilder()
-                        .setTitle('Веселые команды 🎉')
-                        .setDescription("</randomanime.json:> - Показывает случайное аниме");
+                        .setTitle(`${local.fun.description} 🎉`)
+                        .setDescription(`</randomanime.json:> - ${localinfo.fun[0]}`);
                     break;
             }
             await interaction.update({embeds: [embed], components: [rowForHelpEvent]});

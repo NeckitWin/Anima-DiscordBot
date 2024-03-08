@@ -1,6 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const axios = require('axios');
-const lang = require('../../Data/Lang/lang');
+const lang = require('../../Data/Lang');
 
 console.log("command weather loaded");
 

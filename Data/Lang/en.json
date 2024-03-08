@@ -16,5 +16,65 @@
     "pressure": "pressure",
     "wind": "wind speed",
     "clouds": "cloudiness"
+  },
+  "menuhelp": {
+    "placeholder": "Learn more about the commands",
+    "info": {
+      "label": "Information",
+      "description": "Information commands"
+    },
+    "admin": {
+      "label": "Administration",
+      "description": "Commands for administration"
+    },
+    "moder": {
+      "label": "Moderation",
+      "description": "Commands for moderation"
+    },
+    "util": {
+      "label": "Utilities",
+      "description": "Various utilities for the server"
+    },
+    "games": {
+      "label": "Games",
+      "description": "Game commands"
+    },
+    "fun": {
+      "label": "Entertainment",
+      "description": "Entertainment commands"
+    },
+    "request": "Request from "
+  },
+  "commandsdesc": {
+    "info": [
+      "Shows a list of all commands",
+      "Shows information about the bot",
+      "Shows information about the user",
+      "Shows the user's avatar",
+      "Shows information about the user",
+      "Shows information about the server",
+      "Shows information about the role"
+    ],
+    "admin": [
+      "Bans the user"
+    ],
+    "moder": [
+      "Bans the user",
+      "Kicks the user",
+      "Mutes the user",
+      "Clears the chat for a certain number of messages"
+    ],
+    "util": [
+      "Calculator",
+      "Suggest an idea in this channel for voting",
+      "Translates text, determines the language of the text for translation independently",
+      "Shows the ping from the user to the bot"
+    ],
+    "games": [
+      "Play Russian roulette with a friend"
+    ],
+    "fun": [
+      "Shows a random anime"
+    ]
   }
 }

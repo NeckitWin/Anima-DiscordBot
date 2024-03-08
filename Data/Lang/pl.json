@@ -1,5 +1,5 @@
 {
-  "test":"testowa komenda",
+  "test": "testowa komenda",
   "newUsers": {
     "title": "Witamy na naszym serwerze!",
     "description": "Mam nadzieję, że spodoba Ci się tutaj i znajdziesz wielu interesujących ludzi i tematów do rozmów.",
@@ -16,6 +16,65 @@
     "pressure": "ciśnienie",
     "wind": "prędkość wiatru",
     "clouds": "zachmurzenie"
+  },
+  "menuhelp": {
+    "placeholder": "Dowiedz się więcej o poleceniach",
+    "info": {
+      "label": "Informacje",
+      "description": "Polecenia informacyjne"
+    },
+    "admin": {
+      "label": "Administracja",
+      "description": "Polecenia dla administracji"
+    },
+    "moder": {
+      "label": "Moderacja",
+      "description": "Polecenia dla moderacji"
+    },
+    "util": {
+      "label": "Narzędzia",
+      "description": "Różne narzędzia dla serwera"
+    },
+    "games": {
+      "label": "Gry",
+      "description": "Polecenia gier"
+    },
+    "fun": {
+      "label": "Rozrywka",
+      "description": "Polecenia rozrywkowe"
+    },
+    "request": "Żądanie od "
+  },
+  "commandsdesc": {
+    "info": [
+      "Pokazuje listę wszystkich poleceń",
+      "Pokazuje informacje o botcie",
+      "Pokazuje informacje o użytkowniku",
+      "Pokazuje awatar użytkownika",
+      "Pokazuje informacje o użytkowniku",
+      "Pokazuje informacje o serwerze",
+      "Pokazuje informacje o roli"
+    ],
+    "admin": [
+      "Banuje użytkownika"
+    ],
+    "moder": [
+      "Banuje użytkownika",
+      "Wyrzuca użytkownika",
+      "Wycisza użytkownika",
+      "Czyści czat na pewną ilość wiadomości"
+    ],
+    "util": [
+      "Kalkulator",
+      "Zaproponuj pomysł na tym kanale do głosowania",
+      "Tłumaczy tekst, samodzielnie określa język tekstu do tłumaczenia",
+      "Pokazuje ping od użytkownika do bota"
+    ],
+    "games": [
+      "Graj w rosyjską ruletkę z przyjacielem"
+    ],
+    "fun": [
+      "Pokazuje losowe anime"
+    ]
   }
-
 }

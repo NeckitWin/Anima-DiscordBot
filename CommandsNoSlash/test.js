@@ -1,5 +1,5 @@
 const {CommandInteraction, AttachmentBuilder, EmbedBuilder, PermissionsBitField} = require('discord.js');
-const lang = require('../Data/Lang/lang');
+const lang = require('../Data/Lang');
 
 module.exports = {
     name: 'test',

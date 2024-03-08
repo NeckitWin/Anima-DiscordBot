@@ -1,7 +1,7 @@
 // Message for new users in system channel
 const {Events, Permissions, EmbedBuilder} = require('discord.js');
 const {greetings} = require('../Data/greetings.json');
-const lang = require('../Data/Lang/lang')
+const lang = require('../Data/Lang')
 
 console.log("Events/newUsers loaded✅")
 
