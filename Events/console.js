@@ -38,6 +38,8 @@ module.exports = {
                 else {
                     console.error(`У меня нет прав на отправку сообщений в канал "${channelName}" на сервере "${serverName}".`);
                 }
+            }else if(command === 'stop') {
+                process.exit(0);
             }
         });
     }
