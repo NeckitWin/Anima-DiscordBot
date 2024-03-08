@@ -15,27 +15,6 @@ module.exports = {
                 database: database
             });
             connection.connect();
-
-            // try {
-            //     connection.query(checkUser, userid, (err, result) => {
-            //         if (err) {
-            //             console.log(err);
-            //         } else {
-            //             if (result[0].count !== 0) return;
-            //             if (result[0].count === 0) {
-            //                 connection.query(sql, values, (err, result) => {
-            //                     if (err) {
-            //                         console.log(err);
-            //                     } else {
-            //                         console.log(`User ${username} added to database`);
-            //                     }
-            //                 });
-            //             }
-            //         }
-            //     });
-            // }catch (err){
-            //     console.log("error in file addUserToDB: "+err);
-            // }
         } catch (error) {
             console.error('Error event connect:', error);
             console.log('Error in connect.js file');

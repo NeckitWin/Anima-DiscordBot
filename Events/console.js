@@ -1,4 +1,4 @@
-const { Events, Message } = require('discord.js');
+const {Events, Message} = require('discord.js');
 
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -9,37 +9,35 @@ module.exports = {
     name: Events.ClientReady,
     async execute(client) {
         readline.on('line', async (input) => {
-            // Извлечение информации из ввода
-            const [serverName, channelName, ...messageParts] = input.split(':');
-            const message = messageParts.join(' '); // Объединение частей сообщения
+            const [command, serverName, channelName, ...messageParts] = input.split(':');
+            const message = messageParts.join(' ');
 
-            // Проверка корректности
-            if (!serverName || !channelName || !message) {
-                console.error('Неверный формат. Введите: "Название сервера:название канала:Текстовое сообщение"');
-                return;
-            }
-
-            // Поиск сервера и канала
-            const guild = client.guilds.cache.find((guild) => guild.name === serverName);
-            if (!guild) {
-                console.error(`Сервер "${serverName}" не найден.`);
-                return;
-            }
-
-            const channel = guild.channels.cache.find((channel) => channel.name === channelName);
-            if (!channel) {
-                console.error(`Канал "${channelName}" не найден на сервере "${serverName}".`);
-                return;
-            }
-            if (channel.permissionsFor(client.user).has('SEND_MESSAGES'))
-                try {
-                    await channel.send(message);
-                    console.log(`Сообщение "${message}" отправлено в канал "${channelName}" на сервере "${serverName}".`);
-                } catch (error) {
-                    console.error(`Ошибка отправки сообщения: ${error}`);
+            if (command === 'say') {
+                if (!serverName || !channelName || !message) {
+                    console.error('Неверный формат. Введите: "Название сервера:название канала:Текстовое сообщение"');
+                    return;
                 }
-            else {
-                console.error(`У меня нет прав на отправку сообщений в канал "${channelName}" на сервере "${serverName}".`);
+                const guild = client.guilds.cache.find((guild) => guild.name === serverName);
+                if (!guild) {
+                    console.error(`Сервер "${serverName}" не найден.`);
+                    return;
+                }
+
+                const channel = guild.channels.cache.find((channel) => channel.name === channelName);
+                if (!channel) {
+                    console.error(`Канал "${channelName}" не найден на сервере "${serverName}".`);
+                    return;
+                }
+                if (channel.permissionsFor(client.user).has('SendMessages'))
+                    try {
+                        await channel.send(message);
+                        console.log(`Сообщение "${message}" отправлено в канал "${channelName}" на сервере "${serverName}".`);
+                    } catch (error) {
+                        console.error(`Ошибка отправки сообщения: ${error}`);
+                    }
+                else {
+                    console.error(`У меня нет прав на отправку сообщений в канал "${channelName}" на сервере "${serverName}".`);
+                }
             }
         });
     }
