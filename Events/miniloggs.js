@@ -5,11 +5,9 @@ module.exports = {
     async execute(message) {
         try {
             const date = new Date();
-            console.log( `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`)
-            console.log(`${message.guild.name}(${message.channel.name}) - User: ${message.author.username}, Content: ${message.content}`);
+            console.log(`[${date.toLocaleDateString()}|${date.toLocaleTimeString()}]:[${message.guild.name}/${message.channel.name}] - user:${message.author.username}, content: ${message.content}`);
         } catch (error) {
-            console.error('Error:', error);
-            console.log('Failed in miniloggs.js');
+            console.error('Error in miniloggs.js:', error);
         }
 
     }
