@@ -79,7 +79,7 @@ module.exports = {
                     },
                     {
                         name: `👑・${local.admin.label}`,
-                        value: '',
+                        value: '</technical-problem:1215979169444270113>',
                         inline: false,
                     },
                     {
@@ -99,7 +99,7 @@ module.exports = {
                     },
                     {
                         name: `🎉・${local.fun.label}`,
-                        value: '',
+                        value: '</random-anime:1212842667667488790>',
                         inline: false,
                     }
                 ],

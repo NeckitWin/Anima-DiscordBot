@@ -1,4 +1,8 @@
 {
+  "error": {
+    "otheruser": "To może być używane przez tego, kto wywołał to zdarzenie",
+    "dontperm": "Nie masz uprawnień do korzystania z tego"
+  },
   "test": "testowa komenda",
   "newUsers": {
     "title": "Witamy na naszym serwerze!",
@@ -56,7 +60,7 @@
       "Pokazuje informacje o roli"
     ],
     "admin": [
-      "Banuje użytkownika"
+      "Jeśli znajdziesz błąd, wyślij opis błędu za pomocą tego polecenia"
     ],
     "moder": [
       "Banuje użytkownika",

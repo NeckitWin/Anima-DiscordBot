@@ -4,8 +4,8 @@ console.log("command Admin/technicalProblem.js loaded✅");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('technical_problem')
-        .setNameLocalizations({ru: 'техническая_проблема', pl: 'problem_techniczny', uk: 'технічна_проблема'})
+        .setName('technical-problem')
+        .setNameLocalizations({ru: 'техническая-проблема', pl: 'problem-techniczny', uk: 'технічна-проблема'})
         .setDescription('Report a technical problem')
         .setDescriptionLocalizations({
             ru: 'Сообщить о технической проблеме',
