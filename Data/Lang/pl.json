@@ -3,6 +3,7 @@
     "otheruser": "To może być używane przez tego, kto wywołał to zdarzenie",
     "dontperm": "Nie masz uprawnień do korzystania z tego"
   },
+  "request": "Żądanie od ",
   "test": "testowa komenda",
   "newUsers": {
     "title": "Witamy na naszym serwerze!",
@@ -46,8 +47,7 @@
     "fun": {
       "label": "Rozrywka",
       "description": "Polecenia rozrywkowe"
-    },
-    "request": "Żądanie od "
+    }
   },
   "commandsdesc": {
     "info": [

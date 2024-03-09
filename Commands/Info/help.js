@@ -104,7 +104,7 @@ module.exports = {
                     }
                 ],
                 author: {
-                    name: local.request + interaction.user.displayName,
+                    name: lang[preferredLang].request + interaction.user.displayName,
                     icon_url: interaction.user.displayAvatarURL(),
                 },
             };

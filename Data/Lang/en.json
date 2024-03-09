@@ -3,6 +3,7 @@
     "otheruser": "This can be used by the one who triggered this event",
     "dontperm": "You do not have permission to use this"
   },
+  "request": "Request from ",
   "test": "Test command",
   "newUsers": {
     "title": "Welcome to our server!",
@@ -46,8 +47,7 @@
     "fun": {
       "label": "Entertainment",
       "description": "Entertainment commands"
-    },
-    "request": "Request from "
+    }
   },
   "commandsdesc": {
     "info": [
