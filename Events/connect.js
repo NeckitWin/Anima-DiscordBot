@@ -1,6 +1,6 @@
 const {Events, Message} = require('discord.js');
 const mysql = require('mysql');
-const {host, user, password, database} = require('../Data/databd.json');
+const {host, user, password, database} = require('../Data/database.json');
 
 console.log('Events/connect loaded✅');
 
