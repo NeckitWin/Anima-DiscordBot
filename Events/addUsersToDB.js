@@ -13,16 +13,14 @@ module.exports = {
         const sql = `INSERT INTO users (id, username) VALUES (?, ?)`;
         const values = [userid, username];
 
-        const connection = mysql.createConnection({
+        const connection = mysql.createPool({
             host: host,
             user: user,
             password: password,
             database: database
         });
-        connection.connect();
-
         try {
-            connection.query(checkUser, userid, (err, result) => {
+            await connection.query(checkUser, userid, (err, result) => {
                 if (err) {
                     console.log(err);
                 } else {
