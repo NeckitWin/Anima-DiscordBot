@@ -2,10 +2,8 @@ Data/config.json
 node_modules
 .idea
 Data/reactions
+Data/database.json
 ArcaneWorld
 ArcaneWorld/
 Events/minecraftCommands.js
 CommandsNoSlash/gemini.js
-
-./Data/database.json
-Data/database.json
