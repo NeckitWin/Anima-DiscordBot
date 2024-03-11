@@ -7,6 +7,8 @@ console.log('Events/addUsersToDB loaded✅');
 module.exports = {
     name: Events.MessageCreate,
     async execute(message) {
+        if (message.author.bot) return;
+
         const userid = message.author.id;
         const username = message.author.username;
         const checkUser = `SELECT COUNT(*) AS count FROM users WHERE id = ?`;
