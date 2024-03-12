@@ -7,6 +7,7 @@ module.exports = {
         description: 'give command',
         async execute(message) {
             if(message.author.id !== '429562004399980546') return;
+            if (!message.channel.permissionsFor(message.client.user).has("SendMessages")) return;
 
             let args = message.content.slice(5).trim().split(/ +/);
             let name = args[0];
