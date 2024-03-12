@@ -1,4 +1,4 @@
-const {Events, Message} = require('discord.js');
+const {Events} = require('discord.js');
 const mysql = require('mysql');
 const {host, user, password, database} = require('../Data/database.json');
 
@@ -14,7 +14,16 @@ module.exports = {
                 password: password,
                 database: database
             });
-            connection.connect();
+            connection.connect(function (err){
+                if (err) {
+                    console.log('Error connecting to database❌');
+                    console.log(err);
+                    stop();
+                } else {
+                    console.log('Connected to database✅');
+                    connection.end();
+                }
+            })
         } catch (error) {
             console.error('Error event connect:', error);
             console.log('Error in connect.js file');
