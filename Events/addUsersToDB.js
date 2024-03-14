@@ -22,7 +22,7 @@ module.exports = {
             database: database
         });
         try {
-            await connection.query(checkUser, userid, (err, result) => {
+            connection.query(checkUser, userid, (err, result) => {
                 if (err) {
                     console.log(err);
                 } else {
@@ -31,8 +31,10 @@ module.exports = {
                         connection.query(sql, values, (err, result) => {
                             if (err) {
                                 console.log(err);
+                                connection.end();
                             } else {
                                 console.log(`User ${username} added to database`);
+                                connection.end();
                             }
                         });
                     }
