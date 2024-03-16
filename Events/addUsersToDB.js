@@ -12,8 +12,9 @@ module.exports = {
         const userid = message.author.id;
         const username = message.author.username;
         const checkUser = `SELECT COUNT(*) AS count FROM users WHERE id = ?`;
-        const sql = `INSERT INTO users (id, username) VALUES (?, ?)`;
-        const values = [userid, username];
+        const sql = `INSERT INTO users (id, username, xp, coin) VALUES (?, ?, ?, ?)`;
+        const values = [userid, username, 0, 0];
+        const sqlxp = `UPDATE users SET xp = xp + 1 WHERE id = ?`
 
         const connection = mysql.createPool({
             host: host,
@@ -26,9 +27,17 @@ module.exports = {
                 if (err) {
                     console.log(err);
                 } else {
-                    if (result[0].count !== 0) return;
-                    if (result[0].count === 0) {
-                        connection.query(sql, values, (err, result) => {
+                    if (result[0].count !== 0) {
+                        connection.query(sqlxp, values, (err) => {
+                            if (err) {
+                                console.log(err);
+                                connection.end();
+                            } else {
+                                connection.end();
+                            }
+                        })
+                    } else if (result[0].count === 0) {
+                        connection.query(sql, values, (err) => {
                             if (err) {
                                 console.log(err);
                                 connection.end();
