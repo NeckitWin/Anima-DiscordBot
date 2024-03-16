@@ -17,6 +17,7 @@ module.exports = {
     async execute(interaction) {
         const user = interaction.options.getUser('user') || interaction.user;
         await user.fetch();
+        console.log(user);
 
         const embed = new EmbedBuilder()
             .setTitle("User Avatars")

@@ -8,12 +8,13 @@ module.exports = {
     name: Events.MessageCreate,
     async execute(message) {
         if (message.author.bot) return;
-
-        const userid = message.author.id;
+        if (message.author.system) return;
+        const userid = parseInt(message.author.id);
         const username = message.author.username;
+        const displayname = message.author.displayName;
         const checkUser = `SELECT COUNT(*) AS count FROM users WHERE id = ?`;
-        const sql = `INSERT INTO users (id, username, xp, coin) VALUES (?, ?, ?, ?)`;
-        const values = [userid, username, 0, 0];
+        const sql = `INSERT INTO users (id, user, name, xp, coin) VALUES (?, ?, ?, ?, ?)`;
+        const values = [userid, username, displayname, 0, 0];
         const sqlxp = `UPDATE users SET xp = xp + 1 WHERE id = ?`
 
         const connection = mysql.createPool({
@@ -26,27 +27,17 @@ module.exports = {
             connection.query(checkUser, userid, (err, result) => {
                 if (err) {
                     console.log(err);
+                    connection.end();
                 } else {
-                    if (result[0].count !== 0) {
-                        connection.query(sqlxp, values, (err) => {
-                            if (err) {
-                                console.log(err);
-                                connection.end();
-                            } else {
-                                connection.end();
-                            }
-                        })
-                    } else if (result[0].count === 0) {
-                        connection.query(sql, values, (err) => {
-                            if (err) {
-                                console.log(err);
-                                connection.end();
-                            } else {
-                                console.log(`User ${username} added to database`);
-                                connection.end();
-                            }
-                        });
-                    }
+                    const query = result[0].count !== 0 ? sqlxp : sql;
+                    connection.query(query, values, (err) => {
+                        if (err) {
+                            console.log(err);
+                        } else if (query === sql) {
+                            console.log(`User ${username} added to database`);
+                        }
+                        connection.end();
+                    });
                 }
             });
         }catch (err){
