@@ -16,7 +16,6 @@ module.exports = {
             .setRequired(true)
         ),
     async execute(interaction) {
-        console.log(interaction.member.avatarURL);
         const user = interaction.options.getUser('user') || interaction.user;
         await user.fetch();
 
