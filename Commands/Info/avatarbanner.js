@@ -16,33 +16,40 @@ module.exports = {
             .setRequired(true)
         ),
     async execute(interaction) {
-        const user = interaction.options.getUser('user') || interaction.user;
-        await user.fetch();
+        const userLink = interaction.options.getUser('user') || interaction.user;
+        await userLink.fetch();
+        console.log(userLink)
 
         const embed = new EmbedBuilder()
             .setTitle("User Avatars")
-            .setDescription(" ")
+            .setDescription("Avatar ")
             .setColor("#ff0062")
-            .setImage(user.avatarURL({ dynamic: true, size: 4096 }));
+            .setImage(userLink.avatarURL({ dynamic: true, size: 4096 }));
 
         let embed1 = null;
         let embed2 = null;
 
-        if (interaction.guild.members.cache.get(interaction.user.id).avatarURL() !== null) {
-         embed1 = new EmbedBuilder()
-            .setTitle(" ")
-            .setDescription(" ")
-            .setColor("#ff0062")
-            .setImage(interaction.guild.members.cache.get(interaction.user.id).avatarURL({ dynamic: true, size: 4096 }));
-            }
-        if (user.bannerURL() !== null) {
+            embed1 = new EmbedBuilder()
+                .setTitle(" ")
+                .setDescription("Display avatar server ")
+                .setColor("#ff0062")
+                .setImage(interaction.guild.members.cache.get(userLink.id).avatarURL({dynamic: true, size: 4096}));
+
             embed2 = new EmbedBuilder()
-                .setTitle("Banner")
-                .setDescription(" ")
+                .setTitle(" ")
+                .setDescription("Banner")
                 .setColor("#ff0062")
                 .setTimestamp()
-                .setImage(user.bannerURL({dynamic: true, size: 4096}));
+                .setImage(userLink.bannerURL({dynamic: true, size: 4096}));
+
+        if (interaction.guild.members.cache.get(userLink.id).avatarURL({dynamic: true, size: 4096}) !== null && userLink.bannerURL({dynamic: true, size: 4096}) !== null) {
+            interaction.reply({embeds: [embed, embed1, embed2]});
+        } else if (interaction.guild.members.cache.get(userLink.id).avatarURL({dynamic: true, size: 4096}) !== null) {
+            interaction.reply({embeds: [embed, embed1]});
+        } else if (userLink.bannerURL({dynamic: true, size: 4096}) !== null) {
+            interaction.reply({embeds: [embed, embed2]});
+        } else {
+            interaction.reply({embeds: [embed]});
         }
-        interaction.reply({ embeds: [embed, embed1, embed2] });
     }
 }
