@@ -17,7 +17,7 @@ module.exports = {
         ),
     async execute(interaction) {
         console.log(interaction.member.avatarURL);
-        const user = interaction.options.getUser('user');
+        const user = interaction.options.getUser('user') || interaction.user;
         await user.fetch();
 
         const embed = new EmbedBuilder()
@@ -25,18 +25,25 @@ module.exports = {
             .setDescription(" ")
             .setColor("#ff0062")
             .setImage(user.avatarURL({ dynamic: true, size: 4096 }));
-        const embed1 = new EmbedBuilder()
+
+        let embed1 = null;
+        let embed2 = null;
+
+        if (interaction.guild.members.cache.get(interaction.user.id).avatarURL() !== null) {
+         embed1 = new EmbedBuilder()
             .setTitle(" ")
             .setDescription(" ")
             .setColor("#ff0062")
             .setImage(interaction.guild.members.cache.get(interaction.user.id).avatarURL({ dynamic: true, size: 4096 }));
-        const embed2 = new EmbedBuilder()
-            .setTitle("Banner")
-            .setDescription(" ")
-            .setColor("#ff0062")
-            .setTimestamp()
-            .setImage(user.bannerURL({ dynamic: true, size: 4096 }));
-
+            }
+        if (user.bannerURL() !== null) {
+            embed2 = new EmbedBuilder()
+                .setTitle("Banner")
+                .setDescription(" ")
+                .setColor("#ff0062")
+                .setTimestamp()
+                .setImage(user.bannerURL({dynamic: true, size: 4096}));
+        }
         interaction.reply({ embeds: [embed, embed1, embed2] });
     }
 }
