@@ -13,43 +13,41 @@ module.exports = {
             .setNameLocalizations({ ru: 'пользователь', pl: 'użytkownik', uk: 'користувач' })
             .setDescription('User to get avatar and banner of')
             .setDescriptionLocalizations({ ru: 'Пользователь, у которого нужно получить аватар и баннер', pl: 'Użytkownik, którego awatar i baner chcesz uzyskać', uk: 'Користувач, у якого потрібно отримати аватар і банер' })
-            .setRequired(true)
         ),
     async execute(interaction) {
         const userLink = interaction.options.getUser('user') || interaction.user;
         await userLink.fetch();
-        console.log(userLink)
+
+        const avatarURL = userLink.avatarURL({ dynamic: true, size: 4096 });
+        const serverAvatarURL = interaction.guild.members.cache.get(userLink.id).avatarURL({dynamic: true, size: 4096});
+        const bannerURL = userLink.bannerURL({dynamic: true, size: 4096});
 
         const embed = new EmbedBuilder()
             .setTitle("User Avatars")
-            .setDescription("Avatar ")
+            .setDescription("Avatar")
             .setColor("#ff0062")
-            .setImage(userLink.avatarURL({ dynamic: true, size: 4096 }));
+            .setImage(avatarURL);
 
-        let embed1 = null;
-        let embed2 = null;
+        let embeds = [embed];
 
-            embed1 = new EmbedBuilder()
+        if (serverAvatarURL !== null) {
+            const embed1 = new EmbedBuilder()
                 .setTitle(" ")
-                .setDescription("Display avatar server ")
+                .setDescription("Display server avatar")
                 .setColor("#ff0062")
-                .setImage(interaction.guild.members.cache.get(userLink.id).avatarURL({dynamic: true, size: 4096}));
+                .setImage(serverAvatarURL);
+            embeds.push(embed1);
+        }
 
-            embed2 = new EmbedBuilder()
+        if (bannerURL !== null) {
+            const embed2 = new EmbedBuilder()
                 .setTitle(" ")
                 .setDescription("Banner")
                 .setColor("#ff0062")
                 .setTimestamp()
-                .setImage(userLink.bannerURL({dynamic: true, size: 4096}));
-
-        if (interaction.guild.members.cache.get(userLink.id).avatarURL({dynamic: true, size: 4096}) !== null && userLink.bannerURL({dynamic: true, size: 4096}) !== null) {
-            interaction.reply({embeds: [embed, embed1, embed2]});
-        } else if (interaction.guild.members.cache.get(userLink.id).avatarURL({dynamic: true, size: 4096}) !== null) {
-            interaction.reply({embeds: [embed, embed1]});
-        } else if (userLink.bannerURL({dynamic: true, size: 4096}) !== null) {
-            interaction.reply({embeds: [embed, embed2]});
-        } else {
-            interaction.reply({embeds: [embed]});
+                .setImage(bannerURL);
+            embeds.push(embed2);
         }
+        interaction.reply({embeds: embeds});
     }
 }
