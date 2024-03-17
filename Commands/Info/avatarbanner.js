@@ -13,11 +13,12 @@ module.exports = {
             .setNameLocalizations({ ru: 'пользователь', pl: 'użytkownik', uk: 'користувач' })
             .setDescription('User to get avatar and banner of')
             .setDescriptionLocalizations({ ru: 'Пользователь, у которого нужно получить аватар и баннер', pl: 'Użytkownik, którego awatar i baner chcesz uzyskać', uk: 'Користувач, у якого потрібно отримати аватар і банер' })
+            .setRequired(true)
         ),
     async execute(interaction) {
-        const user = interaction.options.getUser('user') || interaction.user;
+        console.log(interaction.member.avatarURL);
+        const user = interaction.options.getUser('user');
         await user.fetch();
-        console.log(user);
 
         const embed = new EmbedBuilder()
             .setTitle("User Avatars")
@@ -28,7 +29,7 @@ module.exports = {
             .setTitle(" ")
             .setDescription(" ")
             .setColor("#ff0062")
-            .setImage(user.displayAvatarURL({ dynamic: true, size: 4096 }));
+            .setImage(interaction.guild.members.cache.get(interaction.user.id).avatarURL({ dynamic: true, size: 4096 }));
         const embed2 = new EmbedBuilder()
             .setTitle("Banner")
             .setDescription(" ")
