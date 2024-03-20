@@ -22,7 +22,7 @@ module.exports = {
             const technicalChannel = await technicalGuild.channels.fetch(ChannelTPID);
 
             const embed = new EmbedBuilder()
-                .setColor(Colors.DarkPurple)
+                .setColor(Colors.DarkRed)
                 .setTitle(`Topic: ${topic}`)
                 .setDescription("Problem:\n" + "```\n" + description + "```")
                 .setAuthor({

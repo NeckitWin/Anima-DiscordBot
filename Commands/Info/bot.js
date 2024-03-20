@@ -1,6 +1,4 @@
-const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
-
-console.log("command Info/bot.js loaded✅");
+const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, Colors} = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -27,21 +25,15 @@ module.exports = {
         const rowLinksForBot = new ActionRowBuilder()
             .addComponents(ButtonServer, ButtonWebSite, ButtonGitHub);
 
-        const embed = {
-            color: 0xd40e3e,
-            title: "Info about bot Anima",
-            thumbnail: {
-                url: interaction.client.user.displayAvatarURL(),
-            },
-            fields: [
-                {
-                    name: "My name is " + `${interaction.client.user.username} 🤖`,
-                    value: '',
-                    inline: true,
-                },
+        const embed = new EmbedBuilder()
+            .setColor(Colors.White)
+            .setTitle(`Info about Bot ${interaction.client.user.username} 🤖`)
+            .setDescription(' ')
+            .setThumbnail(interaction.client.user.displayAvatarURL())
+            .addFields(
                 {
                     name: 'My ID',
-                    value: "```"+interaction.client.user.id+"```",
+                    value: "```js\n"+interaction.client.user.id+"```",
                     inline: false,
                 },
                 {
@@ -61,8 +53,8 @@ module.exports = {
                 },
                 {
                     name: "My owner",
-                    value: "<@429562004399980546> ([NeckitWin](https://github.com/NeckitWin))",
-                    inline: false,
+                    value: "<@429562004399980546>[Contact](https://neckitwin.github.io/)",
+                    inline: true,
                 },
                 {
                     name: "My support server",
@@ -73,9 +65,8 @@ module.exports = {
                     name: "Source code",
                     value: "[GitHub Repository](https://github.com/NeckitWin/Anima-DiscordBot)",
                     inline: true,
-                },
-            ],
-        };
+                }
+            )
         interaction.reply({ embeds: [embed], components: [rowLinksForBot]});
     }
 };
