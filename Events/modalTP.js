@@ -1,11 +1,19 @@
-const {Events, ModalBuilder, TextInputBuilder, TextInputStyle} = require('discord.js');
-// modal submit command for admin / technical problem
+const {Events, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder, Colors} = require('discord.js');
+const lang = require("../Data/Lang");
 console.log("Events/modalTP.js loaded✅");
 
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
         if (interaction.isModalSubmit() && interaction.customId === 'modalTP') {
+
+            let preferredLang = interaction.guild.preferredLocale;
+            if (!lang.hasOwnProperty(preferredLang)) {
+                preferredLang = 'en';
+            }
+            let local = lang[preferredLang].technicalProblems;
+
+
             const topic = interaction.fields.getTextInputValue('topicTP');
             const description = interaction.fields.getTextInputValue('descriptionTP');
             const OwnerServerID = '984079879802876035';
@@ -13,24 +21,25 @@ module.exports = {
             const guild = await interaction.client.guilds.fetch(OwnerServerID);
             const channel = await guild.channels.fetch(ChannelTPID);
 
-            const embed = {
-                color: 0x0099ff,
-                title: `Тема: ${topic}`,
-                description: "Описание:\n"+"```\n"+description+"```",
-                author: {
+            const embed = new EmbedBuilder()
+                .setColor(Colors.DarkPurple)
+                .setTitle(`Topic: ${topic}`)
+                .setDescription("Problem:\n" + "```\n" + description + "```")
+                .setAuthor({
                     name: interaction.user.tag,
                     icon_url: interaction.user.displayAvatarURL({dynamic: true}),
-                },
-                timestamp: new Date(),
-                footer: {
-                    text: `ID: ${interaction.user.id}`,
-                },
-            };
-
-            await channel.send({ embeds: [embed] });
-
-            await interaction.reply({ content: 'Спасибо, что сообщили об ошибке! Ожидайте исправления в скором времени.', ephemeral: true });
+                })
+                .setTimestamp(new Date())
+                .setFooter({
+                    text: `ID: ${interaction.user.id}`
+                })
         }
-    }
 
+        await channel.send({embeds: [embed]});
+
+        await interaction.reply({
+            content: local.request,
+            ephemeral: true
+        });
+    }
 }
