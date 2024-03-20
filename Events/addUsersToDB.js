@@ -9,6 +9,7 @@ module.exports = {
     async execute(message) {
         if (message.author.bot) return;
         if (message.author.system) return;
+        if (message.author.client) return;
         const userid = parseInt(message.author.id);
         const username = message.author.username;
         const displayname = message.author.displayName;

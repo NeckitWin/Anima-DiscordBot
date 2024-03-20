@@ -18,8 +18,8 @@ module.exports = {
             .setTitle('Сообщите о технической проблеме')
         const topic = new TextInputBuilder()
             .setCustomId('topicTP')
-            .setPlaceholder('Введите тему технической проблемы')
             .setLabel('Тема')
+            .setPlaceholder('Введите тему технической проблемы')
             .setMinLength(4)
             .setMaxLength(50)
             .setStyle(TextInputStyle.Short);

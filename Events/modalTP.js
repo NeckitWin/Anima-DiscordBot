@@ -29,7 +29,7 @@ module.exports = {
 
             await channel.send({ embeds: [embed] });
 
-            await interaction.reply({ content: 'Большое спасибо за то, что сообщили о ошибке!', ephemeral: true });
+            await interaction.reply({ content: 'Спасибо, что сообщили об ошибке! Ожидайте исправления в скором времени.', ephemeral: true });
         }
     }
 
