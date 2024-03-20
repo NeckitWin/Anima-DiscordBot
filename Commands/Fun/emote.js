@@ -16,8 +16,13 @@ module.exports = {
             "pl": "Pokaż swoje emocje!",
             "uk": "Покажи свої емоції!"
         })
-        .addStringOption(option =>
-            option.setName('text')
+        .addStringOption(option => option
+            .setName('emotion')
+            .setNameLocalizations({
+                    "ru": "эмоция",
+                    "pl": "emocja",
+                    "uk": "емоція"
+                })
                 .setDescription('Text to show emotions')
                 .setDescriptionLocalizations({
                     "ru": "Текст для показа эмоций",
@@ -40,12 +45,14 @@ module.exports = {
                 .setRequired(true)
         ),
     async execute(interaction) {
-        const text = interaction.options.getString('text');
+        const emotion = interaction.options.getString('emotion');
         const locale = interaction.guild.preferredLocale;
 
         const embed = new EmbedBuilder()
             .setColor(Colors.Purple)
             .setTitle("Random Emote")
             .setImage("https://api.itslit.uk/emote");
+
+        await interaction.reply({ content: `В разработке...`, ephemeral: true});
     }
 }
