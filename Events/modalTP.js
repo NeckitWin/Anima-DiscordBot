@@ -18,8 +18,8 @@ module.exports = {
             const description = interaction.fields.getTextInputValue('descriptionTP');
             const OwnerServerID = '984079879802876035';
             const ChannelTPID = '1206389800299667527';
-            const guild = await interaction.client.guilds.fetch(OwnerServerID);
-            const channel = await guild.channels.fetch(ChannelTPID);
+            const technicalGuild = await interaction.client.guilds.fetch(OwnerServerID);
+            const technicalChannel = await technicalGuild.channels.fetch(ChannelTPID);
 
             const embed = new EmbedBuilder()
                 .setColor(Colors.DarkPurple)
@@ -33,13 +33,13 @@ module.exports = {
                 .setFooter({
                     text: `ID: ${interaction.user.id}`
                 })
+
+            await technicalChannel.send({embeds: [embed]});
+
+            await interaction.reply({
+                content: local.request,
+                ephemeral: true
+            });
         }
-
-        await channel.send({embeds: [embed]});
-
-        await interaction.reply({
-            content: local.request,
-            ephemeral: true
-        });
     }
 }
