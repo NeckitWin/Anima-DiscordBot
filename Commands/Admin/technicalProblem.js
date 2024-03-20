@@ -1,6 +1,5 @@
 const {SlashCommandBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
-
-console.log("command Admin/technicalProblem.js loaded✅");
+const lang = require('../../Data/Lang');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,22 +12,28 @@ module.exports = {
             uk: 'Повідомити про технічну проблему'
         }),
     async execute(interaction) {
+        let preferredLang = interaction.guild.preferredLocale;
+        if (!lang.hasOwnProperty(preferredLang)) {
+            preferredLang = 'en';
+        }
+        let local = lang[preferredLang].technicalProblems;
+
         const modal = new ModalBuilder()
             .setCustomId('modalTP')
-            .setTitle('Сообщите о технической проблеме')
+            .setTitle(local.title)
         const topic = new TextInputBuilder()
             .setCustomId('topicTP')
-            .setLabel('Тема')
-            .setPlaceholder('Введите тему технической проблемы')
+            .setLabel(local.topic.label)
+            .setPlaceholder(local.topic.title)
             .setMinLength(4)
             .setMaxLength(50)
             .setStyle(TextInputStyle.Short);
 
         const description = new TextInputBuilder()
             .setCustomId('descriptionTP')
-            .setPlaceholder('Введите очень подробное описание технической проблемы, пожалуйста')
-            .setLabel('Описание проблемы')
-            .setMinLength(20)
+            .setLabel(local.description.label)
+            .setPlaceholder(local.description.title)
+            .setMinLength(10)
             .setMaxLength(1850)
             .setStyle(TextInputStyle.Paragraph);
 

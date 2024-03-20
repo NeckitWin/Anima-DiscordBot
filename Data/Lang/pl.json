@@ -5,6 +5,18 @@
   },
   "request": "Żądanie od ",
   "test": "testowa komenda",
+  "technicalProblems": {
+    "title": "Zgłoś problem techniczny",
+    "topic": {
+      "label": "Temat",
+      "title": "Wprowadź tytuł problemu technicznego"
+    },
+    "description": {
+      "label": "Opis problemu",
+      "title": "Wprowadź szczegółowy opis problemu technicznego"
+    },
+    "request": "Dziękujemy za zgłoszenie błędu! Oczekuj na poprawki w najbliższym czasie."
+  },
   "newUsers": {
     "title": "Witamy na naszym serwerze!",
     "description": "Mam nadzieję, że spodoba Ci się tutaj i znajdziesz wielu interesujących ludzi i tematów do rozmów.",
