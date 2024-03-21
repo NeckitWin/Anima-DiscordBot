@@ -7,6 +7,7 @@ module.exports = {
         .setDescription('Shows information about the bot')
         .setDescriptionLocalizations({ ru: 'Показывает информацию о боте', pl: 'Pokazuje informacje o bocie', uk: 'Показує інформацію про бота' }),
     async execute(interaction) {
+        const bot = await interaction.client.user.fetch();
         const ButtonServer = new ButtonBuilder()
             .setLabel("Discord Server")
             .setURL("https://discord.com/invite/JxNyZAsYpA")
@@ -30,6 +31,7 @@ module.exports = {
             .setTitle(`Info about Bot ${interaction.client.user.username} 🤖`)
             .setDescription(' ')
             .setThumbnail(interaction.client.user.displayAvatarURL())
+            .setImage(bot.bannerURL({ format: "png", size: 4096}))
             .addFields(
                 {
                     name: 'My ID',
