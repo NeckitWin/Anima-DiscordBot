@@ -1,0 +1,96 @@
+{
+  "error": {
+    "otheruser": "To może być używane przez tego, kto wywołał to zdarzenie",
+    "dontperm": "Nie masz uprawnień do korzystania z tego"
+  },
+  "request": "Żądanie od ",
+  "test": "testowa komenda",
+  "technicalProblems": {
+    "title": "Zgłoś problem techniczny",
+    "topic": {
+      "label": "Temat",
+      "title": "Wprowadź tytuł problemu technicznego"
+    },
+    "description": {
+      "label": "Opis problemu",
+      "title": "Wprowadź szczegółowy opis problemu technicznego"
+    },
+    "request": "Dziękujemy za zgłoszenie błędu! Oczekuj na poprawki w najbliższym czasie."
+  },
+  "newUsers": {
+    "title": "Witamy na naszym serwerze!",
+    "description": "Mam nadzieję, że spodoba Ci się tutaj i znajdziesz wielu interesujących ludzi i tematów do rozmów.",
+    "value": "Proszę zapoznać się z zasadami serwera:"
+  },
+  "weather": {
+    "title": "Pogoda",
+    "description1": "Miasto",
+    "description2": "Prognoza pogody",
+    "feelslike": "temperatura odczuwalna",
+    "min": "minimalna temperatura",
+    "max": "maksymalna temperatura",
+    "humidity": "wilgotność",
+    "pressure": "ciśnienie",
+    "wind": "prędkość wiatru",
+    "clouds": "zachmurzenie"
+  },
+  "menuhelp": {
+    "placeholder": "Dowiedz się więcej o poleceniach",
+    "info": {
+      "label": "Informacje",
+      "description": "Polecenia informacyjne"
+    },
+    "admin": {
+      "label": "Administracja",
+      "description": "Polecenia dla administracji"
+    },
+    "moder": {
+      "label": "Moderacja",
+      "description": "Polecenia dla moderacji"
+    },
+    "util": {
+      "label": "Narzędzia",
+      "description": "Różne narzędzia dla serwera"
+    },
+    "games": {
+      "label": "Gry",
+      "description": "Polecenia gier"
+    },
+    "fun": {
+      "label": "Rozrywka",
+      "description": "Polecenia rozrywkowe"
+    }
+  },
+  "commandsdesc": {
+    "info": [
+      "Pokazuje listę wszystkich poleceń",
+      "Pokazuje informacje o botcie",
+      "Pokazuje informacje o użytkowniku",
+      "Pokazuje awatar użytkownika",
+      "Pokazuje informacje o użytkowniku",
+      "Pokazuje informacje o serwerze",
+      "Pokazuje informacje o roli"
+    ],
+    "admin": [
+      "Jeśli znajdziesz błąd, wyślij opis błędu za pomocą tego polecenia"
+    ],
+    "moder": [
+      "Banuje użytkownika",
+      "Wyrzuca użytkownika",
+      "Wycisza użytkownika",
+      "Czyści czat na pewną ilość wiadomości"
+    ],
+    "util": [
+      "Kalkulator",
+      "Zaproponuj pomysł na tym kanale do głosowania",
+      "Tłumaczy tekst, samodzielnie określa język tekstu do tłumaczenia",
+      "Pokazuje ping od użytkownika do bota"
+    ],
+    "games": [
+      "Graj w rosyjską ruletkę z przyjacielem"
+    ],
+    "fun": [
+      "Pokazuje losowe anime"
+    ]
+  }
+}

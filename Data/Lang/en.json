@@ -1,0 +1,96 @@
+{
+  "error": {
+    "otheruser": "This can be used by the one who triggered this event",
+    "dontperm": "You do not have permission to use this"
+  },
+  "request": "Request from ",
+  "test": "Test command",
+  "technicalProblems": {
+    "title": "Report a technical problem",
+    "topic": {
+      "label": "Topic",
+      "title": "Enter the title of the technical problem"
+    },
+    "description": {
+      "label": "Problem description",
+      "title": "Enter a detailed description of the technical problem"
+    },
+    "request": "Thank you for reporting the error! Expect a fix soon."
+  },
+  "newUsers": {
+    "title": "Welcome to our server!",
+    "description": "I hope you have a great time here and make lots of new friends!",
+    "value": "Make sure you are aware of the server rules:"
+  },
+  "weather": {
+    "title": "Weather",
+    "description1": "City",
+    "description2": "Weather forecast",
+    "feelslike": "temperature feels like",
+    "min": "min temperature",
+    "max": "max temperature",
+    "humidity": "humidity",
+    "pressure": "pressure",
+    "wind": "wind speed",
+    "clouds": "cloudiness"
+  },
+  "menuhelp": {
+    "placeholder": "Learn more about the commands",
+    "info": {
+      "label": "Information",
+      "description": "Information commands"
+    },
+    "admin": {
+      "label": "Administration",
+      "description": "Commands for administration"
+    },
+    "moder": {
+      "label": "Moderation",
+      "description": "Commands for moderation"
+    },
+    "util": {
+      "label": "Utilities",
+      "description": "Various utilities for the server"
+    },
+    "games": {
+      "label": "Games",
+      "description": "Game commands"
+    },
+    "fun": {
+      "label": "Entertainment",
+      "description": "Entertainment commands"
+    }
+  },
+  "commandsdesc": {
+    "info": [
+      "Shows a list of all commands",
+      "Shows information about the bot",
+      "Shows information about the user",
+      "Shows the user's avatar",
+      "Shows information about the user",
+      "Shows information about the server",
+      "Shows information about the role"
+    ],
+    "admin": [
+      "If you find a bug, please send a description of the bug through this command"
+    ],
+    "moder": [
+      "Bans the user",
+      "Kicks the user",
+      "Mutes the user",
+      "Clears the chat for a certain number of messages"
+    ],
+    "util": [
+      "Calculator",
+      "Suggest an idea in this channel for voting",
+      "Translates text, determines the language of the text for translation independently",
+      "Shows the ping from the user to the bot"
+    ],
+    "games": [
+      "Play Russian roulette with a friend"
+    ],
+    "fun": [
+      "Shows a random anime"
+    ]
+  }
+}
