@@ -10,7 +10,7 @@ const getConnection = () => {
     });
 
     con.connect(err => {
-        if (err) throw err;
+        if (err) console.error(err);
     })
 
     return con;
