@@ -10,6 +10,7 @@ module.exports = {
         const sqlSelect = `SELECT userID FROM users`;
         const sqlInsert = `INSERT INTO users (users.userID, users.username,users.aura)
         VALUES (${message.author.id}, "${message.author.username}", 0)`;
+        // test
         con.query(sqlInsert,(err, result) => {
             if (err) console.log(err);
         })
