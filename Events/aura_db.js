@@ -12,23 +12,31 @@ module.exports = {
         const sqlSelect = `SELECT userID FROM users WHERE users.userID = ${user_id}`; // search user
         con.query(sqlSelect, (err, result) => {
             if (err) console.error(err);
+
             if (result.length > 0) { // if user was
-                const sqlInsert = `UPDATE wallet SET aura=aura+1317 WHERE userID = ${user_id}`;
-                con.query(sqlInsert,(err, result) => {
+
+                const sqlSelectServer = `SELECT * FROM wallet WHERE serverID = ? AND userID = ?`
+                con.query(sqlSelectServer, [message.guild.id, user_id], (err, res) => {
                     if (err) console.error(err);
+                    if (res.length > 0) { // if wallet server be
+                        const sqlInsertWallet = `UPDATE wallet SET aura=aura+1317 WHERE serverID = ? AND userID = ?`;
+                        con.query(sqlInsertWallet, [message.guild.id, user_id], (err, res) => {
+                            if (err) console.error(err);
+                        });
+                    } else {
+                        const sqlInsertWallet = `INSERT INTO wallet (serverID, userID) VALUES (?, ?)`;
+                        con.query(sqlInsertWallet, [message.guild.id, user_id], (err) => {
+                            if (err) console.error(err);
+                        });
+                    }
                 })
+
             } else { // if user wasn't
                 const sqlInsertUser = `INSERT INTO users (userID, username) VALUES (?, ?)`;
-                const sqlInsertWallet = `INSERT INTO wallet (serverID, userID) VALUES (?, ?)`;
-
                 con.query(sqlInsertUser, [user_id, message.author.username], (err) => {
                     if (err) {
                         console.error(err);
-                        return;
                     }
-                    con.query(sqlInsertWallet, [message.guild.id, user_id], (err) => {
-                        if (err) console.error(err);
-                    });
                 });
             }
         });
