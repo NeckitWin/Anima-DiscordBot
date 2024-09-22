@@ -1,5 +1,18 @@
-const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
+const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 const {getConnection} = require("../../Data/db");
+
+const prevButton = new ButtonBuilder()
+    .setCustomId("prevLeaders")
+    .setEmoji("<:emoji:1287203676418609223>")
+    .setStyle(ButtonStyle.Success);
+
+const nextButton = new ButtonBuilder()
+    .setCustomId("nextLeaders")
+    .setEmoji("<:emoji:1287203697469689856>")
+    .setStyle(ButtonStyle.Success);
+
+const row = new ActionRowBuilder()
+    .addComponents(prevButton, nextButton)
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,10 +25,6 @@ module.exports = {
         conn.query(sql, [interaction.guild.id], (err, result) => {
             if (err) console.error(err);
             const auraLeaders = result.slice(0,11);
-
-            const user = interaction.user;
-            user.fetch();
-            console.log(user.avatarURL());
 
             const embed = new EmbedBuilder()
                 .setTitle("🏆 Ranking Aura Top ⚖️")
@@ -30,7 +39,7 @@ module.exports = {
                 ])
             })
 
-            interaction.reply({embeds: [embed]});
+            interaction.reply({embeds: [embed], components: [row]});
         })
     }
 }
