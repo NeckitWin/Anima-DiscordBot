@@ -2,7 +2,7 @@ const {Events} = require('discord.js');
 
 module.exports = {
     name: Events.InteractionCreate,
-    async execute(interaction) {
+    async execute(interaction) { 
         if (!interaction.isButton()) return;
         switch (interaction.customId) {
             case "nextLeaders":

@@ -21,10 +21,11 @@ module.exports = {
     async execute(interaction) {
         const conn = getConnection();
 
-        const sql = `SELECT * FROM wallet JOIN users ON wallet.userID = users.userID WHERE serverID = ?`;
+        const sql = `SELECT * FROM wallet WHERE serverID = ?`;
         conn.query(sql, [interaction.guild.id], (err, result) => {
             if (err) console.error(err);
             const auraLeaders = result.slice(0,11);
+            const leaders = interaction.guild.members.fetch(interaction.user.id);
 
             const embed = new EmbedBuilder()
                 .setTitle("🏆 Ranking Aura Top ⚖️")

@@ -6,6 +6,7 @@ module.exports = {
     async execute(message) {
         if (message.author.bot) return; // not bot
         const user_id = message.author.id;
+        const username = message.author.displayName;
 
         const conn = getConnection();
 
@@ -16,16 +17,18 @@ module.exports = {
             if (result.length > 0) { // if user was
 
                 const sqlSelectServer = `SELECT * FROM wallet WHERE serverID = ? AND userID = ?`
+
                 conn.query(sqlSelectServer, [message.guild.id, user_id], (err, res) => {
                     if (err) console.error(err);
+
                     if (res.length > 0) { // if wallet server be
                         const sqlInsertWallet = `UPDATE wallet SET aura=aura+1317 WHERE serverID = ? AND userID = ?`;
                         conn.query(sqlInsertWallet, [message.guild.id, user_id], (err, res) => {
                             if (err) console.error(err);
                         });
                     } else {
-                        const sqlInsertWallet = `INSERT INTO wallet (serverID, userID) VALUES (?, ?)`;
-                        conn.query(sqlInsertWallet, [message.guild.id, user_id], (err) => {
+                        const sqlInsertWallet = `INSERT INTO wallet (serverID, userID, username) VALUES (?, ?, ?)`;
+                        conn.query(sqlInsertWallet, [message.guild.id, user_id, username], (err) => {
                             if (err) console.error(err);
                         });
                     }

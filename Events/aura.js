@@ -1,6 +1,6 @@
 const {Message, EmbedBuilder} = require('discord.js');
-
-console.log("event aura.js loaded✅");
+const {getConnection} = require('../Data/db');
+const conn = getConnection();
 
 const PlusAura = [
     'https://media1.tenor.com/m/b8SJCiQHnF8AAAAC/backind-back.gif',
@@ -19,25 +19,39 @@ module.exports = {
     async execute(message = new Message()) {
         try {
             if (!(message.content === '-aura' || message.content === '+aura')) return;
-            if (message.mentions.repliedUser === null) return message.reply('You have to reply to someone\'s message!');
-            if (message.mentions.repliedUser.id === message.author.id) return message.reply('You can\'t give aura to yourself!');
-            const random = parseInt(Math.random() * (10000 - 100) + 100);
             const replyUser = message.mentions.repliedUser;
-            let embed;
+            if (replyUser === null) return message.reply('You have to reply to someone\'s message!');
+            if (replyUser.id === message.author.id) return message.reply('You can\'t give aura to yourself!');
+            if (replyUser.bot) return message.reply('You can\'t give aura to bot!');
+            const random = parseInt(Math.random() * (10000 - 100) + 100);
+
+
+
+            const embed = new EmbedBuilder()
+                .setTitle(replyUser.displayName + " got an aura")
+            let sign;
             if (message.content === '-aura') {
-                embed = new EmbedBuilder()
-                    .setTitle(replyUser.displayName + " has lost their aura")
-                    .setDescription(`-${random} aura`)
+                sign = "-";
+
+                embed.setDescription(`-${random} aura`)
                     .setColor("#ff0000")
                     .setImage(MinusAura[Math.floor(Math.random() * MinusAura.length)]);
             } else if (message.content === '+aura') {
-                embed = new EmbedBuilder()
-                    .setTitle(replyUser.displayName + " got an aura")
-                    .setDescription(`+${random} aura`)
+                sign = "+";
+
+                embed.setDescription(`+${random} aura`)
                     .setColor("#00ff00")
                     .setImage(PlusAura[Math.floor(Math.random() * PlusAura.length)]);
-
             }
+
+            sql = `UPDATE wallet SET aura=aura${sign}? WHERE userID=? AND serverID=?`
+            conn.query(sql, [random, message.author.id, message.guild.id], (err, res) => {
+                if (err) console.error(err);
+            })
+
+
+
+
             message.channel.send({embeds: [embed]});
         } catch (e) {
             console.error(e);
