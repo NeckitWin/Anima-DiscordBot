@@ -62,7 +62,7 @@ module.exports = {
                 },
                 {
                     name: "My support server",
-                    value: "[Discord Server Link](https://discord.gg/gzYk2gcqAG)",
+                    value: "[Discord Server Link](https://discord.gg/rw5dzGT67s)",
                     inline: true,
                 },
                 {
