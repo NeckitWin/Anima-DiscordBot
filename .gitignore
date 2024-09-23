@@ -4,3 +4,4 @@ node_modules
 Data/reactions
 Data/database.json
 CommandsNoSlash/gemini.js
+Data/jsons
