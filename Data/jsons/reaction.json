@@ -1,0 +1,26 @@
+{
+  "reactions": [
+    {"name": "sad", "value": "sad"},
+    {"name": "happy", "value": "happy"},
+    {"name": "angry", "value": "angry"},
+    {"name": "cry", "value": "cry"},
+    {"name": "laugh", "value": "laugh"},
+    {"name": "shocked", "value": "shocked"},
+    {"name": "love", "value": "love"},
+    {"name": "sleepy", "value": "sleepy"},
+    {"name": "thinking", "value": "thinking"}
+  ],
+  "sad": [
+    "https://media.tenor.com/26_GcQVlnU4AAAAM/anime.gif",
+    "https://media1.tenor.com/m/aHOMEkkIVIcAAAAC/gojo-gojo-satoru.gif",
+    "https://media1.tenor.com/m/GCyDWvoy6gQAAAAC/sad-anime.gif"
+  ],
+  "happy": [],
+  "angry": [],
+  "cry": [],
+  "laugh": [],
+  "shocked": [],
+  "love": [],
+  "sleepy": [],
+  "thinking": []
+}

@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const {Client, Events, GatewayIntentBits, Collection} = require('discord.js')
+const {Client, Events, GatewayIntentBits, Collection, ActivityType} = require('discord.js')
 const {token} = require('./Data/config.json')
 
 const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.DirectMessages, GatewayIntentBits.DirectMessageReactions, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages]});
@@ -29,9 +29,9 @@ client.on("ready", () => {
     console.log('Bot is ready!✅');
 
     client.user.setPresence({
-        activities: {name: 'LOADING ... '},
-        status: 'idle'
-    })
+        activities: [{ name: `/help`, type: ActivityType.Watching }],
+        status: 'idle',
+    });
 })
 
 client.on(Events.InteractionCreate, async interaction => {
