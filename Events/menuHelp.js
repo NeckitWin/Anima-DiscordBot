@@ -24,10 +24,10 @@ module.exports = {
             const infocontent = `</help:1285287069676994605> - ${localinfo.info[0]} \n` +
                 `</bot:1285287069676994604> - ${localinfo.info[1]} \n` +
                 `</user:1274053573700878358> - ${localinfo.info[2]} \n` +
-                `</avatar-banner:1285287069676994603> - ${localinfo.info[3]} \n` +
-                `</user:1274053573700878358> - ${localinfo.info[4]} \n` +
+                `</leaders:1287176496791945268> - ${localinfo.info[3]} \n` +
+                `</avatar-banner:1285287069676994603> - ${localinfo.info[4]} \n` +
                 `</server:1285287069676994607> - ${localinfo.info[5]} \n` +
-                `</role:1285287069676994606> - ${localinfo.info[6]}`;
+                `</role:1285287069676994606> - ${localinfo.info[6]} \n`;
 
             const admincontent = `empty`
 
