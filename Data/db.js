@@ -16,4 +16,17 @@ const getConnection = () => {
     return conn;
 }
 
-module.exports = {getConnection};
+const getUser = (user_id, server_id) => {
+    return new Promise((resolve, reject) => {
+        const conn = getConnection();
+        const sql = `SELECT * FROM users JOIN wallet ON users.userID = wallet.userID WHERE wallet.userID = ? AND wallet.serverID = ?`;
+
+        conn.query(sql, [user_id, server_id], (err, res) => {
+            if (err) reject(err);
+            else resolve(res);
+        })
+        conn.end();
+    })
+}
+
+module.exports = {getConnection, getUser};

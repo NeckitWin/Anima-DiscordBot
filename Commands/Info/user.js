@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const {getUser} = require('../../Data/db')
 
 console.log("command Info/user.js loaded✅");
 
@@ -14,6 +15,9 @@ module.exports = {
             const user = interaction.options.getUser('user') || interaction.user;
             await user.fetch();
             const member = interaction.guild.members.cache.get(user.id);
+
+            const userInfo = await getUser(user.id, interaction.guild.id);
+            console.log(userInfo)
 
             const embed = {
                 color: 0x0099ff,

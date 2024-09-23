@@ -6,7 +6,7 @@ module.exports = {
     async execute(message) {
         if (message.author.bot) return; // not bot
         const user_id = message.author.id;
-        const username = message.author.displayName;
+        const displayName = message.author.displayName;
 
         const conn = getConnection();
 
@@ -27,8 +27,8 @@ module.exports = {
                             if (err) console.error(err);
                         });
                     } else {
-                        const sqlInsertWallet = `INSERT INTO wallet (serverID, userID, username) VALUES (?, ?, ?)`;
-                        conn.query(sqlInsertWallet, [message.guild.id, user_id, username], (err) => {
+                        const sqlInsertWallet = `INSERT INTO wallet (serverID, userID, serverName) VALUES (?, ?, ?)`;
+                        conn.query(sqlInsertWallet, [message.guild.id, user_id, displayName], (err) => {
                             if (err) console.error(err);
                         });
                     }
@@ -40,7 +40,11 @@ module.exports = {
                     if (err) {
                         console.error(err);
                     }
-                });
+                    const sqlInsertWallet = `INSERT INTO wallet (serverID, userID, serverName) VALUES (?, ?, ?)`;
+                    conn.query(sqlInsertWallet, [message.guild.id, user_id, displayName], (err) => {
+                        if (err) console.error(err);
+                    });
+                })
             }
         });
     }

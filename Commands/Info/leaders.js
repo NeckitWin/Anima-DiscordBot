@@ -20,12 +20,13 @@ module.exports = {
         .setDescription('Leaders aura'),
     async execute(interaction) {
         const conn = getConnection();
+        let prevNumber = 0;
+        let nextNumber = 10;
 
-        const sql = `SELECT * FROM wallet WHERE serverID = ?`;
+        const sql = `SELECT * FROM wallet WHERE serverID = ? ORDER BY wallet.aura DESC`; // sort desc >
         conn.query(sql, [interaction.guild.id], (err, result) => {
             if (err) console.error(err);
-            const auraLeaders = result.slice(0,11);
-            const leaders = interaction.guild.members.fetch(interaction.user.id);
+            const auraLeaders = result.slice(prevNumber, nextNumber);
 
             const embed = new EmbedBuilder()
                 .setTitle("🏆 Ranking Aura Top ⚖️")
@@ -36,7 +37,7 @@ module.exports = {
 
             auraLeaders.forEach((leader, index) => {
                 embed.addFields([
-                    {name: `#${index+1}. ${leader.username}`, value: `**Aura**: ${leader.aura}`, inline: false},
+                    {name: `#${index+1}. ${leader.serverName}`, value: `**Aura**: ${leader.aura}`, inline: false},
                 ])
             })
 

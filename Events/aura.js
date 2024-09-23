@@ -44,13 +44,10 @@ module.exports = {
                     .setImage(PlusAura[Math.floor(Math.random() * PlusAura.length)]);
             }
 
-            sql = `UPDATE wallet SET aura=aura${sign}? WHERE userID=? AND serverID=?`
-            conn.query(sql, [random, message.author.id, message.guild.id], (err, res) => {
+            const sql = `UPDATE wallet SET aura=aura${sign}? WHERE userID=? AND serverID=?`
+            conn.query(sql, [random, replyUser.id, message.guild.id], (err, res) => {
                 if (err) console.error(err);
             })
-
-
-
 
             message.channel.send({embeds: [embed]});
         } catch (e) {
