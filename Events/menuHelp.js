@@ -3,6 +3,7 @@ const {rowForHelpEx} = require('../Commands/Info/help.js');
 const lang = require('../Data/Lang');
 
 module.exports = {
+    cooldown: 5,
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {

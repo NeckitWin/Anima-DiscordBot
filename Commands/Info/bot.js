@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, Colors} = require("discord.js");
-
+const {formatDate} = require("../../Data/utility");
 
 
 module.exports = {
@@ -52,7 +52,7 @@ module.exports = {
                 },
                 {
                     name: "When I was created",
-                    value: "```"+interaction.client.user.createdAt.toLocaleTimeString("pl-PL", { timeZone: "Europe/Warsaw", day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' })+"```",
+                    value: "```"+formatDate(interaction.client.user.createdAt)+"```",
                     inline: true,
                 },
                 {

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const {formatDate} = require("../../Data/utility");
 
 console.log("command Info/role.js loaded✅");
 
@@ -32,7 +33,7 @@ module.exports = {
                 .addFields(
                     {name:'🆔 ID role', value:"```"+role.id+"```", inline: true},
                     {name:'🌈 Color', value:"```"+"#"+role.color.toString(16)+"```", inline: false},
-                    {name:'📅 Date of creation', value:"```"+role.createdAt.toLocaleString('pl-PL')+"```", inline: true},
+                    {name:'📅 Date of creation', value:"```"+formatDate(role.createdAt)+"```", inline: true},
                     {name:'👥 Owners', value:"```"+role.members.size+"```", inline: true},
                     {name:'👑 Role hierarchy', value:"```"+(role.guild.roles.cache.size - role.position)+"```", inline: true},
                     {name:'🔒 Permissions', value:"```"+role.permissions.toArray().join(", ")+"```", inline: false}

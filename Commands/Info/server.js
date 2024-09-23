@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const {formatDate} = require("../../Data/utility");
 
 console.log("command Info/mods.js loaded✅");
 
@@ -23,7 +24,7 @@ module.exports = {
                 fields: [
                     { name: '👑 Server owner', value: "```"+owner.user.username+"```", inline: true },
                     { name: '🆔 Server ID', value: "```"+guild.id+"```", inline: false },
-                    { name: '📅 Date of creation', value: "```"+guild.createdAt.toDateString()+"```", inline: true },
+                    { name: '📅 Date of creation', value: "```"+formatDate(guild.createdAt)+"```", inline: true },
                     { name: '👥 Member count', value: "```"+guild.memberCount+"```", inline: true },
                     { name: '📺 Channels count', value: "```"+guild.channels.cache.size+"```", inline: true, },
                 ],

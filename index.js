@@ -28,10 +28,11 @@ for (const folder of commandFolders) {
 client.on("ready", () => {
     console.log('Bot is ready!✅');
 
-    client.user.setActivity('+aura',{
-        type: 'WATCHING'
+    client.user.setPresence({
+        activities: {name: 'LOADING ... '},
+        status: 'idle'
     })
-});
+})
 
 client.on(Events.InteractionCreate, async interaction => {
     if (interaction.isChatInputCommand()) {

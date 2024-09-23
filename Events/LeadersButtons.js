@@ -15,6 +15,7 @@ const row = new ActionRowBuilder()
     .addComponents(prevButton, nextButton)
 
 module.exports = {
+    cooldown: 5,
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isButton()) return;

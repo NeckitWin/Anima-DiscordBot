@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const {getUser} = require('../../Data/db')
+const {formatDate} = require("../../Data/utility");
 
 console.log("command Info/user.js loaded✅");
 
@@ -18,13 +19,6 @@ module.exports = {
 
             const getUserArray = await getUser(user.id, interaction.guild.id);
             const userInfo = getUserArray[0];
-
-            const formatDate = (date) => {
-                const day = String(date.getDate()).padStart(2, '0');
-                const month = String(date.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
-                const year = date.getFullYear();
-                return `${day}.${month}.${year}`;
-            };
 
             const embed = {
                 color: 0x0099ff,
