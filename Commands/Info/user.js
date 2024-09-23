@@ -16,12 +16,19 @@ module.exports = {
             await user.fetch();
             const member = interaction.guild.members.cache.get(user.id);
 
-            const userInfo = await getUser(user.id, interaction.guild.id);
-            console.log(userInfo)
+            const getUserArray = await getUser(user.id, interaction.guild.id);
+            const userInfo = getUserArray[0];
+
+            const formatDate = (date) => {
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
+                const year = date.getFullYear();
+                return `${day}.${month}.${year}`;
+            };
 
             const embed = {
                 color: 0x0099ff,
-                title: `Информация о пользователе ${user.username}`,
+                title: `Info about user — ${user.displayName}`,
                 thumbnail: {
                     url: user.displayAvatarURL(),
                 },
@@ -31,8 +38,9 @@ module.exports = {
                 fields: [
                     { name: '👤 Username', value: "```"+user.username+"```", inline: true },
                     { name: '🔢 User ID', value: "```"+user.id+"```", inline: false },
-                    { name: '📅 Date of creation', value: "```"+user.createdAt.toDateString()+"```", inline: true },
-                    { name: '📅 Server entry date', value: "```"+member.joinedAt.toDateString()+"```", inline: true },
+                    { name: '📅 Date of creation', value: "```"+formatDate(user.createdAt)+"```", inline: true },
+                    { name: '📅 Server entry date', value: "```"+formatDate(member.joinedAt)+"```", inline: true },
+                    { name: '🔥 Aura', value: `\`\`\`ansi\n[2;31m${userInfo.aura}[0m\`\`\``, inline: true },
                     { name: '🔒 Roles', value: member.roles.cache.map(role => role.toString()).join(' '), inline: false },
                 ],
             };

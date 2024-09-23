@@ -8,11 +8,11 @@ const PlusAura = [
     'https://media.tenor.com/mawaqOU-OiQAAAAM/smoke-packwatch.gif'
 ]
 const MinusAura = [
-        'https://media1.tenor.com/m/0x5op-jCThgAAAAC/aura-diagnosis.gif',
-        'https://media1.tenor.com/m/0Ln8TCeAVPQAAAAC/backind-backind-aura.gif',
-        'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ24zZmZ6anphaXE2dGRhZnl2d2NpbHI4ZHFjY2RhcWFvdGZzNGk2bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4NM2GkFUSPLiVQP0c9/giphy.gif',
-        'https://media1.tenor.com/m/F-D5EhlQXdMAAAAC/nalog.gif'
-    ]
+    'https://media1.tenor.com/m/0x5op-jCThgAAAAC/aura-diagnosis.gif',
+    'https://media1.tenor.com/m/0Ln8TCeAVPQAAAAC/backind-backind-aura.gif',
+    'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ24zZmZ6anphaXE2dGRhZnl2d2NpbHI4ZHFjY2RhcWFvdGZzNGk2bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4NM2GkFUSPLiVQP0c9/giphy.gif',
+    'https://media1.tenor.com/m/F-D5EhlQXdMAAAAC/nalog.gif'
+]
 
 module.exports = {
     name: 'messageCreate',
@@ -24,7 +24,6 @@ module.exports = {
             if (replyUser.id === message.author.id) return message.reply('You can\'t give aura to yourself!');
             if (replyUser.bot) return message.reply('You can\'t give aura to bot!');
             const random = parseInt(Math.random() * (10000 - 100) + 100);
-
 
 
             const embed = new EmbedBuilder()
