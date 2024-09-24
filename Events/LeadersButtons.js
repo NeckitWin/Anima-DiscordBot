@@ -1,5 +1,5 @@
-const {EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events} = require("discord.js");
-const {getConnection} = require('../Data/db');
+const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events } = require("discord.js");
+const { getConnection } = require('../Data/db');
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -12,20 +12,29 @@ const nextButton = new ButtonBuilder()
     .setStyle(ButtonStyle.Success);
 
 const row = new ActionRowBuilder()
-    .addComponents(prevButton, nextButton)
+    .addComponents(prevButton, nextButton);
+
+const leadersFiltr = (embed, result, prevNumber, nextNumber) => {
+    let auraLeaders = result.slice(prevNumber, nextNumber);
+    auraLeaders.forEach((leader, index) => {
+        embed.addFields([
+            {
+                name: `#${index + prevNumber + 1}. ${leader.serverName}`,
+                value: `**Aura**: ${leader.aura}`,
+                inline: false
+            },
+        ]);
+    });
+};
 
 module.exports = {
-    cooldown: 5,
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isButton()) return;
 
         const conn = getConnection();
+        const sql = `SELECT * FROM wallet WHERE serverID = ? ORDER BY wallet.aura DESC`;
 
-        let prevNumber = 0;
-        let nextNumber = 10;
-
-        const sql = `SELECT * FROM wallet WHERE serverID = ? ORDER BY wallet.aura DESC`; // sort desc >
         conn.query(sql, [interaction.guild.id], (err, result) => {
             if (err) console.error(err);
 
@@ -35,59 +44,42 @@ module.exports = {
                 .setThumbnail(interaction.guild.iconURL())
                 .setFooter({
                     text: `Requested by ${interaction.user.displayName}`,
-                    iconURL: interaction.user.avatarURL({dynamic: true, size: 4096})
+                    iconURL: interaction.user.avatarURL({ dynamic: true, size: 4096 })
                 });
 
+            // Initialize the page number if it doesn't exist
+            if (!interaction.message.page) {
+                interaction.message.page = 0; // Start on the first page
+            }
 
-            let auraLeaders;
+            let prevNumber = interaction.message.page * 10;
+            let nextNumber = prevNumber + 10;
+
             switch (interaction.customId) {
                 case "nextLeaders":
-                    prevNumber += 10;
-                    nextNumber += 10;
-                    if (nextNumber > result.length) {
-                        nextNumber = result.length;
-                        if (result.length >= 10) {
-                            prevNumber = result.length - 10;
-                        } else {
-                            prevNumber = 0;
-                        }
+                    if (nextNumber < result.length) {
+                        interaction.message.page++;
                     }
-                    auraLeaders = result.slice(prevNumber, nextNumber);
-                    auraLeaders.forEach((leader, index) => {
-                        embed.addFields([
-                            {
-                                name: `#${index + prevNumber + 1}. ${leader.username}`,
-                                value: `**Aura**: ${leader.aura}`,
-                                inline: false
-                            },
-                        ])
-                    })
-                    interaction.update({embeds: [embed], components: [row]});
                     break;
 
                 case "prevLeaders":
-                    if (prevNumber >= 10) {
-                        prevNumber -= 10;
-                        nextNumber -= 10;
-                    } else {
-                        prevNumber = 0;
-                        nextNumber = 10;
+                    if (interaction.message.page > 0) {
+                        interaction.message.page--;
                     }
-                    auraLeaders = result.slice(prevNumber, nextNumber);
-                    auraLeaders.forEach((leader, index) => {
-                        embed.addFields([
-                            {
-                                name: `#${index + 1}. ${leader.username}`,
-                                value: `**Aura**: ${leader.aura}`,
-                                inline: false
-                            },
-                        ])
-                    })
-                    interaction.update({embeds: [embed], components: [row]});
                     break;
             }
-        })
+
+            prevNumber = interaction.message.page * 10;
+            nextNumber = prevNumber + 10;
+
+            if (nextNumber > result.length) {
+                nextNumber = result.length;
+            }
+
+            embed.fields = [];
+            leadersFiltr(embed, result, prevNumber, nextNumber);
+
+            interaction.update({ embeds: [embed], components: [row] });
+        });
     }
-}
-
-
+};
