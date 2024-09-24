@@ -31,6 +31,7 @@ module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isButton()) return;
+        if (interaction.message.interaction.user.id !== interaction.user.id ) return interaction.reply({content: 'this is not your command', ephemeral: true});
 
         const conn = getConnection();
         const sql = `SELECT * FROM wallet WHERE serverID = ? ORDER BY wallet.aura DESC`;
@@ -47,9 +48,8 @@ module.exports = {
                     iconURL: interaction.user.avatarURL({ dynamic: true, size: 4096 })
                 });
 
-            // Initialize the page number if it doesn't exist
             if (!interaction.message.page) {
-                interaction.message.page = 0; // Start on the first page
+                interaction.message.page = 0;
             }
 
             let prevNumber = interaction.message.page * 10;
