@@ -1,5 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 const {getConnection} = require("../../Data/funcs/db");
+const {getCooldown} = require("../../Data/funcs/cooldown");
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
