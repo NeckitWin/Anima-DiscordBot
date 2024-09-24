@@ -42,7 +42,7 @@ module.exports = {
 
             const gamescontent = `\`+aura\` - to respect \n\`-aura\` - to disrespect`;
 
-            const funcontent = `</random-anime:1212842667667488790> - ${localinfo.fun[0]}`
+            const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]}`
 
             const menuHelpEvent = new StringSelectMenuBuilder()
                 .setCustomId('menuHelp')

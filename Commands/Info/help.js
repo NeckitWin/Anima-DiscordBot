@@ -98,7 +98,7 @@ module.exports = {
                     },
                     {
                         name: `🎉・${local.fun.label}`,
-                        value: '</random-anime:1285287069756690489>',
+                        value: '</reaction:1287841310979395676>',
                         inline: false,
                     }
                 ],
