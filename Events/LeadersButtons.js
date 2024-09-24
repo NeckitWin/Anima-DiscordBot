@@ -1,5 +1,5 @@
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events } = require("discord.js");
-const { getConnection } = require('../Data/db');
+const { getConnection } = require('../Data/funcs/db');
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")

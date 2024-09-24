@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const {getUser} = require('../../Data/db')
+const {getUser} = require('../../Data/funcs/db')
 const {formatDate} = require("../../Data/utility");
 
 console.log("command Info/user.js loaded✅");

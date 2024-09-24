@@ -2,8 +2,6 @@ const {Message} = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 
-console.log("event prefixEvent.js loaded✅");
-
 module.exports = {
     name: 'messageCreate',
     async execute(message = new Message()) {

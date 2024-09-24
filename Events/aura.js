@@ -1,5 +1,6 @@
-const {Message, EmbedBuilder} = require('discord.js');
-const {getConnection} = require('../Data/db');
+const {EmbedBuilder} = require('discord.js');
+const {getConnection} = require('../Data/funcs/db');
+const {getCooldown} = require('../Data/funcs/cooldown');
 const conn = getConnection();
 
 const PlusAura = [
@@ -15,12 +16,20 @@ const MinusAura = [
 ]
 
 module.exports = {
+    cooldown: 60,
     name: 'messageCreate',
-    async execute(message = new Message()) {
+    async execute(message) {
         try {
             if (!(message.content === '-aura' || message.content === '+aura')) return;
+            console.log(message)
+            const cooldown = await getCooldown(message, message.author.id, 600)
+            if (cooldown) return;
+
             const replyUser = message.mentions.repliedUser;
-            if (replyUser === null) return message.reply('You have to reply to someone\'s message!');
+            if (replyUser === null) return message.reply({
+                content: 'You have to reply to someone\'s message!',
+                ephemeral: true
+            });
             if (replyUser.id === message.author.id) return message.reply('You can\'t give aura to yourself!');
             if (replyUser.bot) return message.reply('You can\'t give aura to bot!');
             const random = parseInt(Math.random() * (10000 - 100) + 100);

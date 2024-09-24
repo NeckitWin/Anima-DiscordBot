@@ -1,11 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const {Client, Events, GatewayIntentBits, Collection, ActivityType} = require('discord.js')
-const {token} = require('./Data/config.json')
+const {Client, Events, GatewayIntentBits, Collection, ActivityType} = require('discord.js');
+const {token} = require('./Data/config.json');
 
 const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.DirectMessages, GatewayIntentBits.DirectMessageReactions, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages]});
 
 client.commands = new Collection();
+client.cooldown = new Collection();
 
 const foldersPath = path.join(__dirname, 'Commands');
 const commandFolders = fs.readdirSync(foldersPath);

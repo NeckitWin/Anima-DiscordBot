@@ -1,5 +1,5 @@
 const {Events} = require('discord.js');
-const {getConnection} = require('../Data/db');
+const {getConnection} = require('../Data/funcs/db');
 
 module.exports = {
     name: Events.MessageCreate,

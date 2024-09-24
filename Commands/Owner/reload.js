@@ -1,13 +1,9 @@
-// Команда для регистрации всех команд в папке Commands
-
 const fs = require('fs');
 const path = require('path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token, clientId } = require('../../Data/config.json');
 const {SlashCommandBuilder} = require('discord.js');
-// Нужно создать config.json в папке Data и вставить туда следующее:
-// {"token": "Токен бота", "clientId": "ID бота"}
 
 console.log("command Owner/reload.js loaded✅");
 
