@@ -21,9 +21,7 @@ module.exports = {
     async execute(message) {
         try {
             if (!(message.content === '-aura' || message.content === '+aura')) return;
-            console.log(message)
-            const cooldown = await getCooldown(message, message.author.id, 600)
-            if (cooldown) return;
+            if (await getCooldown(message, message.author.id, 600)) return; // cooldown
 
             const replyUser = message.mentions.repliedUser;
             if (replyUser === null) return message.reply({
