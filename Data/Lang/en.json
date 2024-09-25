@@ -87,10 +87,11 @@
       "Shows the ping from the user to the bot"
     ],
     "games": [
-      "Play Russian roulette with a friend"
+      ""
     ],
     "fun": [
-      "Show your reaction"
+      "Show your reaction",
+      "Interact with another user"
     ]
   }
 }

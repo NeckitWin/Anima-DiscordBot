@@ -42,7 +42,8 @@ module.exports = {
 
             const gamescontent = `\`+aura\` - to respect \n\`-aura\` - to disrespect`;
 
-            const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]}`
+            const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]} \n` +
+                                        `</interaction:1288525650721898669> - ${localinfo.fun[1]}`;
 
             const menuHelpEvent = new StringSelectMenuBuilder()
                 .setCustomId('menuHelp')

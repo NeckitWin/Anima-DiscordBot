@@ -87,10 +87,11 @@
       "Pokazuje ping od użytkownika do bota"
     ],
     "games": [
-      "Graj w rosyjską ruletkę z przyjacielem"
+      ""
     ],
     "fun": [
-      "Pokaż swoją reakcję"
+      "Pokaż swoją reakcję",
+      "Współdziałaj z innym użytkownikiem"
     ]
   }
 }

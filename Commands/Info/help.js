@@ -98,7 +98,7 @@ module.exports = {
                     },
                     {
                         name: `🎉・${local.fun.label}`,
-                        value: '</reaction:1287841310979395676>',
+                        value: '</reaction:1287841310979395676> </interaction:1288525650721898669>',
                         inline: false,
                     }
                 ],
