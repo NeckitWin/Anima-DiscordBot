@@ -30,7 +30,7 @@ client.on("ready", () => {
     console.log('Bot is ready!✅');
 
     client.user.setPresence({
-        activities: [{ name: `/help`, type: ActivityType.Watching }],
+        activities: [{ name: `/help`, type: ActivityType.Competing }],
         status: 'idle',
     });
 })
