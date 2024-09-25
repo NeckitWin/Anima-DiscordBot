@@ -15,7 +15,7 @@ module.exports = {
         const target = interaction.options.getString("your_reaction");
         const embed = new EmbedBuilder()
             .setAuthor({name: `${interaction.user.displayName} ${target}`, iconURL: interaction.user.displayAvatarURL()})
-            .setImage(data[target][Math.floor(Math.random() * target.length)]);
+            .setImage(data[target][Math.floor(Math.random() * data[target].length)]);
 
         interaction.reply({embeds: [embed]});
     }

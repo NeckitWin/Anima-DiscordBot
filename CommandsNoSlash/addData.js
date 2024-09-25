@@ -7,10 +7,11 @@ module.exports = {
     description: 'Owner command',
     async execute(message) {
         const messageArray = message.content.split(' ');
-        const target = messageArray[1];
-        const newData = messageArray[2];
+        const jsonFile = messageArray[1];
+        const target = messageArray[2];
+        const newData = messageArray[3];
 
-        const pathFile = path.join(__dirname, "../Data/jsons/reaction.json");
+        const pathFile = path.join(__dirname, `../Data/jsons/${jsonFile}.json`);
 
         fs.readFile(pathFile, 'utf8',(err, data)=>{
             if (err) return console.error(err);
