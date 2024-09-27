@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
-const perm = require('../../Data/perm.json');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 console.log("command Moder/clear.js loaded✅");
 
@@ -13,6 +12,7 @@ module.exports = {
             pl: 'Czyści czat na określoną liczbę wiadomości',
             uk: 'Очищає чат на вказану кількість повідомлень'
         })
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .addIntegerOption(option =>
             option.setName('amount')
                 .setNameLocalizations({ ru: 'количество', pl: 'ilość', uk: 'кількість' })
@@ -26,40 +26,17 @@ module.exports = {
     async execute(interaction) {
         const member = interaction.guild.members.cache.get(interaction.user.id);
         const amount = interaction.options.getInteger('amount');
-        // Проверяем, есть ли у пользователя права на удаление сообщений
-        if (!member.permissions.has('ManageMessages')) {
-            const response = {
-                'default': perm.default,
-                'ru': perm.ru,
-                'pl': perm.pl,
-                'uk': perm.uk
-            };
-            const locale = interaction.locale && response.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
-            const replyMessage = response[locale];
-            return interaction.reply(replyMessage);
-        }
-        // Проверяем, что количество сообщений находится в диапазоне от 1 до 100
+
+        // if (!member.permissions.has('ManageMessages')) {
+        //     return interaction.reply({content: `You don't have permission to use this command`, ephemeral: true});
+        // }
+
         if (amount <= 0 || amount > 100) {
-            const response = {
-                'ru': 'Количество сообщений должно быть в диапазоне от 1 до 100',
-                'pl': 'Liczba wiadomości musi być w zakresie od 1 do 100',
-                'uk': 'Кількість повідомлень повинна бути в діапазоні від 1 до 100',
-                'default': 'Amount of messages must be in range from 1 to 100'
-            };
-            const locale = interaction.locale && response.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
-            const replyMessage = response[locale];
-            return interaction.reply(replyMessage);
-        } else { // Если все проверки пройдены, удаляем сообщения и отвечаем пользователю
+            interaction.reply({content: `You must delete at least 1 message and no more than 100 messages`, ephemeral: true});
+        } else {
             await interaction.channel.bulkDelete(amount, true);
-            const response = {
-                'default': `${amount} messages deleted`,
-                'ru': `Удалено ${amount} сообщений`,
-                'pl': `Usunięto ${amount} wiadomości`,
-                'uk': `Видалено ${amount} повідомлень`
-            };
-            const locale = interaction.locale && response.hasOwnProperty(interaction.locale) ? interaction.locale : 'default';
-            const replyMessage = response[locale];
-            await interaction.reply(replyMessage);
+
+            interaction.reply({content: `Deleted ${amount} messages`});
         }
     },
 };
