@@ -125,6 +125,7 @@ module.exports = {
                     break;
             }
             await interaction.update({embeds: [embed], components: [rowForHelpEvent]});
+            
         }
     }
 }
