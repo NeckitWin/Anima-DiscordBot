@@ -24,12 +24,7 @@ module.exports = {
                 })
                 .setRequired(true)),
     async execute(interaction) {
-        const member = interaction.guild.members.cache.get(interaction.user.id);
         const amount = interaction.options.getInteger('amount');
-
-        // if (!member.permissions.has('ManageMessages')) {
-        //     return interaction.reply({content: `You don't have permission to use this command`, ephemeral: true});
-        // }
 
         if (amount <= 0 || amount > 100) {
             interaction.reply({content: `You must delete at least 1 message and no more than 100 messages`, ephemeral: true});
