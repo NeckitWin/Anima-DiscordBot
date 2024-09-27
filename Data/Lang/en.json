@@ -72,7 +72,7 @@
       "Shows information about the role"
     ],
     "admin": [
-      "If you find a bug, please send a description of the bug through this command"
+      "Send something on behalf of the bot"
     ],
     "moder": [
       "Bans the user",
@@ -82,9 +82,8 @@
     ],
     "util": [
       "Calculator",
-      "Suggest an idea in this channel for voting",
       "Translates text, determines the language of the text for translation independently",
-      "Shows the ping from the user to the bot"
+      "The weather in your city"
     ],
     "games": [
       ""

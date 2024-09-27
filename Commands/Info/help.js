@@ -78,7 +78,7 @@ module.exports = {
                     },
                     {
                         name: `👑・${local.admin.label}`,
-                        value: '',
+                        value: '</say:1287818587666645003>',
                         inline: false,
                     },
                     {
@@ -88,7 +88,7 @@ module.exports = {
                     },
                     {
                         name: `🔧・${local.util.label}`,
-                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>',
+                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>',
                         inline: false,
                     },
                     {
@@ -98,7 +98,7 @@ module.exports = {
                     },
                     {
                         name: `🎉・${local.fun.label}`,
-                        value: '</reaction:1287841310979395676> </interaction:1288525650721898669>',
+                        value: '</reaction:1287841310979395676>, </interaction:1288525650721898669>',
                         inline: false,
                     }
                 ],

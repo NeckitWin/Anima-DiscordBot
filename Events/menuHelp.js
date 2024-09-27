@@ -1,5 +1,4 @@
 const {Events, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder} = require('discord.js');
-const {rowForHelpEx} = require('../Commands/Info/help.js');
 const lang = require('../Data/Lang');
 
 module.exports = {
@@ -30,7 +29,7 @@ module.exports = {
                 `</server:1285287069676994607> - ${localinfo.info[5]} \n` +
                 `</role:1285287069676994606> - ${localinfo.info[6]} \n`;
 
-            const admincontent = `empty`
+            const admincontent = `</say:1287818587666645003> - ${localinfo.admin[0]}`
 
             const modercontent = `</ban:1285287069676994608> - ${localinfo.moder[0]} \n` +
                 `</kick:1285287069676994610> - ${localinfo.moder[1]} \n` +
@@ -38,7 +37,8 @@ module.exports = {
                 `</clear:1285287069676994609> - ${localinfo.moder[3]}`;
 
             const utilcontent = `</calc:1285287069756690488> - ${localinfo.util[0]} \n` +
-                `</translate:1285287069756690490> - ${localinfo.util[2]} \n`;
+                `</translate:1285287069756690490> - ${localinfo.util[1]} \n` +
+                `</weather:1285287069756690491> - ${localinfo.util[2]}`;
 
             const gamescontent = `\`+aura\` - to respect \n\`-aura\` - to disrespect`;
 
@@ -125,7 +125,7 @@ module.exports = {
                     break;
             }
             await interaction.update({embeds: [embed], components: [rowForHelpEvent]});
-            
+
         }
     }
 }

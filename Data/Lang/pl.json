@@ -72,7 +72,7 @@
       "Pokazuje informacje o roli"
     ],
     "admin": [
-      "Jeśli znajdziesz błąd, wyślij opis błędu za pomocą tego polecenia"
+      "Wyślij coś w imieniu bota"
     ],
     "moder": [
       "Banuje użytkownika",
@@ -82,9 +82,8 @@
     ],
     "util": [
       "Kalkulator",
-      "Zaproponuj pomysł na tym kanale do głosowania",
       "Tłumaczy tekst, samodzielnie określa język tekstu do tłumaczenia",
-      "Pokazuje ping od użytkownika do bota"
+      "Pogoda w twoim mieście"
     ],
     "games": [
       ""
