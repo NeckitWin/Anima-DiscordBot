@@ -9,7 +9,6 @@ process.env.GROQ_API_KEY = config.apiKey;
 process.env.GOOGLE_API_KEY = config.geminiApiKey;
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-console.log("event gpt.js loaded✅");
 
 module.exports = {
     name: 'messageCreate',

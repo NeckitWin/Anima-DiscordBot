@@ -2,8 +2,6 @@ const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const axios = require('axios');
 const lang = require('../../Data/Lang');
 
-console.log("command weather loaded");
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('weather')

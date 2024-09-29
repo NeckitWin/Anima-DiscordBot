@@ -1,8 +1,6 @@
 const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require("discord.js");
 const lang = require('../../Data/Lang');
 
-console.log("command Info/help.js loaded✅");
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('help')

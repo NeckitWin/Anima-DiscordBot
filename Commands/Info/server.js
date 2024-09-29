@@ -1,8 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const {formatDate} = require("../../Data/utility");
 
-console.log("command Info/mods.js loaded✅");
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('server')

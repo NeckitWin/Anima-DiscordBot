@@ -1,8 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const {formatDate} = require("../../Data/utility");
 
-console.log("command Info/role.js loaded✅");
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('role')

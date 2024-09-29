@@ -5,8 +5,6 @@ const { Routes } = require('discord-api-types/v9');
 const { token, clientId } = require('../../Data/config.json');
 const {SlashCommandBuilder} = require('discord.js');
 
-console.log("command Owner/reload.js loaded✅");
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('reload')

@@ -1,7 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 
-console.log("command Info/avatarbanner.js loaded✅")
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('avatar-banner')

@@ -1,7 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 
-console.log("command Fun/calc.js loaded✅");
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('calc')

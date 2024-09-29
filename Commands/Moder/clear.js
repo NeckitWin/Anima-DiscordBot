@@ -1,7 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
-console.log("command Moder/clear.js loaded✅");
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('clear')
