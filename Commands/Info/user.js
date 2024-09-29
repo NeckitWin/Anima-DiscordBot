@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const {getUser} = require('../../Data/funcs/db')
+const {getUserServer} = require('../../Data/funcs/db')
 const {formatDate} = require("../../Data/utility");
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
             await user.fetch();
             const member = interaction.guild.members.cache.get(user.id);
 
-            const getUserArray = await getUser(user.id, interaction.guild.id);
+            const getUserArray = await getUserServer(user.id, interaction.guild.id);
             const userInfo = getUserArray[0];
 
             const embed = {
