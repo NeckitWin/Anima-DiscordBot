@@ -1,6 +1,5 @@
-const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events } = require("discord.js");
-const { getConnection } = require('../Data/funcs/db');
-const {getCooldown} = require("../Data/funcs/cooldown");
+const {EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events} = require("discord.js");
+const {getLeaderboard} = require('../Data/funcs/db');
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -32,57 +31,55 @@ module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isButton()) return;
-        if (!(interaction.customId!==`nextLeaders` || interaction.customId!==`prevLeaders`)) return;
-        if (interaction.message.interaction.user.id !== interaction.user.id ) return interaction.reply({content: 'this is not your command', ephemeral: true});
-
-        const conn = getConnection();
-        const sql = `SELECT * FROM wallet WHERE serverID = ? ORDER BY wallet.aura DESC`;
-
-        conn.query(sql, [interaction.guild.id], (err, result) => {
-            if (err) console.error(err);
-
-            const embed = new EmbedBuilder()
-                .setTitle("🏆 Ranking Aura Top ⚖️")
-                .setColor("#00ffa1")
-                .setThumbnail(interaction.guild.iconURL())
-                .setFooter({
-                    text: `Requested by ${interaction.user.displayName}`,
-                    iconURL: interaction.user.avatarURL({ dynamic: true, size: 4096 })
-                });
-
-            if (!interaction.message.page) {
-                interaction.message.page = 0;
-            }
-
-            let prevNumber = interaction.message.page * 10;
-            let nextNumber = prevNumber + 10;
-
-            switch (interaction.customId) {
-                case "nextLeaders":
-                    if (nextNumber < result.length) {
-                        interaction.message.page++;
-                    }
-                    break;
-
-                case "prevLeaders":
-                    if (interaction.message.page > 0) {
-                        interaction.message.page--;
-                    }
-                    break;
-            }
-
-            prevNumber = interaction.message.page * 10;
-            nextNumber = prevNumber + 10;
-
-            if (nextNumber > result.length) {
-                nextNumber = result.length;
-            }
-
-            embed.fields = [];
-            leadersFiltr(embed, result, prevNumber, nextNumber);
-
-            interaction.update({ embeds: [embed], components: [row] });
+        if (!(interaction.customId !== `nextLeaders` || interaction.customId !== `prevLeaders`)) return;
+        if (interaction.message.interaction.user.id !== interaction.user.id) return interaction.reply({
+            content: 'this is not your command',
+            ephemeral: true
         });
-        conn.end();
+
+
+        const result = await getLeaderboard(interaction.guild.id);
+
+        const embed = new EmbedBuilder()
+            .setTitle("🏆 Ranking Aura Top ⚖️")
+            .setColor("#00ffa1")
+            .setThumbnail(interaction.guild.iconURL())
+            .setFooter({
+                text: `Requested by ${interaction.user.displayName}`,
+                iconURL: interaction.user.avatarURL({dynamic: true, size: 4096})
+            });
+
+        if (!interaction.message.page) {
+            interaction.message.page = 0;
+        }
+
+        let prevNumber = interaction.message.page * 10;
+        let nextNumber = prevNumber + 10;
+
+        switch (interaction.customId) {
+            case "nextLeaders":
+                if (nextNumber < result.length) {
+                    interaction.message.page++;
+                }
+                break;
+
+            case "prevLeaders":
+                if (interaction.message.page > 0) {
+                    interaction.message.page--;
+                }
+                break;
+        }
+
+        prevNumber = interaction.message.page * 10;
+        nextNumber = prevNumber + 10;
+
+        if (nextNumber > result.length) {
+            nextNumber = result.length;
+        }
+
+        embed.fields = [];
+        leadersFiltr(embed, result, prevNumber, nextNumber);
+
+        await interaction.update({embeds: [embed], components: [row]});
     }
 };
