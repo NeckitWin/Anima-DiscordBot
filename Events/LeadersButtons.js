@@ -31,7 +31,7 @@ module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isButton()) return;
-        if (!(interaction.customId !== `nextLeaders` || interaction.customId !== `prevLeaders`)) return;
+        if (!(interaction.customId === `nextLeaders` || interaction.customId === `prevLeaders`)) return;
         if (interaction.message.interaction.user.id !== interaction.user.id) return interaction.reply({
             content: 'this is not your command',
             ephemeral: true
