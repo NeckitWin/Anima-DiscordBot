@@ -11,7 +11,7 @@ const getConnection = () => {
 
     conn.connect(err => {
         if (err) console.error(err);
-    })
+    });
 
     return conn;
 }
@@ -24,9 +24,21 @@ const getUser = (user_id, server_id) => {
         conn.query(sql, [user_id, server_id], (err, res) => {
             if (err) reject(err);
             else resolve(res);
-        })
+        });
         conn.end();
     })
 }
 
-module.exports = {getConnection, getUser};
+const getLeaderboard = (server_id) => {
+    return new Promise((resolve, reject)=>{
+        const conn = getConnection();
+        const sql = `SELECT wallet.serverName, wallet.aura FROM wallet WHERE serverID = ? ORDER BY wallet.aura DESC`;
+        conn.query(sql,[server_id],(err, res)=>{
+            if (err) reject(err);
+            else resolve(res);
+        });
+        conn.end();
+    })
+}
+
+module.exports = {getConnection, getUser, getLeaderboard};

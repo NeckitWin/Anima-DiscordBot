@@ -2,8 +2,6 @@ const { SlashCommandBuilder } = require("discord.js");
 const {getUser} = require('../../Data/funcs/db')
 const {formatDate} = require("../../Data/utility");
 
-console.log("command Info/user.js loaded✅");
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('user')
@@ -38,7 +36,7 @@ module.exports = {
                     { name: '🔒 Roles', value: member.roles.cache.map(role => role.toString()).join(' '), inline: false },
                 ],
             };
-            interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
         }

@@ -83,5 +83,6 @@ module.exports = {
 
             interaction.update({ embeds: [embed], components: [row] });
         });
+        conn.end();
     }
 };

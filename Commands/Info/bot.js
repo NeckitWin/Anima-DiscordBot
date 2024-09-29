@@ -1,14 +1,14 @@
 const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, Colors} = require("discord.js");
 const {formatDate} = require("../../Data/utility");
 
-
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('bot')
+        .setName(`bot`)
         .setNameLocalizations({ ru: 'бот', pl: 'bot', uk: 'бот' })
         .setDescription('Shows information about the bot')
         .setDescriptionLocalizations({ ru: 'Показывает информацию о боте', pl: 'Pokazuje informacje o bocie', uk: 'Показує інформацію про бота' }),
     async execute(interaction) {
+
         const bot = await interaction.client.user.fetch();
         const ButtonServer = new ButtonBuilder()
             .setLabel("Discord Server")

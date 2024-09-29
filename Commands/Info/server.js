@@ -17,7 +17,7 @@ module.exports = {
 
             const embed = {
                 color: 0x0099ff,
-                title: `Информация о сервере ${guild.name}`,
+                title: `Info about server ${guild.name}`,
                 thumbnail: {
                     url: guild.iconURL(),
                 },
