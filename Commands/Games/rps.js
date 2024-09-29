@@ -1,4 +1,5 @@
-const {SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require(`discord.js`)
+const {SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} = require(`discord.js`)
+const {getCooldown} = require("../../Data/funcs/cooldown");
 
 const buttonAccept = new ButtonBuilder()
     .setCustomId(`rpsAccept`)
@@ -21,8 +22,16 @@ module.exports = {
             .setDescription(`choose a user you want to play the game with`)
             .setRequired(true)),
     async execute(interaction) {
-        const target = interaction.options.getUser(`user`);
+        if (await getCooldown('rps', interaction, interaction.user.id, 30)) return;
+        if (interaction.user.id !== 429562004399980546) return interaction.reply({content: `In development`, ephemeral: true});
 
-        await interaction.reply({content: `test`, components: [row]})
+        const target = interaction.options.getUser(`user`);
+        const embed = new EmbedBuilder()
+            .setTitle(`Rock, Paper, Scissors!`)
+            .setDescription(`Do you want to play a game with the user ${interaction.user}?`)
+            .setColor(`#288444`)
+            .setImage(`https://i.imgur.com/eSKNwQH.gif`);
+
+        await interaction.reply({content: `${target}`, embeds:[embed], components: [row]});
     }
 }
