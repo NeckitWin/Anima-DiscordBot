@@ -13,7 +13,7 @@ const getConnection = () => {
         if (err) console.error(err);
     });
 
-    conn.on(`error`, (err)=>{
+    conn.on(`error`, (err) => {
         if (err.code === `PROTOCOL_CONNECTION_LOST`) {
             console.error(err);
             getConnection();
@@ -67,20 +67,25 @@ const postNewUser = (user_id, server_id, username, servername) => {
         const conn = getConnection();
         const sqlBaseData = `INSERT INTO users (userID, username) VALUES (?, ?)`;
         const sqlGuildData = `INSERT INTO wallet (userID, serverID, serverName) VALUES (?, ?, ?)`;
+
         conn.query(sqlBaseData, [user_id, username], (err, res) => {
-            if (err) reject(err);
-            else conn.query(sqlGuildData, [user_id, server_id, servername], (err, res) => {
-                if (err) reject(err);
+            if (err) return reject(err);
+
+            conn.query(sqlGuildData, [user_id, server_id, servername], (err, res) => {
+                if (err) return reject(err);
+
+                resolve();
                 conn.end();
-            })
-        })
-    })
+            });
+        });
+    });
 };
 
-const updateAura = async (user_id, server_id, sign, count, servername) => {
+const updateAura = async (user_id, server_id, sign, count, servername, username) => {
     return new Promise(async (resolve, reject) => {
         const conn = getConnection();
         try {
+            const ifUserWasDB = await getUser(user_id);
             const ifUserHasWallet = await getUserServer(user_id, server_id);
             const sqlUpdateAura = `UPDATE wallet SET aura=aura${sign}? WHERE serverID = ? AND userID = ?`;
             const sqlCreateWallet = `INSERT INTO wallet (userID, serverID, serverName) VALUES (?,?,?)`;
@@ -91,10 +96,15 @@ const updateAura = async (user_id, server_id, sign, count, servername) => {
                     else resolve();
                 })
             } else {
-                conn.query(sqlCreateWallet, [user_id, server_id, servername], (err, res) => {
-                    if (err) reject(err);
-                    else resolve();
-                })
+                if (ifUserWasDB) {
+                    conn.query(sqlCreateWallet, [user_id, server_id, servername], (err, res) => {
+                        if (err) reject(err);
+                        else resolve();
+                    })
+                } else {
+                    await postNewUser(user_id, server_id, username, servername);
+                    resolve();
+                }
             }
         } catch (e) {
             console.error(e);

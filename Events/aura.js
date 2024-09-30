@@ -49,7 +49,7 @@ module.exports = {
                 .setImage(PlusAura[Math.floor(Math.random() * PlusAura.length)]);
         }
 
-        await updateAura(replyUser.id, message.guild.id, sign, random, replyUser.displayName);
+        await updateAura(replyUser.id, message.guild.id, sign, random, replyUser.displayName, replyUser.username);
 
         await message.channel.send({embeds: [embed]});
     }
