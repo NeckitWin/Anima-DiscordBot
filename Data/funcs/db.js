@@ -13,6 +13,13 @@ const getConnection = () => {
         if (err) console.error(err);
     });
 
+    conn.on(`error`, (err)=>{
+        if (err.code === `PROTOCOL_CONNECTION_LOST`) {
+            console.error(err);
+            getConnection();
+        } else throw err;
+    });
+
     return conn;
 };
 
