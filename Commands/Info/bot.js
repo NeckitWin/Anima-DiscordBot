@@ -1,28 +1,32 @@
-const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, Colors} = require("discord.js");
+const {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, Colors} = require("discord.js");
 const {formatDate} = require("../../Data/utility");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName(`bot`)
-        .setNameLocalizations({ ru: 'бот', pl: 'bot', uk: 'бот' })
+        .setNameLocalizations({ru: 'бот', pl: 'bot', uk: 'бот'})
         .setDescription('Shows information about the bot')
-        .setDescriptionLocalizations({ ru: 'Показывает информацию о боте', pl: 'Pokazuje informacje o bocie', uk: 'Показує інформацію про бота' }),
+        .setDescriptionLocalizations({
+            ru: 'Показывает информацию о боте',
+            pl: 'Pokazuje informacje o bocie',
+            uk: 'Показує інформацію про бота'
+        }),
     async execute(interaction) {
 
         const bot = await interaction.client.user.fetch();
         const ButtonServer = new ButtonBuilder()
             .setLabel("Discord Server")
-            .setURL("https://discord.com/invite/JxNyZAsYpA")
+            .setURL("https://discord.gg/rw5dzGT67s")
             .setStyle(ButtonStyle.Link);
 
         const ButtonWebSite = new ButtonBuilder()
             .setLabel("Website")
-            .setURL("https://neckitwin.github.io/")
+            .setURL("https://github.com/NeckitWin")
             .setStyle(ButtonStyle.Link);
 
         const ButtonGitHub = new ButtonBuilder()
             .setLabel("Source Code")
-            .setURL("https://github.com/NeckitWin/Anima-DiscordBot")
+            .setURL("https://github.com/NeckitWin")
             .setStyle(ButtonStyle.Link);
 
         const rowLinksForBot = new ActionRowBuilder()
@@ -33,44 +37,39 @@ module.exports = {
             .setTitle(`Info about Bot ${interaction.client.user.username} 🤖`)
             .setDescription(' ')
             .setThumbnail(interaction.client.user.displayAvatarURL())
-            .setImage(bot.bannerURL({ format: "png", size: 4096}))
+            .setImage(bot.bannerURL({format: "png", size: 4096}))
             .addFields(
                 {
                     name: 'My ID',
-                    value: "```js\n"+interaction.client.user.id+"```",
+                    value: `\`\`\`fix\n${interaction.client.user.id}\`\`\``,
                     inline: false,
                 },
                 {
-                    name: "Number of servers",
-                    value: "```"+"🌐"+interaction.client.guilds.cache.size+"```",
-                    inline: true,
-                },
-                {
-                    name:"Number of users",
-                    value: "```"+"👤"+interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)+"```",
+                    name: "Lib",
+                    value: `\`\`\`css\nDiscord.js\`\`\``,
                     inline: true,
                 },
                 {
                     name: "When I was created",
-                    value: "```"+formatDate(interaction.client.user.createdAt)+"```",
+                    value: `\`\`\`${formatDate(interaction.client.user.createdAt)}\`\`\``,
                     inline: true,
                 },
                 {
                     name: "My owner",
-                    value: "<@429562004399980546>[Contact](https://neckitwin.github.io/)",
+                    value: "NeckitWin <@429562004399980546>",
+                    inline: false,
+                },
+                {
+                    name: "Number of servers",
+                    value: `\`\`\`🌐${interaction.client.guilds.cache.size}\`\`\``,
                     inline: true,
                 },
                 {
-                    name: "My support server",
-                    value: "[Discord Server Link](https://discord.gg/rw5dzGT67s)",
-                    inline: true,
-                },
-                {
-                    name: "Source code",
-                    value: "[GitHub Repository](https://github.com/NeckitWin/Anima-DiscordBot)",
+                    name: "Number of users",
+                    value: `\`\`\`👤${interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)}\`\`\``,
                     inline: true,
                 }
             )
-        interaction.reply({ embeds: [embed], components: [rowLinksForBot]});
+        interaction.reply({embeds: [embed], components: [rowLinksForBot]});
     }
 };
