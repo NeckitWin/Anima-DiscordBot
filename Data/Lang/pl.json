@@ -1,29 +1,10 @@
 {
   "error": {
-    "otheruser": "To może być używane przez tego, kto wywołał to zdarzenie",
     "dontperm": "Nie masz uprawnień do korzystania z tego",
     "notyourcommand": "Komenda nie została wywołana przez ciebie",
     "botdontperm": "Nie mam uprawnień do tego"
   },
   "request": "Żądanie od ",
-  "test": "testowa komenda",
-  "technicalProblems": {
-    "title": "Zgłoś problem techniczny",
-    "topic": {
-      "label": "Temat",
-      "title": "Wprowadź tytuł problemu technicznego"
-    },
-    "description": {
-      "label": "Opis problemu",
-      "title": "Wprowadź szczegółowy opis problemu technicznego"
-    },
-    "request": "Dziękujemy za zgłoszenie błędu! Oczekuj na poprawki w najbliższym czasie."
-  },
-  "newUsers": {
-    "title": "Witamy na naszym serwerze!",
-    "description": "Mam nadzieję, że spodoba Ci się tutaj i znajdziesz wielu interesujących ludzi i tematów do rozmów.",
-    "value": "Proszę zapoznać się z zasadami serwera:"
-  },
   "weather": {
     "title": "Pogoda",
     "description1": "Miasto",

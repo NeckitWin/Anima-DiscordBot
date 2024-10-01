@@ -1,29 +1,10 @@
 {
   "error": {
-    "otheruser": "This can be used by the one who triggered this event",
     "dontperm": "You do not have permission to use this",
     "notyourcommand": "The command was not invoked by you",
     "botdontperm": "I don't have permission to do this"
   },
   "request": "Request from ",
-  "test": "Test command",
-  "technicalProblems": {
-    "title": "Report a technical problem",
-    "topic": {
-      "label": "Topic",
-      "title": "Enter the title of the technical problem"
-    },
-    "description": {
-      "label": "Problem description",
-      "title": "Enter a detailed description of the technical problem"
-    },
-    "request": "Thank you for reporting the error! Expect a fix soon."
-  },
-  "newUsers": {
-    "title": "Welcome to our server!",
-    "description": "I hope you have a great time here and make lots of new friends!",
-    "value": "Make sure you are aware of the server rules:"
-  },
   "weather": {
     "title": "Weather",
     "description1": "City",

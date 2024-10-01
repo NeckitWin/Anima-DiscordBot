@@ -88,6 +88,7 @@ module.exports = {
                 .setColor(`#d998ff`)
                 .setThumbnail(interaction.guild.iconURL());
 
+            if (!thisServer) return await interaction.reply({content: `No roles in autorole list`, ephemeral: true});
             thisServer.roles.map(el => {
                 embed.addFields([
                     {
