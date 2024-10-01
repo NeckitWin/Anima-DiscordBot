@@ -3,12 +3,13 @@ const path = require('path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token, clientId } = require('../../Data/config.json');
-const {SlashCommandBuilder} = require('discord.js');
+const {SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('reload')
-        .setDescription('Register all commands'),
+        .setDescription('Owner command, you cant use it')
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
         allowedUserIds = ['429562004399980546'];
 

@@ -18,7 +18,13 @@ const row = new ActionRowBuilder()
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('leaders')
-        .setDescription('Leaders aura'),
+        .setNameLocalizations({ru: 'лидеры', pl: 'liderzy', uk: 'лідери'})
+        .setDescription('Leaders aura')
+        .setDescriptionLocalizations({
+            ru: 'Лидеры ауры',
+            pl: 'Liderzy aury',
+            uk: 'Лідери аури'
+        }),
     async execute(interaction) {
         let prevNumber = 0;
         let nextNumber = 10;

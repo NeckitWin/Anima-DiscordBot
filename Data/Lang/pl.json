@@ -2,7 +2,8 @@
   "error": {
     "otheruser": "To może być używane przez tego, kto wywołał to zdarzenie",
     "dontperm": "Nie masz uprawnień do korzystania z tego",
-    "notyourcommand": "Komenda nie została wywołana przez ciebie"
+    "notyourcommand": "Komenda nie została wywołana przez ciebie",
+    "botdontperm": "Nie mam uprawnień do tego"
   },
   "request": "Żądanie od ",
   "test": "testowa komenda",

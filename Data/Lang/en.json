@@ -2,7 +2,8 @@
   "error": {
     "otheruser": "This can be used by the one who triggered this event",
     "dontperm": "You do not have permission to use this",
-    "notyourcommand": "The command was not invoked by you"
+    "notyourcommand": "The command was not invoked by you",
+    "botdontperm": "I don't have permission to do this"
   },
   "request": "Request from ",
   "test": "Test command",

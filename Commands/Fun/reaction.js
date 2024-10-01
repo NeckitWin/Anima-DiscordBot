@@ -5,10 +5,22 @@ const data = require("../../Data/jsons/reaction.json")
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("reaction")
+        .setNameLocalizations({ru: "реакция", pl: "reakcja", uk: "реакція"})
         .setDescription("react to a message")
+        .setDescriptionLocalizations({
+            ru: "реагируйте на сообщение",
+            pl: "zareaguj na wiadomość",
+            uk: "реагуйте на повідомлення"
+        })
         .addStringOption(option =>
             option.setName("your_reaction")
+                .setNameLocalizations({ru: "ваша_реакция", pl: "twoja_reakcja", uk: "ваша_реакція"})
                 .setDescription("Put your reaction")
+                .setDescriptionLocalizations({
+                    ru: "Поставьте свою реакцию",
+                    pl: "Wstaw swoją reakcję",
+                    uk: "Поставте свою реакцію"
+                })
                 .addChoices(data.reactions)
                 .setRequired(true)),
     async execute(interaction) {
