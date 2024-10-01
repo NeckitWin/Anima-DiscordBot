@@ -29,7 +29,10 @@ module.exports = {
                 `</server:1285287069676994607> - ${localinfo.info[5]} \n` +
                 `</role:1285287069676994606> - ${localinfo.info[6]} \n`;
 
-            const admincontent = `</say:1287818587666645003> - ${localinfo.admin[0]}`
+            const admincontent = `</say:1287818587666645003> - ${localinfo.admin[0]} \n` +
+                `</autorole add:1290435224072884264> - ${localinfo.admin[1]} \n` +
+                `</autorole list:1290435224072884264> - ${localinfo.admin[2]} \n` +
+                `</autorole remove:1290435224072884264> - ${localinfo.admin[3]}`
 
             const modercontent = `</ban:1285287069676994608> - ${localinfo.moder[0]} \n` +
                 `</kick:1285287069676994610> - ${localinfo.moder[1]} \n` +

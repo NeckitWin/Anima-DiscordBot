@@ -72,7 +72,10 @@
       "Shows information about the role"
     ],
     "admin": [
-      "Send something on behalf of the bot"
+      "Send something on behalf of the bot",
+      "Set auto role for new members",
+      "View the list of auto roles",
+      "Remove auto role from the list"
     ],
     "moder": [
       "Bans the user",

@@ -72,7 +72,10 @@
       "Pokazuje informacje o roli"
     ],
     "admin": [
-      "Wyślij coś w imieniu bota"
+      "Wyślij coś w imieniu bota",
+      "Ustaw automatyczną rolę dla nowych członków",
+      "Zobacz listę automatycznych ról",
+      "Usuń automatyczną rolę z listy"
     ],
     "moder": [
       "Banuje użytkownika",

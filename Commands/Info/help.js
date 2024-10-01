@@ -76,7 +76,7 @@ module.exports = {
                     },
                     {
                         name: `👑・${local.admin.label}`,
-                        value: '</say:1287818587666645003>',
+                        value: `</say:1287818587666645003>, </autorole add:1290435224072884264>, </autorole list:1290435224072884264>, </autorole remove:1290435224072884264>`,
                         inline: false,
                     },
                     {
