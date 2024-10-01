@@ -8,11 +8,12 @@ module.exports = {
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {
 
             let preferredLang = interaction.guild.preferredLocale;
-            if (!lang.hasOwnProperty(preferredLang)) {
-                preferredLang = 'en';
-            }
+            if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+
             let local = lang[preferredLang].menuhelp;
             let localinfo = lang[preferredLang].commandsdesc;
+
+            if (interaction.user.id !== interaction.message.interaction.user.id) return await interaction.reply({content: lang[preferredLang].error.notyourcommand, ephemeral: true});
 
             if (interaction.user.id !== interaction.message.interaction.user.id) {
                 return await interaction.reply({
@@ -43,7 +44,8 @@ module.exports = {
                 `</translate:1285287069756690490> - ${localinfo.util[1]} \n` +
                 `</weather:1285287069756690491> - ${localinfo.util[2]}`;
 
-            const gamescontent = `\`+aura\` - to respect \n\`-aura\` - to disrespect`;
+            const gamescontent = `\`+aura\` - ${localinfo.games[0]} \n`+
+            `\`-aura\` - ${localinfo.games[1]}`;
 
             const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]} \n` +
                                         `</interaction:1288525650721898669> - ${localinfo.fun[1]}`;
@@ -128,7 +130,6 @@ module.exports = {
                     break;
             }
             await interaction.update({embeds: [embed], components: [rowForHelpEvent]});
-
         }
     }
 }

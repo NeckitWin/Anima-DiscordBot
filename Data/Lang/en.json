@@ -1,7 +1,8 @@
 {
   "error": {
     "otheruser": "This can be used by the one who triggered this event",
-    "dontperm": "You do not have permission to use this"
+    "dontperm": "You do not have permission to use this",
+    "notyourcommand": "The command was not invoked by you"
   },
   "request": "Request from ",
   "test": "Test command",
@@ -89,7 +90,8 @@
       "The weather in your city"
     ],
     "games": [
-      ""
+      "add aura to the user",
+      "take aura from the user"
     ],
     "fun": [
       "Show your reaction",

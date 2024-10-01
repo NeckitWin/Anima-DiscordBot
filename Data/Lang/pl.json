@@ -1,7 +1,8 @@
 {
   "error": {
     "otheruser": "To może być używane przez tego, kto wywołał to zdarzenie",
-    "dontperm": "Nie masz uprawnień do korzystania z tego"
+    "dontperm": "Nie masz uprawnień do korzystania z tego",
+    "notyourcommand": "Komenda nie została wywołana przez ciebie"
   },
   "request": "Żądanie od ",
   "test": "testowa komenda",
@@ -89,7 +90,8 @@
       "Pogoda w twoim mieście"
     ],
     "games": [
-      ""
+      "dodaj aurę użytkownikowi",
+      "odejmij aurę użytkownikowi"
     ],
     "fun": [
       "Pokaż swoją reakcję",
