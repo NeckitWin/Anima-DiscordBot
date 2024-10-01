@@ -12,17 +12,17 @@ module.exports = {
 
         try {
             const data = await fs.promises.readFile(pathFile, 'utf8');
-            const jsonData = JSON.parse(data)
+            const jsonData = JSON.parse(data);
 
             const foundServer = jsonData.find(el => el.server === serverID);
             if (foundServer) {
-                const roleID = foundServer.role;
-                const autoRole = member.guild.roles.cache.get(roleID);
-                if (autoRole) member.roles.add(autoRole);
+                foundServer.roles.forEach(roleID=>{
+                    const autoRole = member.guild.roles.cache.get(roleID);
+                    if (autoRole) member.roles.add(autoRole);
+                });
             } else return;
         } catch (e) {
             console.error(e);
         }
-
     }
 }
