@@ -23,47 +23,46 @@ module.exports = {
             })
             .setRequired(true)),
     async execute(interaction) {
+        let preferredLang = interaction.guild.preferredLocale;
+        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+        let local = lang[preferredLang].weather;
+
         try {
-            let preferredLang = interaction.guild.preferredLocale;
-            if (!lang.hasOwnProperty(preferredLang)) {
-                preferredLang = 'en';
-            }
-            let info;
-            let local = lang[preferredLang].weather;
             const city = interaction.options.getString('city');
-            await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3d9de74844d28377e81415151cbe6a66`)
-                .then(res => (info = res))
+            const dataWeather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3d9de74844d28377e81415151cbe6a66`);
+            const response = dataWeather.data;
+
             const embed = new EmbedBuilder()
                 .setColor('Yellow')
                 .setTitle(local.title)
-                .setDescription(`⚡ **${local.description1}:**\n\`\`\`js\n${city} \`\`\`\n🌅 **${local.description2}:**\n\`\`\`js\n${Math.round(info.data.main.temp)}°C \n\`\`\``)
+                .setDescription(`⚡ **${local.description1}:**\n\`\`\`js\n${city} \`\`\`\n🌅 **${local.description2}:**\n\`\`\`js\n${Math.round(response.main.temp)}°C \n\`\`\``)
                 .addFields({
                         name: `🌡️ ${local.feelslike}:`,
-                        value: `\`\`\`js\n${Math.round(info.data.main.temp)}°C\`\`\``,
+                        value: `\`\`\`js\n${Math.round(response.main.temp)}°C\`\`\``,
                         inline: true
                     }, {
                         name: `🌡️ ${local.min}:`,
-                        value: `\`\`\`js\n${Math.round(info.data.main.temp_min)}°C\`\`\``,
+                        value: `\`\`\`js\n${Math.round(response.main.temp_min)}°C\`\`\``,
                         inline: true
                     }, {
                         name: `🌡️ ${local.max}:`,
-                        value: `\`\`\`js\n${Math.round(info.data.main.temp_max)}°C\`\`\``,
+                        value: `\`\`\`js\n${Math.round(response.main.temp_max)}°C\`\`\``,
                         inline: true
                     }, {
                         name: `💧 ${local.humidity}:`,
-                        value: `\`\`\`js\n${info.data.main.humidity}%\`\`\``,
+                        value: `\`\`\`js\n${response.main.humidity}%\`\`\``,
                         inline: true
                     }, {
                         name: `🌡️ ${local.pressure}:`,
-                        value: `\`\`\`js\n${info.data.main.pressure}hPa\`\`\``,
+                        value: `\`\`\`js\n${response.main.pressure}hPa\`\`\``,
                         inline: true
                     }, {
                         name: `🌬️ ${local.wind}:`,
-                        value: `\`\`\`js\n${info.data.wind.speed}m/s\`\`\``,
+                        value: `\`\`\`js\n${response.wind.speed}m/s\`\`\``,
                         inline: true
                     }, {
                         name: `🌬️ ${local.clouds}:`,
-                        value: `\`\`\`js\n${info.data.clouds.all}%\`\`\``,
+                        value: `\`\`\`js\n${response.clouds.all}%\`\`\``,
                         inline: true
                     }
                 )
@@ -72,7 +71,7 @@ module.exports = {
             await interaction.reply({embeds: [embed]});
         } catch (error) {
             console.error(error);
-            console.log('An error occurred while calculating the expression.');
+            await interaction.reply({content: local.error, ephemeral: true});
         }
     },
 }

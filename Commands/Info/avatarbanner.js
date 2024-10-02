@@ -21,8 +21,6 @@ module.exports = {
         const bannerURL = userLink.bannerURL({dynamic: true, size: 4096});
 
         const embed = new EmbedBuilder()
-            .setTitle("User Avatars")
-            .setDescription("Avatar")
             .setColor("#ff0062")
             .setImage(avatarURL);
 
@@ -30,8 +28,6 @@ module.exports = {
 
         if (serverAvatarURL !== null) {
             const embed1 = new EmbedBuilder()
-                .setTitle(" ")
-                .setDescription("Display server avatar")
                 .setColor("#ff0062")
                 .setImage(serverAvatarURL);
             embeds.push(embed1);
@@ -39,8 +35,6 @@ module.exports = {
 
         if (bannerURL !== null) {
             const embed2 = new EmbedBuilder()
-                .setTitle(" ")
-                .setDescription("Banner")
                 .setColor("#ff0062")
                 .setTimestamp()
                 .setImage(bannerURL);

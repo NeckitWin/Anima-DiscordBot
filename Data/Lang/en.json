@@ -5,6 +5,14 @@
     "botdontperm": "I don't have permission to do this"
   },
   "request": "Request from ",
+  "server": {
+    "title": "Info about the server",
+    "owner": "Server owner",
+    "serverid": "Server ID",
+    "date": "Date of creation",
+    "members": "Member count",
+    "channels": "Channel count"
+  },
   "weather": {
     "title": "Weather",
     "description1": "City",
@@ -15,7 +23,9 @@
     "humidity": "humidity",
     "pressure": "pressure",
     "wind": "wind speed",
-    "clouds": "cloudiness"
+    "clouds": "cloudiness",
+    "error": "City not found. Please try again with a different spelling."
+
   },
   "menuhelp": {
     "placeholder": "Learn more about the commands",
