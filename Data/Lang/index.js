@@ -4,4 +4,10 @@ const uk = require('../../Data/Lang/uk.json');
 const pl = require('../../Data/Lang/pl.json');
 const index = {ru, en, uk, pl};
 
+const getLang = (interaction) => {
+    let preferredLang = interaction.guild.preferredLocale;
+    if (!index.hasOwnProperty(preferredLang)) preferredLang = 'en';
+    return index[preferredLang];
+}
+
 module.exports = index;

@@ -57,6 +57,20 @@
     "clouds": "zachmurzenie",
     "error": "Nie znaleziono miasta. Spróbuj ponownie z innym zapisem."
   },
+  "greeting": {
+    "title": "Ustaw powitanie dla kanału",
+    "titlecontent": "Napisz tytuł powitania",
+    "titleplace": "Witamy na serwerze",
+    "content": "Napisz wiadomość powitalną",
+    "contentplace": "Cieszymy się, że cię widzimy na serwerze!",
+    "picture": "Dodaj URL obrazka/gifa do powitania",
+    "channel": "ID kanału (nie trzeba zmieniać)",
+    "response": "Wypełnij dane w oknie modalnym.",
+    "nottext": "Podany kanał nie jest kanałem tekstowym.",
+    "dontset": "Nie ustawiłeś powitania na tym serwerze.",
+    "remove": "Powitanie zostało pomyślnie usunięte z serwera.",
+    "success": "Powitanie zostało pomyślnie ustawione na kanale"
+  },
   "menuhelp": {
     "placeholder": "Dowiedz się więcej o poleceniach",
     "info": {

@@ -57,6 +57,20 @@
     "calc": "Calculation",
     "res": "Result"
   },
+  "greeting": {
+    "title": "Set a greeting for the channel",
+    "titlecontent": "Write the greeting title",
+    "titleplace": "Welcome to the server",
+    "content": "Write a greeting message",
+    "contentplace": "We are glad to see you on the server!",
+    "picture": "Add a picture/gif URL to the greeting",
+    "channel": "Channel ID (no need to change)",
+    "response": "Fill in the data in the modal window.",
+    "nottext": "You specified a non-text channel.",
+    "dontset": "You haven't set a greeting on this server.",
+    "remove": "The greeting has been successfully removed from the server.",
+    "success": "The greeting has been successfully set on the channel"
+  },
   "menuhelp": {
     "placeholder": "Learn more about the commands",
     "info": {

@@ -19,9 +19,9 @@ module.exports = {
         const gifGreeting = greetingsGif[randomGif];
 
         const embed = new EmbedBuilder()
-            .setTitle(`Welcome to the server!`)
-            .setDescription(`Please familiarize yourself with the rules and continue chatting`)
-            .setColor(`#a493ff`)
+            .setTitle(foundServer.title)
+            .setDescription(foundServer.content)
+            .setColor(`#ffffff`)
             .setThumbnail(member.user.avatarURL())
             .setImage(foundServer.picture !== "" ? foundServer.picture : gifGreeting)
         await greetingChannel.send({content: `${member}`, embeds:[embed]})
