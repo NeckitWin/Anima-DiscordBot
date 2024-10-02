@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const {getUserServer} = require('../../Data/funcs/db')
 const {formatDate} = require("../../Data/utility");
+const lang = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,6 +12,10 @@ module.exports = {
         .addUserOption(option => option.setName('user').setDescription('Пользователь, о котором нужна информация')),
     async execute(interaction) {
         try {
+            let preferredLang = interaction.guild.preferredLocale;
+            if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+            let local = lang[preferredLang].user;
+
             const user = interaction.options.getUser('user') || interaction.user;
             await user.fetch();
             const member = interaction.guild.members.cache.get(user.id);
@@ -28,12 +33,12 @@ module.exports = {
                     url: user.bannerURL({ size: 4096 }),
                 },
                 fields: [
-                    { name: '👤 Username', value: "```"+user.username+"```", inline: true },
-                    { name: '🔢 User ID', value: "```"+user.id+"```", inline: false },
-                    { name: '📅 Date of creation', value: "```"+formatDate(user.createdAt)+"```", inline: true },
-                    { name: '📅 Server entry date', value: "```"+formatDate(member.joinedAt)+"```", inline: true },
+                    { name: `👤 ${local.username}`, value: "```"+user.username+"```", inline: true },
+                    { name: `🔢 ${local.userid}`, value: "```"+user.id+"```", inline: false },
+                    { name: `📅 ${local.date}`, value: "```"+formatDate(user.createdAt)+"```", inline: true },
+                    { name: `📅 ${local.dateentry}`, value: "```"+formatDate(member.joinedAt)+"```", inline: true },
                     { name: '🔥 Aura', value: `\`\`\`ansi\n[2;31m${userInfo.aura}[0m\`\`\``, inline: true },
-                    { name: '🔒 Roles', value: member.roles.cache.map(role => role.toString()).join(' '), inline: false },
+                    { name: `🔒 ${local.roles}`, value: member.roles.cache.map(role => role.toString()).join(' '), inline: false },
                 ],
             };
             await interaction.reply({ embeds: [embed] });

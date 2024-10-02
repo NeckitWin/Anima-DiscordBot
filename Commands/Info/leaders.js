@@ -1,6 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 const {getLeaderboard} = require("../../Data/funcs/db");
-const {getCooldown} = require("../../Data/funcs/cooldown");
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -34,7 +33,7 @@ module.exports = {
         const auraLeaders = leaderboard.slice(prevNumber, nextNumber);
 
         const embed = new EmbedBuilder()
-            .setTitle("🏆 Ranking Aura Top ⚖️")
+            .setTitle("🏆 Aura Top ⚖️")
             .setColor("#00ffa1")
             .setThumbnail(interaction.guild.iconURL())
             .setFooter({

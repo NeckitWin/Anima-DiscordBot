@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const {formatDate} = require("../../Data/utility");
+const lang = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -23,18 +24,22 @@ module.exports = {
             .setRequired(true)),
     async execute(interaction) {
         try {
+            let preferredLang = interaction.guild.preferredLocale;
+            if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+            let local = lang[preferredLang].role;
+
             const role = interaction.options.getRole('role');
             const embed = new EmbedBuilder()
                 .setColor(role.color)
-                .setTitle(`Information about role: ${role.name}`)
+                .setTitle(`${local.title}: ${role.name}`)
                 .setThumbnail(role.iconURL({size: 4096}))
                 .addFields(
-                    {name:'🆔 ID role', value:"```"+role.id+"```", inline: true},
-                    {name:'🌈 Color', value:"```"+"#"+role.color.toString(16)+"```", inline: false},
-                    {name:'📅 Date of creation', value:"```"+formatDate(role.createdAt)+"```", inline: true},
-                    {name:'👥 Owners', value:"```"+role.members.size+"```", inline: true},
-                    {name:'👑 Role hierarchy', value:"```"+(role.guild.roles.cache.size - role.position)+"```", inline: true},
-                    {name:'🔒 Permissions', value:"```"+role.permissions.toArray().join(", ")+"```", inline: false}
+                    {name:`🆔 ${local.roleid}`, value:"```fix\n"+role.id+"```", inline: true},
+                    {name:`🌈 ${local.color}`, value:"```"+"#"+role.color.toString(16)+"```", inline: false},
+                    {name:`📅 ${local.date}`, value:"```"+formatDate(role.createdAt)+"```", inline: true},
+                    {name:`👥 ${local.owners}`, value:"```"+role.members.size+"```", inline: true},
+                    {name:`👑 ${local.position}`, value:"```"+(role.guild.roles.cache.size - role.position)+"```", inline: true},
+                    {name:`🔒 ${local.permissions}`, value:"```"+role.permissions.toArray().join(", ")+"```", inline: false}
                 );
             interaction.reply({embeds: [embed]});
         } catch (error) {

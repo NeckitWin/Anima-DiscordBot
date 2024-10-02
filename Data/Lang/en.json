@@ -13,6 +13,24 @@
     "members": "Member count",
     "channels": "Channel count"
   },
+  "bot": {
+    "title": "Info about me",
+    "botid": "My ID",
+    "lib": "Library",
+    "date": "Date of creation",
+    "owner": "My owner",
+    "servers": "Server count",
+    "users": "User count"
+  },
+  "role": {
+    "title": "Info about the role",
+    "roleid": "Role ID",
+    "color": "Color",
+    "date": "Date of creation",
+    "owners": "Owners",
+    "position": "Role hierarchy",
+    "permissions": "Permissions"
+  },
   "weather": {
     "title": "Weather",
     "description1": "City",
@@ -25,7 +43,14 @@
     "wind": "wind speed",
     "clouds": "cloudiness",
     "error": "City not found. Please try again with a different spelling."
-
+  },
+  "user": {
+    "title": "Info about the user",
+    "username": "Username",
+    "userid": "User ID",
+    "date": "Date of creation",
+    "dateentry": "Server join date",
+    "roles": "Roles"
   },
   "menuhelp": {
     "placeholder": "Learn more about the commands",

@@ -13,6 +13,32 @@
     "members": "Liczba członków",
     "channels": "Liczba kanałów"
   },
+  "bot": {
+    "title": "Informacje o mnie",
+    "botid": "Moje ID",
+    "lib": "Biblioteka",
+    "date": "Data utworzenia",
+    "owner": "Mój właściciel",
+    "servers": "Liczba serwerów",
+    "users": "Liczba użytkowników"
+  },
+  "role": {
+    "title": "Informacje o roli",
+    "roleid": "ID roli",
+    "color": "Kolor",
+    "date": "Data utworzenia",
+    "owners": "Właściciele",
+    "position": "Hierarchia roli",
+    "permissions": "Uprawnienia"
+  },
+  "user": {
+    "title": "Informacje o użytkowniku",
+    "username": "Nazwa użytkownika",
+    "userid": "ID użytkownika",
+    "date": "Data utworzenia",
+    "dateentry": "Data dołączenia do serwera",
+    "roles": "Role"
+  },
   "weather": {
     "title": "Pogoda",
     "description1": "Miasto",
