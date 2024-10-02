@@ -52,6 +52,11 @@
     "dateentry": "Server join date",
     "roles": "Roles"
   },
+  "calc": {
+    "title": "Calculator",
+    "calc": "Calculation",
+    "res": "Result"
+  },
   "menuhelp": {
     "placeholder": "Learn more about the commands",
     "info": {

@@ -1,4 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
+const lang = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -22,17 +23,19 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction) {
         const expression = interaction.options.getString('expression');
-        try {
-            const result = eval(expression);
-            const embed = new EmbedBuilder()
-                .setColor('Blue')
-                .setTitle('Calculator')
-                .setDescription("🔢 **Calculation:**\n```js\n"+expression+"```\n✅ **Result:**\n```js\n"+result+"```")
-                .setThumbnail("https://i.pinimg.com/originals/50/da/8c/50da8c44ba216bd8d5c20992bc8ce939.gif");
 
-            await interaction.reply({embeds: [embed]});
-        } catch (error) {
-            console.error(error);
-        }
-    },
+        let preferredLang = interaction.guild.preferredLocale;
+        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+        let local = lang[preferredLang].calc;
+
+        const result = eval(expression);
+        const embed = new EmbedBuilder()
+            .setColor('Blue')
+            .setTitle(local.title)
+            .setDescription(`🔢 **${local.calc}:**\n\`\`\`js\n${expression}\`\`\`\n✅ **${local.res}:**\n\`\`\`js\n${result}\`\`\``)
+            .setThumbnail("https://i.pinimg.com/originals/50/da/8c/50da8c44ba216bd8d5c20992bc8ce939.gif");
+
+        await interaction.reply({embeds: [embed]});
+
+    }
 }

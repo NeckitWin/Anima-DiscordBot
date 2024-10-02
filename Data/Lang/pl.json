@@ -39,6 +39,11 @@
     "dateentry": "Data dołączenia do serwera",
     "roles": "Role"
   },
+  "calc": {
+    "title": "Kalkulator",
+    "calc": "Obliczenie",
+    "res": "Wynik"
+  },
   "weather": {
     "title": "Pogoda",
     "description1": "Miasto",
