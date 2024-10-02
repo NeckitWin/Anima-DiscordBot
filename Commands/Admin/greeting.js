@@ -24,11 +24,11 @@ module.exports = {
         .addSubcommand(subcommand => subcommand
             .setName('set')
             .setNameLocalizations({ru: `установить`, pl: `ustaw`, uk: `встановити`})
-            .setDescription('Set the channel for greeting')
+            .setDescription('Set the channel for greeting new members')
             .setDescriptionLocalizations({
-                ru: `Установить канал для приветствия`,
-                pl: `Ustaw kanał dla powitania`,
-                uk: `Встановити канал для привітання`
+                ru: `Установить канал для приветствия новых участников`,
+                pl: `Ustaw kanał dla powitania nowych członków`,
+                uk: `Встановити канал для привітання нових учасників`
             }).addChannelOption(option => option
                 .setName('channel')
                 .setNameLocalizations({ru: `канал`, pl: `kanał`, uk: `канал`})

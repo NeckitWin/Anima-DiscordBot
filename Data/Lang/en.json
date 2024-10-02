@@ -112,7 +112,9 @@
       "Send something on behalf of the bot",
       "Set auto role for new members",
       "View the list of auto roles",
-      "Remove auto role from the list"
+      "Remove auto role from the list",
+      "Set the channel for greeting new members",
+      "Remove the greeting from server"
     ],
     "moder": [
       "Bans the user",

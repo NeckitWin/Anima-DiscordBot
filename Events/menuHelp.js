@@ -33,7 +33,9 @@ module.exports = {
             const admincontent = `</say:1287818587666645003> - ${localinfo.admin[0]} \n` +
                 `</autorole add:1290435224072884264> - ${localinfo.admin[1]} \n` +
                 `</autorole list:1290435224072884264> - ${localinfo.admin[2]} \n` +
-                `</autorole remove:1290435224072884264> - ${localinfo.admin[3]}`
+                `</autorole remove:1290435224072884264> - ${localinfo.admin[3]} \n` +
+                `</greeting set:1290765643011981323> - ${localinfo.admin[4]} \n` +
+                `</greeting remove:1290765643011981323> - ${localinfo.admin[5]}`;
 
             const modercontent = `</ban:1285287069676994608> - ${localinfo.moder[0]} \n` +
                 `</kick:1285287069676994610> - ${localinfo.moder[1]} \n` +
