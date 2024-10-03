@@ -1,9 +1,11 @@
-const { SlashCommandBuilder} = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
+const lang = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ban')
         .setNameLocalizations({ ru: 'бан', pl: 'ban', uk: 'бан' })
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .setDescription('Ban a user with a reason and for a certain time')
         .setDescriptionLocalizations({ ru: 'Забанить пользователя с причиной и на определенное время', pl: 'Zbanuj użytkownika z powodem i na określony czas', uk: 'Забанувати користувача з причиною і на певний час' })
         .addUserOption(option =>
@@ -33,9 +35,9 @@ module.exports = {
     async execute(interaction) {
         const member = await interaction.guild.members.fetch(interaction.user.id);
 
-        if (!member.permissions.has('BanMembers')){
-            return interaction.reply({ content: 'You dont have permission to use this command.', ephemeral: true });
-        }
+        let preferredLang = interaction.guild.preferredLocale;
+        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+        let local = lang[preferredLang].ban;
 
         const user = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');
@@ -51,40 +53,40 @@ module.exports = {
         }
 
         const embed = {
-            color: 65407, // Changed color from '#0099ff' to 65407
-            title: 'User Banned',
+            color: 65407,
+            title: local.title,
             thumbnail: {
                 url: user.displayAvatarURL({ dynamic: true }),
             },
             fields: [
                 {
-                    name: 'User',
-                    value: "```"+user.name+"```",
+                    name: local.user,
+                    value: "```"+user.displayName+"```",
                     inline: true,
                 },
                 {
-                    name: 'User ID',
+                    name: local.userid,
                     value: "```"+user.id+"```",
                     inline: true,
                 },
                 {
-                    name: 'Reason',
+                    name: local.reason,
                     value: "```"+reason+"```",
                     inline: true,
                 },
                 {
-                    name: 'Duration',
-                    value: "```"+`${time} minutes`+"```",
+                    name: local.duration,
+                    value: "```"+`${time} ${local.minutes}`+"```",
                     inline: true,
                 },
                 {
-                    name: 'Messages Deleted',
-                    value: deleteMessages ? "```Yes```" : "```No```",
+                    name: local.messages,
+                    value: deleteMessages ? `\`\`\`${local.yes}\`\`\`` : `\`\`\`${local.no}\`\`\``,
                     inline: true,
                 },
                 {
-                    name: 'Banned By',
-                    value: "```"+interaction.user.name+"```",
+                    name: local.by,
+                    value: "```"+interaction.user.displayName+"```",
                     inline: true,
                 },
             ],
@@ -94,7 +96,7 @@ module.exports = {
         await interaction.reply({ embeds: [embed] });
 
         setTimeout(async () => {
-            await interaction.guild.members.unban(user, 'Temporary ban duration expired');
+            await interaction.guild.members.unban(user, local.unban);
         }, time * 60 * 1000);
     },
 };

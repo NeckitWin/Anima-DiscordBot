@@ -4,17 +4,27 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token, clientId } = require('../../Data/config.json');
 const {SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
+const lang = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('reload')
+        .setNameLocalizations({ru: 'перезагрузить', pl: 'przeładuj', uk: 'перезавантажити'})
         .setDescription('Owner command, you cant use it')
+        .setDescriptionLocalizations({
+            ru: 'Команда владельца, вы не можете использовать её',
+            pl: 'Komenda właściciela, nie możesz jej użyć',
+            uk: 'Команда власника, ви не можете використовувати її'
+        })
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
         allowedUserIds = ['429562004399980546'];
+        let preferredLang = interaction.guild.preferredLocale;
+        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+        let local = lang[preferredLang].error;
 
         if (!allowedUserIds.includes(interaction.user.id)) {
-            return interaction.reply('You are not allowed to use this command');
+            return interaction.reply({content:local.dontperm, ephemeral: true});
         }
 
         const commands = [];

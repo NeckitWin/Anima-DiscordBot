@@ -1,9 +1,11 @@
-const { SlashCommandBuilder, MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, MessageEmbed, PermissionFlagsBits } = require('discord.js');
+const lang = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('mute')
         .setNameLocalizations({ ru: 'мут', pl: 'wycisz', uk: 'мут' })
+        .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
         .setDescription('Mute a user for a certain time')
         .setDescriptionLocalizations({ ru: 'Замутить пользователя на определенное время', pl: 'Wycisz użytkownika na określony czas', uk: 'Замутити користувача на певний час' })
         .addUserOption(option =>
@@ -27,46 +29,47 @@ module.exports = {
     async execute(interaction) {
         const member = await interaction.guild.members.fetch(interaction.user.id);
 
-        if (!member.permissions.has('ModerateMembers')){
-            return interaction.reply({ content: 'You dont have permission to use this command.', ephemeral: true });
-        }
+
+        let preferredLang = interaction.guild.preferredLocale;
+        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+        let local = lang[preferredLang].mute;
+
         const user = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');
         const duration = interaction.options.getInteger('duration');
 
-        // Mute the user
         const memberToMute = interaction.guild.members.cache.get(user.id);
-        await memberToMute.timeout(duration * 60 * 1000); // Mute the user for the specified duration
+        await memberToMute.timeout(duration * 60 * 1000);
 
         const embed = {
-            color: 65407, // Changed color from '#0099ff' to 65407
-            title: 'User Muted',
+            color: 65407,
+            title: local.title,
             thumbnail: {
                 url: user.displayAvatarURL({ dynamic: true }),
             },
             fields: [
                 {
-                    name: 'User',
+                    name: local.user,
                     value: "```"+user.username+"```",
                     inline: true,
                 },
                 {
-                    name: 'User ID',
+                    name: local.userid,
                     value: "```"+user.id+"```",
                     inline: true,
                 },
                 {
-                    name: 'Reason',
+                    name: local.reason,
                     value: "```"+reason+"```",
                     inline: true,
                 },
                 {
-                    name: 'Duration',
-                    value: "```"+`${duration} minutes`+"```",
+                    name: local.duration,
+                    value: "```"+`${duration} ${local.minutes}`+"```",
                     inline: true,
                 },
                 {
-                    name: 'Muted By',
+                    name: local.by,
                     value: "```"+interaction.user.username+"```",
                     inline: true,
                 },

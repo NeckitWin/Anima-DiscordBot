@@ -5,6 +5,34 @@
     "botdontperm": "I don't have permission to do this"
   },
   "request": "Request from ",
+  "ban": {
+    "title": "User Banned",
+    "user": "User",
+    "userid": "User ID",
+    "reason": "Reason",
+    "duration": "Duration",
+    "messages": "Messages Deleted",
+    "by": "Banned by",
+    "minutes": "minutes",
+    "yes": "Yes",
+    "no": "No",
+    "unban": "Temporary ban duration expired"
+  },
+  "kick": {
+    "title": "User Kicked",
+    "user": "User",
+    "userid": "User ID",
+    "reason": "Reason"
+  },
+  "mute": {
+    "title": "User Muted",
+    "user": "User",
+    "userid": "User ID",
+    "reason": "Reason",
+    "duration": "Duration",
+    "minutes": "minutes",
+    "by": "Muted by"
+  },
   "server": {
     "title": "Info about the server",
     "owner": "Server owner",
@@ -56,6 +84,11 @@
     "title": "Calculator",
     "calc": "Calculation",
     "res": "Result"
+  },
+  "clear": {
+    "amount": "You must delete at least 1 message and no more than 100 messages",
+    "successFirst": "Deleted",
+    "successSecond": "messages"
   },
   "greeting": {
     "title": "Set a greeting for the channel",

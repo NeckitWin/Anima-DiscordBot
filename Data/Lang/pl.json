@@ -5,6 +5,34 @@
     "botdontperm": "Nie mam uprawnień do tego"
   },
   "request": "Żądanie od ",
+  "kick": {
+    "title": "Użytkownik wyrzucony",
+    "user": "Użytkownik",
+    "userid": "ID użytkownika",
+    "reason": "Powód"
+  },
+  "ban": {
+    "title": "Użytkownik zbanowany",
+    "user": "Użytkownik",
+    "userid": "ID użytkownika",
+    "reason": "Powód",
+    "duration": "Czas trwania",
+    "messages": "Wiadomości usunięte",
+    "by": "Zbanowany przez",
+    "minutes": "minut",
+    "yes": "Tak",
+    "no": "Nie",
+    "unban": "Czasowa blokada wygasła"
+  },
+  "mute": {
+    "title": "Użytkownik wyciszony",
+    "user": "Użytkownik",
+    "userid": "ID użytkownika",
+    "reason": "Powód",
+    "duration": "Czas trwania",
+    "minutes": "minut",
+    "by": "Wyciszony przez"
+  },
   "server": {
     "title": "Informacje o serwerze",
     "owner": "Właściciel serwera",
@@ -56,6 +84,11 @@
     "wind": "prędkość wiatru",
     "clouds": "zachmurzenie",
     "error": "Nie znaleziono miasta. Spróbuj ponownie z innym zapisem."
+  },
+  "clear": {
+    "amount": "Musisz usunąć co najmniej 1 wiadomość i nie więcej niż 100 wiadomości",
+    "successFirst": "Usunięto",
+    "successSecond": "wiadomości"
   },
   "greeting": {
     "title": "Ustaw powitanie dla kanału",

@@ -1,9 +1,11 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const lang = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('clear')
         .setNameLocalizations({ ru: 'очистить', pl: 'wyczyść', uk: 'очистити' })
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .setDescription('Clears chat for specified amount of messages')
         .setDescriptionLocalizations({
             ru: 'Очищает чат на указанное количество сообщений',
@@ -22,14 +24,18 @@ module.exports = {
                 })
                 .setRequired(true)),
     async execute(interaction) {
+        let preferredLang = interaction.guild.preferredLocale;
+        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+        let local = lang[preferredLang].clear;
+
         const amount = interaction.options.getInteger('amount');
 
-        if (amount <= 0 || amount > 100) {
-            interaction.reply({content: `You must delete at least 1 message and no more than 100 messages`, ephemeral: true});
+        if (amount < 1 || amount > 100) {
+            interaction.reply({content: local.amount, ephemeral: true});
         } else {
             await interaction.channel.bulkDelete(amount, true);
 
-            interaction.reply({content: `Deleted ${amount} messages`});
+            interaction.reply({content: `${local.successFirst} ${amount} ${local.successSecond}`});
         }
     },
 };

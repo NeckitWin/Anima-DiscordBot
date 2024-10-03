@@ -1,9 +1,11 @@
-const {SlashCommandBuilder, MessageEmbed} = require('discord.js');
+const {SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
+const lang = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('kick')
         .setNameLocalizations({ru: 'кик', pl: 'wyrzuć', uk: 'кик'})
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
         .setDescription('Kick a user')
         .setDescriptionLocalizations({ru: 'Кикнуть пользователя', pl: 'Wyrzuć użytkownika', uk: 'Кікнути користувача'})
         .addUserOption(option =>
@@ -23,11 +25,10 @@ module.exports = {
                 .setDescriptionLocalizations({ru: 'Причина кика', pl: 'Powód wyrzucenia', uk: 'Причина кіка'})
                 .setRequired(true)),
     async execute(interaction) {
-        const member = await interaction.guild.members.fetch(interaction.user.id);
+        let preferredLang = interaction.guild.preferredLocale;
+        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+        let local = lang[preferredLang].kick;
 
-        if (!member.permissions.has('ModerateMembers')) {
-            return interaction.reply({content: 'You dont have permission to use this command.', ephemeral: true});
-        }
         const user = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');
 
@@ -36,23 +37,23 @@ module.exports = {
 
         const embed = {
             color: 16711680,
-            title: 'User Kicked',
+            title: `${local.title}`,
             thumbnail: {
                 url: user.displayAvatarURL({dynamic: true}),
             },
             fields: [
                 {
-                    name: 'User',
+                    name: local.user,
                     value: "```" + user.username + "```",
                     inline: true,
                 },
                 {
-                    name: 'User ID',
+                    name: local.userid,
                     value: "```" + user.id + "```",
                     inline: true,
                 },
                 {
-                    name: 'Reason',
+                    name: local.reason,
                     value: "```" + reason + "```",
                 },
             ],
