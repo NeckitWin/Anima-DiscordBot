@@ -70,7 +70,8 @@
   "calc": {
     "title": "Kalkulator",
     "calc": "Obliczenie",
-    "res": "Wynik"
+    "res": "Wynik",
+    "error": "Nieprawidłowe obliczenie"
   },
   "weather": {
     "title": "Pogoda",

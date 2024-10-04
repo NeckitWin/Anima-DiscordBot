@@ -3,7 +3,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const config = require('../Data/config.json');
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
+const fetch = require('node-fetch2');
 
 process.env.GROQ_API_KEY = config.apiKey;
 process.env.GOOGLE_API_KEY = config.geminiApiKey;

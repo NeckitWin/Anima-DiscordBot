@@ -83,7 +83,8 @@
   "calc": {
     "title": "Calculator",
     "calc": "Calculation",
-    "res": "Result"
+    "res": "Result",
+    "error": "Invalid calculation"
   },
   "clear": {
     "amount": "You must delete at least 1 message and no more than 100 messages",

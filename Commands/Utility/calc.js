@@ -1,6 +1,8 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const lang = require("../../Data/Lang");
 
+
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('calc')
@@ -28,7 +30,19 @@ module.exports = {
         if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
         let local = lang[preferredLang].calc;
 
-        const result = eval(expression);
+        const safeEval = (expression) => {
+            try {
+                if (/^[0-9+\-*/().\s]+$/.test(expression)) {
+                    return eval(expression);
+                } else {
+                    return local.error;
+                }
+            } catch (error) {
+                return console.error(error);
+            }
+        }
+
+        const result = safeEval(expression);
         const embed = new EmbedBuilder()
             .setColor('Blue')
             .setTitle(local.title)
