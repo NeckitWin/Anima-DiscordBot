@@ -1,9 +1,7 @@
 const {EmbedBuilder} = require('discord.js');
 const {getConnection, updateAura} = require('../Data/funcs/db');
 const {getCooldown} = require('../Data/funcs/cooldown');
-const lang = require("../Data/Lang");
 const {getLang} = require("../Data/Lang");
-const conn = getConnection();
 
 const PlusAura = [
     'https://media1.tenor.com/m/b8SJCiQHnF8AAAAC/backind-back.gif',
@@ -22,18 +20,20 @@ module.exports = {
     name: 'messageCreate',
     async execute(message) {
         if (!(message.content === '-aura' || message.content === '+aura')) return;
-        if (await getCooldown('aura', message, message.author.id, 600)) return; // cooldown
 
         const lang = await getLang(message);
         const local = lang.aura;
 
         const replyUser = message.mentions.repliedUser;
-        if (replyUser === null) return message.reply({
+        if (replyUser === null || replyUser === undefined) return message.reply({
             content: lang.error.mustreply,
             ephemeral: true
         });
         if (replyUser.id === message.author.id) return message.reply(local.cantyourself);
         if (replyUser.bot) return message.reply(local.cantbot);
+
+        if (await getCooldown('aura', message, 600)) return; // cooldown
+
         const random = parseInt(Math.random() * (10000 - 100) + 100);
 
 

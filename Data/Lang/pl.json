@@ -2,7 +2,11 @@
   "error": {
     "dontperm": "Nie masz uprawnień do korzystania z tego",
     "notyourcommand": "Komenda nie została wywołana przez ciebie",
-    "botdontperm": "Nie mam uprawnień do tego"
+    "botdontperm": "Nie mam uprawnień do tego",
+    "mustreply": "Musisz odpowiedzieć na wiadomość kogoś!",
+    "wait": "Proszę czekać",
+    "minutes": "minut",
+    "seconds": "sekund"
   },
   "request": "Żądanie od ",
   "say": {
