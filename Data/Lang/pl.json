@@ -5,6 +5,13 @@
     "botdontperm": "Nie mam uprawnień do tego"
   },
   "request": "Żądanie od ",
+  "say": {
+    "response": "Wysyłanie twojej wiadomości..."
+  },
+  "language": {
+    "title": "Pomyślnie zmieniono język",
+    "description": "Język ustawiony na"
+  },
   "kick": {
     "title": "Użytkownik wyrzucony",
     "user": "Użytkownik",
@@ -104,6 +111,12 @@
     "dontset": "Nie ustawiłeś powitania na tym serwerze.",
     "remove": "Powitanie zostało pomyślnie usunięte z serwera.",
     "success": "Powitanie zostało pomyślnie ustawione na kanale"
+  },
+  "aura": {
+    "cantyourself": "Nie możesz dać aury sobie!",
+    "cantbot": "Nie możesz dać aury botowi!",
+    "title": "otrzymał aurę",
+    "aura": "aura"
   },
   "menuhelp": {
     "placeholder": "Dowiedz się więcej o poleceniach",

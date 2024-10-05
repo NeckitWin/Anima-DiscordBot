@@ -9,6 +9,7 @@ const {
 const fs = require("node:fs");
 const path = require("node:path");
 const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -52,9 +53,8 @@ module.exports = {
     async execute(interaction) {
         let modal;
 
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].greeting;
+        const lang = await getLang(interaction);
+        const local = lang.greeting
 
         const pathFile = path.join(__dirname, `../../Data/jsons/greeting.json`);
         const serverID = interaction.guild.id;

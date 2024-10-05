@@ -6,6 +6,13 @@
     "mustreply": "You have to reply to someone's message!"
   },
   "request": "Request from ",
+  "say": {
+    "response": "Sending your message..."
+  },
+  "language": {
+    "title": "Successfully changed the language",
+    "description": "The language is set to"
+  },
   "ban": {
     "title": "User Banned",
     "user": "User",

@@ -5,6 +5,7 @@ const { Routes } = require('discord-api-types/v9');
 const { token, clientId } = require('../../Data/config.json');
 const {SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
 const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -19,9 +20,8 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
         allowedUserIds = ['429562004399980546'];
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].error;
+        const lang = await getLang(interaction);
+        const local = lang.error;
 
         if (!allowedUserIds.includes(interaction.user.id)) {
             return interaction.reply({content:local.dontperm, ephemeral: true});

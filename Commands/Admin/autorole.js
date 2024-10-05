@@ -2,6 +2,7 @@ const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuild
 const fs = require("node:fs");
 const path = require("node:path");
 const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -64,12 +65,11 @@ module.exports = {
                 })
                 .setRequired(true))),
     async execute(interaction) {
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
+        const local = await getLang(interaction);
 
         const botMember = interaction.guild.members.me;
         if (!botMember.permissions.has(PermissionsBitField.Flags.ManageRoles)) return interaction.reply({
-            content: lang[preferredLang].error.botdontperm,
+            content: local.error.botdontperm,
             ephemeral: true
         });
         const serverID = interaction.guild.id;

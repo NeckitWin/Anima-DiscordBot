@@ -17,7 +17,7 @@ module.exports = {
                     {name:'українська', value:'uk-ua'},
                     {name:'japanese', value:'ja'},
                 )
-                .setDescription('The language to translate to')
+                .setDescription('The language.js to translate to')
                 .setDescriptionLocalizations({ru: 'Язык для перевода', pl: 'Język do tłumaczenia', uk: 'Мова для перекладу'})
                 .setRequired(true))
         .addStringOption(option =>
