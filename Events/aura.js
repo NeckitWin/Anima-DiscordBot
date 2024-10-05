@@ -29,27 +29,27 @@ module.exports = {
 
         const replyUser = message.mentions.repliedUser;
         if (replyUser === null) return message.reply({
-            content: 'You have to reply to someone\'s message!',
+            content: lang.error.mustreply,
             ephemeral: true
         });
-        if (replyUser.id === message.author.id) return message.reply('You can\'t give aura to yourself!');
-        if (replyUser.bot) return message.reply('You can\'t give aura to bot!');
+        if (replyUser.id === message.author.id) return message.reply(local.cantyourself);
+        if (replyUser.bot) return message.reply(local.cantbot);
         const random = parseInt(Math.random() * (10000 - 100) + 100);
 
 
         const embed = new EmbedBuilder()
-            .setTitle(replyUser.displayName + " got an aura")
+            .setTitle(`${replyUser.displayName} ${local.title}`)
         let sign;
         if (message.content === '-aura') {
             sign = "-";
 
-            embed.setDescription(`-${random} aura`)
+            embed.setDescription(`-${random} ${local.aura}`)
                 .setColor("#ff0000")
                 .setImage(MinusAura[Math.floor(Math.random() * MinusAura.length)]);
         } else if (message.content === '+aura') {
             sign = "+";
 
-            embed.setDescription(`+${random} aura`)
+            embed.setDescription(`+${random} ${local.aura}`)
                 .setColor("#00ff00")
                 .setImage(PlusAura[Math.floor(Math.random() * PlusAura.length)]);
         }

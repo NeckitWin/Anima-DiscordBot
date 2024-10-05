@@ -18,7 +18,8 @@ module.exports = {
             .addFields(
                 {name: `Guild Name:`, value: `\`\`\`fix\n${guild.name}\`\`\``, inline: false},
                 {name: `User count`, value: `\`\`\`fix\n${userCount}\`\`\``, inline: true},
-                {name: `Guild Owner`, value: `${owner}`, inline: true}
+                {name: `Guild Owner`, value: `\`\`\`fix\n${owner.username}\`\`\``, inline: true},
+                {name: `Owner ID`, value: `\`\`\`fix\n${owner.id}\`\`\``, inline: true}
             );
 
         myChannel.send({embeds: [embed]})

@@ -167,6 +167,7 @@
       "Shows information about the role"
     ],
     "admin": [
+      "Set the language for your server",
       "Send something on behalf of the bot",
       "Set auto role for new members",
       "View the list of auto roles",
