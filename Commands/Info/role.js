@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const {formatDate} = require("../../Data/utility");
-const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,9 +24,8 @@ module.exports = {
             .setRequired(true)),
     async execute(interaction) {
         try {
-            let preferredLang = interaction.guild.preferredLocale;
-            if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-            let local = lang[preferredLang].role;
+            const lang = await getLang(interaction);
+            const local = lang.role;
 
             const role = interaction.options.getRole('role');
             const embed = new EmbedBuilder()

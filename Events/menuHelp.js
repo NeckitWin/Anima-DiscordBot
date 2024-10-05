@@ -1,5 +1,5 @@
 const {Events, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder} = require('discord.js');
-const lang = require('../Data/Lang');
+const {getLang} = require("../Data/Lang");
 
 module.exports = {
     cooldown: 5,
@@ -7,11 +7,9 @@ module.exports = {
     async execute(interaction) {
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {
 
-            let preferredLang = interaction.guild.preferredLocale;
-            if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-
-            let local = lang[preferredLang].menuhelp;
-            let localinfo = lang[preferredLang].commandsdesc;
+            const lang = await getLang(interaction);
+            const local = lang.menuhelp;
+            const localinfo = lang.commandsdesc;
 
             if (interaction.user.id !== interaction.message.interaction.user.id) return await interaction.reply({content: lang[preferredLang].error.notyourcommand, ephemeral: true});
 

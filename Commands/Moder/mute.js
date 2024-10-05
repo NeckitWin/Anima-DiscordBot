@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, MessageEmbed, PermissionFlagsBits } = require('discord.js');
-const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -29,10 +29,8 @@ module.exports = {
     async execute(interaction) {
         const member = await interaction.guild.members.fetch(interaction.user.id);
 
-
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].mute;
+        const lang = await getLang(interaction);
+        const local = lang.mute;
 
         const user = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');

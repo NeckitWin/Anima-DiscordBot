@@ -2,6 +2,7 @@ const {EmbedBuilder} = require('discord.js');
 const {getConnection, updateAura} = require('../Data/funcs/db');
 const {getCooldown} = require('../Data/funcs/cooldown');
 const lang = require("../Data/Lang");
+const {getLang} = require("../Data/Lang");
 const conn = getConnection();
 
 const PlusAura = [
@@ -23,9 +24,8 @@ module.exports = {
         if (!(message.content === '-aura' || message.content === '+aura')) return;
         if (await getCooldown('aura', message, message.author.id, 600)) return; // cooldown
 
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].aura;
+        const lang = await getLang(message);
+        const local = lang.aura;
 
         const replyUser = message.mentions.repliedUser;
         if (replyUser === null) return message.reply({

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
-const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -33,11 +33,8 @@ module.exports = {
                 .setDescriptionLocalizations({ ru: 'удалить сообщения пользователя', pl: 'czy usunąć wiadomości użytkownika', uk: 'видалити повідомлення користувача'})
                 .setRequired(true)),
     async execute(interaction) {
-        const member = await interaction.guild.members.fetch(interaction.user.id);
-
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].ban;
+        const lang = await getLang(interaction);
+        const local = lang.ban;
 
         const user = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');

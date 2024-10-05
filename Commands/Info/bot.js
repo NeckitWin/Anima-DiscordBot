@@ -1,6 +1,6 @@
 const {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, Colors} = require("discord.js");
 const {formatDate} = require("../../Data/utility");
-const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 const ButtonServer = new ButtonBuilder()
     .setLabel("Discord Server")
@@ -26,9 +26,8 @@ module.exports = {
             uk: 'Показує інформацію про бота'
         }),
     async execute(interaction) {
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].bot;
+        const lang = await getLang(interaction);
+        const local = lang.bot;
 
         const bot = await interaction.client.user.fetch();
 

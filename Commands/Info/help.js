@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require("discord.js");
-const lang = require('../../Data/Lang');
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,9 +13,8 @@ module.exports = {
         }),
     async execute(interaction) {
         try {
-            let preferredLang = interaction.guild.preferredLocale;
-            if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-            let local = lang[preferredLang].menuhelp;
+            const lang = await getLang(interaction);
+            const local = lang.menuhelp;
 
             const menuHelp = new StringSelectMenuBuilder()
                 .setCustomId('menuHelp')
@@ -101,7 +100,7 @@ module.exports = {
                     }
                 ],
                 author: {
-                    name: lang[preferredLang].request + interaction.user.displayName,
+                    name: lang.request + interaction.user.displayName,
                     icon_url: interaction.user.displayAvatarURL(),
                 },
             };

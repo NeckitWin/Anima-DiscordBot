@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const {getUserServer} = require('../../Data/funcs/db')
 const {formatDate} = require("../../Data/utility");
-const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,9 +24,8 @@ module.exports = {
         }),
     async execute(interaction) {
         try {
-            let preferredLang = interaction.guild.preferredLocale;
-            if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-            let local = lang[preferredLang].user;
+            const lang = await getLang(interaction);
+            const local = lang.user;
 
             const user = interaction.options.getUser('user') || interaction.user;
             await user.fetch();

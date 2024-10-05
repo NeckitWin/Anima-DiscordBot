@@ -1,7 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
-const lang = require("../../Data/Lang");
-
-
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,9 +24,8 @@ module.exports = {
     async execute(interaction) {
         const expression = interaction.options.getString('expression');
 
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].calc;
+        const lang = await getLang(interaction);
+        const local = lang.calc;
 
         const safeEval = (expression) => {
             try {

@@ -1,6 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const axios = require('axios');
-const lang = require('../../Data/Lang');
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -23,10 +23,8 @@ module.exports = {
             })
             .setRequired(true)),
     async execute(interaction) {
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].weather;
-
+        const lang = await getLang(interaction);
+        const local = lang.weather;
         try {
             const city = interaction.options.getString('city');
             const dataWeather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3d9de74844d28377e81415151cbe6a66`);

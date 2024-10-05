@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const lang = require("../../Data/Lang");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,9 +24,8 @@ module.exports = {
                 })
                 .setRequired(true)),
     async execute(interaction) {
-        let preferredLang = interaction.guild.preferredLocale;
-        if (!lang.hasOwnProperty(preferredLang)) preferredLang = 'en';
-        let local = lang[preferredLang].clear;
+        const lang = await getLang(interaction);
+        const local = lang.clear;
 
         const amount = interaction.options.getInteger('amount');
 

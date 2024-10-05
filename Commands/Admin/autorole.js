@@ -1,7 +1,6 @@
 const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder} = require(`discord.js`)
 const fs = require("node:fs");
 const path = require("node:path");
-const lang = require("../../Data/Lang");
 const {getLang} = require("../../Data/Lang");
 
 module.exports = {

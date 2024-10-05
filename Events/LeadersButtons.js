@@ -1,5 +1,6 @@
 const {EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events} = require("discord.js");
 const {getLeaderboard} = require('../Data/funcs/db');
+const {getLang} = require("../Data/Lang");
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -32,8 +33,11 @@ module.exports = {
     async execute(interaction) {
         if (!interaction.isButton()) return;
         if (!(interaction.customId === `nextLeaders` || interaction.customId === `prevLeaders`)) return;
+        const lang = await getLang(interaction);
+        const local = lang.error;
+
         if (interaction.message.interaction.user.id !== interaction.user.id) return interaction.reply({
-            content: 'this is not your command',
+            content: local.notyourcommand,
             ephemeral: true
         });
 
