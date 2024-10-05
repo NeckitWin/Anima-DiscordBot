@@ -8,6 +8,16 @@
   "say": {
     "response": "Wysyłanie twojej wiadomości..."
   },
+  "autorole": {
+    "list": "Lista automatycznych ról",
+    "noroles": "Brak ról na liście automatycznych ról",
+    "id": "ID roli",
+    "role": "Rola",
+    "rolehas": "Rola została już ustawiona",
+    "roleadd": "dodana do listy automatycznych ról",
+    "rolewasnt": "Rola nie była na liście automatycznych ról",
+    "roleremove": "usunięta z listy automatycznych ról"
+  },
   "language": {
     "title": "Pomyślnie zmieniono język",
     "description": "Język ustawiony na"

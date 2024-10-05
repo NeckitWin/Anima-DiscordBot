@@ -9,6 +9,16 @@
   "say": {
     "response": "Sending your message..."
   },
+  "autorole": {
+    "list": "List of autoroles",
+    "noroles": "No roles in autorole list",
+    "id": "Role ID",
+    "role": "Role",
+    "rolehas": "Role has already been set",
+    "roleadd": "added to the autorole list",
+    "rolewasnt": "Role wasn't in the autorole list",
+    "roleremove": "removed from the autorole list"
+  },
   "language": {
     "title": "Successfully changed the language",
     "description": "The language is set to"
@@ -114,7 +124,7 @@
     "success": "The greeting has been successfully set on the channel"
   },
   "aura": {
-    "cantyourself" : "You can't give aura to yourself!",
+    "cantyourself": "You can't give aura to yourself!",
     "cantbot": "You can't give aura to the bot!",
     "title": "got an aura",
     "aura": "aura"

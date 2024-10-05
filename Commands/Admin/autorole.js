@@ -64,11 +64,12 @@ module.exports = {
                 })
                 .setRequired(true))),
     async execute(interaction) {
-        const local = await getLang(interaction);
+        const lang = await getLang(interaction);
+        const local = lang.autorole;
 
         const botMember = interaction.guild.members.me;
         if (!botMember.permissions.has(PermissionsBitField.Flags.ManageRoles)) return interaction.reply({
-            content: local.error.botdontperm,
+            content: lang.error.botdontperm,
             ephemeral: true
         });
         const serverID = interaction.guild.id;
@@ -83,16 +84,16 @@ module.exports = {
 
         if (subcommand === `list`) {
             const embed = new EmbedBuilder()
-                .setTitle(`List of autorole roles`)
+                .setTitle(local.list)
                 .setColor(`#d998ff`)
                 .setThumbnail(interaction.guild.iconURL());
 
-            if (!thisServer) return await interaction.reply({content: `No roles in autorole list`, ephemeral: true});
+            if (!thisServer) return await interaction.reply({content: local.noroles, ephemeral: true});
             thisServer.roles.map(el => {
                 embed.addFields([
                     {
-                        name: ` ID: ${el}`,
-                        value: `Role: <@&${el}>`,
+                        name: `${local.id}: ${el}`,
+                        value: `${local.role}: <@&${el}>`,
                         inline: false
                     }
                 ]);
@@ -103,7 +104,7 @@ module.exports = {
 
             if (thisServer) { // if server was json
                 if (!thisServer.roles.includes(roleID)) thisServer.roles.push(roleID);
-                else return await interaction.reply({content: "Role has already been set", ephemeral: true})
+                else return await interaction.reply({content: local.rolehas, ephemeral: true})
 
             } else {
                 jsonData.push({
@@ -113,21 +114,18 @@ module.exports = {
             }
             const parseDataJson = JSON.stringify(jsonData, null, 2);
             await fs.promises.writeFile(pathFile, parseDataJson);
-            await interaction.reply({content: `Role <@&${roleID}> added to autorole list`, ephemeral: true})
+            await interaction.reply({content: `${local.role} <@&${roleID}> ${local.roleadd}`, ephemeral: true})
 
         } else if (subcommand === "remove") {
 
             if (thisServer) { // if server was json
-                if (!thisServer.roles.includes(roleID)) return await interaction.reply({
-                    content: `Role wasn't in the list`,
-                    ephemeral: true
-                });
+                if (!thisServer.roles.includes(roleID)) return await interaction.reply({content: local.rolewasnt, ephemeral: true});
                 else thisServer.roles = thisServer.roles.filter(el => el !== roleID);
-            } else return await interaction.reply({content: `Role wasn't in the list`, ephemeral: true});
+            } else return await interaction.reply({content: local.rolewasnt, ephemeral: true});
 
             const parseDataJson = JSON.stringify(jsonData, null, 2);
             await fs.promises.writeFile(pathFile, parseDataJson);
-            await interaction.reply({content: `Role <@&${roleID}> removed from autorole list`, ephemeral: true});
+            await interaction.reply({content: `${local.role} <@&${roleID}> ${local.roleremove}`, ephemeral: true});
         }
     }
 }
