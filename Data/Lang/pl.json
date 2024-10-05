@@ -3,10 +3,32 @@
     "dontperm": "Nie masz uprawnień do korzystania z tego",
     "notyourcommand": "Komenda nie została wywołana przez ciebie",
     "botdontperm": "Nie mam uprawnień do tego",
+    "botdontpermrole": "Muszę mieć uprawnienia do zarządzania rolami",
     "mustreply": "Musisz odpowiedzieć na wiadomość kogoś!",
     "wait": "Proszę czekać",
     "minutes": "minut",
     "seconds": "sekund"
+  },
+  "auratop": {
+    "title": "Tabela liderów aury",
+    "request": "Żądanie od "
+  },
+  "interaction": {
+    "hug": "przytula cię",
+    "kiss": "całuje cię",
+    "pat": "głaszcze cię",
+    "bite": "gryzie cię"
+  },
+  "reaction": {
+    "sad": "czuje się smutny",
+    "happy": "czuje się szczęśliwy",
+    "angry": "czuje się zły",
+    "cry": "płacze",
+    "laugh": "śmieje się",
+    "shocked": "jest w szoku",
+    "love": "jest zakochany",
+    "sleep": "śpi",
+    "thinking": "głęboko myśli"
   },
   "request": "Żądanie od ",
   "say": {

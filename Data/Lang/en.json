@@ -3,10 +3,32 @@
     "dontperm": "You do not have permission to use this",
     "notyourcommand": "The command was not invoked by you",
     "botdontperm": "I don't have permission to do this",
+    "botdontpermrole": "I must have a permission to manage roles",
     "mustreply": "You have to reply to someone's message!",
     "wait": "Please wait",
     "minutes": "minutes",
     "seconds": "seconds"
+  },
+  "auratop": {
+    "title": "Aura Leaderboard",
+    "request": "Request from "
+  },
+  "interaction": {
+    "hug": "gives you a hug",
+    "kiss": "kisses you",
+    "pat": "gives you a pat",
+    "bite": "gives you a bite"
+  },
+  "reaction": {
+    "sad": "is feeling sad",
+    "happy": "is feeling happy",
+    "angry": "is feeling angry",
+    "cry": "is crying",
+    "laugh": "is laughing",
+    "shocked": "is shocked",
+    "love": "is in love",
+    "sleep": "is sleeping",
+    "thinking": "is deep in thought"
   },
   "request": "Request from ",
   "say": {

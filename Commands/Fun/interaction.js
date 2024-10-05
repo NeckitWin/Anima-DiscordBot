@@ -1,6 +1,7 @@
 const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 
 const data = require("../../Data/jsons/interaction.json")
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -25,8 +26,11 @@ module.exports = {
         const target = interaction.options.getString("your_interaction");
         const mentionUser = interaction.options.getUser("user");
 
+        const lang = await getLang(interaction);
+        const local = lang.interaction;
+
         const embed = new EmbedBuilder()
-            .setAuthor({name: `${interaction.user.displayName} ${target} you`, iconURL: interaction.user.displayAvatarURL()})
+            .setAuthor({name: `${interaction.user.displayName} ${local[target]}`, iconURL: interaction.user.displayAvatarURL()})
             .setImage(data[target][Math.floor(Math.random() * data[target].length)]);
 
         interaction.reply({content: `${mentionUser}`, embeds: [embed]});

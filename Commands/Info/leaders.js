@@ -1,5 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 const {getLeaderboard} = require("../../Data/funcs/db");
+const {getLang} = require("../../Data/Lang");
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -28,16 +29,19 @@ module.exports = {
         let prevNumber = 0;
         let nextNumber = 10;
 
+        const lang = await getLang(interaction);
+        const local = lang.auratop;
+
         const leaderboard = await getLeaderboard(interaction.guild.id);
 
         const auraLeaders = leaderboard.slice(prevNumber, nextNumber);
 
         const embed = new EmbedBuilder()
-            .setTitle("🏆 Aura Top ⚖️")
+            .setTitle(`🏆 ${local.title} ⚖️`)
             .setColor("#00ffa1")
             .setThumbnail(interaction.guild.iconURL())
             .setFooter({
-                text: `Requested by ${interaction.user.displayName}`,
+                text: `${local.request} ${interaction.user.displayName}`,
                 iconURL: interaction.user.avatarURL({dynamic: true, size: 4096})
             })
         ;

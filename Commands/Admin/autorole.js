@@ -69,7 +69,7 @@ module.exports = {
 
         const botMember = interaction.guild.members.me;
         if (!botMember.permissions.has(PermissionsBitField.Flags.ManageRoles)) return interaction.reply({
-            content: lang.error.botdontperm,
+            content: lang.error.botdontpermrole,
             ephemeral: true
         });
         const serverID = interaction.guild.id;
