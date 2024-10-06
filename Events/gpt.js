@@ -13,11 +13,12 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 module.exports = {
     name: 'messageCreate',
     async execute(message = new Message()) {
+        const botID = `1187466797885182141`;
+        // const mentionUserID = message.mentions.users.size > 0 ? message.mentions.users.first().id : undefined;
+        // const replyMessage = mentionUserID ? await message.channel.messages.cache.get(message.reference.messageId).content : undefined;
         if (message.author.bot) return;
-
         const firstWord = message.content.split(' ')[0].toLowerCase();
-        if (!(firstWord === 'anima,' || firstWord === 'анима,')) return;
-
+        if (!(firstWord === 'anima,' || firstWord === 'анима,' )) return;
         let buffer;
         try {
             if (message.attachments.size > 0) {
@@ -39,17 +40,17 @@ module.exports = {
             const result = generate.response.text();
 
             if (result.length < 1990) {
-                message.reply(result);
+                await message.reply(result);
             } else {
                 const filePath = path.join(__dirname, 'temp.txt');
-                fs.writeFileSync(filePath, result, 'utf8', (err) => {
+                await fs.promises.writeFile(filePath, result, 'utf8', (err) => {
                     if (err) {
                         console.error(err);
                         return message.reply("error in console");
                     }
                 });
                 const attachment = new AttachmentBuilder(filePath, 'message.txt');
-                message.reply({files: [attachment]})
+                await message.reply({files: [attachment]})
                     .then(() => fs.unlink(filePath, (err) => {
                         if (err) {
                             console.error('Error deleting file:', err);
