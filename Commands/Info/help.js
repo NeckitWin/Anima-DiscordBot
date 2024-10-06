@@ -90,7 +90,7 @@ module.exports = {
                     },
                     {
                         name: `🎮・${local.games.label}`,
-                        value: '`+aura`, `-aura`',
+                        value: '</ben:1292452492986155051>, `+aura`, `-aura`',
                         inline: false,
                     },
                     {

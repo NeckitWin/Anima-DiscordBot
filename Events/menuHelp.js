@@ -45,8 +45,9 @@ module.exports = {
                 `</translate:1285287069756690490> - ${localinfo.util[1]} \n` +
                 `</weather:1285287069756690491> - ${localinfo.util[2]}`;
 
-            const gamescontent = `\`+aura\` - ${localinfo.games[0]} \n`+
-            `\`-aura\` - ${localinfo.games[1]}`;
+            const gamescontent = `</ben:1292452492986155051> - ${localinfo.games[0]} \n` +
+                `\`+aura\` - ${localinfo.games[1]} \n`+
+            `\`-aura\` - ${localinfo.games[2]}`;
 
             const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]} \n` +
                                         `</interaction:1288525650721898669> - ${localinfo.fun[1]}`;
