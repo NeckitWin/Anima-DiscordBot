@@ -10,8 +10,14 @@
     "seconds": "sekund"
   },
   "auratop": {
-    "title": "Tabela liderów aury",
-    "request": "Żądanie od "
+    "title": "Tabela liderów aury"
+  },
+  "ben": {
+    "question": "Pytanie",
+    "yes": "Tak",
+    "no": "Nie",
+    "blabla": "Bla bla bla",
+    "haha": "Ha ha ha"
   },
   "interaction": {
     "hug": "przytula cię",

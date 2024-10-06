@@ -10,8 +10,14 @@
     "seconds": "seconds"
   },
   "auratop": {
-    "title": "Aura Leaderboard",
-    "request": "Request from "
+    "title": "Aura Leaderboard"
+  },
+  "ben": {
+    "question": "Question",
+    "yes": "Yes",
+    "no": "No",
+    "blabla": "Bla bla bla",
+    "haha": "Ha ha ha"
   },
   "interaction": {
     "hug": "gives you a hug",

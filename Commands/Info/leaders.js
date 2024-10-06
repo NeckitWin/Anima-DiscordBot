@@ -30,25 +30,24 @@ module.exports = {
         let nextNumber = 10;
 
         const lang = await getLang(interaction);
-        const local = lang.auratop;
 
         const leaderboard = await getLeaderboard(interaction.guild.id);
 
         const auraLeaders = leaderboard.slice(prevNumber, nextNumber);
 
         const embed = new EmbedBuilder()
-            .setTitle(`🏆 ${local.title} ⚖️`)
+            .setTitle(`🏆 ${lang.auratop.title} ⚖️`)
             .setColor("#00ffa1")
             .setThumbnail(interaction.guild.iconURL())
             .setFooter({
-                text: `${local.request} ${interaction.user.displayName}`,
+                text: `${lang.request} ${interaction.user.displayName}`,
                 iconURL: interaction.user.avatarURL({dynamic: true, size: 4096})
             })
         ;
 
         auraLeaders.forEach((leader, index) => {
             embed.addFields([
-                {name: `#${index + 1}. ${leader.serverName}`, value: `**Aura**: ${leader.aura}`, inline: false},
+                {name: `#${index + 1}. ${leader.serverName}`, value: `**${lang.aura.aura}**: ${leader.aura}`, inline: false},
             ])
         })
 
