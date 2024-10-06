@@ -97,7 +97,10 @@
     "date": "Data utworzenia",
     "owner": "Mój właściciel",
     "servers": "Liczba serwerów",
-    "users": "Liczba użytkowników"
+    "users": "Liczba użytkowników",
+    "discordserver": "Serwer wsparcia",
+    "website": "Strona internetowa",
+    "invite": "Zaprosić"
   },
   "role": {
     "title": "Informacje o roli",

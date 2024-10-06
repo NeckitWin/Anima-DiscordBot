@@ -2,18 +2,6 @@ const {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedB
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
 
-const ButtonServer = new ButtonBuilder()
-    .setLabel("Discord Server")
-    .setURL("https://discord.gg/rw5dzGT67s")
-    .setStyle(ButtonStyle.Link);
-
-const ButtonGitHub = new ButtonBuilder()
-    .setLabel("Github")
-    .setURL("https://github.com/NeckitWin")
-    .setStyle(ButtonStyle.Link);
-
-const rowLinksForBot = new ActionRowBuilder()
-    .addComponents(ButtonServer, ButtonGitHub);
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -68,7 +56,26 @@ module.exports = {
                     value: `\`\`\`👤${interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)}\`\`\``,
                     inline: true,
                 }
-            )
+            );
+
+        const ButtonServer = new ButtonBuilder()
+            .setLabel(local.discordserver)
+            .setURL("https://discord.gg/d8kCF4c3t5")
+            .setStyle(ButtonStyle.Link);
+
+        const ButtonWebsite = new ButtonBuilder()
+            .setLabel(local.website)
+            .setURL("https://neckitwin.github.io/Anima/")
+            .setStyle(ButtonStyle.Link);
+
+        const ButtonGitHub = new ButtonBuilder()
+            .setLabel(local.invite)
+            .setURL("https://discord.com/oauth2/authorize?client_id=1187466797885182141")
+            .setStyle(ButtonStyle.Link);
+
+        const rowLinksForBot = new ActionRowBuilder()
+            .addComponents(ButtonServer, ButtonWebsite , ButtonGitHub);
+
         interaction.reply({embeds: [embed], components: [rowLinksForBot]});
     }
 };

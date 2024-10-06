@@ -97,7 +97,10 @@
     "date": "Date of creation",
     "owner": "My owner",
     "servers": "Server count",
-    "users": "User count"
+    "users": "User count",
+    "discordserver": "Support server",
+    "website": "Website",
+    "invite": "Invite"
   },
   "role": {
     "title": "Info about the role",
