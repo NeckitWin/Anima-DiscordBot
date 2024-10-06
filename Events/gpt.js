@@ -14,13 +14,14 @@ module.exports = {
     name: 'messageCreate',
     async execute(message = new Message()) {
         const botID = `1187466797885182141`;
-        // const mentionUserID = message.mentions.users.size > 0 ? message.mentions.users.first().id : undefined;
-        // const replyMessage = mentionUserID ? await message.channel.messages.cache.get(message.reference.messageId).content : undefined;
         if (message.author.bot) return;
-        const firstWord = message.content.split(' ')[0].toLowerCase();
-        if (!(firstWord === 'anima,' || firstWord === 'анима,' )) return;
-        let buffer;
         try {
+        const isBotReply = message.mentions.users.first()?.id === botID;
+        const repliedMessage = message.reference !== null ? await message.channel.messages.cache.get(message.reference.messageId) : false;
+        const firstWord = message.content.split(' ')[0].toLowerCase();
+        const isBotNameMention = firstWord === `anima,` || firstWord === `анима,`;
+        if (!(isBotNameMention || isBotReply )) return;
+        let buffer;
             if (message.attachments.size > 0) {
                 const attachment = message.attachments.first();
                 if (attachment.contentType && attachment.contentType.startsWith('image/')) {
@@ -32,7 +33,7 @@ module.exports = {
             }
 
             const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
-            const prompt = message.content;
+            const prompt = repliedMessage ? repliedMessage.content + message.content : message.content;
 
             const generate = await model.generateContent(
                 message.attachments.size > 0 ? [prompt, {inlineData: {data: buffer.toString("base64"), mimeType: message.attachments.first().contentType}}] : prompt
