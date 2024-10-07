@@ -14,8 +14,6 @@ module.exports = {
         const lang = await getLang(interaction);
         const local = lang.greeting;
 
-        console.log(local);
-
         const obj = interaction.fields.fields.map(el=>el.value);
 
         const newData = {
