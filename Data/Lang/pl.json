@@ -9,6 +9,46 @@
     "minutes": "minut",
     "seconds": "sekund"
   },
+  "loggs": {
+    "member": {
+      "join": "Użytkownik dołączył",
+      "leave": "Użytkownik opuścił",
+      "name": "Wyświetlana nazwa",
+      "user_id": "ID użytkownika",
+      "username": "Nazwa użytkownika"
+    },
+    "message": {
+      "delete": "Wiadomość usunięta",
+      "edit": "Wiadomość edytowana",
+      "old": "Stara wiadomość",
+      "new": "Nowa wiadomość",
+      "content": "Treść",
+      "message_id": "ID wiadomości",
+      "channel": "Kanał",
+      "channel_id": "ID kanału",
+      "author": "Autor"
+    },
+    "channel": {
+      "create": "Kanał utworzony",
+      "delete": "Kanał usunięty",
+      "update": "Kanał zaktualizowany",
+      "channel": "Kanał",
+      "name": "Nazwa kanału",
+      "old": "Stara nazwa kanału",
+      "new": "Nowa nazwa kanału",
+      "channel_id": "ID kanału",
+      "type": "Typ kanału",
+      "types": {
+        "text": "Kanał tekstowy",
+        "voice": "Kanał głosowy",
+        "forum": "Forum",
+        "category": "Kategoria",
+        "news": "Kanał informacyjny",
+        "stage": "Scena",
+        "unknown": "Nieznany"
+      }
+    }
+  },
   "auratop": {
     "title": "Tabela liderów aury"
   },

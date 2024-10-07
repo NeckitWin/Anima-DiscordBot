@@ -9,6 +9,46 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
+  "loggs": {
+    "member": {
+      "join": "User joined",
+      "leave": "User left",
+      "name": "Display name",
+      "user_id": "User ID",
+      "username": "Username"
+    },
+    "message": {
+      "delete": "Message deleted",
+      "edit": "Message edited",
+      "old": "Old message",
+      "new": "New message",
+      "content": "Content",
+      "message_id": "Message ID",
+      "channel": "Channel",
+      "channel_id": "Channel ID",
+      "author": "Author"
+    },
+    "channel": {
+      "create": "Channel created",
+      "delete": "Channel deleted",
+      "update": "Channel updated",
+      "channel": "Channel",
+      "name": "Channel name",
+      "old": "Old channel name",
+      "new": "New channel name",
+      "channel_id": "Channel ID",
+      "type": "Channel type",
+      "types": {
+        "text": "Text Channel",
+        "voice": "Voice Channel",
+        "forum": "Forum",
+        "category": "Category",
+        "news": "News Channel",
+        "stage": "Stage",
+        "unknown": "Unknown"
+      }
+    }
+  },
   "auratop": {
     "title": "Aura Leaderboard"
   },
