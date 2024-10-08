@@ -45,11 +45,11 @@ module.exports = {
         const result = await getLeaderboard(interaction.guild.id);
 
         const embed = new EmbedBuilder()
-            .setTitle("🏆 Ranking Aura Top ⚖️")
+            .setTitle(`🏆 ${lang.auratop.title} ⚖️`)
             .setColor("#00ffa1")
             .setThumbnail(interaction.guild.iconURL())
             .setFooter({
-                text: `Requested by ${interaction.user.displayName}`,
+                text: `${lang.request} ${interaction.user.displayName}`,
                 iconURL: interaction.user.avatarURL({dynamic: true, size: 4096})
             });
 

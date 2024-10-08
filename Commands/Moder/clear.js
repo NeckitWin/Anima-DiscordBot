@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField } = require('discord.js');
 const {getLang} = require("../../Data/Lang");
 
 module.exports = {
@@ -26,8 +26,9 @@ module.exports = {
     async execute(interaction) {
         const lang = await getLang(interaction);
         const local = lang.clear;
-
+        try {
         const amount = interaction.options.getInteger('amount');
+        if (!interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ManageMessages)) return await interaction.reply({content: lang.error.botdontpermclear, ephemeral: true});
 
         if (amount < 1 || amount > 100) {
             interaction.reply({content: local.amount, ephemeral: true});
@@ -36,5 +37,9 @@ module.exports = {
 
             interaction.reply({content: `${local.successFirst} ${amount} ${local.successSecond}`});
         }
-    },
-};
+        } catch (err) {
+            console.error(err);
+            return interaction.reply({content: lang.error.botdontperm, ephemeral: true});
+        }
+    }
+}

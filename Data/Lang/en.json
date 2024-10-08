@@ -1,5 +1,13 @@
 {
   "error": {
+    "rolesEqual": "User's role is the same as yours",
+    "bothigherrole": "User's role is higher than mine",
+    "userhigherrole": "User's role is higher than yours",
+    "botdontpermkick": "I don't have permission to kick members",
+    "botdontpermban": "I don't have permission to ban members",
+    "botdontpermmute": "I don't have permission to mute members",
+    "botdontpermclear": "I don't have permission to delete messages",
+    "botdontpermsendmessage": "I don't have permission to send messages in this channel",
     "dontperm": "You do not have permission to use this",
     "notyourcommand": "The command was not invoked by you",
     "botdontperm": "I don't have permission to do this",
@@ -170,7 +178,8 @@
     "userid": "User ID",
     "date": "Date of creation",
     "dateentry": "Server join date",
-    "roles": "Roles"
+    "roles": "Roles",
+    "error": "User not found"
   },
   "calc": {
     "title": "Calculator",

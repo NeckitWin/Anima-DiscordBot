@@ -23,10 +23,9 @@ module.exports = {
             uk: "Виберіть учасника для відображення інформації"
         }),
     async execute(interaction) {
+        const lang = await getLang(interaction);
+        const local = lang.user;
         try {
-            const lang = await getLang(interaction);
-            const local = lang.user;
-
             const user = interaction.options.getUser('user') || interaction.user;
             await user.fetch();
             const member = interaction.guild.members.cache.get(user.id);
@@ -56,6 +55,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
+            await interaction.reply({ content: local.error, ephemeral: true });
         }
     },
 };

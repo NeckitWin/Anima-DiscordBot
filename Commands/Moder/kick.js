@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
+const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
 
 module.exports = {
@@ -27,38 +27,58 @@ module.exports = {
     async execute(interaction) {
         const lang = await getLang(interaction);
         const local = lang.kick;
+        try {
+            if (!interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.KickMembers)) return await interaction.reply({content: lang.error.botdontpermkick, ephemeral: true});
+            const user = interaction.options.getUser('user');
+            const reason = interaction.options.getString('reason');
+            const memberToKick = interaction.guild.members.cache.get(user.id);
+            const memberExecuting = interaction.guild.members.cache.get(interaction.user.id);
 
-        const user = interaction.options.getUser('user');
-        const reason = interaction.options.getString('reason');
+            if (!memberToKick) return await interaction.reply({content: lang.user.error, ephemeral: true});
 
-        const memberToKick = interaction.guild.members.cache.get(user.id);
-        await memberToKick.kick(reason);
+            if (memberToKick.roles.highest.position >= interaction.guild.members.me.roles.highest.position) {
+                return interaction.reply({ content: lang.error.bothigherrole, ephemeral: true });
+            }
 
-        const embed = {
-            color: 16711680,
-            title: `${local.title}`,
-            thumbnail: {
-                url: user.displayAvatarURL({dynamic: true}),
-            },
-            fields: [
-                {
-                    name: local.user,
-                    value: "```" + user.username + "```",
-                    inline: true,
+            if (memberToKick.roles.highest.position > memberExecuting.roles.highest.position) {
+                return interaction.reply({ content: lang.error.userhigherrole, ephemeral: true });
+            }
+
+            if (memberToKick.roles.highest.position === memberExecuting.roles.highest.position) {
+                return interaction.reply({ content: lang.error.rolesEqual, ephemeral: true });
+            }
+
+            await memberToKick.kick(reason);
+
+            const embed = {
+                color: 16711680,
+                title: `${local.title}`,
+                thumbnail: {
+                    url: user.displayAvatarURL({dynamic: true}),
                 },
-                {
-                    name: local.userid,
-                    value: "```" + user.id + "```",
-                    inline: true,
-                },
-                {
-                    name: local.reason,
-                    value: "```" + reason + "```",
-                },
-            ],
-            timestamp: new Date(),
-        };
+                fields: [
+                    {
+                        name: local.user,
+                        value: "```" + user.username + "```",
+                        inline: true,
+                    },
+                    {
+                        name: local.userid,
+                        value: "```" + user.id + "```",
+                        inline: true,
+                    },
+                    {
+                        name: local.reason,
+                        value: "```" + reason + "```",
+                    },
+                ],
+                timestamp: new Date(),
+            };
 
-        return interaction.reply({embeds: [embed]});
+            return interaction.reply({embeds: [embed]});
+        } catch (err) {
+            console.error(err);
+            return interaction.reply({content: lang.user.error, ephemeral: true});
+        }
     }
 }

@@ -1,5 +1,13 @@
 {
   "error": {
+    "rolesEqual": "Rola użytkownika jest taka sama jak twoja",
+    "bothigherrole": "Rola użytkownika jest wyższa niż moja",
+    "userhigherrole": "Rola użytkownika jest wyższa niż twoja",
+    "botdontpermkick": "Nie mam uprawnień do wyrzucania członków",
+    "botdontpermban": "Nie mam uprawnień do banowania członków",
+    "botdontpermmute": "Nie mam uprawnień do wyciszania członków",
+    "botdontpermclear": "Nie mam uprawnień do usuwania wiadomości",
+    "botdontpermsendmessage": "Nie mam uprawnień do wysyłania wiadomości na tym kanale",
     "dontperm": "Nie masz uprawnień do korzystania z tego",
     "notyourcommand": "Komenda nie została wywołana przez ciebie",
     "botdontperm": "Nie mam uprawnień do tego",
@@ -157,7 +165,8 @@
     "userid": "ID użytkownika",
     "date": "Data utworzenia",
     "dateentry": "Data dołączenia do serwera",
-    "roles": "Role"
+    "roles": "Role",
+    "error": "Nie znaleziono użytkownika"
   },
   "calc": {
     "title": "Kalkulator",
