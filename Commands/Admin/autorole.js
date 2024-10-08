@@ -68,7 +68,7 @@ module.exports = {
         const local = lang.autorole;
 
         const botMember = interaction.guild.members.me;
-        if (!botMember.permissions.has(PermissionsBitField.Flags.ManageRoles)) return interaction.reply({
+        if (!botMember.permissions.has(PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({
             content: lang.error.botdontpermrole,
             ephemeral: true
         });
@@ -101,6 +101,7 @@ module.exports = {
             await interaction.reply({embeds: [embed]});
 
         } else if (subcommand === "add") {
+            if (botMember.roles.highest.position < roleTarget.position) return await interaction.reply({content: lang.error.bothigherrole, ephemeral: true});
 
             if (thisServer) { // if server was json
                 if (!thisServer.roles.includes(roleID)) thisServer.roles.push(roleID);
