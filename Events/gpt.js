@@ -16,11 +16,11 @@ module.exports = {
         const botID = `1187466797885182141`;
         if (message.author.bot) return;
         try {
-        const isBotReply = message.mentions.users.first()?.id === botID;
-        const repliedMessage = message.reference !== null ? await message.channel.messages.cache.get(message.reference.messageId) : false;
+        // const isBotReply = message.mentions.users.first()?.id === botID;
+        // const repliedMessage = message.reference !== null ? await message.channel.messages.cache.get(message.reference.messageId) : false;
         const firstWord = message.content.split(' ')[0].toLowerCase();
         const isBotNameMention = firstWord === `anima,` || firstWord === `анима,`;
-        if (!(isBotNameMention || isBotReply )) return;
+        if (!isBotNameMention) return;
         let buffer;
             if (message.attachments.size > 0) {
                 const attachment = message.attachments.first();
@@ -33,7 +33,7 @@ module.exports = {
             }
 
             const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
-            const prompt = repliedMessage ? repliedMessage.content + message.content : message.content;
+            const prompt = message.content;
 
             const generate = await model.generateContent(
                 message.attachments.size > 0 ? [prompt, {inlineData: {data: buffer.toString("base64"), mimeType: message.attachments.first().contentType}}] : prompt
