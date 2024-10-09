@@ -22,8 +22,8 @@ module.exports = {
                 })
                 .setRequired(true)),
     async execute(interaction) {
+        const lang = await getLang(interaction);
         try {
-            const lang = await getLang(interaction);
             if (!interaction.channel.nsfw) return await interaction.reply({content: lang.nsfw.error, ephemeral: true});
             await interaction.deferReply();
             const target = interaction.options.getString(`search`)
@@ -38,10 +38,11 @@ module.exports = {
                 .setFooter({text: `${lang.nsfw.tags}: ${tags}`})
                 .setTimestamp();
 
-            if (!response) return await interaction.reply({content: lang.nsfw.noresult, ephemeral: true});
+            if (!response) return await interaction.editReply({content: lang.nsfw.noresult, ephemeral: true});
             await interaction.editReply({embeds: [embed]});
         } catch (e) {
             console.error(e)
+            await interaction.editReply({content: lang.nsfw.noresult, ephemeral: true});
         }
     }
 }
