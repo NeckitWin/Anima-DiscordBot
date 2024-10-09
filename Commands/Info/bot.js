@@ -27,7 +27,7 @@ module.exports = {
             .setImage(bot.bannerURL({format: "png", size: 4096}))
             .addFields(
                 {
-                    name: local.botid,
+                    name: `<:id:1293617760521293824> ${local.botid}`,
                     value: `\`\`\`fix\n${interaction.client.user.id}\`\`\``,
                     inline: false,
                 },
