@@ -1,11 +1,10 @@
 const {Message, AttachmentBuilder} = require('discord.js');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const {GoogleGenerativeAI, HarmCategory, HarmBlockThreshold} = require("@google/generative-ai");
 const config = require('../Data/config.json');
 const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch2');
 
-process.env.GROQ_API_KEY = config.apiKey;
 process.env.GOOGLE_API_KEY = config.geminiApiKey;
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
@@ -16,12 +15,13 @@ module.exports = {
         const botID = `1187466797885182141`;
         if (message.author.bot) return;
         try {
-        // const isBotReply = message.mentions.users.first()?.id === botID;
-        // const repliedMessage = message.reference !== null ? await message.channel.messages.cache.get(message.reference.messageId) : false;
-        const firstWord = message.content.split(' ')[0].toLowerCase();
-        const isBotNameMention = firstWord === `anima,` || firstWord === `анима,`;
-        if (!isBotNameMention) return;
-        let buffer;
+            const firstWord = message.content.split(' ')[0].toLowerCase();
+            const isBotNameMention = firstWord === `anima,` || firstWord === `анима,`;
+            if (!isBotNameMention) return;
+
+            await message.channel.sendTyping();
+
+            let buffer;
             if (message.attachments.size > 0) {
                 const attachment = message.attachments.first();
                 if (attachment.contentType && attachment.contentType.startsWith('image/')) {
@@ -32,11 +32,25 @@ module.exports = {
                 }
             }
 
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+            const model = genAI.getGenerativeModel({
+                model: "gemini-1.5-flash",
+                systemInstruction: "You are a Discord Bot (Anima girl character). Your name is Anima. You are a helpful assistant.",
+                safetySettings: [
+                    {category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE},
+                    {category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE},
+                    {category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE},
+                    {category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE}
+                ]
+            });
             const prompt = message.content;
 
             const generate = await model.generateContent(
-                message.attachments.size > 0 ? [prompt, {inlineData: {data: buffer.toString("base64"), mimeType: message.attachments.first().contentType}}] : prompt
+                message.attachments.size > 0 ? [prompt, {
+                    inlineData: {
+                        data: buffer.toString("base64"),
+                        mimeType: message.attachments.first().contentType
+                    }
+                }] : prompt
             );
             const result = generate.response.text();
 
