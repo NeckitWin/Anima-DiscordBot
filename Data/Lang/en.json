@@ -17,6 +17,11 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
+  "nsfw": {
+    "error": "This command can only be used in NSFV channels",
+    "tags": "Tags",
+    "noresult": "No results found"
+  },
   "loggs": {
     "member": {
       "join": "User joined",
@@ -275,7 +280,8 @@
     ],
     "fun": [
       "Show your reaction",
-      "Interact with another user"
+      "Interact with another user",
+      "Search NSFW anime content by tags"
     ]
   }
 }

@@ -17,6 +17,11 @@
     "minutes": "minut",
     "seconds": "sekund"
   },
+  "nsfw": {
+    "error": "To polecenie można używać tylko w NSFW kanałach",
+    "tags": "Tagi",
+    "noresult": "Nie znaleziono wyników"
+  },
   "loggs": {
     "member": {
       "join": "Użytkownik dołączył",
@@ -275,7 +280,8 @@
     ],
     "fun": [
       "Pokaż swoją reakcję",
-      "Współdziałaj z innym użytkownikiem"
+      "Współdziałaj z innym użytkownikiem",
+      "Wyszukaj NSFW anime kontent według tagów"
     ]
   }
 }
