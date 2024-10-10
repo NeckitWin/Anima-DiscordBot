@@ -158,16 +158,18 @@
     "channels": "Channel count"
   },
   "bot": {
-    "title": "Info about me",
-    "botid": "My ID",
+    "title": "Thanks for using",
+    "description": "I am Anima, a Multifunctional Discord Bot and Anime Girl, created to assist you! I offer server management, AI, moderation, utilities, and entertainment.",
     "lib": "Library",
-    "date": "Date of creation",
-    "owner": "My owner",
-    "servers": "Server count",
-    "users": "User count",
-    "discordserver": "Support server",
+    "create": "I was created on",
+    "use": "I'm used by",
+    "servers": "servers",
+    "help": "I help",
+    "users": "users",
+    "dev": "developer",
+    "discordserver": "Support Server",
     "website": "Website",
-    "invite": "Invite"
+    "invite": "Invite me"
   },
   "role": {
     "title": "Info about the role",

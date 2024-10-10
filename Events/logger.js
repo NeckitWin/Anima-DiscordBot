@@ -148,7 +148,7 @@ module.exports = [
                     {name: localChannel.name, value: `\`\`\`${channel.name}\`\`\``, inline: true},
                     {name: localChannel.type, value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: true},
                     {name: localChannel.channel_id, value: `\`\`\`${channel.id}\`\`\``, inline: false},
-                    {name: `nsfw`, value: `\`\`\`${newChannel.nsfw}\`\`\``, inline: true}
+                    {name: `nsfw`, value: `\`\`\`${channel.nsfw}\`\`\``, inline: true}
                 ])
                 .setThumbnail(channel.guild.iconURL())
                 .setTimestamp()
@@ -298,5 +298,8 @@ module.exports = [
 
             await checkServer(role, embed);
         }
+    },
+    {
+
     }
 ]

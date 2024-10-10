@@ -16,51 +16,40 @@ module.exports = {
     async execute(interaction) {
         const lang = await getLang(interaction);
         const local = lang.bot;
-
         const bot = await interaction.client.user.fetch();
+        const lib = `discord.js`;
+        const botCreated = formatDate(interaction.client.user.createdAt);
+        const serversCount = interaction.client.guilds.cache.size;
+        const usersCount = interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
+        const supportServer = `https://discord.gg/d8kCF4c3t5`;
+        const botAvatar = bot.displayAvatarURL({dynamic: true});
+        const botBanner = bot.bannerURL({dynamic: true, size: 4096});
+        const botOwnerID = `429562004399980546`;
+        const botOwner = await interaction.client.users.fetch(botOwnerID);
+        const titleEmoji = `<a:anime_girl:1294060303734280244>`;
+        const nodejsEmoji = `<:node_js:1294063653666160693>`;
 
         const embed = new EmbedBuilder()
-            .setColor(Colors.White)
-            .setTitle(`${local.title} - ${interaction.client.user.username} 🤖`)
-            .setDescription(' ')
-            .setThumbnail(interaction.client.user.displayAvatarURL())
-            .setImage(bot.bannerURL({format: "png", size: 4096}))
+            .setTitle(`${titleEmoji} ${local.title} - Anima!`)
+            .setDescription(
+                `**${local.description}**\n\n`+
+                `**${local.lib}:**  \`${lib}\`${nodejsEmoji}\n`
+            )
+            .setColor(`#ff6a92`)
+            .setThumbnail(botAvatar)
+            .setImage(botBanner)
             .addFields(
-                {
-                    name: `<:id:1293617760521293824> ${local.botid}`,
-                    value: `\`\`\`fix\n${interaction.client.user.id}\`\`\``,
-                    inline: false,
-                },
-                {
-                    name: local.lib,
-                    value: `\`\`\`css\nDiscord.js\`\`\``,
-                    inline: true,
-                },
-                {
-                    name: local.date,
-                    value: `\`\`\`${formatDate(interaction.client.user.createdAt)}\`\`\``,
-                    inline: true,
-                },
-                {
-                    name: local.owner,
-                    value: "NeckitWin <@429562004399980546>",
-                    inline: false,
-                },
-                {
-                    name: local.servers,
-                    value: `\`\`\`🌐${interaction.client.guilds.cache.size}\`\`\``,
-                    inline: true,
-                },
-                {
-                    name: local.users,
-                    value: `\`\`\`👤${interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)}\`\`\``,
-                    inline: true,
-                }
-            );
+                {name: `📅 ${local.create}`, value: `╰ **\`${botCreated}\`**`, inline: false},
+                {name: `❤️‍🔥 ${local.use}`, value: `╰ **\`${serversCount}\`** ${local.servers}`, inline: false},
+                {name: `👥 ${local.help}`, value: `╰ **\`${usersCount}\`** ${local.users}`, inline: false}
+            )
+            .setFooter({iconURL: botOwner.displayAvatarURL(), text: `${botOwner.username} - ${local.dev}⚙️`});
 
+
+        // buttons
         const ButtonServer = new ButtonBuilder()
             .setLabel(local.discordserver)
-            .setURL("https://discord.gg/d8kCF4c3t5")
+            .setURL(supportServer)
             .setStyle(ButtonStyle.Link);
 
         const ButtonWebsite = new ButtonBuilder()
@@ -76,6 +65,6 @@ module.exports = {
         const rowLinksForBot = new ActionRowBuilder()
             .addComponents(ButtonServer, ButtonWebsite , ButtonGitHub);
 
-        interaction.reply({embeds: [embed], components: [rowLinksForBot]});
+        await interaction.reply({embeds: [embed], components: [rowLinksForBot]});
     }
 };
