@@ -11,20 +11,20 @@ module.exports = {
         const owner = getOwner.user;
         const memberCount = guild.memberCount;
 
-        const inviteChannel = guild.channels.cache.find(channel=>
-            channel.isTextBased() && channel.permissionsFor(guild.members.me).has(PermissionFlagsBits.CreateInstantInvite)
-        )
-
-        let inviteLink;
-        if (inviteChannel) {
-            try {
-                inviteLink = await inviteChannel.createInvite({ maxAge: 0, maxUses: 0 });
-            } catch (error) {
-                console.error('Error creating invite:', error);
-            }
-        }
-
-        const link = inviteLink ? inviteLink.url : false;
+        // const inviteChannel = guild.channels.cache.find(channel=>
+        //     channel.isTextBased() && channel.permissionsFor(guild.members.me).has(PermissionFlagsBits.CreateInstantInvite)
+        // )
+        //
+        // let inviteLink;
+        // if (inviteChannel) {
+        //     try {
+        //         inviteLink = await inviteChannel.createInvite({ maxAge: 0, maxUses: 0 });
+        //     } catch (error) {
+        //         console.error('Error creating invite:', error);
+        //     }
+        // }
+        //
+        // const link = inviteLink ? inviteLink.url : false;
 
         const embed = new EmbedBuilder()
             .setTitle(`Bot added to new server`)
@@ -37,16 +37,18 @@ module.exports = {
                 {name: `Owner ID`, value: `\`\`\`fix\n${owner.id}\`\`\``, inline: true}
             );
 
-        if (link) {
-            const buttonInvite = new ButtonBuilder()
-                .setLabel("Join server")
-                .setStyle(ButtonStyle.Link)
-                .setURL(link);
+        // if (link) {
+        //     const buttonInvite = new ButtonBuilder()
+        //         .setLabel("Join server")
+        //         .setStyle(ButtonStyle.Link)
+        //         .setURL(link);
+        //
+        //     const row = new ActionRowBuilder()
+        //         .addComponents(buttonInvite);
+        //
+        //     await myChannel.send({embeds: [embed], components: [row]});}
 
-            const row = new ActionRowBuilder()
-                .addComponents(buttonInvite);
 
-            await myChannel.send({embeds: [embed], components: [row]});
-        } else await myChannel.send({embeds: [embed]})
+        await myChannel.send({embeds: [embed]})
     }
 }

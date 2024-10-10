@@ -26,13 +26,20 @@ const getLocal = async (interaction) => {
 
 const channelTypeParse = (type) => {
     switch (type) {
-        case 0: return `text`;
-        case 2: return `voice`;
-        case 15:return `forum`;
-        case 4: return `category`;
-        case 5: return `news`;
-        case 13:return `stage`;
-        default: return `unknown`;
+        case 0:
+            return `text`;
+        case 2:
+            return `voice`;
+        case 15:
+            return `forum`;
+        case 4:
+            return `category`;
+        case 5:
+            return `news`;
+        case 13:
+            return `stage`;
+        default:
+            return `unknown`;
     }
 }
 
@@ -140,7 +147,8 @@ module.exports = [
                 .addFields([
                     {name: localChannel.name, value: `\`\`\`${channel.name}\`\`\``, inline: true},
                     {name: localChannel.type, value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: true},
-                    {name: localChannel.channel_id, value: `\`\`\`${channel.id}\`\`\``, inline: false}
+                    {name: localChannel.channel_id, value: `\`\`\`${channel.id}\`\`\``, inline: false},
+                    {name: `nsfw`, value: `\`\`\`${newChannel.nsfw}\`\`\``, inline: true}
                 ])
                 .setThumbnail(channel.guild.iconURL())
                 .setTimestamp()
@@ -162,7 +170,8 @@ module.exports = [
                 .addFields([
                     {name: localChannel.name, value: `\`\`\`${channel.name}\`\`\``, inline: true},
                     {name: localChannel.type, value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: true},
-                    {name: localChannel.channel_id, value: `\`\`\`${channel.id}\`\`\``, inline: false}
+                    {name: localChannel.channel_id, value: `\`\`\`${channel.id}\`\`\``, inline: false},
+                    {name: `nsfw`, value: `\`\`\`${newChannel.nsfw}\`\`\``, inline: true}
                 ])
                 .setThumbnail(channel.guild.iconURL())
                 .setTimestamp()
@@ -177,21 +186,117 @@ module.exports = [
             const lang = await getLocal(newChannel);
             const localChannel = lang.loggs.channel;
             const channelType = channelTypeParse(newChannel.type);
+            if (oldChannel.position !== newChannel.position) return;
 
             const embed = new EmbedBuilder()
                 .setTitle(localChannel.update)
                 .setDescription(`${localChannel.channel}: ${newChannel}`)
                 .addFields([
-                    {name: localChannel.old, value: `\`\`\`${oldChannel.name}\`\`\``, inline: true},
+                    oldChannel.name !== newChannel.name ? {
+                        name: localChannel.old,
+                        value: `\`\`\`${oldChannel.name}\`\`\``,
+                        inline: true
+                    } : undefined,
                     {name: localChannel.new, value: `\`\`\`${newChannel.name}\`\`\``, inline: true},
                     {name: localChannel.type, value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: false},
-                    {name: localChannel.channel_id, value: `\`\`\`${newChannel.id}\`\`\``, inline: false}
-                ])
+                    {name: localChannel.channel_id, value: `\`\`\`${newChannel.id}\`\`\``, inline: false},
+                    {name: `nsfw`, value: `\`\`\`${newChannel.nsfw}\`\`\``, inline: true}
+                ].filter(Boolean))
                 .setThumbnail(newChannel.guild.iconURL())
                 .setTimestamp()
                 .setColor(`#00d9ff`);
 
             await checkServer(oldChannel, embed);
+        }
+    },
+    {
+        name: Events.GuildRoleCreate,
+        async execute(role) {
+            const lang = await getLocal(role);
+            const localRole = lang.loggs.role;
+
+            const embed = new EmbedBuilder()
+                .setTitle(localRole.create)
+                .setDescription(`${localRole.role}: ${role}`)
+                .addFields([
+                    {name: localRole.name, value: `\`\`\`${role.name}\`\`\``, inline: true},
+                    {name: localRole.role_id, value: `\`\`\`${role.id}\`\`\``, inline: true},
+                    {name: localRole.color, value: `\`\`\`${role.hexColor}\`\`\``, inline: true},
+                    {name: localRole.hoist, value: `\`\`\`${role.hoist}\`\`\``, inline: true},
+                    {name: localRole.position, value: `\`\`\`${role.position}\`\`\``, inline: true},
+                    {
+                        name: localRole.permissions,
+                        value: `\`\`\`${role.permissions.toArray().join(`, `)}\`\`\``,
+                        inline: false
+                    }
+                ])
+                .setThumbnail(role.guild.iconURL())
+                .setTimestamp()
+                .setColor(`#00ff00`);
+
+            await checkServer(role, embed);
+        }
+    },
+    {
+        name: Events.GuildRoleUpdate,
+        async execute(oldRole, newRole) {
+            const lang = await getLocal(newRole);
+            const localRole = lang.loggs.role;
+
+            if (oldRole.position !== newRole.position) return;
+
+            const embed = new EmbedBuilder()
+                .setTitle(localRole.update)
+                .setDescription(`${localRole.role}: ${newRole}`)
+                .addFields([
+                    oldRole.name !== newRole.name ? {
+                        name: localRole.old,
+                        value: `\`\`\`${oldRole.name}\`\`\``,
+                        inline: true
+                    } : undefined,
+                    {name: localRole.new, value: `\`\`\`${newRole.name}\`\`\``, inline: true},
+                    {name: localRole.color, value: `\`\`\`fix\n${newRole.hexColor}\`\`\``, inline: true},
+                    {name: localRole.position, value: `\`\`\`${newRole.position}\`\`\``, inline: true},
+                    {name: localRole.hoist, value: `\`\`\`${newRole.hoist}\`\`\``, inline: true},
+                    {
+                        name: localRole.permissions,
+                        value: `\`\`\`${newRole.permissions.toArray().join(`, `)}\`\`\``,
+                        inline: true
+                    }
+                ].filter(Boolean))
+                .setThumbnail(newRole.guild.iconURL())
+                .setTimestamp()
+                .setColor(`#00d9ff`);
+
+            await checkServer(oldRole, embed);
+        }
+    },
+    {
+        name: Events.GuildRoleDelete,
+        async execute(role) {
+            const lang = await getLocal(role);
+            const localRole = lang.loggs.role;
+
+            const embed = new EmbedBuilder()
+                .setTitle(localRole.delete)
+                .setDescription(` `)
+                .addFields([
+                    {name: localRole.name, value: `\`\`\`${role.name}\`\`\``, inline: true},
+                    {name: localRole.role_id, value: `\`\`\`${role.id}\`\`\``, inline: true},
+                    {name: localRole.color, value: `\`\`\`${role.hexColor}\`\`\``, inline: true},
+                    {name: localRole.hoist, value: `\`\`\`${role.hoist}\`\`\``, inline: true},
+                    {name: localRole.position, value: `\`\`\`${role.position}\`\`\``, inline: true},
+                    {
+                        name: localRole.permissions,
+                        value: `\`\`\`${role.permissions.toArray().join(`, `)}\`\`\``,
+                        inline: false
+                    }
+                ])
+                .setThumbnail(role.guild.iconURL())
+                .setTimestamp()
+                .setColor(`#ff0000`);
+
+            await checkServer(role, embed);
         }
     }
 ]

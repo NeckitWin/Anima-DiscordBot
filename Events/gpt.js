@@ -16,7 +16,7 @@ module.exports = {
         if (message.author.bot) return;
         try {
             const firstWord = message.content.split(' ')[0].toLowerCase();
-            const isBotNameMention = firstWord === `anima,` || firstWord === `анима,`;
+            const isBotNameMention = firstWord === `anima,` || firstWord === `анима,` || firstWord === `Anima` || firstWord === `<@${botID}>`;
             if (!isBotNameMention) return;
 
             await message.channel.sendTyping();

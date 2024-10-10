@@ -60,6 +60,20 @@
         "stage": "Stage",
         "unknown": "Unknown"
       }
+    },
+    "role": {
+      "create": "Role created",
+      "delete": "Role deleted",
+      "update": "Role updated",
+      "role": "Role",
+      "name": "Role name",
+      "old": "Old role name",
+      "new": "New role name",
+      "role_id": "Role ID",
+      "color": "Color",
+      "permissions": "Permissions",
+      "position": "Role hierarchy",
+      "hoist": "Displayed separately"
     }
   },
   "auratop": {

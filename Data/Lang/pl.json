@@ -60,6 +60,20 @@
         "stage": "Scena",
         "unknown": "Nieznany"
       }
+    },
+    "role": {
+      "create": "Rola utworzona",
+      "delete": "Rola usunięta",
+      "update": "Rola zaktualizowana",
+      "role": "Rola",
+      "name": "Nazwa roli",
+      "old": "Stara nazwa roli",
+      "new": "Nowa nazwa roli",
+      "role_id": "ID roli",
+      "color": "Kolor roli",
+      "permissions": "Uprawnienia roli",
+      "position": "Pozycja roli",
+      "hoist": "Wyświetl oddzielnie"
     }
   },
   "auratop": {
