@@ -16,7 +16,6 @@
     "@megavasiliy007/sdc-api": "github:MegaVasiliy007/sdc-api",
     "axios": "^1.6.7",
     "discord.js": "^14.16.3",
-    "groq-sdk": "^0.7.0",
     "mysql": "^2.18.1",
     "node-fetch2": "^1.6.3",
     "nodemon": "^3.1.7"
