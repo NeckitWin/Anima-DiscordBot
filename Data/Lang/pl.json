@@ -17,6 +17,15 @@
     "minutes": "minut",
     "seconds": "sekund"
   },
+  "coin": {
+    "heads": "Orzeł",
+    "tails": "Reszka",
+    "title": "Orzeł czy Reszka",
+    "coinup": "Moneta jest w powietrzu...",
+    "choice": "Wybrałeś",
+    "win": "Wygrałeś! Moneta wylądowała na",
+    "lose": "Przegrałeś! Moneta wylądowała na"
+  },
   "nsfw": {
     "error": "To polecenie można używać tylko w NSFW kanałach",
     "tags": "Tagi",
@@ -291,6 +300,7 @@
     ],
     "games": [
       "Zapytaj coś od Bena i otrzymaj odpowiedź",
+      "Rzuć monetą i zgadnij stronę!",
       "dodaj aurę użytkownikowi",
       "odejmij aurę użytkownikowi"
     ],

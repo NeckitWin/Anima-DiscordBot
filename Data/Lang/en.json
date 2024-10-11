@@ -17,6 +17,15 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
+  "coin": {
+    "heads": "Heads",
+    "tails": "Tails",
+    "title": "Heads or Tails",
+    "coinup": "The coin is up in the air...",
+    "choice": "You chose",
+    "win": "You won! The coin landed on",
+    "lose": "You lost! The coin landed on"
+  },
   "nsfw": {
     "error": "This command can only be used in NSFV channels",
     "tags": "Tags",
@@ -291,6 +300,7 @@
     ],
     "games": [
       "Ask Ben anything and get an answer",
+      "Flip a coin and guess the side",
       "Add aura to the user",
       "Take aura from the user"
     ],
