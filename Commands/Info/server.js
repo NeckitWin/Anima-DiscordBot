@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require("discord.js");
+const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
 
@@ -17,10 +17,42 @@ module.exports = {
         const local = lang.server;
 
         const guild = interaction.guild;
+        // await guild.channels.fetch();
         const owner = await guild.fetchOwner();
-        await guild.channels.fetch();
+        const serverIcon = guild.iconURL();
+        const serverBanner = guild.bannerURL();
+        const members = await guild.members.fetch();
+        const channels = await guild.channels.fetch();
+        console.log(channels)
 
-        const embed = {
+        const embed = new EmbedBuilder()
+            .setTitle(`${local.title} ${guild.name}`)
+            .setColor(`#ff5890`)
+            .setAuthor({name: owner.user.displayName, iconURL: owner.user.avatarURL()})
+            .setDescription(`${local.owner} \`${owner.user.username}\`\n` +
+                `${local.serverid} \`${guild.id}\`\n`)
+            .addFields(
+                {
+                    name: `members`,
+                    value: `all: ${members.size}\n` +
+                        `people: ${members.filter(member => !member.user.bot).size}\n` +
+                        `bots: ${members.filter(member => member.user.bot).size}`,
+                    inline: true
+                },
+                {
+                    name: `channels`,
+                    value: `all: ${channels.size}\n` +
+                        `text: ${channels.filter(channel => channel.type).size}\n` +
+                        `forum: ${channels.filter(channel => channel.type === 'GuildForum').size}\n` +
+                        `voice: ${channels.filter(channel => channel.type === 'GuildVoice').size}`,
+                    inline: true
+                },
+            )
+
+        if (serverIcon) embed.setThumbnail(serverIcon);
+        if (serverBanner) embed.setImage(serverBanner);
+
+        const test = {
             color: 0x0099ff,
             title: `${local.title} ${guild.name}`,
             thumbnail: {

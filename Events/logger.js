@@ -2,6 +2,7 @@ const {Events, EmbedBuilder} = require("discord.js");
 const path = require("node:path");
 const fs = require("node:fs");
 const {getLang} = require("../Data/Lang");
+const {getTypeChannel} = require("../Data/funcs/getTypeChannel");
 
 const checkServer = async (interaction, embed) => {
     try {
@@ -22,25 +23,6 @@ const checkServer = async (interaction, embed) => {
 
 const getLocal = async (interaction) => {
     return await getLang(interaction);
-}
-
-const channelTypeParse = (type) => {
-    switch (type) {
-        case 0:
-            return `text`;
-        case 2:
-            return `voice`;
-        case 15:
-            return `forum`;
-        case 4:
-            return `category`;
-        case 5:
-            return `news`;
-        case 13:
-            return `stage`;
-        default:
-            return `unknown`;
-    }
 }
 
 module.exports = [
@@ -140,7 +122,7 @@ module.exports = [
             const lang = await getLocal(channel);
             const localChannel = lang.loggs.channel;
 
-            const channelType = channelTypeParse(channel.type);
+            const channelType = getTypeChannel(channel.type);
             const embed = new EmbedBuilder()
                 .setTitle(localChannel.create)
                 .setDescription(`${localChannel.channel}: ${channel}`)
@@ -162,7 +144,7 @@ module.exports = [
         async execute(channel) {
             const lang = await getLocal(channel);
             const localChannel = lang.loggs.channel;
-            const channelType = channelTypeParse(channel.type);
+            const channelType = getTypeChannel(channel.type);
 
             const embed = new EmbedBuilder()
                 .setTitle(localChannel.delete)
@@ -185,7 +167,7 @@ module.exports = [
         async execute(oldChannel, newChannel) {
             const lang = await getLocal(newChannel);
             const localChannel = lang.loggs.channel;
-            const channelType = channelTypeParse(newChannel.type);
+            const channelType = getTypeChannel(newChannel.type);
             if (oldChannel.position !== newChannel.position) return;
 
             const embed = new EmbedBuilder()
