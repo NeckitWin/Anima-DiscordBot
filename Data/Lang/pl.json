@@ -26,6 +26,13 @@
     "win": "Wygrałeś! Moneta wylądowała na",
     "lose": "Przegrałeś! Moneta wylądowała na"
   },
+  "random": {
+    "title": "Losowa liczba",
+    "generate": "Generuje losową liczbę",
+    "from": "od",
+    "to": "do",
+    "random": "Losowa liczba"
+  },
   "nsfw": {
     "error": "To polecenie można używać tylko w NSFW kanałach",
     "tags": "Tagi",

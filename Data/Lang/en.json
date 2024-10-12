@@ -26,6 +26,13 @@
     "win": "You won! The coin landed on",
     "lose": "You lost! The coin landed on"
   },
+  "random": {
+    "title": "Random number",
+    "generate": "Generates a random number",
+    "from": "from",
+    "to": "to",
+    "random": "Random number"
+  },
   "nsfw": {
     "error": "This command can only be used in NSFV channels",
     "tags": "Tags",
