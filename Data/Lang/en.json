@@ -31,7 +31,7 @@
     "generate": "Generates a random number",
     "from": "from",
     "to": "to",
-    "random": "Random number"
+    "random": "Random number generated"
   },
   "nsfw": {
     "error": "This command can only be used in NSFV channels",
@@ -326,7 +326,8 @@
     "util": [
       "Calculator",
       "Translates text, determines the language of the text for translation independently",
-      "The weather in your city"
+      "The weather in your city",
+      "Generates a random number"
     ],
     "games": [
       "Ask Ben anything and get an answer",

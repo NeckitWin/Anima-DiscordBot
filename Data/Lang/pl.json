@@ -31,7 +31,7 @@
     "generate": "Generuje losową liczbę",
     "from": "od",
     "to": "do",
-    "random": "Losowa liczba"
+    "random": "Losowa liczba zgenerowana"
   },
   "nsfw": {
     "error": "To polecenie można używać tylko w NSFW kanałach",
@@ -326,7 +326,8 @@
     "util": [
       "Kalkulator",
       "Tłumaczy tekst, samodzielnie określa język tekstu do tłumaczenia",
-      "Pogoda w twoim mieście"
+      "Pogoda w twoim mieście",
+      "Generuje losową liczbę"
     ],
     "games": [
       "Zapytaj coś od Bena i otrzymaj odpowiedź",

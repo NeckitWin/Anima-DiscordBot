@@ -11,7 +11,10 @@ module.exports = {
             const local = lang.menuhelp;
             const localinfo = lang.commandsdesc;
 
-            if (interaction.user.id !== interaction.message.interaction.user.id) return await interaction.reply({content: lang[preferredLang].error.notyourcommand, ephemeral: true});
+            if (interaction.user.id !== interaction.message.interaction.user.id) return await interaction.reply({
+                content: lang[preferredLang].error.notyourcommand,
+                ephemeral: true
+            });
 
             if (interaction.user.id !== interaction.message.interaction.user.id) {
                 return await interaction.reply({
@@ -28,7 +31,7 @@ module.exports = {
                 `</server:1285287069676994607> - ${localinfo.info[5]} \n` +
                 `</role:1285287069676994606> - ${localinfo.info[6]} \n`;
 
-            const admincontent = `</language:1292081237837611079> - ${localinfo.admin[0]} \n`+
+            const admincontent = `</language:1292081237837611079> - ${localinfo.admin[0]} \n` +
                 `</autorole add:1290435224072884264> - ${localinfo.admin[1]} \n` +
                 `</autorole list:1290435224072884264> - ${localinfo.admin[2]} \n` +
                 `</autorole remove:1290435224072884264> - ${localinfo.admin[3]} \n` +
@@ -42,16 +45,17 @@ module.exports = {
 
             const utilcontent = `</calc:1285287069756690488> - ${localinfo.util[0]} \n` +
                 `</translate:1285287069756690490> - ${localinfo.util[1]} \n` +
-                `</weather:1285287069756690491> - ${localinfo.util[2]}`;
+                `</weather:1285287069756690491> - ${localinfo.util[2]}\n` +
+                `</random:1294775882124361819> - ${localinfo.util[3]}`;
 
             const gamescontent = `</ben:1292452492986155051> - ${localinfo.games[0]} \n` +
                 `</coin_flip:1294379110197624924> - ${localinfo.games[1]} \n` +
-                `\`+aura\` - ${localinfo.games[2]} \n`+
-            `\`-aura\` - ${localinfo.games[3]}`;
+                `\`+aura\` - ${localinfo.games[2]} \n` +
+                `\`-aura\` - ${localinfo.games[3]}`;
 
             const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]} \n` +
-                                        `</interaction:1288525650721898669> - ${localinfo.fun[1]} \n` +
-                                        `</nsfw:1293672483869949973> - ${localinfo.fun[2]}`;
+                `</interaction:1288525650721898669> - ${localinfo.fun[1]} \n` +
+                `</nsfw:1293672483869949973> - ${localinfo.fun[2]}`;
 
             const menuHelpEvent = new StringSelectMenuBuilder()
                 .setCustomId('menuHelp')

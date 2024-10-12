@@ -85,7 +85,7 @@ module.exports = {
                     },
                     {
                         name: `🔧・${local.util.label}`,
-                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>',
+                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>, </random:1294775882124361819>',
                         inline: false,
                     },
                     {
