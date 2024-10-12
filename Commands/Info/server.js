@@ -2,6 +2,21 @@ const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
 
+const serverProtection = (number) => {
+    switch (number) {
+        case 0:
+            return 'none';
+        case 1:
+            return 'low';
+        case 2:
+            return 'medium';
+        case 3:
+            return 'high';
+        case 4:
+            return 'veryhigh';
+    }
+}
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('server')
@@ -17,55 +32,54 @@ module.exports = {
         const local = lang.server;
 
         const guild = interaction.guild;
-        // await guild.channels.fetch();
         const owner = await guild.fetchOwner();
         const serverIcon = guild.iconURL();
         const serverBanner = guild.bannerURL();
         const members = await guild.members.fetch();
         const channels = await guild.channels.fetch();
-        console.log(channels)
 
         const embed = new EmbedBuilder()
             .setTitle(`${local.title} ${guild.name}`)
-            .setColor(`#ff5890`)
+            .setColor(`#ff2e77`)
             .setAuthor({name: owner.user.displayName, iconURL: owner.user.avatarURL()})
-            .setDescription(`${local.owner} \`${owner.user.username}\`\n` +
-                `${local.serverid} \`${guild.id}\`\n`)
+            .setDescription(`<:owner:1294739459656519690> ${local.owner}: \`${owner.user.username}\`\n` +
+                `<:protect:1294739476832190514> ${local.serverid}: \`${guild.id}\`\n`)
             .addFields(
                 {
-                    name: `members`,
-                    value: `all: ${members.size}\n` +
-                        `people: ${members.filter(member => !member.user.bot).size}\n` +
-                        `bots: ${members.filter(member => member.user.bot).size}`,
+                    name: local.members,
+                    value: `<:members:1294739398822334475> ${local.total}: ${members.size}\n` +
+                        `<:member:1294739382112358541> ${local.people}: ${members.filter(member => !member.user.bot).size}\n` +
+                        `<:bot:1294739043048886352> ${local.bots}: ${members.filter(member => member.user.bot).size}\n` +
+                        `<:online:1294745413085302925> ${local.online}: ${members.filter(member => member.presence?.status === 'online').size}\n` +
+                        `<:idle:1294745429451473048> ${local.idle}: ${members.filter(member => member.presence?.status === 'idle').size}\n` +
+                        `<:dnd:1294745439567876250> ${local.dnd}: ${members.filter(member => member.presence?.status === 'dnd').size}\n` +
+                        `<:invisible:1294745501941501952> ${local.offline}: ${members.filter(member => member.presence?.status === undefined).size}`,
                     inline: true
                 },
                 {
-                    name: `channels`,
-                    value: `all: ${channels.size}\n` +
-                        `text: ${channels.filter(channel => channel.type).size}\n` +
-                        `forum: ${channels.filter(channel => channel.type === 'GuildForum').size}\n` +
-                        `voice: ${channels.filter(channel => channel.type === 'GuildVoice').size}`,
+                    name: local.channels,
+                    value: `<:channels:1294739087051194530> ${local.total}: ${channels.size}\n` +
+                        `<:category:1294739077727256737> ${local.category}: ${channels.filter(channel => channel.type === 4).size}\n` +
+                        `<:text:1294739741199171625> ${local.text}: ${channels.filter(channel => channel.type === 0).size}\n` +
+                        `<:forum:1294739216621895761> ${local.forum}: ${channels.filter(channel => channel.type === 15).size}\n` +
+                        `<:voice:1294739840524357715> ${local.voice}: ${channels.filter(channel => channel.type === 2).size}\n` +
+                        `<:stage:1294739676795637902> ${local.stage}: ${channels.filter(channel => channel.type === 13).size}`,
+                    inline: true
+                },
+                {
+                    name: `Main information`,
+                    value: `<:moderator:1294739417402970132> ${local.security}: ${local[serverProtection(guild.verificationLevel)]}\n` +
+                        `<:two_members:1294739793779097660> ${local.roles}: ${guild.roles.cache.size}\n` +
+                        `<:designer:1294739122489135256> ${local.emojis}: ${guild.emojis.cache.size}\n` +
+                        `<:boost:1294739031762141184> ${local.level}: ${guild.premiumTier}\n` +
+                        `<:nitro:1294739428761141338> ${local.boost}: ${guild.premiumSubscriptionCount}\n` +
+                        `<:calendar:1294739054876950549> ${local.date}: ${formatDate(guild.createdAt)}`,
                     inline: true
                 },
             )
 
         if (serverIcon) embed.setThumbnail(serverIcon);
         if (serverBanner) embed.setImage(serverBanner);
-
-        const test = {
-            color: 0x0099ff,
-            title: `${local.title} ${guild.name}`,
-            thumbnail: {
-                url: guild.iconURL(),
-            },
-            fields: [
-                {name: `👑 ${local.owner}`, value: `\`\`\`fix\n${owner.user.username}\`\`\``, inline: true},
-                {name: `🆔 ${local.serverid}`, value: `\`\`\`${guild.id}\`\`\``, inline: false},
-                {name: `📅 ${local.date}`, value: `\`\`\`${formatDate(guild.createdAt)}\`\`\``, inline: true},
-                {name: `👥 ${local.members}`, value: `\`\`\`${guild.memberCount}\`\`\``, inline: true},
-                {name: `📺 ${local.channels}`, value: `\`\`\`${guild.channels.cache.size}\`\`\``, inline: true,},
-            ],
-        };
 
         await interaction.reply({embeds: [embed]});
     },
