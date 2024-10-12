@@ -5,6 +5,7 @@ const path = require("node:path");
 module.exports = {
     name: Events.GuildMemberAdd,
     async execute(member) {
+        if (member.user.bot) return;
         const botMember = member.guild.members.me;
         if (!botMember.permissions.has(PermissionsBitField.Flags.ManageRoles)) return;
         let serverID = member.guild.id;

@@ -6,6 +6,7 @@ const greetingsGif = require("../Data/jsons/greeting_gif.json");
 module.exports = {
     name: Events.GuildMemberAdd,
     async execute(member) {
+        if (member.user.bot) return;
         const pathFile = path.join(__dirname, "../Data/jsons/greeting.json");
         const data = await fs.promises.readFile(pathFile, 'utf8');
         const jsonData = JSON.parse(data);
