@@ -4,7 +4,7 @@ const {getLang} = require("../../Data/Lang");
 const answers = [
     {value:"yes", gif:"https://media.tenor.com/nIsnQBxoRjkAAAAM/ben-yes.gif", color: "#007a00"},
     {value:"no", gif:"https://media.tenor.com/QcztFcpQ0C4AAAAM/talking-ben-talking.gif", color: "#ca0000"},
-    {value: "blabla", gif: "https://media.tenor.com/fr6i8VzKJuEAAAAM/talking-ben-ugh.gif", color: "#0066ff"},
+    {value: "ugh", gif: "https://media.tenor.com/fr6i8VzKJuEAAAAM/talking-ben-ugh.gif", color: "#0066ff"},
     {value: "haha", gif: "https://media1.tenor.com/m/ysXC0XFeXycAAAAC/talking-ben-ben.gif", color: "#ffcc7f"}
 ]
 

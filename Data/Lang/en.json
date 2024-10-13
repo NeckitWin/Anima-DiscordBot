@@ -99,8 +99,8 @@
     "question": "Question",
     "yes": "Yes",
     "no": "No",
-    "blabla": "Bla bla bla",
-    "haha": "Ha ha ha"
+    "Ugh": "Ugh",
+    "haha": "Ho ho ho"
   },
   "interaction": {
     "hug": "gives you a hug",
@@ -235,11 +235,28 @@
   "user": {
     "title": "Info about the user",
     "username": "Username",
-    "userid": "User ID",
-    "date": "Date of creation",
-    "dateentry": "Server join date",
-    "roles": "Roles",
-    "error": "User not found"
+    "reg": "Registered",
+    "entry": "Entry date",
+    "status": "Status",
+    "badge": "Badges",
+    "active": "Activity",
+    "role": "Roles",
+    "aura": "Aura",
+    "user_id": "User ID",
+    "error": "User not found",
+    "activity": {
+      "play": "Playing",
+      "stream": "Streaming",
+      "listen": "Listening",
+      "watch": "Watching",
+      "compete": "Competing"
+    },
+    "statusName": {
+      "online": "Online",
+      "idle": "Idle",
+      "dnd": "Do not disturb",
+      "offline": "Offline"
+    }
   },
   "calc": {
     "title": "Calculator",

@@ -1,14 +1,65 @@
-const { SlashCommandBuilder } = require("discord.js");
+const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const {getUserServer} = require('../../Data/funcs/db')
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
 
+const getActivityType = (type) => {
+    switch (type) {
+        case 0:
+            return 'play';
+        case 1:
+            return 'stream';
+        case 2:
+            return 'listen';
+        case 3:
+            return 'watch';
+        case 4:
+            return 'custom';
+        case 5:
+            return 'compete';
+        default:
+            return false;
+    }
+}
+
+const getStatusEmoji = (status) => {
+    switch (status) {
+        case 'online':
+            return '<:online:1294745413085302925>';
+        case 'idle':
+            return '<:idle:1294745429451473048>';
+        case 'dnd':
+            return '<:dnd:1294745439567876250>';
+        case 'offline':
+            return '<:invisible:1294745501941501952>';
+        default:
+            return false;
+    }
+}
+
+const getBadgeEmoji = (badge) => {
+    switch (badge) {
+        case `HypeSquadOnlineHouse1`:
+            return `<:badge_bravery:1295007106813919324>`;
+        case `HypeSquadOnlineHouse2`:
+            return `<:badge_brillance:1295007063281242173>`;
+        case `HypeSquadOnlineHouse3`:
+            return `<:badge_balance:1295007143807811614>`;
+        case `ActiveDeveloper`:
+            return `<:badge_active:1295006989025542205>`;
+    }
+}
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('user')
-        .setNameLocalizations({ ru: 'пользователь', pl: 'użytkownik', uk: 'користувач' })
+        .setNameLocalizations({ru: 'пользователь', pl: 'użytkownik', uk: 'користувач'})
         .setDescription('Shows information about a user or about a user that was mentioned')
-        .setDescriptionLocalizations({ru: "Показывает информацию о пользователе или о пользователе, которого упомянули", pl: "Pokazuje informacje o użytkowniku lub o użytkowniku, którego wspomniano", uk: "Показує інформацію про користувача або про користувача, якого згадали"})
+        .setDescriptionLocalizations({
+            ru: "Показывает информацию о пользователе или о пользователе, которого упомянули",
+            pl: "Pokazuje informacje o użytkowniku lub o użytkowniku, którego wspomniano",
+            uk: "Показує інформацію про користувача або про користувача, якого згадали"
+        })
         .addUserOption(option => option
             .setName('user')
             .setNameLocalizations({
@@ -26,36 +77,51 @@ module.exports = {
         const lang = await getLang(interaction);
         const local = lang.user;
         try {
-            const user = interaction.options.getUser('user') || interaction.user;
-            await user.fetch();
-            const member = interaction.guild.members.cache.get(user.id);
+            const target = interaction.options.getUser('user');
+            const getUser = target ?? interaction.user;
+            const user = await getUser.fetch();
+            const userID = user.id;
+            const member = await interaction.guild.members.fetch(userID);
+            if (!member) return await interaction.reply({content: local.notFound, ephemeral: true});
+            const userColor = member.displayColor;
+            const guildID = interaction.guild.id;
+            const rolesList = member.roles.cache.filter(role=>role.id!==interaction.guild.id).reverse().map(role => role.toString()).join(' ');
+            const rolesCount = member.roles.cache.size-1;
+            const status = member.presence?.status;
+            const activityType = getActivityType(member.presence?.activities[0]?.type);
+            const activityName = member.presence?.activities[0]?.name;
+            const activityState = member.presence?.activities[0]?.state;
+            let bage = member.user.flags.toArray().map(badge => getBadgeEmoji(badge)).join(' ');
+            const nitro = member.premiumSince;
+            if (nitro) bage += `<a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
 
-            const getUserArray = await getUserServer(user.id, interaction.guild.id);
+            const avatar = user.avatarURL({size: 4096});
+            const banner = user.bannerURL({size: 4096});
+
+            const getUserArray = await getUserServer(userID, guildID);
             const userInfo = getUserArray[0] || {};
-            let aura = userInfo.aura ?? 0;
+            const aura = userInfo.aura ?? 0;
 
-            const embed = {
-                color: 0x0099ff,
-                title: `Info about user — ${user.displayName}`,
-                thumbnail: {
-                    url: user.displayAvatarURL(),
-                },
-                image: {
-                    url: user.bannerURL({ size: 4096 }),
-                },
-                fields: [
-                    { name: `👤 ${local.username}`, value: "```"+user.username+"```", inline: true },
-                    { name: `🔢 ${local.userid}`, value: "```"+user.id+"```", inline: false },
-                    { name: `📅 ${local.date}`, value: "```"+formatDate(user.createdAt)+"```", inline: true },
-                    { name: `📅 ${local.dateentry}`, value: "```"+formatDate(member.joinedAt)+"```", inline: true },
-                    { name: '🔥 Aura', value: `\`\`\`ansi\n[2;31m${aura}[0m\`\`\``, inline: true },
-                    { name: `🔒 ${local.roles}`, value: member.roles.cache.map(role => role.toString()).join(' '), inline: false },
-                ],
-            };
-            await interaction.reply({ embeds: [embed] });
+            const embed = new EmbedBuilder()
+                .setTitle(`${local.title} — ${user.displayName}`)
+                .setColor(userColor)
+                .setDescription(`**${local.username}** \`${user.username}\` \n`+
+                    `**${local.reg}**: \`${formatDate(user.createdAt)}\`\n` +
+                    `**${local.entry}**: \`${formatDate(member.joinedAt)}\`\n` +
+                    `**${local.status}**: ${getStatusEmoji(status)} ${local.statusName[status]}\n` +
+                    (bage ? `**${local.badge}**: ${bage}\n` : ``) +
+                    (activityType ? `**${local.active}**: ${activityType === `custom` ? activityState : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
+                    `**${local.role}[${rolesCount}]**: ${rolesList}\n` +
+                    `**${local.aura}**: ${aura}`)
+                .setFooter({text: `${local.user_id}: ${userID}`});
+            if (avatar) embed.setThumbnail(avatar);
+            if (banner) embed.setImage(banner);
+
+            await interaction.reply({embeds: [embed]});
+
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: local.error, ephemeral: true });
+            await interaction.reply({content: local.error, ephemeral: true});
         }
     },
 };
