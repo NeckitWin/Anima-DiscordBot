@@ -2,7 +2,7 @@ const {getLang} = require("../Lang");
 const timeout = new Set();
 
 const getCooldown = async (commandEvent, message, time) => {
-    const userID = message.author.id;
+    const userID = message.author?.id ?? message.user.id;
 
     const lang = await getLang(message);
     const local = lang.error;

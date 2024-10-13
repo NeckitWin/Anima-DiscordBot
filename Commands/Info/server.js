@@ -67,7 +67,7 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: `Main information`,
+                    name: local.main,
                     value: `<:moderator:1294739417402970132> ${local.security}: ${local[serverProtection(guild.verificationLevel)]}\n` +
                         `<:two_members:1294739793779097660> ${local.roles}: ${guild.roles.cache.size}\n` +
                         `<:designer:1294739122489135256> ${local.emojis}: ${guild.emojis.cache.size}\n` +

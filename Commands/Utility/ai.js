@@ -63,37 +63,39 @@ module.exports = {
         const lang = await getLang(interaction);
         const local = lang.ai;
         try {
+            const subcommand = interaction.options.getSubcommand();
             const prompt = interaction.options.getString(`prompt`);
 
-            const embedLoading = new EmbedBuilder()
-                .setTitle(`<a:loading:1295096250609172611>${local.loading}...`)
-                .setColor(`#ffc65c`);
+            if (subcommand === `image`) {
+                // if (await getCooldown('ai', interaction, 600)) return; // cooldown
 
-            const subcommand = interaction.options.getSubcommand();
-            if (subcommand === `image`) await interaction.reply({embeds: [embedLoading]});
+                const embedLoading = new EmbedBuilder()
+                    .setTitle(`<a:loading:1295096250609172611>${local.loading}...`)
+                    .setColor(`#ffc65c`);
+                await interaction.reply({embeds: [embedLoading]});
 
-            const model = genAI.getGenerativeModel({
-                model: "gemini-1.5-flash",
-                systemInstruction: "Remove 18+ content from the provided text. Enhance the text for image generation and ensure each request is unique. Your response should be no more than 100 characters!",
-            });
+                const model = genAI.getGenerativeModel({
+                    model: "gemini-1.5-flash",
+                    systemInstruction: "Remove 18+ content from the provided text. Enhance the text for image generation and ensure each request is unique. Your response should be no more than 100 characters!",
+                });
 
-            const generate = await model.generateContent(prompt);
-            const result = generate.response.text();
-            const readyPrompt = result.replace(/ /g, '%20');
+                const generate = await model.generateContent(prompt);
+                const result = generate.response.text();
+                const readyPrompt = result.replace(/ /g, '%20');
 
-            const width = interaction.options.getInteger(`width`);
-            const height = interaction.options.getInteger(`height`);
+                const width = interaction.options.getInteger(`width`);
+                const height = interaction.options.getInteger(`height`);
 
-            const request = `https://image.pollinations.ai/prompt/${readyPrompt}?width=${width ? width : "512"}?height=${height ? height : "512"}&nologo=rokosbasilisk`;
-            const response = await fetch(request);
+                const request = `https://image.pollinations.ai/prompt/${readyPrompt}?width=${width ? width : "512"}?height=${height ? height : "512"}&nologo=rokosbasilisk`;
+                const response = await fetch(request);
 
-            const embed = new EmbedBuilder()
-                .setTitle(local.generateImage)
-                .setDescription(`${local.prompt}: ${prompt}`)
-                .setColor(`#ffc65c`)
-                .setImage(response.url);
-            await interaction.editReply({content: ``, embeds: [embed]});
-
+                const embed = new EmbedBuilder()
+                    .setTitle(local.generateImage)
+                    .setDescription(`${local.prompt}: ${prompt}`)
+                    .setColor(`#ffc65c`)
+                    .setImage(response.url);
+                await interaction.editReply({content: ``, embeds: [embed]});
+            }
         } catch (e) {
             console.error(e)
             const embedError = new EmbedBuilder()
