@@ -17,6 +17,12 @@
     "minutes": "minut",
     "seconds": "sekund"
   },
+  "ai": {
+    "loading": "Ładowanie",
+    "generateImage": "AI zgenerowało obraz",
+    "prompt": "Twoje pytanie",
+    "error": "Twoje pytanie jest niebezpieczne lub jest zbyt długie"
+  },
   "coin": {
     "heads": "Orzeł",
     "tails": "Reszka",

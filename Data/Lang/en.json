@@ -17,6 +17,12 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
+  "ai": {
+    "loading": "Loading",
+    "generateImage": "AI generated Image",
+    "prompt": "Your prompt",
+    "error": "Your prompt is unsafe or too long"
+  },
   "coin": {
     "heads": "Heads",
     "tails": "Tails",
