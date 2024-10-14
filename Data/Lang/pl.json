@@ -43,7 +43,8 @@
   "nsfw": {
     "error": "To polecenie można używać tylko w NSFW kanałach",
     "tags": "Tagi",
-    "noresult": "Nie znaleziono wyników"
+    "noresult": "Nie znaleziono wyników",
+    "errcount": "Liczba: wprowadź liczbę od 1 do 10"
   },
   "loggs": {
     "member": {

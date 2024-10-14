@@ -34,7 +34,7 @@ module.exports = {
 
             const model = genAI.getGenerativeModel({
                 model: "gemini-1.5-flash",
-                systemInstruction: "You are a Discord Bot (Anima girl character). Your name is Anima. You are a helpful assistant.",
+                systemInstruction: "You are a Discord Bot (Anima girl character). Your name is Anima. You are a helpful assistant. You are prohibited from using @everyone or @here !!!",
                 safetySettings: [
                     {category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE},
                     {category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE},
@@ -52,7 +52,8 @@ module.exports = {
                     }
                 }] : prompt
             );
-            const result = generate.response.text();
+            let result = generate.response.text();
+            result = result.replace(/@/g, "");
 
             if (result.length < 1990) {
                 await message.reply(result);

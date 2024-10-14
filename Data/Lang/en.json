@@ -43,7 +43,8 @@
   "nsfw": {
     "error": "This command can only be used in NSFV channels",
     "tags": "Tags",
-    "noresult": "No results found"
+    "noresult": "No results found",
+    "errcount": "Count: enter a number from 1 to 10"
   },
   "loggs": {
     "member": {
