@@ -13,6 +13,7 @@
     "botdontperm": "I don't have permission to do this",
     "botdontpermrole": "I must have a permission to manage roles",
     "mustreply": "You have to reply to someone's message!",
+    "otherpeople": "You must select different users",
     "wait": "Please wait",
     "minutes": "minutes",
     "seconds": "seconds"
@@ -361,7 +362,8 @@
     "fun": [
       "Show your reaction",
       "Interact with another user",
-      "Search NSFW anime content by tags"
+      "Search NSFW anime content by tags",
+      "Find out the compatibility percentage of two users:"
     ]
   }
 }

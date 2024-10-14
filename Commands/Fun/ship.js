@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require('discord.js');
+const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const fetch = require('node-fetch2');
 const gifFrames = require("gif-frames");
 const GIFEncoder = require('gif-encoder');
@@ -6,6 +6,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const sharp = require("sharp");
 const {guild} = require("@megavasiliy007/sdc-api");
+const {getLang} = require("../../Data/Lang");
 
 const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowOffset = 10) => {
     const response = await fetch(url);
@@ -82,10 +83,20 @@ module.exports = {
             .setRequired(true)
         ),
     async execute(interaction) {
+        const lang = await getLang(interaction);
+
         try {
-            await interaction.deferReply()
+            const embedLoading = new EmbedBuilder()
+                .setTitle(`<a:loading:1295096250609172611> ${lang.ai.loading}...`)
+                .setColor(`#ff0062`);
+            await interaction.reply({embeds: [embedLoading]});
             const user1 = interaction.options.getUser('user1');
             const user2 = interaction.options.getUser('user2');
+
+            if (user1.id === user2.id) {
+                embedLoading.setTitle(lang.error.otherpeople).setColor(`#bf0000`);
+                return interaction.editReply({embeds: [embedLoading]});
+            }
 
             const userAvatar1 = await getCircleBufferImage(user1.avatarURL({size: 256}));
             const userAvatar2 = await getCircleBufferImage(user2.avatarURL({size: 256}));
@@ -104,7 +115,7 @@ module.exports = {
                     {input: Buffer.from(textSVG), top: 130, left: 230}
                 ]).toBuffer();
 
-            await interaction.editReply({files: [result]});
+            await interaction.editReply({content:`${user1} ${user2}`, embeds: [], files: [result]});
 
         } catch (e) {
             console.error(e);

@@ -13,6 +13,7 @@
     "botdontperm": "Nie mam uprawnień do tego",
     "botdontpermrole": "Muszę mieć uprawnienia do zarządzania rolami",
     "mustreply": "Musisz odpowiedzieć na wiadomość kogoś!",
+    "otherpeople": "Musisz wybrać różnych użytkowników",
     "wait": "Proszę czekać",
     "minutes": "minut",
     "seconds": "sekund"
@@ -361,7 +362,8 @@
     "fun": [
       "Pokaż swoją reakcję",
       "Współdziałaj z innym użytkownikiem",
-      "Wyszukaj NSFW anime kontent według tagów"
+      "Wyszukaj NSFW anime kontent według tagów",
+      "Sprawdź procent zgodności dwóch użytkowników"
     ]
   }
 }

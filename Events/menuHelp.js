@@ -55,7 +55,8 @@ module.exports = {
 
             const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]} \n` +
                 `</interaction:1288525650721898669> - ${localinfo.fun[1]} \n` +
-                `</nsfw:1293672483869949973> - ${localinfo.fun[2]}`;
+                `</nsfw:1293672483869949973> - ${localinfo.fun[2]}\n` +
+                `</ship:1295137310584864868> - ${localinfo.fun[3]}`;
 
             const menuHelpEvent = new StringSelectMenuBuilder()
                 .setCustomId('menuHelp')
