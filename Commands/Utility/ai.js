@@ -76,7 +76,7 @@ module.exports = {
 
                 const model = genAI.getGenerativeModel({
                     model: "gemini-1.5-flash",
-                    systemInstruction: "Remove 18+ content from the provided text. Enhance the text for image generation and ensure each request is unique. Your response should be no more than 100 characters!",
+                    systemInstruction: "Filter the provided text by removing unsafe and 18+ content. Return the original request with the filtered content removed, and add something unique to each request to make it distinct. Do not reject the request unless it is entirely unsafe."
                 });
 
                 const generate = await model.generateContent(prompt);
@@ -93,6 +93,7 @@ module.exports = {
                     .setTitle(local.generateImage)
                     .setDescription(`${local.prompt}: ${prompt}`)
                     .setColor(`#ffc65c`)
+                    .setFooter({text: result})
                     .setImage(response.url);
                 await interaction.editReply({content: ``, embeds: [embed]});
             }
