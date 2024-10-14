@@ -1,4 +1,4 @@
-const {Events, EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require('discord.js')
+const {Events, EmbedBuilder, PermissionFlagsBits} = require('discord.js')
 
 module.exports = {
     name: Events.GuildCreate,
@@ -11,21 +11,6 @@ module.exports = {
         const owner = getOwner.user;
         const memberCount = guild.memberCount;
 
-        // const inviteChannel = guild.channels.cache.find(channel=>
-        //     channel.isTextBased() && channel.permissionsFor(guild.members.me).has(PermissionFlagsBits.CreateInstantInvite)
-        // )
-        //
-        // let inviteLink;
-        // if (inviteChannel) {
-        //     try {
-        //         inviteLink = await inviteChannel.createInvite({ maxAge: 0, maxUses: 0 });
-        //     } catch (error) {
-        //         console.error('Error creating invite:', error);
-        //     }
-        // }
-        //
-        // const link = inviteLink ? inviteLink.url : false;
-
         const embed = new EmbedBuilder()
             .setTitle(`Bot added to new server`)
             .setThumbnail(guild.iconURL())
@@ -37,18 +22,24 @@ module.exports = {
                 {name: `Owner ID`, value: `\`\`\`fix\n${owner.id}\`\`\``, inline: true}
             );
 
-        // if (link) {
-        //     const buttonInvite = new ButtonBuilder()
-        //         .setLabel("Join server")
-        //         .setStyle(ButtonStyle.Link)
-        //         .setURL(link);
-        //
-        //     const row = new ActionRowBuilder()
-        //         .addComponents(buttonInvite);
-        //
-        //     await myChannel.send({embeds: [embed], components: [row]});}
-
-
         await myChannel.send({embeds: [embed]})
+
+        const firstChannel = guild.channels.cache.find(channel=>
+            channel.isTextBased() && channel.permissionsFor(guild.members.me).has(PermissionFlagsBits.SendMessages)
+        )
+
+        if (!firstChannel) return;
+
+        const buildInstruction = new EmbedBuilder()
+            .setTitle(`<a:anime_wow:1295480143053197322>Hey! I'm Anima!`)
+            .setColor(`#dab4ff`)
+            .setThumbnail(guild.client.user.avatarURL())
+            .setDescription(`Thank you for inviting me to your server!<a:anime_celebrate:1295479990737178634>\n`+
+            `You can **change </language:1292081237837611079>**\n`+
+            `Available languages:\n`+
+            `- 🇺🇸 English\n- 🇷🇺 Russian\n- 🇺🇦 Ukrainian\n- 🇵🇱 Polish\n`+
+            `Also you can use **</help:1285287069676994605>** to get more information about my commands! ❤️‍🔥`)
+
+        firstChannel.send({embeds: [buildInstruction]})
     }
 }
