@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
+const {SlashCommandBuilder, EmbedBuilder, ChannelType} = require("discord.js");
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
 
@@ -38,6 +38,24 @@ module.exports = {
         const members = await guild.members.fetch();
         const channels = await guild.channels.fetch();
 
+        const threadsCount = guild.channels.cache.filter(channel => channel.type === ChannelType.GuildForum)
+            .reduce((count, forumChannel) => count + forumChannel.threads.cache.size, 0);
+
+        let publicThreadsCount = 0;
+        let privateThreadsCount = 0;
+
+        guild.channels.cache
+            .filter(channel =>
+                channel.type === ChannelType.GuildText ||
+                channel.type === ChannelType.GuildNews)
+            .forEach((channel) => {
+                const threads = (channel).threads?.cache;
+                if (threads) {
+                    publicThreadsCount += threads.filter(thread => thread.type === ChannelType.PublicThread).size;
+                    privateThreadsCount += threads.filter(thread => thread.type === ChannelType.PrivateThread).size;
+                }
+            });
+
         const embed = new EmbedBuilder()
             .setTitle(`${local.title} ${guild.name}`)
             .setColor(`#ff2e77`)
@@ -58,11 +76,14 @@ module.exports = {
                 },
                 {
                     name: local.channels,
-                    value: `<:channels:1294739087051194530> ${local.total}: ${channels.size}\n` +
+                    value: `<:channels:1295439867014025216> ${local.total}: ${channels.size}\n` +
                         `<:category:1294739077727256737> ${local.category}: ${channels.filter(channel => channel.type === 4).size}\n` +
                         `<:text:1294739741199171625> ${local.text}: ${channels.filter(channel => channel.type === 0).size}\n` +
-                        `<:forum:1294739216621895761> ${local.forum}: ${channels.filter(channel => channel.type === 15).size}\n` +
                         `<:voice:1294739840524357715> ${local.voice}: ${channels.filter(channel => channel.type === 2).size}\n` +
+                        `<:forum:1294739216621895761> ${local.forum}: ${channels.filter(channel => channel.type === 15).size}\n` +
+                        `<:forum_thread:1295439879618171012> ${local.post}: ${threadsCount}\n` +
+                        `<:thread:1294739750267392040> ${local.thread}: ${publicThreadsCount}\n` +
+                        `<:private_thread:1295440455475134524> ${local.pthread}: ${privateThreadsCount}\n` +
                         `<:stage:1294739676795637902> ${local.stage}: ${channels.filter(channel => channel.type === 13).size}`,
                     inline: true
                 },
