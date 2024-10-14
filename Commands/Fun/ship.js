@@ -1,11 +1,7 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const fetch = require('node-fetch2');
-const gifFrames = require("gif-frames");
-const GIFEncoder = require('gif-encoder');
-const fs = require("node:fs");
 const path = require("node:path");
 const sharp = require("sharp");
-const {guild} = require("@megavasiliy007/sdc-api");
 const {getLang} = require("../../Data/Lang");
 
 const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowOffset = 10) => {
