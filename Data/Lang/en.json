@@ -31,7 +31,14 @@
       "attack_on_titan": "Attack on Titan",
       "death_note": "Death Note",
       "demon_slayer": "Demon Slayer",
-      "jujutsu_kaisen": "Jujutsu Kaisen"
+      "jujutsu_kaisen": "Jujutsu Kaisen",
+      "one_piece": "One Piece",
+      "tokyo_ghoul": "Tokyo Ghoul",
+      "code_geass": "Code Geass",
+      "berserk": "Berserk",
+      "jojo": "JoJo",
+      "evangelion": "Neon Genesis Evangelion",
+      "erased": "Erased"
     }
   },
   "ai": {
@@ -376,8 +383,9 @@
     "games": [
       "Ask Ben anything and get an answer",
       "Flip a coin and guess the side",
-      "Add aura to the user",
-      "Take aura from the user"
+      "Add aura to a user",
+      "Remove aura from a user",
+      "Guess the anime by the picture"
     ],
     "fun": [
       "Show your reaction",

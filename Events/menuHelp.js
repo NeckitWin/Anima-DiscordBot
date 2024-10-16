@@ -51,7 +51,8 @@ module.exports = {
             const gamescontent = `</ben:1292452492986155051> - ${localinfo.games[0]} \n` +
                 `</coin_flip:1294379110197624924> - ${localinfo.games[1]} \n` +
                 `\`+aura\` - ${localinfo.games[2]} \n` +
-                `\`-aura\` - ${localinfo.games[3]}`;
+                `\`-aura\` - ${localinfo.games[3]}\n` +
+            `</anime:1294302199869997197> - ${localinfo.games[4]}`;
 
             const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]} \n` +
                 `</interaction:1288525650721898669> - ${localinfo.fun[1]} \n` +

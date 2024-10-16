@@ -64,10 +64,14 @@ module.exports = {
             await interaction.editReply({embeds: [embed], components: [row]});
 
             const timeoutID = setTimeout(async () => {
-                embed.setColor(`#ff002f`);
-                embed.setFooter({text: local.time_over, iconURL: userAvatar});
-                await interaction.editReply({embeds: [embed], components: []});
-                timers.delete(interaction.id);
+                try {
+                    embed.setColor(`#ff002f`);
+                    embed.setFooter({text: local.time_over, iconURL: userAvatar});
+                    await interaction.editReply({embeds: [embed], components: []});
+                    timers.delete(interaction.id);
+                } catch (e) {
+                    console.error(e);
+                }
             }, 15 * 1000);
 
             timers.set(interaction.id, timeoutID);

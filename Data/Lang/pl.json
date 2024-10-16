@@ -31,7 +31,14 @@
       "attack_on_titan": "Atak tytanów",
       "death_note": "Notatnik śmierci",
       "demon_slayer": "Demon Slayer",
-      "jujutsu_kaisen": "Jujutsu Kaisen"
+      "jujutsu_kaisen": "Jujutsu Kaisen",
+      "one_piece": "One Piece",
+      "tokyo_ghoul": "Tokyo Ghoul",
+      "code_geass": "Code Geass",
+      "berserk": "Berserk",
+      "jojo": "JoJo",
+      "evangelion": "Neon Genesis Evangelion",
+      "erased": "Miasto, z którego zniknąłem"
     }
   },
   "ai": {
@@ -374,10 +381,11 @@
       "Generuje losową liczbę"
     ],
     "games": [
-      "Zapytaj coś od Bena i otrzymaj odpowiedź",
-      "Rzuć monetą i zgadnij stronę!",
-      "dodaj aurę użytkownikowi",
-      "odejmij aurę użytkownikowi"
+      "Zapytaj Bena o coś i otrzymaj odpowiedź",
+      "Rzuć monetą i zgadnij stronę",
+      "Dodaj aurę użytkownikowi",
+      "Usuń aurę od użytkownika",
+      "Zgadnij anime po obrazku"
     ],
     "fun": [
       "Pokaż swoją reakcję",
