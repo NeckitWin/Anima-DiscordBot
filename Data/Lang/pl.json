@@ -18,6 +18,22 @@
     "minutes": "minut",
     "seconds": "sekund"
   },
+  "anime": {
+    "guess": "Zgadnij anime",
+    "time": "Masz 15 sekund, aby zgadnąć anime!",
+    "time_over": "Czas minął... Spróbuj ponownie!",
+    "correct": "Zgadłeś! To",
+    "incorrect": "Nie zgadłeś! To",
+    "titles": {
+      "bleach": "Bleach",
+      "naruto": "Naruto",
+      "hunter_x_hunter": "Hunter x Hunter",
+      "attack_on_titan": "Atak tytanów",
+      "death_note": "Notatnik śmierci",
+      "demon_slayer": "Demon Slayer",
+      "jujutsu_kaisen": "Jujutsu Kaisen"
+    }
+  },
   "ai": {
     "loading": "Ładowanie",
     "generateImage": "AI zgenerowało obraz",

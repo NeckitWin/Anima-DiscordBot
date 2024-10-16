@@ -18,6 +18,22 @@
     "minutes": "хвилин",
     "seconds": "секунд"
   },
+  "anime": {
+    "guess": "Вгадай аніме",
+    "time": "У вас є 15 секунд, щоб вгадати аніме!",
+    "time_over": "Час вийшов... Спробуйте ще раз!",
+    "correct": "Ви вгадали! Це",
+    "incorrect": "Ви не вгадали! Це",
+    "titles": {
+      "bleach": "Bleach",
+      "naruto": "Naruto",
+      "hunter_x_hunter": "Hunter x Hunter",
+      "attack_on_titan": "Атака титанів",
+      "death_note": "Щоденник смерті",
+      "demon_slayer": "Убивця демонів",
+      "jujutsu_kaisen": "Магічна битва"
+    }
+  },
   "ai": {
     "loading": "Завантаження",
     "generateImage": "ІІ сгенерував зображення",

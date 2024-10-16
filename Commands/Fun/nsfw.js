@@ -42,7 +42,7 @@ module.exports = {
             const target = interaction.options.getString('search');
             const request = target.replace(/ /g, '%20');
 
-            const data = await fetch(`https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&limit=1000&tags=${target}`);
+            const data = await fetch(`https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&limit=1000&tags=${request}`);
             const jsonData = data.ok ? await data.json() : null;
 
             if (!jsonData || jsonData.length === 0) return await interaction.followUp({
