@@ -238,6 +238,8 @@
     "use": "Jestem używana przez",
     "servers": "serwery",
     "help": "Pomagam",
+    "ram": "Użycie RAM",
+    "mb": "MB",
     "users": "użytkownikom",
     "dev": "deweloper",
     "discordserver": "Serwer wsparcia",

@@ -100,7 +100,7 @@ module.exports = {
             const bgImage = sharp(bgPath);
             const randomNumber = Math.floor(Math.random() * (100 + 1));
 
-            const textSVG = createTextSVG((randomNumber+"%"), 50, 'white','#450000', 4, true)
+            const textSVG = createTextSVG((randomNumber+"%"), 50, 'white','#450000', 3, true)
             // const username1 = createTextSVG(user1.displayName, 24, 'white', true);
             // const username2 = createTextSVG(user2.displayName,24, 'white', true);
 

@@ -238,6 +238,8 @@
     "use": "I'm used by",
     "servers": "servers",
     "help": "I help",
+    "ram": "Usage RAM",
+    "mb": "MB",
     "users": "users",
     "dev": "developer",
     "discordserver": "Support Server",
