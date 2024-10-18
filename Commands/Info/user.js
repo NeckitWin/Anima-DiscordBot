@@ -100,6 +100,7 @@ module.exports = {
 
             const getUserArray = await getUserServer(userID, guildID);
             const userInfo = getUserArray[0] || {};
+            const shards = userInfo.shards ?? 0;
             const aura = userInfo.aura ?? 0;
 
             const embed = new EmbedBuilder()
@@ -112,6 +113,7 @@ module.exports = {
                     (bage ? `**${local.badge}**: ${bage}\n` : ``) +
                     (activityType ? `**${local.active}**: ${activityType === `custom` ? activityState : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
                     `**${local.role}[${rolesCount}]**: ${rolesList}\n` +
+                    `**Shards**: ${shards}<:shard:1296969847690760234>\n` +
                     `**${local.aura}**: ${aura}`)
                 .setFooter({text: `${local.user_id}: ${userID}`});
             if (avatar) embed.setThumbnail(avatar);

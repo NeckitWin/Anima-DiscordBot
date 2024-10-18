@@ -15,8 +15,6 @@ module.exports = {
         }),
     async execute(interaction) {
         try {
-            await interaction.deferReply();
-
             const totalMemory = os.totalmem();
             const transferTotalMemory = (totalMemory / 1024 / 1024).toFixed(2);
             const memoryUsage = process.memoryUsage();
@@ -73,7 +71,7 @@ module.exports = {
             const rowLinksForBot = new ActionRowBuilder()
                 .addComponents(ButtonServer, ButtonWebsite, ButtonGitHub);
 
-            await interaction.editReply({embeds: [embed], components: [rowLinksForBot]});
+            await interaction.reply({embeds: [embed], components: [rowLinksForBot]});
         } catch (e) {
             console.error(e);
         }

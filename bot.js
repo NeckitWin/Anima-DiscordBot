@@ -31,7 +31,7 @@ client.on("ready", () => {
     console.log('Bot is ready!✅');
 
     client.user.setPresence({
-        activities: [{ name: `/help`, type: ActivityType.Competing }],
+        activities: [{ name: `invite me...❤️‍🔥`, type: ActivityType.Streaming, url: 'https://www.youtube.com/watch?v=_bYFu9mBnr4&ab_channel=CalebCurry' }],
         status: 'idle',
     });
 })
