@@ -113,7 +113,7 @@ module.exports = {
                     (bage ? `**${local.badge}**: ${bage}\n` : ``) +
                     (activityType ? `**${local.active}**: ${activityType === `custom` ? activityState : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
                     `**${local.role}[${rolesCount}]**: ${rolesList}\n` +
-                    `**Shards**: ${shards}<:shard:1296969847690760234>\n` +
+                    `**${local.shard}**: ${shards}<:shard:1296969847690760234>\n` +
                     `**${local.aura}**: ${aura}`)
                 .setFooter({text: `${local.user_id}: ${userID}`});
             if (avatar) embed.setThumbnail(avatar);
