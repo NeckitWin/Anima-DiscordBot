@@ -33,7 +33,7 @@ const getStatusEmoji = (status) => {
         case 'offline':
             return '<:invisible:1294745501941501952>';
         default:
-            return false;
+            return '<:invisible:1294745501941501952>';
     }
 }
 
@@ -87,7 +87,7 @@ module.exports = {
             const guildID = interaction.guild.id;
             const rolesList = member.roles.cache.filter(role=>role.id!==interaction.guild.id).reverse().map(role => role.toString()).join(' ');
             const rolesCount = member.roles.cache.size-1;
-            const status = member.presence?.status;
+            const status = member.presence?.status || 'offline';
             const activityType = getActivityType(member.presence?.activities[0]?.type);
             const activityName = member.presence?.activities[0]?.name;
             const activityState = member.presence?.activities[0]?.state;

@@ -23,8 +23,8 @@ module.exports = [
             if (message.commandName !== `emoji-sticker`) return;
             try {
                 const messageID = message.targetId;
-                const getMessage = await message.channel.messages?.fetch(messageID) || false;
-                if (!getMessage) return await message.reply(`I don't have access to this guild`);
+                const getMessage = await message.channel?.messages.fetch(messageID) || false;
+                if (!getMessage) return await message.reply({content: `I don't have access to this guild`, ephemeral: true});
                 const sticker = getMessage.stickers?.first() || false;
 
                 const emojiContent = getMessage.content.match(/<a?:\w+:\d+>/g);
@@ -78,8 +78,20 @@ module.exports = [
 
                     await message.reply({embeds: [embed], components: [row], ephemeral: true});
                 } else {
-                    await message.reply(`No emoji or sticker found`);
+                    await message.reply({content: `No emoji or sticker found`, ephemeral: true});
                 }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    },
+    {
+        name: Events.InteractionCreate,
+        async execute(message) {
+            if (!message.isMessageContextMenuCommand()) return;
+            if (message.commandName !== `adv`) return;
+            try {
+
             } catch (e) {
                 console.error(e);
             }
