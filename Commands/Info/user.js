@@ -91,12 +91,15 @@ module.exports = {
             const activityType = getActivityType(member.presence?.activities[0]?.type);
             const activityName = member.presence?.activities[0]?.name;
             const activityState = member.presence?.activities[0]?.state;
-            let bage = member.user.flags.toArray().map(badge => getBadgeEmoji(badge)).join(' ');
-            const nitro = member.premiumSince;
-            if (nitro) bage += `<a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
-
             const avatar = user.avatarURL({size: 4096});
             const banner = user.bannerURL({size: 4096});
+
+            let bage = member.user.flags.toArray().map(badge => getBadgeEmoji(badge)).join(' ');
+            const nitro = member.premiumSince;
+            if (nitro) bage += ` <a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
+            if (banner) bage += ` <a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
+            if (user.bot) bage = `<a:code:1297250463644782643>`;
+
 
             const getUserArray = await getUserServer(userID, guildID);
             const userInfo = getUserArray[0] || {};
