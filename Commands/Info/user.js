@@ -106,15 +106,15 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle(`${local.title} — ${user.displayName}`)
                 .setColor(userColor)
-                .setDescription(`**${local.username}** \`${user.username}\` \n`+
-                    `**${local.reg}**: \`${formatDate(user.createdAt)}\`\n` +
-                    `**${local.entry}**: \`${formatDate(member.joinedAt)}\`\n` +
-                    `**${local.status}**: ${getStatusEmoji(status)} ${local.statusName[status]}\n` +
-                    (bage ? `**${local.badge}**: ${bage}\n` : ``) +
-                    (activityType ? `**${local.active}**: ${activityType === `custom` ? activityState : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
-                    `**${local.role}[${rolesCount}]**: ${rolesList}\n` +
-                    `**${local.shard}**: ${shards}<:shard:1296969847690760234>\n` +
-                    `**${local.aura}**: ${aura}`)
+                .setDescription(`<:user:1297197580903645319> **${local.username}** \`${user.username}\` \n`+
+                    `<:date:1297196424882294796> **${local.reg}**: \`${formatDate(user.createdAt)}\`\n` +
+                    `<:date:1297196424882294796> **${local.entry}**: \`${formatDate(member.joinedAt)}\`\n` +
+                    `<:moon:1297194475780575242> **${local.status}**: ${getStatusEmoji(status)} ${local.statusName[status]}\n` +
+                    (bage ? `<:badge:1297195546041385042> **${local.badge}**: ${bage}\n` : ``) +
+                    (activityType ? `<:activity:1297194463776604233> **${local.active}**: ${activityType === `custom` ? activityState : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
+                    `<:Roles:1297191708848689166> **${local.role}[${rolesCount}]**: ${rolesList}\n` +
+                    `<:shard:1296969847690760234> **${local.shard}**: ${shards}\n` +
+                    `<:aura:1297189989498753076> **${local.aura}**: ${aura}`)
                 .setFooter({text: `${local.user_id}: ${userID}`});
             if (avatar) embed.setThumbnail(avatar);
             if (banner) embed.setImage(banner);

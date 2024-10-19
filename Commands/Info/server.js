@@ -90,7 +90,7 @@ module.exports = {
                 {
                     name: local.main,
                     value: `<:moderator:1294739417402970132> ${local.security}: ${local[serverProtection(guild.verificationLevel)]}\n` +
-                        `<:two_members:1294739793779097660> ${local.roles}: ${guild.roles.cache.size}\n` +
+                        `<:two_members:1294739793779097660> ${local.roles}: ${guild.roles.cache.size-1}\n` +
                         `<:designer:1294739122489135256> ${local.emojis}: ${guild.emojis.cache.size}\n` +
                         `<:boost:1294739031762141184> ${local.level}: ${guild.premiumTier}\n` +
                         `<:nitro:1294739428761141338> ${local.boost}: ${guild.premiumSubscriptionCount}\n` +
