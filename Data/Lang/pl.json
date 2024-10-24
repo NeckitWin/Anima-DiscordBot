@@ -18,6 +18,14 @@
     "minutes": "minut",
     "seconds": "sekund"
   },
+  "anti": {
+    "capslock": "System antykapowania",
+    "capslockset": "Ograniczenie używania Caps Locka zostało",
+    "enabled": "włączone",
+    "disabled": "wyłączone",
+    "capslockalready": "Ograniczenie używania Caps Locka jest już",
+    "capslockresponse": "Proszę, nie używaj Caps Locka!"
+  },
   "anime": {
     "guess": "Zgadnij anime",
     "time": "Masz 15 sekund, aby zgadnąć anime!",

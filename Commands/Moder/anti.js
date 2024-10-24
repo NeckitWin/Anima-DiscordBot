@@ -1,5 +1,6 @@
-const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
+const {SlashCommandBuilder, EmbedBuilder, PermissionsBitField} = require(`discord.js`);
 const {getServer, updateAntiCaps} = require("../../Data/funcs/dbServer");
+const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -38,21 +39,26 @@ module.exports = {
     async execute(interaction) {
         const {options, guild} = interaction;
         const subcommand = options.getSubcommand();
+        const lang = await getLang(interaction);
+        const local = lang.anti;
+        const botMember = guild.members.me;
+        if (!interaction.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers)) return await interaction.reply({content: lang.error.botdontpermmute, ephemeral: true});
+
         if (subcommand === `caps`) {
             const status = options.getBoolean(`status`);
             const guildID = guild.id;
             const guildName = guild.name;
             const {antiCaps} = await getServer(guildID, guildName);
             const embed = new EmbedBuilder()
-                .setTitle(`Anti-Caps Lock`)
+                .setTitle(local.capslock)
 
             if (status != antiCaps) {
                 await updateAntiCaps(guildID, status);
                 embed.setColor(`#00ac00`);
-                embed.setDescription(`Caps lock restriction has been ${status ? `enabled` : `disabled`}`);
+                embed.setDescription(`${local.capslockset} `);
             } else {
                 embed.setColor(`#ba0000`);
-                embed.setDescription(`Caps lock restriction is already ${status ? `enabled` : `disabled`}`);
+                embed.setDescription(`${local.capslockalready} ${local[status ? `enabled` : `disabled`]}`);
             }
             await interaction.reply({embeds: [embed]});
         }

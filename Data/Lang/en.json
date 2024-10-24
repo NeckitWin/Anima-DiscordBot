@@ -19,7 +19,12 @@
     "seconds": "seconds"
   },
   "anti": {
-
+    "capslock": "Anti Caps Lock System",
+    "capslockset": "Caps lock restriction has been",
+    "enabled": "enabled",
+    "disabled": "disabled",
+    "capslockalready": "Caps lock restriction is already",
+    "capslockresponse": "Please don't use caps lock!"
   },
   "anime": {
     "guess": "Guess the anime",
