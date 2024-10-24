@@ -11,35 +11,40 @@ module.exports = {
         const owner = getOwner.user;
         const memberCount = guild.memberCount;
 
-        const embed = new EmbedBuilder()
-            .setTitle(`Bot added to new server`)
-            .setThumbnail(guild.iconURL())
-            .setColor(`#00ff9d`)
-            .addFields(
-                {name: `Guild Name:`, value: `\`\`\`fix\n${guild.name}\`\`\``, inline: false},
-                {name: `User count`, value: `\`\`\`fix\n${memberCount}\`\`\``, inline: true},
-                {name: `Guild Owner`, value: `\`\`\`fix\n${owner.username}\`\`\``, inline: true},
-                {name: `Owner ID`, value: `\`\`\`fix\n${owner.id}\`\`\``, inline: true}
-            );
+        try {
 
-        await myChannel.send({embeds: [embed]})
+            const embed = new EmbedBuilder()
+                .setTitle(`Bot added to new server`)
+                .setThumbnail(guild.iconURL())
+                .setColor(`#00ff9d`)
+                .addFields(
+                    {name: `Guild Name:`, value: `\`\`\`fix\n${guild.name}\`\`\``, inline: false},
+                    {name: `User count`, value: `\`\`\`fix\n${memberCount}\`\`\``, inline: true},
+                    {name: `Guild Owner`, value: `\`\`\`fix\n${owner.username}\`\`\``, inline: true},
+                    {name: `Owner ID`, value: `\`\`\`fix\n${owner.id}\`\`\``, inline: true}
+                );
 
-        const firstChannel = guild.channels.cache.find(channel=>
-            channel.isTextBased() && channel.permissionsFor(guild.members.me).has(PermissionFlagsBits.SendMessages)
-        )
+            await myChannel.send({embeds: [embed]})
 
-        if (!firstChannel) return;
+            const firstChannel = guild.channels.cache.find(channel =>
+                channel.isTextBased() && channel.permissionsFor(guild.members.me).has(PermissionFlagsBits.SendMessages)
+            )
 
-        const buildInstruction = new EmbedBuilder()
-            .setTitle(`<a:anime_wow:1295480143053197322>Hey! I'm Anima!`)
-            .setColor(`#dab4ff`)
-            .setThumbnail(guild.client.user.avatarURL())
-            .setDescription(`Thank you for inviting me to your server!<a:anime_celebrate:1295479990737178634>\n`+
-            `You can **change </language:1292081237837611079>**\n`+
-            `Available languages:\n`+
-            `- 🇺🇸 English\n- 🇷🇺 Russian\n- 🇺🇦 Ukrainian\n- 🇵🇱 Polish\n`+
-            `Also you can use **</help:1285287069676994605>** to get more information about my commands! ❤️‍🔥`)
+            if (!firstChannel) return;
 
-        firstChannel.send({embeds: [buildInstruction]})
+            const buildInstruction = new EmbedBuilder()
+                .setTitle(`<a:anime_wow:1295480143053197322>Hey! I'm Anima!`)
+                .setColor(`#dab4ff`)
+                .setThumbnail(guild.client.user.avatarURL())
+                .setDescription(`Thank you for inviting me to your server!<a:anime_celebrate:1295479990737178634>\n` +
+                    `You can **change </language:1292081237837611079>**\n` +
+                    `Available languages:\n` +
+                    `- 🇺🇸 English\n- 🇷🇺 Russian\n- 🇺🇦 Ukrainian\n- 🇵🇱 Polish\n` +
+                    `Also you can use **</help:1285287069676994605>** to get more information about my commands! ❤️‍🔥`)
+
+            firstChannel.send({embeds: [buildInstruction]})
+        } catch (e) {
+            console.error(e);
+        }
     }
 }

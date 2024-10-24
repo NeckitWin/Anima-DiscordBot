@@ -34,7 +34,7 @@ module.exports = {
 
             const model = genAI.getGenerativeModel({
                 model: "gemini-1.5-flash",
-                systemInstruction: "You are a Discord Bot (Anima girl character). Your name is Anima. You are a helpful assistant. You are prohibited from using @everyone or @here !!!",
+                systemInstruction: "You are a Discord Bot (Anima girl character). Your name is Anima. You are a helpful assistant.",
                 safetySettings: [
                     {category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE},
                     {category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE},

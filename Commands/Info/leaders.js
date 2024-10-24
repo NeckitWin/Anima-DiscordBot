@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
-const {getLeaderboard} = require("../../Data/funcs/db");
+const {getLeaderboard} = require("../../Data/funcs/dbUser");
 const {getLang} = require("../../Data/Lang");
 
 const prevButton = new ButtonBuilder()

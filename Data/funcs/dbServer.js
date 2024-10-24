@@ -1,0 +1,30 @@
+const {sqlPost, sqlRequest} = require(`./db`);
+
+const postNewServer = async (server_id, server_name) => {
+    await sqlPost(`INSERT INTO servers (serverID, serverName) VALUES (?, ?)`, [server_id, server_name]);
+}
+
+const getServer = async (server_id, server_name) => {
+    try {
+        const sql = `SELECT * FROM servers WHERE serverID = ?`
+        let res = await sqlRequest(sql, [server_id]);
+        if (res.length > 0) {
+            return res[0];
+        } else {
+            await postNewServer(server_id, server_name);
+            res = await sqlRequest(sql, [server_id]);
+            return res[0];
+        }
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+
+const updateAntiCaps = async (server_id, status) => {
+    const sql = `UPDATE servers SET antiCaps = ? WHERE serverID = ?`;
+    await sqlPost(sql, [status, server_id]);
+}
+
+
+module.exports = {postNewServer, getServer, updateAntiCaps};

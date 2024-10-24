@@ -1,5 +1,5 @@
 const {Events} = require('discord.js');
-const {updateAura} = require('../Data/funcs/db');
+const {updateAura} = require('../Data/funcs/dbUser');
 
 module.exports = {
     name: Events.MessageCreate,

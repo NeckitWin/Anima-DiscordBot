@@ -18,6 +18,9 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
+  "anti": {
+
+  },
   "anime": {
     "guess": "Guess the anime",
     "time": "You have 15 seconds to guess the anime!",

@@ -1,6 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
-const {getUserServer} = require("../../Data/funcs/db");
+const {getUserServer} = require("../../Data/funcs/dbUser");
 
 module.exports = {
     data: new SlashCommandBuilder()

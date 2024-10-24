@@ -1,5 +1,9 @@
 const {Events, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle} = require(`discord.js`);
 const fetch = require(`node-fetch2`);
+const config = require("../Data/config.json");
+const {GoogleGenerativeAI, HarmCategory, HarmBlockThreshold} = require("@google/generative-ai");
+process.env.GOOGLE_API_KEY = config.geminiApiKey;
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 const getStickerFormat = (format) => {
     switch (format) {
@@ -22,9 +26,13 @@ module.exports = [
             if (!message.isMessageContextMenuCommand()) return;
             if (message.commandName !== `emoji-sticker`) return;
             try {
+                await message.deferReply({ephemeral: true});
                 const messageID = message.targetId;
                 const getMessage = await message.channel?.messages.fetch(messageID) || false;
-                if (!getMessage) return await message.reply({content: `I don't have access to this guild`, ephemeral: true});
+                if (!getMessage) return await message.editReply({
+                    content: `I don't have access to this guild`,
+                    ephemeral: true
+                });
                 const sticker = getMessage.stickers?.first() || false;
 
                 const emojiContent = getMessage.content.match(/<a?:\w+:\d+>/g);
@@ -60,7 +68,7 @@ module.exports = [
                     const row = new ActionRowBuilder()
                         .addComponents(components);
 
-                    await message.reply({embeds: [embed], components: [row], ephemeral: true});
+                    await message.editReply({embeds: [embed], components: [row], ephemeral: true});
                 } else if (sticker) {
                     const stickerID = sticker.id;
                     const stickerType = sticker.format;
@@ -76,9 +84,9 @@ module.exports = [
                     const row = new ActionRowBuilder()
                         .addComponents(buttonSticker);
 
-                    await message.reply({embeds: [embed], components: [row], ephemeral: true});
+                    await message.editReply({embeds: [embed], components: [row], ephemeral: true});
                 } else {
-                    await message.reply({content: `No emoji or sticker found`, ephemeral: true});
+                    await message.editReply({content: `No emoji or sticker found`, ephemeral: true});
                 }
             } catch (e) {
                 console.error(e);
@@ -89,8 +97,50 @@ module.exports = [
         name: Events.InteractionCreate,
         async execute(message) {
             if (!message.isMessageContextMenuCommand()) return;
-            if (message.commandName !== `adv`) return;
+            if (message.commandName !== `describe-picture`) return;
             try {
+
+                await message.deferReply({ephemeral: true});
+                const userColor = message.member.displayColor;
+                const userLang = message.locale;
+                const messageID = message.targetId;
+                const getMessage = await message.channel?.messages.fetch(messageID) || false;
+                if (!getMessage) return await message.editReply({
+                    content: `I don't have access to this guild`,
+                    ephemeral: true
+                });
+                const attachments = getMessage.attachments;
+                const pictureType = attachments.first()?.contentType || false;
+                if (!pictureType.startsWith(`image/`)) return await message.editReply({
+                    content: `No picture found`,
+                    ephemeral: true
+                });
+                const picture = attachments.first()?.url;
+                const response = await fetch(picture);
+                const buffer = await response.buffer();
+
+                const model = genAI.getGenerativeModel({
+                    model: "gemini-1.5-flash",
+                });
+
+                const prompt = `Describe the picture, language: ${userLang}`;
+                console.log(prompt);
+
+                const generate = await model.generateContent([prompt, {
+                        inlineData: {
+                            data: buffer.toString("base64"),
+                            mimeType: pictureType
+                        }
+                    }]
+                );
+
+                const result = generate.response.text();
+                const embed = new EmbedBuilder()
+                    .setDescription(result)
+                    .setColor(userColor)
+                    .setImage(picture);
+
+                await message.editReply({embeds: [embed], ephemeral: true});
 
             } catch (e) {
                 console.error(e);
