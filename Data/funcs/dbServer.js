@@ -21,10 +21,9 @@ const getServer = async (server_id, server_name) => {
     }
 }
 
-const updateAntiCaps = async (server_id, status) => {
-    const sql = `UPDATE servers SET antiCaps = ? WHERE serverID = ?`;
-    await sqlPost(sql, [status, server_id]);
+const updateServer = async (server_id, column, data) => {
+    const sql = `UPDATE servers SET ${column} = ? WHERE serverID = ?`;
+    await sqlPost(sql, [data, server_id]);
 }
 
-
-module.exports = {postNewServer, getServer, updateAntiCaps};
+module.exports = {postNewServer, getServer, updateServer};

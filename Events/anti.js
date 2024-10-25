@@ -34,9 +34,9 @@ module.exports = {
                 .setDescription(local.capslockresponse)
                 .setColor(`#ba0000`);
 
+            await member.timeout(5 * 60 * 1000);
             await message.reply({content: `${member}`, embeds: [embed]});
             await message.delete();
-            await member.timeout(5 * 60 * 1000);
 
         } catch (err) {
             console.error(err);

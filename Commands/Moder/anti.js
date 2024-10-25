@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder, PermissionsBitField} = require(`discord.js`);
-const {getServer, updateAntiCaps} = require("../../Data/funcs/dbServer");
+const {getServer, updateServer} = require("../../Data/funcs/dbServer");
 const {getLang} = require("../../Data/Lang");
 
 module.exports = {
@@ -53,7 +53,7 @@ module.exports = {
                 .setTitle(local.capslock)
 
             if (status != antiCaps) {
-                await updateAntiCaps(guildID, status);
+                await updateServer(guildID, "antiCaps", status);
                 embed.setColor(`#00ac00`);
                 embed.setDescription(`${local.capslockset} `);
             } else {

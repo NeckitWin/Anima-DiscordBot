@@ -7,7 +7,9 @@ const getConnection = () => {
         user: config.dbUser,
         password: config.dbPassword,
         database: "anima",
-        charset: 'utf8mb4'
+        charset: 'utf8mb4',
+        supportBigNumbers: true,
+        bigNumberStrings: true
     });
 
     conn.connect(err => {

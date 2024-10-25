@@ -3,7 +3,8 @@ module.exports = {
     description: 'Owner command',
     async execute(message) {
         try {
-            console.log(message);
+            const channel = await message.channel.fetch()
+            console.log(channel.nsfw);
         } catch (e) {
             console.error(e)
         }

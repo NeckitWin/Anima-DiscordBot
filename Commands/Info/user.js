@@ -85,7 +85,7 @@ module.exports = {
             if (!member) return await interaction.reply({content: local.notFound, ephemeral: true});
             const userColor = member.displayColor;
             const guildID = interaction.guild.id;
-            const rolesList = member.roles.cache.filter(role=>role.id!==interaction.guild.id).reverse().map(role => role.toString()).join(' ');
+            const highestRole = member.roles.highest;
             const rolesCount = member.roles.cache.size-1;
             const status = member.presence?.status || 'offline';
             const activityType = getActivityType(member.presence?.activities[0]?.type);
@@ -96,10 +96,8 @@ module.exports = {
 
             let bage = member.user.flags.toArray().map(badge => getBadgeEmoji(badge)).join(' ');
             const nitro = member.premiumSince;
-            if (nitro) bage += ` <a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
-            if (banner) bage += ` <a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
+            if (nitro || banner) bage += ` <a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
             if (user.bot) bage = `<a:code:1297250463644782643>`;
-
 
             const getUserArray = await getUserServer(userID, guildID);
             const userInfo = getUserArray[0] || {};
@@ -114,8 +112,8 @@ module.exports = {
                     `<:date:1297196424882294796> **${local.entry}**: \`${formatDate(member.joinedAt)}\`\n` +
                     `<:moon:1297194475780575242> **${local.status}**: ${getStatusEmoji(status)} ${local.statusName[status]}\n` +
                     (bage ? `<:badge:1297195546041385042> **${local.badge}**: ${bage}\n` : ``) +
-                    (activityType ? `<:activity:1297194463776604233> **${local.active}**: ${activityType === `custom` ? activityState : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
-                    `<:Roles:1297191708848689166> **${local.role}[${rolesCount}]**: ${rolesList}\n` +
+                    (activityType ? `<:activity:1297194463776604233> **${local.active}**: ${activityType === `custom` ? (activityState ?? `\`❔\`` ) : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
+                    `<:Roles:1297191708848689166> **${local.role}[${rolesCount}]**: ${highestRole}\n` +
                     `<:shard:1296969847690760234> **${local.shard}**: ${shards}\n` +
                     `<:aura:1297189989498753076> **${local.aura}**: ${aura}`)
                 .setFooter({text: `${local.user_id}: ${userID}`});

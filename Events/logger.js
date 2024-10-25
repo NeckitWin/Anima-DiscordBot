@@ -1,28 +1,27 @@
 const {Events, EmbedBuilder} = require("discord.js");
-const path = require("node:path");
-const fs = require("node:fs");
 const {getLang} = require("../Data/Lang");
 const {getTypeChannel} = require("../Data/funcs/getTypeChannel");
+const {getServer} = require("../Data/funcs/dbServer");
 
-const checkServer = async (interaction, embed) => {
+const checkServer = async (message) => {
     try {
-        if (interaction.author?.bot) return;
-        const serverID = interaction.guild.id;
-        const pathFile = path.join(__dirname, "../Data/jsons/loggServers.json");
-        const data = await fs.promises.readFile(pathFile, `utf-8`);
-        const jsonData = JSON.parse(data);
-        const thisServer = jsonData.find(el => el.server === serverID);
-        if (!thisServer) return;
-        const loggChannel = interaction.guild.channels.cache.get(thisServer.channel);
-        if (!loggChannel) return;
-        await loggChannel.send({content: ``, embeds: [embed]});
-    } catch (e) {
-        console.error(e);
+        const guildID = message.guild.id;
+        const guildName = message.guild.name;
+        const {logs} = await getServer(guildID, guildName);
+        if (logs !== 0) {
+            return message.guild.channels.cache.get(logs);
+        } else return false;
+    } catch (err) {
+        console.error(err);
     }
 }
 
-const getLocal = async (interaction) => {
-    return await getLang(interaction);
+const sendLog = async (channel, embed) => {
+    try {
+        await channel.send({embeds: [embed]});
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 module.exports = [
@@ -35,7 +34,10 @@ module.exports = [
     {
         name: Events.GuildMemberAdd,
         async execute(member) {
-            const lang = await getLocal(member);
+            const logChannel = await checkServer(member);
+            if (!logChannel) return;
+
+            const lang = await getLang(member);
             const localMember = lang.loggs.member;
 
             const embed = new EmbedBuilder()
@@ -49,13 +51,16 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#00ff00`);
 
-            await checkServer(member, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.GuildMemberRemove,
         async execute(member) {
-            const lang = await getLocal(member);
+            const logChannel = await checkServer(member);
+            if (!logChannel) return;
+
+            const lang = await getLang(member);
             const localMember = lang.loggs.member;
 
             const embed = new EmbedBuilder()
@@ -69,13 +74,16 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#ff0000`);
 
-            await checkServer(member, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.MessageDelete,
         async execute(message) {
-            const lang = await getLocal(message);
+            const logChannel = await checkServer(message);
+            if (!logChannel) return;
+
+            const lang = await getLang(message);
             const localMessage = lang.loggs.message;
 
             const embed = new EmbedBuilder()
@@ -94,13 +102,17 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#ff0000`);
 
-            await checkServer(message, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.MessageUpdate,
         async execute(oldMessage, newMessage) {
-            const lang = await getLocal(newMessage);
+            const logChannel = await checkServer(newMessage);
+            if (!logChannel) return;
+            if (newMessage.author.bot) return;
+
+            const lang = await getLang(newMessage);
             const localMessage = lang.loggs.message;
 
             const embed = new EmbedBuilder()
@@ -113,13 +125,16 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#00d9ff`);
 
-            await checkServer(oldMessage, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.ChannelCreate,
         async execute(channel) {
-            const lang = await getLocal(channel);
+            const logChannel = await checkServer(channel);
+            if (!logChannel) return;
+
+            const lang = await getLang(channel);
             const localChannel = lang.loggs.channel;
 
             const channelType = getTypeChannel(channel.type);
@@ -136,13 +151,16 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#00ff00`);
 
-            await checkServer(channel, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.ChannelDelete,
         async execute(channel) {
-            const lang = await getLocal(channel);
+            const logChannel = await checkServer(channel);
+            if (!logChannel) return;
+
+            const lang = await getLang(channel);
             const localChannel = lang.loggs.channel;
             const channelType = getTypeChannel(channel.type);
 
@@ -159,13 +177,16 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#ff0000`);
 
-            await checkServer(channel, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.ChannelUpdate,
         async execute(oldChannel, newChannel) {
-            const lang = await getLocal(newChannel);
+            const logChannel = await checkServer(newChannel);
+            if (!logChannel) return;
+
+            const lang = await getLang(newChannel);
             const localChannel = lang.loggs.channel;
             const channelType = getTypeChannel(newChannel.type);
             if (oldChannel.position !== newChannel.position) return;
@@ -188,13 +209,16 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#00d9ff`);
 
-            await checkServer(oldChannel, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.GuildRoleCreate,
         async execute(role) {
-            const lang = await getLocal(role);
+            const logChannel = await checkServer(role);
+            if (!logChannel) return;
+
+            const lang = await getLang(role);
             const localRole = lang.loggs.role;
 
             const embed = new EmbedBuilder()
@@ -216,13 +240,16 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#00ff00`);
 
-            await checkServer(role, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.GuildRoleUpdate,
         async execute(oldRole, newRole) {
-            const lang = await getLocal(newRole);
+            const logChannel = await checkServer(newRole);
+            if (!logChannel) return;
+
+            const lang = await getLang(newRole);
             const localRole = lang.loggs.role;
 
             if (oldRole.position !== newRole.position) return;
@@ -250,13 +277,16 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#00d9ff`);
 
-            await checkServer(oldRole, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
         name: Events.GuildRoleDelete,
         async execute(role) {
-            const lang = await getLocal(role);
+            const logChannel = await checkServer(role);
+            if (!logChannel) return;
+
+            const lang = await getLang(role);
             const localRole = lang.loggs.role;
 
             const embed = new EmbedBuilder()
@@ -278,10 +308,33 @@ module.exports = [
                 .setTimestamp()
                 .setColor(`#ff0000`);
 
-            await checkServer(role, embed);
+            await sendLog(logChannel, embed);
         }
     },
     {
+        name: Events.GuildMemberUpdate,
+        async execute(oldMember, newMember) {
+            const logChannel = await checkServer(newMember);
+            if (!logChannel) return;
+            const newGuildMember = newMember.guild.members.cache.get(newMember.id);
+            const embed = new EmbedBuilder()
+                .setTitle(`Member update profile`)
+                .setDescription(`Member: ${newMember}`)
+                .setThumbnail(newGuildMember.displayAvatarURL())
+                .setColor(`#00d9ff`);
 
+            if (oldMember.displayName !== newMember.displayName) {
+                embed.addFields(
+                    {name: `Old server name`, value: `\`\`\`${oldMember.displayName}\`\`\``, inline: true},
+                    {name: `New server name`, value: `\`\`\`${newMember.displayName}\`\`\``, inline: true}
+                );
+            }
+            if (oldMember.displayAvatarURL() !== newMember.displayAvatarURL()) {
+                embed.addFields(
+                    {name: `New avatar`, value: `\`\`\`${newGuildMember.displayAvatarURL()}\`\`\``, inline: true}
+                );
+            }
+            await sendLog(logChannel, embed);
+        }
     }
 ]
