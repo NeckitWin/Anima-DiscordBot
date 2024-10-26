@@ -10,9 +10,9 @@ const getStickerFormat = (format) => {
         case 1:
             return `png`;
         case 2:
-            return `apng`;
+            return `png`;
         case 3:
-            return `lottie`;
+            return `webp`;
         case 4:
             return `gif`;
     }

@@ -5,22 +5,22 @@ const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("reaction")
-        .setNameLocalizations({ru: "реакция", pl: "reakcja", uk: "реакція"})
-        .setDescription("react to a message")
+        .setName("emote")
+        .setNameLocalizations({ru: "эмоция", pl: "emocja", uk: "емоція"})
+        .setDescription("Show your emotions")
         .setDescriptionLocalizations({
-            ru: "реагируйте на сообщение",
-            pl: "zareaguj na wiadomość",
-            uk: "реагуйте на повідомлення"
+            ru: "Покажите свои эмоции",
+            pl: "Pokaż swoje emocje",
+            uk: "Покажіть свої емоції"
         })
         .addStringOption(option =>
             option.setName("your_reaction")
                 .setNameLocalizations({ru: "ваша_реакция", pl: "twoja_reakcja", uk: "ваша_реакція"})
-                .setDescription("Put your reaction")
+                .setDescription("Select your reaction")
                 .setDescriptionLocalizations({
-                    ru: "Поставьте свою реакцию",
-                    pl: "Wstaw swoją reakcję",
-                    uk: "Поставте свою реакцію"
+                    ru: "Выберите вашу реакцию",
+                    pl: "Wybierz swoją reakcję",
+                    uk: "Виберіть вашу реакцію"
                 })
                 .addChoices(data.reactions)
                 .setRequired(true)),

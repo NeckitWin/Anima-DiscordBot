@@ -5,8 +5,8 @@ const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("interaction")
-        .setNameLocalizations({ru: "взаимодействие", pl: "interakcja", uk: "взаємодія"})
+        .setName("rp")
+        .setNameLocalizations({ru: "рп", pl: "rp", uk: "рп"})
         .setDescription("interaction with someone")
         .setDescriptionLocalizations({ru: "взаимодействие с кем-то", pl: "interakcja z kimś", uk: "взаємодія з кимось"})
         .addStringOption(option =>
@@ -30,9 +30,10 @@ module.exports = {
         const local = lang.interaction;
 
         const embed = new EmbedBuilder()
-            .setAuthor({name: `${interaction.user.displayName} ${local[target]}`, iconURL: interaction.user.displayAvatarURL()})
+            .setAuthor({name: ` `, iconURL: interaction.user.displayAvatarURL()})
+            .setDescription(`${interaction.user} ${local[target]} ${mentionUser}`)
             .setImage(data[target][Math.floor(Math.random() * data[target].length)]);
 
-        interaction.reply({content: `${mentionUser}`, embeds: [embed]});
+        interaction.reply({embeds: [embed]});
     }
 }

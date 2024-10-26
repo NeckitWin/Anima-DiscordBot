@@ -14,21 +14,22 @@ module.exports = {
     async execute(message) {
         try {
             const content = message.content;
+            if (content.length < 4) return;
+            const {antiCaps} = await getServer(message.guild.id, message.guild.name);
+            if (!antiCaps) return;
+            if (!message.guild) return;
             const capsPercentage = calculateCapsPercentage(content);
+            if (capsPercentage < 60) return;
             const member = message.guild.members.cache.get(message.author.id);
             const botMember = message.guild.members.me;
-            const botHighestRole = botMember.roles.highest.position;
-            const memberHighestRole = member.roles.highest.position;
+            const botHighestRole = botMember.roles.highest.position || false;
+            const memberHighestRole = member.roles.highest.position || false;
             const lang = await getLang(message);
             const local = lang.anti;
 
             if (botHighestRole <= memberHighestRole) return;
             if (!message.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers)) return;
             if (message.author.bot) return;
-            if (!message.length > 3) return;
-            const {antiCaps} = await getServer(message.guild.id, message.guild.name);
-            if (!antiCaps) return;
-            if (capsPercentage < 60) return;
             const embed = new EmbedBuilder()
                 .setTitle(local.capslock)
                 .setDescription(local.capslockresponse)

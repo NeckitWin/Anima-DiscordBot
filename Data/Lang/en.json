@@ -142,10 +142,10 @@
     "haha": "Ho ho ho"
   },
   "interaction": {
-    "hug": "gives you a hug",
-    "kiss": "kisses you",
-    "pat": "gives you a pat",
-    "bite": "gives you a bite"
+    "hug": "hugs",
+    "kiss": "kisses",
+    "pat": "pats",
+    "bite": "bites"
   },
   "reaction": {
     "sad": "is feeling sad",
@@ -155,7 +155,7 @@
     "laugh": "is laughing",
     "shocked": "is shocked",
     "love": "is in love",
-    "sleep": "is sleeping",
+    "sleepy": "is sleeping",
     "thinking": "is deep in thought"
   },
   "request": "Request from ",

@@ -142,10 +142,10 @@
     "haha": "Ho ho ho"
   },
   "interaction": {
-    "hug": "przytula cię",
-    "kiss": "całuje cię",
-    "pat": "głaszcze cię",
-    "bite": "gryzie cię"
+    "hug": "przytula",
+    "kiss": "całuje",
+    "pat": "głaszcze",
+    "bite": "gryzie"
   },
   "reaction": {
     "sad": "czuje się smutny",
@@ -155,7 +155,7 @@
     "laugh": "śmieje się",
     "shocked": "jest w szoku",
     "love": "jest zakochany",
-    "sleep": "śpi",
+    "sleepy": "śpi",
     "thinking": "głęboko myśli"
   },
   "request": "Żądanie od ",
