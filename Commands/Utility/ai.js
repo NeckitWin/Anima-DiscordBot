@@ -3,6 +3,7 @@ const {getLang} = require("../../Data/Lang");
 const {getCooldown} = require("../../Data/funcs/cooldown");
 const config = require("../../Data/config.json");
 const {GoogleGenerativeAI} = require("@google/generative-ai");
+const {groqAI} = require("../../Data/funcs/ai");
 
 
 process.env.GOOGLE_API_KEY = config.geminiApiKey;
@@ -19,6 +20,26 @@ module.exports = {
             pl: `Wyślij swoje zapytanie do AI`,
             uk: `Надішліть ваш запит ШІ`
         })
+        .addSubcommand(subcommand => subcommand
+            .setName(`ask`)
+            .setDescription(`Send your request for AI`)
+            .setNameLocalizations({ru: `спросить`, pl: `zapytaj`, uk: `запитати`})
+            .setDescriptionLocalizations({
+                ru: `Отправьте ваш запрос для ИИ`,
+                pl: `Wyślij swoje zapytanie do AI`,
+                uk: `Надішліть ваш запит для ШІ`
+            }).addStringOption(option => option
+                .setName(`prompt`)
+                .setNameLocalizations({ru: `запрос`, pl: `prompt`, uk: `запит`})
+                .setDescription(`Your request`)
+                .setDescriptionLocalizations({
+                    ru: `Ваш запрос`,
+                    pl: `Twój wniosek`,
+                    uk: `Ваш запит`
+                })
+                .setRequired(true)
+            )
+        )
         .addSubcommand(subcommand => subcommand
             .setName(`image`)
             .setDescription(`Send your request for image generation`)
@@ -66,7 +87,10 @@ module.exports = {
             const subcommand = interaction.options.getSubcommand();
             const prompt = interaction.options.getString(`prompt`);
 
-            if (subcommand === `image`) {
+            if (subcommand === `ask`) {
+                const answer = await  groqAI(prompt);
+                await interaction.reply(answer);
+            } else if (subcommand === `image`) {
                 // if (await getCooldown('ai', interaction, 600)) return; // cooldown
 
                 const embedLoading = new EmbedBuilder()

@@ -46,18 +46,17 @@ module.exports = {
     async execute(interaction) {
         const {options, guild} = interaction;
         const subcommand = options.getSubcommand();
-        const channel = options.getChannel(`channel`);
-        const channelID = channel.id;
         const guildID = guild.id;
         const guildName = guild.name;
         const lang = await getLang(interaction);
         const {logs} = await getServer(guildID, guildName);
 
         if (subcommand === `set`) {
+            const channel = options.getChannel(`channel`);
+            const channelID = channel.id;
             await updateServer(guildID, "logs", BigInt(channelID));
             await interaction.reply({content: `<#${channelID}> set as logs channel`, ephemeral: true});
         } else if (subcommand === `remove`) {
-            console.log(logs);
             if (!logs) return await interaction.reply({content: `You don't have logs channel`, ephemeral: true});
             await updateServer(guildID, "logs", 0);
             await interaction.reply({content: `Logs channel removed`, ephemeral: true});

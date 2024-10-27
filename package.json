@@ -14,10 +14,11 @@
   "dependencies": {
     "@google/generative-ai": "^0.19.0",
     "@megavasiliy007/sdc-api": "github:MegaVasiliy007/sdc-api",
-    "axios": "^1.6.7",
+    "axios": "^1.7.7",
     "discord.js": "^14.16.3",
     "gif-encoder": "^0.7.2",
-    "gif-frames": "^1.0.1",
+    "gif-frames": "^0.4.1",
+    "groq-sdk": "^0.7.0",
     "mysql": "^2.18.1",
     "node-fetch2": "^1.6.3",
     "nodemon": "^3.1.7",

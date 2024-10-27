@@ -82,6 +82,7 @@ module.exports = [
         async execute(message) {
             const logChannel = await checkServer(message);
             if (!logChannel) return;
+            if (message.author.bot) return;
 
             const lang = await getLang(message);
             const localMessage = lang.loggs.message;

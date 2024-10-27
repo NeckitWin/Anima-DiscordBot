@@ -22,6 +22,8 @@ module.exports = {
                     pl: 'Ilość wiadomości do usunięcia',
                     uk: 'Кількість повідомлень для видалення'
                 })
+                .setMinValue(1)
+                .setMaxValue(100)
                 .setRequired(true)),
     async execute(interaction) {
         const lang = await getLang(interaction);

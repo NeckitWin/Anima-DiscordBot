@@ -9,38 +9,71 @@ const calculateCapsPercentage = (text) => {
     return totalLetters > 0 ? (upperCaseLetters / totalLetters) * 100 : 0;
 };
 
-module.exports = {
-    name: Events.MessageCreate,
-    async execute(message) {
-        try {
-            const content = message.content;
-            if (content.length < 4) return;
-            const {antiCaps} = await getServer(message.guild.id, message.guild.name);
-            if (!antiCaps) return;
-            if (!message.guild) return;
-            const capsPercentage = calculateCapsPercentage(content);
-            if (capsPercentage < 60) return;
-            const member = message.guild.members.cache.get(message.author.id);
-            const botMember = message.guild.members.me;
-            const botHighestRole = botMember.roles.highest.position || false;
-            const memberHighestRole = member.roles.highest.position || false;
-            const lang = await getLang(message);
-            const local = lang.anti;
+const containsURL = (text) => {
+    const urlPattern = /(https?:\/\/[^\s]+)/g; // Регулярное выражение для поиска URL
+    return urlPattern.test(text);
+};
 
-            if (botHighestRole <= memberHighestRole) return;
-            if (!message.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers)) return;
-            if (message.author.bot) return;
-            const embed = new EmbedBuilder()
-                .setTitle(local.capslock)
-                .setDescription(local.capslockresponse)
-                .setColor(`#ba0000`);
+module.exports = [
+    {
+        name: Events.MessageCreate,
+        async execute(message) {
+            try {
+                const content = message.content;
+                if (content.length < 4) return;
+                if (containsURL(content)) return;
+                const {antiCaps} = await getServer(message.guild.id, message.guild.name);
+                if (!antiCaps) return;
+                if (!message.guild) return;
+                const capsPercentage = calculateCapsPercentage(content);
+                if (capsPercentage < 75) return;
+                const member = message.guild.members.cache.get(message.author.id);
+                const botMember = message.guild.members.me;
+                const botHighestRole = botMember.roles.highest.position || false;
+                const memberHighestRole = member.roles.highest.position || false;
+                const lang = await getLang(message);
+                const local = lang.anti;
 
-            await member.timeout(5 * 60 * 1000);
-            await message.reply({content: `${member}`, embeds: [embed]});
-            await message.delete();
+                if (botHighestRole <= memberHighestRole) return;
+                if (!message.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers)) return;
+                if (message.author.bot) return;
+                const embed = new EmbedBuilder()
+                    .setTitle(local.capslock)
+                    .setDescription(local.capslockresponse)
+                    .setColor(`#ba0000`);
 
-        } catch (err) {
-            console.error(err);
+                await member.timeout(5 * 60 * 1000);
+                await message.reply({content: `${member}`, embeds: [embed]});
+                await message.delete();
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    },
+    {
+        name: Events.MessageCreate,
+        async execute(message) {
+            try {
+                const content = message.content;
+                if (content.length < 7) return;
+                if (!containsURL(content)) return;
+                const {antiLinks} = await getServer(message.guild.id, message.guild.name);
+                if (!antiLinks) return;
+                if (!message.guild) return;
+                const member = message.guild.members.cache.get(message.author.id);
+                const botMember = message.guild.members.me;
+                const botHighestRole = botMember.roles.highest.position || false;
+                const memberHighestRole = member.roles.highest.position || false;
+
+                if (botHighestRole <= memberHighestRole) return;
+                if (!message.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers)) return;
+
+                await message.delete();
+
+            } catch (err) {
+                console.error(err);
+            }
         }
     }
-}
+]
