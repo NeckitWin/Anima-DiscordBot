@@ -20,6 +20,17 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
+  "ball": {
+    "yes": "yes",
+    "no": "no",
+    "maybe": "maybe",
+    "tryAgain": "try again",
+    "certain": "certainly",
+    "doubtful": "doubtful",
+    "question": "Question",
+    "answer": "The ball says",
+    "loading": "You shake the ball"
+  },
   "anti": {
     "title": "Server Security System",
     "capslockset": "Caps Lock restriction",
@@ -351,6 +362,10 @@
     "moder": {
       "label": "Moderation",
       "description": "Commands for moderation"
+    },
+    "economy": {
+      "label": "Economy",
+      "description": "Economy commands"
     },
     "util": {
       "label": "Utilities",

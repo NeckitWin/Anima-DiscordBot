@@ -20,6 +20,17 @@
     "minutes": "minut",
     "seconds": "sekund"
   },
+  "ball": {
+    "yes": "tak",
+    "no": "nie",
+    "maybe": "może",
+    "tryAgain": "spróbuj ponownie",
+    "certain": "z pewnością",
+    "doubtful": "wątpliwe",
+    "question": "Pytanie",
+    "answer": "Kula mówi",
+    "loading": "Trzęsiesz kulę"
+  },
   "anti": {
     "title": "System bezpieczeństwa serwera",
     "capslockset": "Ograniczenie użycia Caps Locka",
@@ -351,6 +362,10 @@
     "moder": {
       "label": "Moderacja",
       "description": "Polecenia dla moderacji"
+    },
+    "economy": {
+      "label": "Ekonomia",
+      "description": "Polecenia ekonomiczne"
     },
     "util": {
       "label": "Narzędzia",
