@@ -10,8 +10,9 @@ const calculateCapsPercentage = (text) => {
 };
 
 const containsURL = (text) => {
-    const urlPattern = /(https?:\/\/[^\s]+)/g; // Регулярное выражение для поиска URL
-    return urlPattern.test(text);
+    const urlPattern = /(https?:\/\/[^\s]+)/g;
+    const httpUrlPattern = /(http?:\/\/[^\s]+)/g;
+    return urlPattern.test(text) || httpUrlPattern.test(text);
 };
 
 module.exports = [
@@ -38,7 +39,7 @@ module.exports = [
                 if (!message.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers)) return;
                 if (message.author.bot) return;
                 const embed = new EmbedBuilder()
-                    .setTitle(local.capslock)
+                    .setTitle(local.title)
                     .setDescription(local.capslockresponse)
                     .setColor(`#ba0000`);
 

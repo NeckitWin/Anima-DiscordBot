@@ -1,10 +1,10 @@
-const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField } = require('discord.js');
+const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('clear')
-        .setNameLocalizations({ ru: 'очистить', pl: 'wyczyść', uk: 'очистити' })
+        .setNameLocalizations({ru: 'очистить', pl: 'wyczyść', uk: 'очистити'})
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .setDescription('Clears chat for specified amount of messages')
         .setDescriptionLocalizations({
@@ -15,7 +15,7 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .addIntegerOption(option =>
             option.setName('amount')
-                .setNameLocalizations({ ru: 'количество', pl: 'ilość', uk: 'кількість' })
+                .setNameLocalizations({ru: 'количество', pl: 'ilość', uk: 'кількість'})
                 .setDescription('amount of messages to clear')
                 .setDescriptionLocalizations({
                     ru: 'Количество сообщений для удаления',
@@ -28,20 +28,30 @@ module.exports = {
     async execute(interaction) {
         const lang = await getLang(interaction);
         const local = lang.clear;
-        try {
         const amount = interaction.options.getInteger('amount');
-        if (!interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ManageMessages)) return await interaction.reply({content: lang.error.botdontpermclear, ephemeral: true});
+        try {
+            const embedLoading = new EmbedBuilder()
+                .setTitle(`<a:loading:1295096250609172611> ${lang.loading}`)
+                .setColor(`#00ffd0`);
+            const embedPerm = new EmbedBuilder()
+                .setTitle(lang.error.botdontpermmanagemessages)
+                .setColor(`#d80000`);
+            const embedSuccess = new EmbedBuilder()
+                .setTitle(`${local.successFirst} ${amount} ${local.successSecond}`)
+                .setAuthor({name: interaction.user.displayName, iconURL: interaction.user.displayAvatarURL()})
+                .setColor(`#00ac00`);
 
-        if (amount < 1 || amount > 100) {
-            interaction.reply({content: local.amount, ephemeral: true});
-        } else {
+            await interaction.reply({embeds: [embedLoading], ephemeral: true});
+
+            if (!interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ManageMessages))
+                return await interaction.editReply({embeds: [embedPerm]});
+
+            if (amount < 1 || amount > 100) return await interaction.editReply({embeds: [embedPerm.setTitle(local.amount)]});
             await interaction.channel.bulkDelete(amount, true);
-
-            interaction.reply({content: `${local.successFirst} ${amount} ${local.successSecond}`});
-        }
+            await interaction.deleteReply();
+            await interaction.followUp({embeds: [embedSuccess], ephemeral: false});
         } catch (err) {
             console.error(err);
-            return interaction.reply({content: lang.error.botdontperm, ephemeral: true});
         }
     }
 }

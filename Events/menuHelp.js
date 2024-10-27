@@ -2,7 +2,6 @@ const {Events, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder} = requir
 const {getLang} = require("../Data/Lang");
 
 module.exports = {
-    cooldown: 5,
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {
@@ -23,7 +22,8 @@ module.exports = {
                 });
             }
 
-            const infocontent = `</help:1285287069676994605> - ${localinfo.info[0]} \n` +
+            const infocontent =
+                `</help:1285287069676994605> - ${localinfo.info[0]} \n` +
                 `</bot:1285287069676994604> - ${localinfo.info[1]} \n` +
                 `</user:1274053573700878358> - ${localinfo.info[2]} \n` +
                 `</leaders:1287176496791945268> - ${localinfo.info[3]} \n` +
@@ -31,30 +31,35 @@ module.exports = {
                 `</server:1285287069676994607> - ${localinfo.info[5]} \n` +
                 `</role:1285287069676994606> - ${localinfo.info[6]} \n`;
 
-            const admincontent = `</language:1292081237837611079> - ${localinfo.admin[0]} \n` +
+            const admincontent =
+                `</language:1292081237837611079> - ${localinfo.admin[0]} \n` +
                 `</autorole add:1290435224072884264> - ${localinfo.admin[1]} \n` +
                 `</autorole list:1290435224072884264> - ${localinfo.admin[2]} \n` +
                 `</autorole remove:1290435224072884264> - ${localinfo.admin[3]} \n` +
                 `</greeting set:1290765643011981323> - ${localinfo.admin[4]} \n` +
                 `</greeting remove:1290765643011981323> - ${localinfo.admin[5]}`;
 
-            const modercontent = `</ban:1285287069676994608> - ${localinfo.moder[0]} \n` +
+            const modercontent =
+                `</ban:1285287069676994608> - ${localinfo.moder[0]} \n` +
                 `</kick:1285287069676994610> - ${localinfo.moder[1]} \n` +
                 `</mute:1285287069756690486> - ${localinfo.moder[2]} \n` +
                 `</clear:1285287069676994609> - ${localinfo.moder[3]}`;
 
-            const utilcontent = `</calc:1285287069756690488> - ${localinfo.util[0]} \n` +
+            const utilcontent =
+                `</calc:1285287069756690488> - ${localinfo.util[0]} \n` +
                 `</translate:1285287069756690490> - ${localinfo.util[1]} \n` +
                 `</weather:1285287069756690491> - ${localinfo.util[2]}\n` +
                 `</random:1294775882124361819> - ${localinfo.util[3]}`;
 
-            const gamescontent = `</ben:1292452492986155051> - ${localinfo.games[0]} \n` +
+            const gamescontent =
+                `</ben:1292452492986155051> - ${localinfo.games[0]} \n` +
                 `</coin_flip:1294379110197624924> - ${localinfo.games[1]} \n` +
                 `\`+aura\` - ${localinfo.games[2]} \n` +
                 `\`-aura\` - ${localinfo.games[3]}\n` +
             `</anime:1294302199869997197> - ${localinfo.games[4]}`;
 
-            const funcontent = `</reaction:1287841310979395676> - ${localinfo.fun[0]} \n` +
+            const funcontent =
+                `</reaction:1287841310979395676> - ${localinfo.fun[0]} \n` +
                 `</interaction:1288525650721898669> - ${localinfo.fun[1]} \n` +
                 `</nsfw:1293672483869949973> - ${localinfo.fun[2]}\n` +
                 `</ship:1295137310584864868> - ${localinfo.fun[3]}`;

@@ -74,43 +74,43 @@ module.exports = {
         const lang = await getLang(interaction);
         const local = lang.anti;
         const botMember = guild.members.me;
-        if (!interaction.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers)) return await interaction.reply({
-            content: lang.error.botdontpermmute,
+        if (!interaction.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers && PermissionsBitField.Flags.ManageMessages))
+            return await interaction.reply({
+            content: `${lang.error.botdontpermmute}\n${lang.error.botdontpermmanagemessages}`,
             ephemeral: true
         });
         const guildID = guild.id;
         const guildName = guild.name;
 
+        const status = options.getInteger(`status`);
+        const response = `\`${local[status ? `enabled` : `disabled`]}\``;
 
         const embed = new EmbedBuilder()
             .setTitle(local.title)
 
         if (subcommand === `caps`) {
-            const status = options.getInteger(`status`);
             const {antiCaps} = await getServer(guildID, guildName);
 
             if (status != antiCaps) {
                 await updateServer(guildID, "antiCaps", status);
                 embed.setColor(`#00ac00`);
-                embed.setDescription(`${local.capslockset} ${local[status ? `enabled` : `disabled`]}`);
+                embed.setDescription(`${local.capslockset} ${response}`);
             } else {
                 embed.setColor(`#ba0000`);
-                embed.setDescription(`${local.capslockalready} ${local[status ? `enabled` : `disabled`]}`);
+                embed.setDescription(`${local.capslockalready} ${response}`);
             }
             await interaction.reply({embeds: [embed]});
         } else if (subcommand === `links`) {
             const status = options.getInteger(`status`);
             const {antiLinks} = await getServer(guildID, guildName);
-            const embed = new EmbedBuilder()
-                .setTitle(`Системы автомодерации сервера`)
 
             if (status != antiLinks) {
                 await updateServer(guildID, "antiLinks", status);
                 embed.setColor(`#00ac00`);
-                embed.setDescription(`Ограничение на использование ссылок ${local[status ? `enabled` : `disabled`]}`);
+                embed.setDescription(`${local.linkset} ${response}`);
             } else {
                 embed.setColor(`#ba0000`);
-                embed.setDescription(`Ограничение на использование ссылок уже было ${local[status ? `enabled` : `disabled`]}`);
+                embed.setDescription(`${local.linkalready} ${response}`);
             }
             await interaction.reply({embeds: [embed]});
         }

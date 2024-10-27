@@ -71,32 +71,32 @@ module.exports = {
                     {
                         name: `📚・${local.info.label}`,
                         value: '</help:1285287069676994605>, </bot:1285287069676994604>, </user:1274053573700878358>, </leaders:1287176496791945268>, </avatar-banner:1285287069676994603>, </server:1285287069676994607>, </role:1285287069676994606>',
-                        inline: false,
+                        inline: false
                     },
                     {
                         name: `👑・${local.admin.label}`,
-                        value: `</language:1292081237837611079>, </autorole add:1290435224072884264>, </autorole list:1290435224072884264>, </autorole remove:1290435224072884264>, </greeting set:1290765643011981323>, </greeting remove:1290765643011981323>`,
-                        inline: false,
+                        value: `</language:1292081237837611079>, </autorole add:1290435224072884264>, </autorole list:1290435224072884264>, </autorole remove:1290435224072884264>, </greeting set:1290765643011981323>, </greeting remove:1290765643011981323>, </logs set:1299470943638519890>, </logs remove:1299470943638519890>`,
+                        inline: false
                     },
                     {
                         name: `👮‍♂️・${local.moder.label}`,
-                        value: '</ban:1285287069676994608>, </clear:1285287069676994609>, </mute:1285287069756690486>, </kick:1285287069676994610>',
-                        inline: false,
+                        value: '</clear:1285287069676994609>, </anti caps:1299470943638519889>, </anti links:1299470943638519889>',
+                        inline: false
                     },
                     {
                         name: `🔧・${local.util.label}`,
                         value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>, </random:1294775882124361819>',
-                        inline: false,
+                        inline: false
                     },
                     {
                         name: `🎮・${local.games.label}`,
-                        value: '</ben:1292452492986155051>, </coin_flip:1294379110197624924>, `+aura`, `-aura`, </anime:1294302199869997197>',
-                        inline: false,
+                        value: '</coin_flip:1294379110197624924>, </anime:1294302199869997197>, `+aura`, `-aura`',
+                        inline: false
                     },
                     {
                         name: `🎉・${local.fun.label}`,
-                        value: '</reaction:1287841310979395676>, </interaction:1288525650721898669>, </nsfw:1293672483869949973>, </ship:1295137310584864868>',
-                        inline: false,
+                        value: '</nsfw:1293672483869949973>, </ship:1295137310584864868>, </ben:1292452492986155051>, </rp:1299513629934223493>',
+                        inline: false
                     }
                 ],
                 author: {

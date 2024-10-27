@@ -1,8 +1,10 @@
 {
+  "loading": "Loading",
   "error": {
     "rolesEqual": "User's role is the same as yours",
     "bothigherrole": "User's role is higher than mine",
     "userhigherrole": "User's role is higher than yours",
+    "botdontpermmanagemessages": "I don't have permission to manage messages",
     "botdontpermkick": "I don't have permission to kick members",
     "botdontpermban": "I don't have permission to ban members",
     "botdontpermmute": "I don't have permission to mute members",
@@ -19,12 +21,14 @@
     "seconds": "seconds"
   },
   "anti": {
-    "capslock": "Anti Caps Lock System",
-    "capslockset": "Caps lock restriction has been",
+    "title": "Server Security System",
+    "capslockset": "Caps Lock restriction",
+    "linkset": "Link sending restriction",
     "enabled": "enabled",
     "disabled": "disabled",
-    "capslockalready": "Caps lock restriction is already",
-    "capslockresponse": "Please don't use caps lock!"
+    "capslockalready": "Caps Lock restriction is already",
+    "linkalready": "Link sending restriction is already",
+    "capslockresponse": "Please don't use Caps Lock!"
   },
   "anime": {
     "guess": "Guess the anime",

@@ -1,8 +1,10 @@
 {
+  "loading": "Ładowanie",
   "error": {
     "rolesEqual": "Rola użytkownika jest taka sama jak twoja",
     "bothigherrole": "Rola użytkownika jest wyższa niż moja",
     "userhigherrole": "Rola użytkownika jest wyższa niż twoja",
+    "botdontpermmanagemessages": "Nie mam uprawnień do zarządzania wiadomościami",
     "botdontpermkick": "Nie mam uprawnień do wyrzucania członków",
     "botdontpermban": "Nie mam uprawnień do banowania członków",
     "botdontpermmute": "Nie mam uprawnień do wyciszania członków",
@@ -19,11 +21,13 @@
     "seconds": "sekund"
   },
   "anti": {
-    "capslock": "System antykapowania",
-    "capslockset": "Ograniczenie używania Caps Locka zostało",
+    "title": "System bezpieczeństwa serwera",
+    "capslockset": "Ograniczenie użycia Caps Locka",
+    "linkset": "Ograniczenie wysyłania linków",
     "enabled": "włączone",
     "disabled": "wyłączone",
-    "capslockalready": "Ograniczenie używania Caps Locka jest już",
+    "capslockalready": "Ograniczenie użycia Caps Locka jest już",
+    "linkalready": "Ograniczenie wysyłania linków jest już",
     "capslockresponse": "Proszę, nie używaj Caps Locka!"
   },
   "anime": {
