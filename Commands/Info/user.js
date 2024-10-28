@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
-const {getUserServer} = require('../../Data/funcs/dbUser')
+const {getUserServer, getRelation} = require('../../Data/funcs/dbUser')
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
 
@@ -103,6 +103,9 @@ module.exports = {
             const userInfo = getUserArray[0] || {};
             const shards = userInfo.shards ?? 0;
             const aura = userInfo.aura ?? 0;
+            const getMarried = await getRelation(guildID, userID);
+            const relation = getMarried && getMarried.length > 0 ? getMarried[0] : null;
+            const relationUser = relation && relation.userID1 === userID ? relation.userID2 : relation.userID1;
 
             const embed = new EmbedBuilder()
                 .setTitle(`${local.title} — ${user.displayName}`)
@@ -112,10 +115,12 @@ module.exports = {
                     `<:date:1297196424882294796> **${local.entry}**: \`${formatDate(member.joinedAt)}\`\n` +
                     `<:moon:1297194475780575242> **${local.status}**: ${getStatusEmoji(status)} ${local.statusName[status]}\n` +
                     (bage ? `<:badge:1297195546041385042> **${local.badge}**: ${bage}\n` : ``) +
-                    (activityType ? `<:activity:1297194463776604233> **${local.active}**: ${activityType === `custom` ? (activityState ?? `\`❔\`` ) : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
+                    (activityType ? `<:activity:1297194463776604233> **${local.active}**: ${activityType === `custom` ? (activityState ?? `\`❔\`\n` ) : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
                     `<:Roles:1297191708848689166> **${local.role}[${rolesCount}]**: ${highestRole}\n` +
+                    (relation ? `<:hearts:1300282044047429682> ${local.married} <@${relationUser}>\n` : ``) +
                     `<:shard:1296969847690760234> **${local.shard}**: ${shards}\n` +
-                    `<:aura:1297189989498753076> **${local.aura}**: ${aura}`)
+                    `<:aura:1297189989498753076> **${local.aura}**: ${aura}`
+                    )
                 .setFooter({text: `${local.user_id}: ${userID}`});
             if (avatar) embed.setThumbnail(avatar);
             if (banner) embed.setImage(banner);

@@ -91,7 +91,7 @@ module.exports = {
                 const answer = await  groqAI(prompt);
                 await interaction.reply(answer);
             } else if (subcommand === `image`) {
-                // if (await getCooldown('ai', interaction, 600)) return; // cooldown
+                // if (await getCooldown('ai', Interaction, 600)) return; // cooldown
 
                 const embedLoading = new EmbedBuilder()
                     .setTitle(`<a:loading:1295096250609172611>${local.loading}...`)

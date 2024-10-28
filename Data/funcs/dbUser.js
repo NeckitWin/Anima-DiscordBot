@@ -47,4 +47,17 @@ const updateAura = async (user_id, server_id, sign, count, servername, username)
     }
 }
 
-module.exports = {getUser, getUserServer, getLeaderboard, postNewUser, updateAura};
+const getRelation = async (server_id, user_id) => {
+    const sql = `SELECT * FROM relation WHERE serverID = ? AND (userID1 = ? OR userID2 = ?)`;
+    return await sqlRequest(sql, [server_id, user_id, user_id]);
+};
+
+const setRelation = async (server_id, user_id1, user_id2) => {
+    const checkRelation = await getRelation(server_id, user_id1);
+    if (checkRelation.length > 0) return false;
+    const sql = `INSERT INTO relation (serverID, userID1, userID2) VALUES (?, ?, ?)`;
+    await sqlPost(sql, [server_id, user_id1, user_id2]);
+    return true;
+};
+
+module.exports = {getUser, getUserServer, getLeaderboard, postNewUser, updateAura, getRelation, setRelation};

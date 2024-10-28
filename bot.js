@@ -82,7 +82,7 @@ for (const file of eventFiles) {
     }
 }
 
-// client.on(Events.ClientReady, async interaction => {
+// client.on(Events.ClientReady, async Interaction => {
 //     const sdc = new SDC(sdcKEY);
 //     sdc.setAutoPost(client);
 // })

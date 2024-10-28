@@ -39,6 +39,12 @@ module.exports = {
                         emoji: '👮‍♂️',
                     },
                     {
+                        label: local.economy.label,
+                        description: local.economy.description,
+                        value: 'economy',
+                        emoji: '🪙',
+                    },
+                    {
                         label: `${local.util.label}`,
                         description: `${local.util.description}`,
                         value: 'utils',
@@ -84,18 +90,23 @@ module.exports = {
                         inline: false
                     },
                     {
+                        name: `🪙・${local.economy.label}`,
+                        value: `</balance:1297200872304021504>, </daily>`,
+                        inline: false
+                    },
+                    {
                         name: `🔧・${local.util.label}`,
                         value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>, </random:1294775882124361819>',
                         inline: false
                     },
                     {
                         name: `🎮・${local.games.label}`,
-                        value: '</coin_flip:1294379110197624924>, </anime:1294302199869997197>, `+aura`, `-aura`',
+                        value: '</anime:1294302199869997197>, </coin_flip:1294379110197624924>, `+aura`, `-aura`',
                         inline: false
                     },
                     {
                         name: `🎉・${local.fun.label}`,
-                        value: '</nsfw:1293672483869949973>, </ship:1295137310584864868>, </ben:1292452492986155051>, </rp:1299513629934223493>, </ball:1300172412628762656>',
+                        value: '</rp:1299513629934223493>, </nsfw:1293672483869949973>, </ship:1295137310584864868>, </ben:1292452492986155051>, </ball:1300172412628762656>',
                         inline: false
                     }
                 ],

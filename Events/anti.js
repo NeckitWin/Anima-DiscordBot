@@ -21,13 +21,13 @@ module.exports = [
         async execute(message) {
             try {
                 const content = message.content;
-                if (content.length < 4) return;
+                if (content.length < 5) return;
                 if (containsURL(content)) return;
                 const {antiCaps} = await getServer(message.guild.id, message.guild.name);
                 if (!antiCaps) return;
                 if (!message.guild) return;
                 const capsPercentage = calculateCapsPercentage(content);
-                if (capsPercentage < 75) return;
+                if (capsPercentage < 60) return;
                 const member = message.guild.members.cache.get(message.author.id);
                 const botMember = message.guild.members.me;
                 const botHighestRole = botMember.roles.highest.position || false;

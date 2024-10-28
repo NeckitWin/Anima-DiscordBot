@@ -300,6 +300,7 @@
     "badge": "Badges",
     "active": "Activity",
     "role": "Roles",
+    "married": "Married to",
     "shard": "Shards",
     "aura": "Aura",
     "user_id": "User ID",
@@ -383,45 +384,50 @@
   "commandsdesc": {
     "info": [
       "Shows a list of all commands",
-      "Shows information about the bot",
-      "Shows information about the user",
-      "Shows list aura leaders",
-      "Shows the user's avatar",
-      "Shows information about the server",
-      "Shows information about the role"
+      "Shows bot information",
+      "Shows user information",
+      "Displays the aura leaderboard",
+      "Shows user avatar",
+      "Shows server information",
+      "Shows role information"
     ],
     "admin": [
       "Set the language for your server",
-      "Set auto role for new members",
-      "View the list of auto roles",
-      "Remove auto role from the list",
-      "Set the channel for greeting new members",
-      "Remove the greeting from server"
+      "Set an autorole for new members",
+      "View the autorole list",
+      "Remove an autorole from the list",
+      "Set a welcome channel for new members",
+      "Remove the welcome from the server",
+      "Set a log channel for the server",
+      "Remove logs from the server"
     ],
     "moder": [
-      "Bans the user",
-      "Kicks the user",
-      "Mutes the user",
-      "Clears the chat for a certain number of messages"
+      "Delete messages in the channel from 1 to 100",
+      "Forbid messages containing 60% or more caps lock (doesn't delete if user role is higher than bot)",
+      "Auto-delete messages with links (doesn't delete if user role is higher than bot)"
+    ],
+    "economy": [
+      "Shows user balance",
+      "Claim daily bonus"
     ],
     "util": [
-      "Calculator",
-      "Translates text, determines the language of the text for translation independently",
-      "The weather in your city",
+      "Solves mathematical examples",
+      "Translates text, automatically detects language for translation",
+      "Weather in your city",
       "Generates a random number"
     ],
     "games": [
-      "Ask Ben anything and get an answer",
-      "Flip a coin and guess the side",
-      "Add aura to a user",
-      "Remove aura from a user",
-      "Guess the anime by the picture"
+      "Guess the anime by the picture",
+      "Heads or tails",
+      "Give aura to another user",
+      "Take aura from another user"
     ],
     "fun": [
-      "Show your reaction",
-      "Interact with another user",
-      "Search NSFW anime content by tags",
-      "Find out the compatibility percentage of two users:"
+      "Show your emotions or interact with another user",
+      "Request adult anime content",
+      "Find out compatibility percentage between two users",
+      "Ask Ben a question",
+      "Discover your fate with a magic prediction ball"
     ]
   }
 }

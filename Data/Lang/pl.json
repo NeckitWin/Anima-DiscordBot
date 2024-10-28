@@ -287,6 +287,7 @@
     "badge": "Odznaki",
     "active": "Aktywność",
     "role": "Role",
+    "married": "W związku małżeńskim z",
     "shard": "Odłamki",
     "aura": "Aura",
     "user_id": "ID użytkownika",
@@ -382,46 +383,51 @@
   },
   "commandsdesc": {
     "info": [
-      "Pokazuje listę wszystkich poleceń",
-      "Pokazuje informacje o botcie",
+      "Pokazuje listę wszystkich komend",
+      "Pokazuje informacje o bocie",
       "Pokazuje informacje o użytkowniku",
-      "Pokazuje listę liderów aury",
-      "Pokazuje awatar użytkownika",
+      "Pokazuje tabelę liderów aury",
+      "Pokazuje avatar użytkownika",
       "Pokazuje informacje o serwerze",
       "Pokazuje informacje o roli"
     ],
     "admin": [
       "Ustaw język dla swojego serwera",
-      "Ustaw automatyczną rolę dla nowych członków",
-      "Zobacz listę automatycznych ról",
-      "Usuń automatyczną rolę z listy",
-      "Ustaw kanał dla powitania nowych członków",
-      "Usuń powitanie z serwera"
+      "Ustaw autorolę dla nowych członków",
+      "Zobacz listę autoroli",
+      "Usuń autorolę z listy",
+      "Ustaw kanał powitania nowych członków",
+      "Usuń powitanie z serwera",
+      "Ustaw kanał logów dla serwera",
+      "Usuń logi z serwera"
     ],
     "moder": [
-      "Banuje użytkownika",
-      "Wyrzuca użytkownika",
-      "Wycisza użytkownika",
-      "Czyści czat na pewną ilość wiadomości"
+      "Usuń wiadomości w kanale od 1 do 100",
+      "Zabroń wiadomości wielkimi literami 60% lub więcej (nie usuwa, jeśli rola użytkownika jest wyższa niż bota)",
+      "Automatyczne usuwanie wiadomości z linkami (nie usuwa, jeśli rola użytkownika jest wyższa niż bota)"
+    ],
+    "economy": [
+      "Pokazuje saldo użytkownika",
+      "Odbierz codzienny bonus"
     ],
     "util": [
-      "Kalkulator",
-      "Tłumaczy tekst, samodzielnie określa język tekstu do tłumaczenia",
-      "Pogoda w twoim mieście",
+      "Rozwiązuje przykłady matematyczne",
+      "Tłumaczy tekst, automatycznie wykrywa język do tłumaczenia",
+      "Pogoda w Twoim mieście",
       "Generuje losową liczbę"
     ],
     "games": [
-      "Zapytaj Bena o coś i otrzymaj odpowiedź",
-      "Rzuć monetą i zgadnij stronę",
-      "Dodaj aurę użytkownikowi",
-      "Usuń aurę od użytkownika",
-      "Zgadnij anime po obrazku"
+      "Zgadnij anime po obrazku",
+      "Orzeł czy reszka",
+      "Podaruj aurę innemu użytkownikowi",
+      "Zabierz aurę od innego użytkownika"
     ],
     "fun": [
-      "Pokaż swoją reakcję",
-      "Współdziałaj z innym użytkownikiem",
-      "Wyszukaj NSFW anime kontent według tagów",
-      "Sprawdź procent zgodności dwóch użytkowników"
+      "Pokaż swoje emocje lub wejdź w interakcję z innym użytkownikiem",
+      "Poproś o treści anime dla dorosłych",
+      "Sprawdź procent kompatybilności między dwoma użytkownikami",
+      "Zadaj pytanie Benowi",
+      "Odkryj swój los za pomocą kuli wróżb"
     ]
   }
 }
