@@ -2,6 +2,7 @@
   "loading": "Ładowanie",
   "error": {
     "rolesEqual": "Rola użytkownika jest taka sama jak twoja",
+    "usernotfound": "Użytkownik nie znaleziony na serwerze",
     "bothigherrole": "Rola użytkownika jest wyższa niż moja",
     "userhigherrole": "Rola użytkownika jest wyższa niż twoja",
     "botdontpermmanagemessages": "Nie mam uprawnień do zarządzania wiadomościami",
@@ -15,10 +16,48 @@
     "botdontperm": "Nie mam uprawnień do tego",
     "botdontpermrole": "Muszę mieć uprawnienia do zarządzania rolami",
     "mustreply": "Musisz odpowiedzieć na wiadomość kogoś!",
+    "dontyourself": "Nie możesz tego zrobić sobie!",
     "otherpeople": "Musisz wybrać różnych użytkowników",
+    "dontbot": "Nie możesz tego zrobić botowi!",
     "wait": "Proszę czekać",
     "minutes": "minut",
     "seconds": "sekund"
+  },
+  "rp": {
+    "interactions": {
+      "hug": "mocno przytula",
+      "kiss": "namiętnie całuje",
+      "pat": "delikatnie głaszcze",
+      "bite": "potajemnie gryzie",
+      "cry": "płacze razem z",
+      "laugh": "śmieje się razem z",
+      "shocked": "jest w szoku razem z",
+      "love": "zakochuje się w",
+      "angry": "złości się na",
+      "think": "myśli o",
+      "sad": "smuci się razem z",
+      "happy": "cieszy się za",
+      "sleep": "zasypia razem z",
+      "dance": "zaprasza do tańca",
+      "punch": "mocno uderza"
+    },
+    "reactions": {
+      "hug": "chce przytulenia",
+      "kiss": "wysyła buziaka",
+      "pat": "chce pieszczoty",
+      "bite": "chce kogoś ugryźć",
+      "cry": "płacze",
+      "laugh": "śmieje się",
+      "shocked": "jest w pełnym szoku",
+      "love": "cierpi z miłości",
+      "angry": "wścieka się",
+      "think": "myśli o czymś ważnym",
+      "sad": "bardzo smutny",
+      "happy": "cieszy się",
+      "sleep": "chce spać",
+      "dance": "tańczy z radości",
+      "punch": "chce kogoś uderzyć"
+    }
   },
   "ball": {
     "yes": "tak",
@@ -155,23 +194,6 @@
     "no": "Nie",
     "ugh": "Ugh",
     "haha": "Ho ho ho"
-  },
-  "interaction": {
-    "hug": "przytula",
-    "kiss": "całuje",
-    "pat": "głaszcze",
-    "bite": "gryzie"
-  },
-  "reaction": {
-    "sad": "czuje się smutny",
-    "happy": "czuje się szczęśliwy",
-    "angry": "czuje się zły",
-    "cry": "płacze",
-    "laugh": "śmieje się",
-    "shocked": "jest w szoku",
-    "love": "jest zakochany",
-    "sleepy": "śpi",
-    "thinking": "głęboko myśli"
   },
   "request": "Żądanie od ",
   "say": {

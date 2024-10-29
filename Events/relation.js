@@ -25,7 +25,7 @@ module.exports = [
                 });
                 if (interaction.customId === `acceptRelation`) {
 
-                    const tryRelation = await setRelation(interaction.guild.id, authorInteraction.id, mentionUser.id);
+                    const tryRelation = await setRelation(guildID, authorInteraction.id, mentionUser.id);
                     if (tryRelation) {
                         await interaction.reply({content: `Вы успешно начали отношения`});
                     } else {

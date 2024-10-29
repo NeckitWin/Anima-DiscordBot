@@ -104,7 +104,7 @@ module.exports = {
             const shards = userInfo.shards ?? 0;
             const aura = userInfo.aura ?? 0;
             const getMarried = await getRelation(guildID, userID);
-            const relation = getMarried && getMarried.length > 0 ? getMarried[0] : null;
+            const relation = getMarried && getMarried.length > 0 ? getMarried[0] : false;
             const relationUser = relation && relation.userID1 === userID ? relation.userID2 : relation.userID1;
 
             const embed = new EmbedBuilder()

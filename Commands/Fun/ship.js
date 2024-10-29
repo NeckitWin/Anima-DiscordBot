@@ -36,7 +36,7 @@ const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0,
 }
 
 const createTextSVG = (text, fontSize, fillColor = 'white', strokeColor, strokeWidth, center = false) => {
-    return `<svg xmlns="http://www.w3.org/2000/svg" height="${fontSize + 10}" ${center ? 'width="200"' : ''}>
+    return `<svg xmlns="http://www.w3.org/2000/svg" height="${fontSize + 10}" ${center ? 'width="240"' : ''}>
                 <text x="${center ? '50%' : '0'}" y="${fontSize}" font-size="${fontSize}" font-family="Comic Sans MS, cursive, sans-serif" fill="${fillColor}" 
                        ${strokeColor ? `stroke="${strokeColor}"` : ''} 
                        stroke-width="${strokeWidth}" text-anchor="${center ? 'middle' : 'start'}" dominant-baseline="hanging" font-weight="bold">
@@ -100,7 +100,7 @@ module.exports = {
             const bgImage = sharp(bgPath);
             const randomNumber = Math.floor(Math.random() * (100 + 1));
 
-            const textSVG = createTextSVG((randomNumber+"%"), 50, 'white','#450000', 3, true)
+            const textSVG = createTextSVG((randomNumber+"%"), 80, 'white','#450000', 3, true)
             // const username1 = createTextSVG(user1.displayName, 24, 'white', true);
             // const username2 = createTextSVG(user2.displayName,24, 'white', true);
 
@@ -108,7 +108,7 @@ module.exports = {
                 .composite([
                     {input: userAvatar1, top: 100, left: 0},
                     {input: userAvatar2, top: 100, left: 440},
-                    {input: Buffer.from(textSVG), top: 130, left: 230}
+                    {input: Buffer.from(textSVG), top: 110, left: 210}
                 ]).toBuffer();
 
             await interaction.editReply({content:`${user1} ${user2}`, embeds: [], files: [result]});

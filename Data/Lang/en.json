@@ -2,6 +2,7 @@
   "loading": "Loading",
   "error": {
     "rolesEqual": "User's role is the same as yours",
+    "usernotfound": "User not found in the server",
     "bothigherrole": "User's role is higher than mine",
     "userhigherrole": "User's role is higher than yours",
     "botdontpermmanagemessages": "I don't have permission to manage messages",
@@ -15,10 +16,48 @@
     "botdontperm": "I don't have permission to do this",
     "botdontpermrole": "I must have a permission to manage roles",
     "mustreply": "You have to reply to someone's message!",
+    "dontyourself": "You can't do this to yourself",
     "otherpeople": "You must select different users",
+    "dontbot": "You can't do this to the bot",
     "wait": "Please wait",
     "minutes": "minutes",
     "seconds": "seconds"
+  },
+  "rp": {
+    "interactions": {
+      "hug": "hugs tightly",
+      "kiss": "kisses passionately",
+      "pat": "gently pats",
+      "bite": "secretly bites",
+      "cry": "cries together with",
+      "laugh": "laughs together with",
+      "shocked": "is shocked together with",
+      "love": "falls in love with",
+      "angry": "is angry with",
+      "think": "thinks about",
+      "sad": "is sad together with",
+      "happy": "is happy for",
+      "sleep": "falls asleep together with",
+      "dance": "invites to dance",
+      "punch": "hits hard"
+    },
+    "reactions": {
+      "hug": "wants a hug",
+      "kiss": "sends a kiss",
+      "pat": "wants some affection",
+      "bite": "wants to bite someone",
+      "cry": "is crying",
+      "laugh": "is laughing",
+      "shocked": "is completely shocked",
+      "love": "suffers from love",
+      "angry": "is furious",
+      "think": "is thinking about something important",
+      "sad": "is very sad",
+      "happy": "is happy",
+      "sleep": "wants to sleep",
+      "dance": "dances with joy",
+      "punch": "wants to punch someone"
+    }
   },
   "ball": {
     "yes": "yes",
@@ -155,23 +194,6 @@
     "no": "No",
     "Ugh": "Ugh",
     "haha": "Ho ho ho"
-  },
-  "interaction": {
-    "hug": "hugs",
-    "kiss": "kisses",
-    "pat": "pats",
-    "bite": "bites"
-  },
-  "reaction": {
-    "sad": "is feeling sad",
-    "happy": "is feeling happy",
-    "angry": "is feeling angry",
-    "cry": "is crying",
-    "laugh": "is laughing",
-    "shocked": "is shocked",
-    "love": "is in love",
-    "sleepy": "is sleeping",
-    "thinking": "is deep in thought"
   },
   "request": "Request from ",
   "say": {
