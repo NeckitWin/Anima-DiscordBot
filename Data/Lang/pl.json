@@ -26,6 +26,17 @@
     "minutes": "minut",
     "seconds": "sekund"
   },
+  "post": {
+    "title": "Utwórz post na swoim serwerze",
+    "titlecontent": "Napisz tytuł posta",
+    "content": "Napisz treść posta",
+    "color": "Ustaw kolor posta",
+    "image": "Dodaj URL obrazka/gifa do posta",
+    "author": "Dodaj ID autora posta",
+    "fill": "Wypełnij wszystkie pola w oknie modalnym",
+    "complete": "Post został pomyślnie utworzony na serwerze",
+    "example": "przykład"
+  },
   "marry": {
     "marry": "Ślub",
     "wasMarry": "Ten użytkownik jest już w związku małżeńskim",

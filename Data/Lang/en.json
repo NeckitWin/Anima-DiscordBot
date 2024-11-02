@@ -26,6 +26,17 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
+  "post": {
+    "title": "Create a post on your server",
+    "titlecontent": "Write the post title",
+    "content": "Write the post content",
+    "color": "Set the post color",
+    "image": "Add the image/gif URL to the post",
+    "author": "Add the author ID of the post",
+    "fill": "Fill in all fields in the modal window",
+    "complete": "The post has been successfully created on the server",
+    "example": "example"
+  },
   "marry": {
     "marry": "Marriage",
     "wasMarry": "This user is already married",

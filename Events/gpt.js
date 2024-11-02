@@ -2,12 +2,13 @@ const { Events, AttachmentBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const Groq = require("groq-sdk");
-const { groqKey } = require('../Data/config.json');
+const { groqKey, groqKey2 } = require('../Data/config.json');
 
 const messageHistory = {};
 
-process.env.GROQ_API_KEY = groqKey;
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+async function createGroqClient(apiKey) {
+    return new Groq({ apiKey });
+}
 
 module.exports = {
     name: Events.MessageCreate,
@@ -24,7 +25,6 @@ module.exports = {
             await message.channel.sendTyping();
 
             const userQuestion = message.content;
-
             const serverId = message.guild.id;
             const history = messageHistory[serverId] || [];
 
@@ -36,16 +36,39 @@ module.exports = {
 
             messages.push({ role: "user", content: `user: ${message.author.displayName}, question: ${userQuestion}` });
 
-            const groqAnswer = await groq.chat.completions.create({
-                messages: [
-                    {
-                        role: "system",
-                        content: "You are Anima, a Discord bot assistant. You love helping people.",
-                    },
-                    ...messages,
-                ],
-                model: "llama3-8b-8192",
-            });
+            let groqAnswer;
+            try {
+                const groq = await createGroqClient(groqKey);
+                groqAnswer = await groq.chat.completions.create({
+                    messages: [
+                        {
+                            role: "system",
+                            content: "You are Anima, a Discord bot assistant. You love helping people.",
+                        },
+                        ...messages,
+                    ],
+                    model: "llama3-8b-8192",
+                });
+            } catch (error) {
+                console.error("Error with primary API key, trying backup key...", error);
+
+                try {
+                    const groqBackup = await createGroqClient(groqKey2);
+                    groqAnswer = await groqBackup.chat.completions.create({
+                        messages: [
+                            {
+                                role: "system",
+                                content: "You are Anima, a Discord bot assistant. You love helping people.",
+                            },
+                            ...messages,
+                        ],
+                        model: "llama3-8b-8192",
+                    });
+                } catch (backupError) {
+                    console.error("Both API keys failed", backupError);
+                    return await message.reply("I'm having trouble connecting to the service. Please try again later.");
+                }
+            }
 
             const result = groqAnswer.choices[0]?.message?.content || "";
 
@@ -59,7 +82,7 @@ module.exports = {
                 user: message.author.displayName,
             });
 
-            if (messageHistory[serverId].length > 50) {
+            if (messageHistory[serverId].length > 200) {
                 messageHistory[serverId].shift();
             }
 

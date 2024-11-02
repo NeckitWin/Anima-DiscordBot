@@ -29,6 +29,10 @@ module.exports = {
             if (DivorceActions.includes(customId)) {
                 const partner = getAuthorMarried[0].userID1 === user.id ? getAuthorMarried[0].userID2 : getAuthorMarried[0].userID1;
                 const partnerMember = `<@${partner}>`;
+                if (user.id !== authorInteraction.id) {
+                    embedError.setTitle(lang.error.notyourcommand);
+                    return interaction.reply({embeds: [embedError], ephemeral: true});
+                }
                 if (customId === `marryDivorce`) {
                     embedDivorce.setDescription(`${local.wantDivorce} ${partnerMember}?`)
                         .setThumbnail(authorInteraction.displayAvatarURL());
@@ -71,13 +75,14 @@ module.exports = {
                     .setTimestamp(new Date());
 
                 let error;
-                if (mentionUser.id !== user.id) {
-                    error = lang.error.notforyou;
-                    embedError.setTitle(error);
-                    return interaction.reply({embeds: [embedError], ephemeral: true});
-                }
+
 
                 if (customId === `marryAccept`) {
+                    if (mentionUser.id !== user.id) {
+                        error = lang.error.notforyou;
+                        embedError.setTitle(error);
+                        return interaction.reply({embeds: [embedError], ephemeral: true});
+                    }
                     if (isAuthorMarried || isMentionUserRelation) {
                         error = local.wasMarry;
                         embedError.setTitle(error);
@@ -92,6 +97,11 @@ module.exports = {
 
                     await message.edit({embeds: [marryEmbed], components: []});
                 } else if (customId === `marryDecline`) {
+                    if (!(mentionUser.id === user.id || user.id === authorInteraction.id)   ) {
+                        error = lang.error.notforyou;
+                        embedError.setTitle(error);
+                        return interaction.reply({embeds: [embedError], ephemeral: true});
+                    }
                     marryEmbed
                         .setDescription(local.declined);
 
