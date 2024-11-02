@@ -64,10 +64,11 @@ module.exports = {
 
                 const funcontent =
                     `</rp:1299513629934223493> - ${localinfo.fun[0]} \n` +
-                    `</nsfw:1293672483869949973> - ${localinfo.fun[1]} \n` +
-                    `</ship:1295137310584864868> - ${localinfo.fun[2]} \n` +
-                    `</ben:1292452492986155051> - ${localinfo.fun[3]} \n` +
-                    `</ball:1300172412628762656> - ${localinfo.fun[4]}`;
+                    `</marry:1302061890201063454> - ${localinfo.fun[1]} \n` +
+                    `</nsfw:1293672483869949973> - ${localinfo.fun[2]} \n` +
+                    `</ship:1295137310584864868> - ${localinfo.fun[3]} \n` +
+                    `</ben:1292452492986155051> - ${localinfo.fun[4]} \n` +
+                    `</ball:1300172412628762656> - ${localinfo.fun[5]}`;
 
                 const menuHelpEvent = new StringSelectMenuBuilder()
                     .setCustomId('menuHelp')

@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const {Client, Events, GatewayIntentBits, Collection, ActivityType} = require('discord.js');
+const {Client, Events, GatewayIntentBits, Collection, ActivityType, EmbedBuilder} = require('discord.js');
 const {token, sdcKEY} = require('./Data/config.json');
 const SDC = require("@megavasiliy007/sdc-api");
 
@@ -35,6 +35,11 @@ client.on("ready", () => {
     });
 })
 
+const embedError = new EmbedBuilder()
+    .setColor('#bc0000')
+    .setTitle('Error')
+    .setDescription(`Unknown error, please contact the server for assistance: https://discord.gg/d8kCF4c3t5`)
+
 client.on(Events.InteractionCreate, async interaction => {
     if (interaction.isChatInputCommand()) {
         const command = interaction.client.commands.get(interaction.commandName);
@@ -49,9 +54,9 @@ client.on(Events.InteractionCreate, async interaction => {
         } catch (error) {
             console.error(error);
             if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({content: 'There was an error while executing this command!', ephemeral: true});
+                await interaction.followUp({embeds: [embedError], ephemeral: true});
             } else {
-                await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
+                await interaction.reply({embeds: [embedError], ephemeral: true});
             }
         }
     }

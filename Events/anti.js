@@ -62,6 +62,7 @@ module.exports = [
                 const {antiLinks} = await getServer(message.guild.id, message.guild.name);
                 if (!antiLinks) return;
                 if (!message.guild) return;
+                if (message.content.includes('.gif')) return;
                 const member = message.guild.members.cache.get(message.author.id);
                 const botMember = message.guild.members.me;
                 const botHighestRole = botMember.roles.highest.position || false;

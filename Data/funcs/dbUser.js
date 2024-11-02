@@ -60,4 +60,10 @@ const setRelation = async (server_id, user_id1, user_id2) => {
     return true;
 };
 
-module.exports = {getUser, getUserServer, getLeaderboard, postNewUser, updateAura, getRelation, setRelation};
+const removeRelation = async (server_id, user_id) => {
+    const sql = `DELETE FROM relation WHERE serverID = ? AND (userID1 = ? OR userID2 = ?)`;
+    await sqlPost(sql, [server_id, user_id, user_id]);
+    return true;
+}
+
+module.exports = {getUser, getUserServer, getLeaderboard, postNewUser, updateAura, getRelation, setRelation, removeRelation};

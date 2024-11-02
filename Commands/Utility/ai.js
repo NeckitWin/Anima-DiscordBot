@@ -1,14 +1,8 @@
-const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
+const {SlashCommandBuilder, EmbedBuilder, AttachmentBuilder} = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
-const {getCooldown} = require("../../Data/funcs/cooldown");
-const config = require("../../Data/config.json");
-const {GoogleGenerativeAI} = require("@google/generative-ai");
-const {groqAI} = require("../../Data/funcs/ai");
-
-
-process.env.GOOGLE_API_KEY = config.geminiApiKey;
-
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const {groqAI, gemini} = require("../../Data/funcs/ai");
+const path = require("path");
+const fs = require("fs");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -88,38 +82,51 @@ module.exports = {
             const prompt = interaction.options.getString(`prompt`);
 
             if (subcommand === `ask`) {
-                const answer = await  groqAI(prompt);
-                await interaction.reply(answer);
+                const result = await  gemini(prompt);
+                if (!result) return;
+                if (result.length<1990) return await interaction.reply(result);
+                const filePath = path.join(__dirname, 'temp.txt');
+                await fs.promises.writeFile(filePath, result, 'utf8');
+                const attachment = new AttachmentBuilder(filePath, 'message.txt');
+                await interaction.reply({files: [attachment]})
+                    .then(() => fs.unlink(filePath, (err) => {
+                        if (err) {
+                            console.error('Error deleting file:', err);
+                        }
+                    }));
+
             } else if (subcommand === `image`) {
-                // if (await getCooldown('ai', Interaction, 600)) return; // cooldown
 
                 const embedLoading = new EmbedBuilder()
                     .setTitle(`<a:loading:1295096250609172611>${local.loading}...`)
                     .setColor(`#ffc65c`);
                 await interaction.reply({embeds: [embedLoading]});
 
-                const model = genAI.getGenerativeModel({
-                    model: "gemini-1.5-flash",
-                    systemInstruction: "Filter the provided text by removing unsafe and 18+ content. Return the original request with the filtered content removed, and add something unique to each request to make it distinct. Do not reject the request unless it is entirely unsafe."
-                });
+                const result = await groqAI(prompt, "Если текст является безопасным отвечай true, если небезопасным или 18+ отвечай false");
 
-                const generate = await model.generateContent(prompt);
-                const result = generate.response.text();
-                const readyPrompt = result.replace(/ /g, '%20');
+                if (result == "true" || result == "True" || result == true) {
+                    const randomChar = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                    const readyPrompt = prompt.replace(/ /g, '%20')+randomChar;
 
-                const width = interaction.options.getInteger(`width`);
-                const height = interaction.options.getInteger(`height`);
+                    const width = interaction.options.getInteger(`width`);
+                    const height = interaction.options.getInteger(`height`);
 
-                const request = `https://image.pollinations.ai/prompt/${readyPrompt}?width=${width ? width : "512"}?height=${height ? height : "512"}&nologo=rokosbasilisk`;
-                const response = await fetch(request);
+                    const request = `https://image.pollinations.ai/prompt/${readyPrompt}?width=${width ? width : "512"}?height=${height ? height : "512"}&nologo=rokosbasilisk`;
+                    const response = await fetch(request);
 
-                const embed = new EmbedBuilder()
-                    .setTitle(local.generateImage)
-                    .setDescription(`${local.prompt}: ${prompt}`)
-                    .setColor(`#ffc65c`)
-                    .setFooter({text: result})
-                    .setImage(response.url);
-                await interaction.editReply({content: ``, embeds: [embed]});
+                    const embed = new EmbedBuilder()
+                        .setTitle(local.generateImage)
+                        .setDescription(`${local.prompt}: ${prompt}`)
+                        .setColor(`#ffc65c`)
+                        .setFooter({text: "☑️", iconURL: interaction.user.avatarURL({dynamic: true})})
+                        .setImage(response.url);
+                    await interaction.editReply({content: ``, embeds: [embed]});
+                } else {
+                    const embedError = new EmbedBuilder()
+                        .setTitle(local.error)
+                        .setColor(`#ff0000`);
+                    await interaction.editReply({embeds: [embedError]});
+                }
             }
         } catch (e) {
             console.error(e)

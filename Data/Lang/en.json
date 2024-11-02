@@ -1,5 +1,7 @@
 {
   "loading": "Loading",
+  "yes": "Yes",
+  "no": "No",
   "error": {
     "rolesEqual": "User's role is the same as yours",
     "usernotfound": "User not found in the server",
@@ -19,9 +21,31 @@
     "dontyourself": "You can't do this to yourself",
     "otherpeople": "You must select different users",
     "dontbot": "You can't do this to the bot",
+    "notforyou": "This is not meant for you",
     "wait": "Please wait",
     "minutes": "minutes",
     "seconds": "seconds"
+  },
+  "marry": {
+    "marry": "Marriage",
+    "wasMarry": "This user is already married",
+    "youWasMarry": "You are already married",
+    "wedding": "Wedding",
+    "proposal": "has proposed to you **for hand and heart**!\n Do you agree to get married?",
+    "proposalYes": "Get married",
+    "proposalNo": "Decline",
+    "dontHave": "You are not married",
+    "yourLove": "Your other half",
+    "date": "Wedding date",
+    "divorce": "Divorce",
+    "divorceMarried": "Marriage dissolution",
+    "wantDivorce": "Are you sure you want to divorce with",
+    "saveMarried": "You saved your marriage",
+    "congratulations": "Congratulations! You got married",
+    "declined": "You declined the marriage",
+    "divorced1": "Unfortunately, the marriage between",
+    "divorced2": "and",
+    "divorced3": "has been dissolved 💔\nWedding date"
   },
   "rp": {
     "interactions": {
@@ -446,6 +470,7 @@
     ],
     "fun": [
       "Show your emotions or interact with another user",
+      "Propose a relationship to another user",
       "Request adult anime content",
       "Find out compatibility percentage between two users",
       "Ask Ben a question",

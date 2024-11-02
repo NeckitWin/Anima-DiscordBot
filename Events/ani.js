@@ -13,13 +13,13 @@ module.exports = {
     name: Events.MessageCreate,
     async execute(message) {
         const botID = `1187466797885182141`;
+        const secondBotID = `1165781260203986994`;
         if (message.author.bot) return;
 
         try {
-            const firstWord = message.content.split(' ')[0].toLowerCase();
-            const isBotNameMention = firstWord === `anima,` || firstWord === `анима,` || firstWord === `anima` || firstWord === `анима` || firstWord === `<@${botID}>`;
-            const isBotMention = (message.mentions?.users?.first()?.id === botID && message.author.id !== `429562004399980546`) || false;
-            if (!isBotNameMention && !isBotMention) return;
+            const firstWord = message.content.startsWith(`ани`);
+            const isBotMention = message.mentions?.users?.first()?.id === (botID || secondBotID) && message.author.id === `429562004399980546`;
+            if (!firstWord && !isBotMention) return;
 
             await message.channel.sendTyping();
 

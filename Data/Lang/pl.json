@@ -1,5 +1,7 @@
 {
   "loading": "Ładowanie",
+  "yes": "Tak",
+  "no": "Nie",
   "error": {
     "rolesEqual": "Rola użytkownika jest taka sama jak twoja",
     "usernotfound": "Użytkownik nie znaleziony na serwerze",
@@ -19,9 +21,31 @@
     "dontyourself": "Nie możesz tego zrobić sobie!",
     "otherpeople": "Musisz wybrać różnych użytkowników",
     "dontbot": "Nie możesz tego zrobić botowi!",
+    "notforyou": "To nie jest przeznaczone dla ciebie",
     "wait": "Proszę czekać",
     "minutes": "minut",
     "seconds": "sekund"
+  },
+  "marry": {
+    "marry": "Ślub",
+    "wasMarry": "Ten użytkownik jest już w związku małżeńskim",
+    "youWasMarry": "Jesteś już w związku małżeńskim",
+    "wedding": "Ślub",
+    "proposal": "zaproponował ci **rękę i serce**!\n Czy zgadzasz się na małżeństwo?",
+    "proposalYes": "Wstąpić w związek małżeński",
+    "proposalNo": "Odrzucić",
+    "dontHave": "Nie jesteś w związku małżeńskim",
+    "yourLove": "Twoja druga połowa",
+    "date": "Data ślubu",
+    "divorce": "Rozwód",
+    "divorceMarried": "Rozwiązanie małżeństwa",
+    "wantDivorce": "Czy na pewno chcesz się rozwieść z",
+    "saveMarried": "Uratowałeś swoje małżeństwo",
+    "congratulations": "Gratulacje! Wstąpiłeś w związek małżeński",
+    "declined": "Odrzuciłeś małżeństwo",
+    "divorced1": "Niestety, małżeństwo między",
+    "divorced2": "a",
+    "divorced3": "zostało rozwiązane 💔\nData ślubu"
   },
   "rp": {
     "interactions": {
@@ -446,6 +470,7 @@
     ],
     "fun": [
       "Pokaż swoje emocje lub wejdź w interakcję z innym użytkownikiem",
+      "Zaproponuj związek innemu użytkownikowi",
       "Poproś o treści anime dla dorosłych",
       "Sprawdź procent kompatybilności między dwoma użytkownikami",
       "Zadaj pytanie Benowi",
