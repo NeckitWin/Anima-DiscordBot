@@ -70,7 +70,11 @@ module.exports = {
                 }
             }
 
-            const result = groqAnswer.choices[0]?.message?.content || "";
+            let result = groqAnswer.choices[0]?.message?.content || "";
+
+            if (result.includes('@')) {
+                result = result.replace(/@/g, ' ');
+            }
 
             if (!messageHistory[serverId]) {
                 messageHistory[serverId] = [];

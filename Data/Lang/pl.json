@@ -24,7 +24,25 @@
     "notforyou": "To nie jest przeznaczone dla ciebie",
     "wait": "Proszę czekać",
     "minutes": "minut",
-    "seconds": "sekund"
+    "seconds": "sekund",
+    "error": "Błąd"
+  },
+  "anonim": {
+    "systemTitle": "System anonimowych wiadomości",
+    "channelAlreadySet": "Kanał anonimowych wiadomości `został już ustawiony` na twoim serwerze.",
+    "textChannelOnly": "Kanał anonimowych wiadomości można ustawić tylko w kanale tekstowym.",
+    "botDisclaimer": "**Bot i jego twórca nie ponoszą odpowiedzialności za wiadomości wysyłane w tym kanale anonimowo przez bota.**\nAdministracja i właściciel serwera",
+    "botDisclaimer2": "automatycznie zgadzają się na potencjalne naruszenia zasad Discorda lub serwera przez uczestników w tym kanale za pośrednictwem bota.\nJeśli nie zgadzasz się z tymi warunkami, wyłącz anonimowe wiadomości za pomocą komendy",
+    "successSet": "Kanał anonimowych wiadomości został pomyślnie ustawiony na",
+    "channelHasntSet": "Kanał anonimowych wiadomości nie jest ustawiony na twoim serwerze",
+    "successDisable": "Kanał anonimowych wiadomości został pomyślnie `wyłączony` na serwerze w kanale",
+    "anonimMessageTitle": "Anonimowa wiadomość",
+    "botNotResponsible": "Bot nie ponosi odpowiedzialności za treść wiadomości",
+    "channelNotSet": "Kanał anonimowy nie jest ustawiony.\nUstawić go może tylko administracja serwera, używając komendy",
+    "youGetMessage": "Otrzymałeś anonimową wiadomość",
+    "successTitle": "Sukces",
+    "messageSent": "Anonimowa wiadomość została wysłana do anonimowego kanału serwera",
+    "forSend": "Aby wysłać anonimową wiadomość, użyj komendy"
   },
   "post": {
     "title": "Utwórz post na swoim serwerze",
@@ -456,7 +474,10 @@
       "Ustaw kanał powitania nowych członków",
       "Usuń powitanie z serwera",
       "Ustaw kanał logów dla serwera",
-      "Usuń logi z serwera"
+      "Usuń logi z serwera",
+      "Utwórz post ze zdjęciem na serwerze w imieniu kogoś",
+      "Ustaw kanał anonimowych wiadomości na serwerze",
+      "Wyłącz anonimowe wiadomości na serwerze"
     ],
     "moder": [
       "Usuń wiadomości w kanale od 1 do 100",
@@ -471,7 +492,8 @@
       "Rozwiązuje przykłady matematyczne",
       "Tłumaczy tekst, automatycznie wykrywa język do tłumaczenia",
       "Pogoda w Twoim mieście",
-      "Generuje losową liczbę"
+      "Generuje losową liczbę",
+      "Wysyła anonimową wiadomość do użytkownika na anonimowym kanale serwera"
     ],
     "games": [
       "Zgadnij anime po obrazku",

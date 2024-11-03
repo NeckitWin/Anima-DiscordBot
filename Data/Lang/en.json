@@ -24,7 +24,25 @@
     "notforyou": "This is not meant for you",
     "wait": "Please wait",
     "minutes": "minutes",
-    "seconds": "seconds"
+    "seconds": "seconds",
+    "error": "Error"
+  },
+  "anonim": {
+    "systemTitle": "Anonymous Messaging System",
+    "channelAlreadySet": "The anonymous message channel has `already been set` on your server.",
+    "textChannelOnly": "The anonymous message channel can only be set in a text channel.",
+    "botDisclaimer": "**The bot and its creator are not responsible for messages sent in this channel anonymously by the bot.**\nThe server administration and owner",
+    "botDisclaimer2": "automatically agree to the potential violations of Discord or server rules by participants in this channel through the bot.\nIf you disagree with these conditions, disable anonymous messages using the command",
+    "successSet": "The anonymous message channel has been successfully set to",
+    "channelHasntSet": "The anonymous message channel has not been set on your server",
+    "successDisable": "The anonymous message channel has been successfully `disabled` on the server in",
+    "anonimMessageTitle": "Anonymous Message",
+    "botNotResponsible": "The bot is not responsible for the content of the message",
+    "channelNotSet": "The anonymous channel is not set.\nOnly the server administration can set it using the command",
+    "youGetMessage": "You have received an anonymous message",
+    "successTitle": "Success",
+    "messageSent": "An anonymous message has been sent to the server's anonymous channel",
+    "forSend": "To send an anonymous message, use the command"
   },
   "post": {
     "title": "Create a post on your server",
@@ -456,7 +474,10 @@
       "Set a welcome channel for new members",
       "Remove the welcome from the server",
       "Set a log channel for the server",
-      "Remove logs from the server"
+      "Remove logs from the server",
+      "Create a post with an image on the server on behalf of someone",
+      "Set a channel for anonymous messages",
+      "Disable anonymous messages on the server"
     ],
     "moder": [
       "Delete messages in the channel from 1 to 100",
@@ -471,7 +492,8 @@
       "Solves mathematical examples",
       "Translates text, automatically detects language for translation",
       "Weather in your city",
-      "Generates a random number"
+      "Generates a random number",
+      "Send an anonymous message to the server's anonymous channel"
     ],
     "games": [
       "Guess the anime by the picture",

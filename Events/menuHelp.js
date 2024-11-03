@@ -39,7 +39,10 @@ module.exports = {
                     `</greeting set:1290765643011981323> - ${localinfo.admin[4]} \n` +
                     `</greeting remove:1290765643011981323> - ${localinfo.admin[5]} \n` +
                     `</logs set:1299470943638519890> - ${localinfo.admin[6]} \n` +
-                    `</logs remove:1299470943638519890> - ${localinfo.admin[7]}`;
+                    `</logs remove:1299470943638519890> - ${localinfo.admin[7]} \n` +
+                    `</post:1302340870892163093> - ${localinfo.admin[8]} \n` +
+                    `</anonim-messages set:1302707977546895472> - ${localinfo.admin[9]} \n` +
+                    `</anonim-messages disable:1302707977546895472> - ${localinfo.admin[10]}`;
 
                 const modercontent =
                     `</clear:1285287069676994609> - ${localinfo.moder[0]} \n`+
@@ -54,7 +57,8 @@ module.exports = {
                     `</calc:1285287069756690488> - ${localinfo.util[0]} \n` +
                     `</translate:1285287069756690490> - ${localinfo.util[1]} \n` +
                     `</weather:1285287069756690491> - ${localinfo.util[2]} \n` +
-                    `</random:1294775882124361819> - ${localinfo.util[3]}`;
+                    `</random:1294775882124361819> - ${localinfo.util[3]}\n` +
+                    `</anonim-message:1302707978008531125> - ${localinfo.util[4]}`;
 
                 const gamescontent =
                     `</anime:1294302199869997197> - ${localinfo.games[0]} \n` +
