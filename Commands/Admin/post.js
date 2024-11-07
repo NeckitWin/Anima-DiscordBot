@@ -12,13 +12,13 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName(`post`)
         .setNameLocalizations({ru: `пост`, pl: `post`, uk: `пост`})
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDescription(`Post a embed message to a channel`)
         .setDescriptionLocalizations({
             ru: `Отправить сообщение в канал`,
             pl: `Wyślij wiadomość na kanał`,
             uk: `Відправити повідомлення в канал`
         })
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addUserOption(option =>
             option.setName(`author`)
                 .setNameLocalizations({ru: `автор`, pl: `autor`, uk: `автор`})
@@ -33,6 +33,7 @@ module.exports = {
         try {
             const lang = await getLang(interaction);
             const local = lang.post;
+            if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
             const target = interaction.options.getUser(`author`);
             const modal = new ModalBuilder()
                 .setCustomId(`postModal`)

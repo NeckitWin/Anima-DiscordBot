@@ -66,6 +66,7 @@ module.exports = {
     async execute(interaction) {
         const lang = await getLang(interaction);
         const local = lang.autorole;
+        if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
 
         const botMember = interaction.guild.members.me;
         if (!botMember.permissions.has(PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({

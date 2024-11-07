@@ -3,6 +3,7 @@
   "yes": "Tak",
   "no": "Nie",
   "error": {
+    "commandforadmin": "Ta komenda jest przeznaczona tylko dla administratorów serwera",
     "rolesEqual": "Rola użytkownika jest taka sama jak twoja",
     "usernotfound": "Użytkownik nie znaleziony na serwerze",
     "bothigherrole": "Rola użytkownika jest wyższa niż moja",

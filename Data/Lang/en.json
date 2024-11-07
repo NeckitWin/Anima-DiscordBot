@@ -3,6 +3,7 @@
   "yes": "Yes",
   "no": "No",
   "error": {
+    "commandforadmin": "This command is only for server administrators",
     "rolesEqual": "User's role is the same as yours",
     "usernotfound": "User not found in the server",
     "bothigherrole": "User's role is higher than mine",

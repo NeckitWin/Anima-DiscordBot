@@ -5,7 +5,6 @@ const {getLang} = require("../../Data/Lang");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('anonim-messages')
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setNameLocalizations({ru: 'анонимные-сообщения', pl: 'anonimowe-wiadomości', uk: 'анонімні-повідомлення'})
         .setDescription('Set the channel for anonim messages')
         .setDescriptionLocalizations({
@@ -13,6 +12,7 @@ module.exports = {
             pl: 'Ustaw kanał dla anonimowych wiadomości na swoim serwerze',
             uk: 'Встановлення каналу для анонімних повідомлень на вашому сервері'
         })
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addSubcommand(subcommand => subcommand
             .setName('set')
             .setNameLocalizations({ru: 'установить', pl: 'ustaw', uk: 'встановити'})
@@ -33,6 +33,7 @@ module.exports = {
                 })
                 .setRequired(false))
         )
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addSubcommand(subcommand => subcommand
             .setName('disable')
             .setNameLocalizations({ru: 'отключить', pl: 'wyłącz', uk: 'вимкнути'})
@@ -42,13 +43,15 @@ module.exports = {
                 pl: 'Wyłącz kanał dla anonimowych wiadomości',
                 uk: 'Вимкнути канал для анонімних повідомлень'
             })
-        ),
+        )
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
         try {
             const lang = await getLang(interaction);
             const local = lang.anonim;
             const subcommand = interaction.options.getSubcommand();
             const {guild} = interaction;
+            if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
             const dataServer = await getServer(guild.id, guild.name);
 
             const embedSuccess = new EmbedBuilder()
@@ -95,7 +98,7 @@ module.exports = {
 
                 embedSuccess.setDescription(`${local.successDisable} <#${dataServer.anonim}>`);
 
-                await interaction.reply({embeds: [embedSuccess]});
+                await interaction.reply({embeds: [embedSuccess], ephemeral: false});
             }
         } catch (err) {
             console.error(err);

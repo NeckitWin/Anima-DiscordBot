@@ -55,6 +55,7 @@ module.exports = {
 
         const lang = await getLang(interaction);
         const local = lang.greeting
+        if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
 
         const pathFile = path.join(__dirname, `../../Data/jsons/greeting.json`);
         const serverID = interaction.guild.id;

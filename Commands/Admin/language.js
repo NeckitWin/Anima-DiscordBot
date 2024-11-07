@@ -6,7 +6,6 @@ const fs = require("node:fs");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName(`language`)
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setNameLocalizations({ru: `язык`, pl: `język`, uk: `мова`})
         .setDescription(`Set language for your server`)
         .setDescriptionLocalizations({
@@ -14,6 +13,7 @@ module.exports = {
             pl: `Ustaw język dla swojego serwera`,
             uk: `Встановити мову для вашого сервера`
         })
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addStringOption(option =>
             option.setName('language')
                 .setNameLocalizations({ru: `язык`, pl: `język`, uk: `мова`})
@@ -33,6 +33,8 @@ module.exports = {
                 )
                 .setRequired(true)),
     async execute(interaction) {
+        let lang = await getLang(interaction);
+        if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
         const target = interaction.options.getString('language');
         const serverID = interaction.guild.id;
 
@@ -53,7 +55,7 @@ module.exports = {
         const newData = JSON.stringify(data, null, 2);
         await fs.promises.writeFile(pathFile, newData, 'utf8');
 
-        const lang = await getLang(interaction);
+        lang = await getLang(interaction);
         const local = lang.language;
 
         const embed = new EmbedBuilder()

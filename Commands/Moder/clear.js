@@ -5,7 +5,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('clear')
         .setNameLocalizations({ru: 'очистить', pl: 'wyczyść', uk: 'очистити'})
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .setDescription('Clears chat for specified amount of messages')
         .setDescriptionLocalizations({
             ru: 'Очищает чат на указанное количество сообщений',
