@@ -15,6 +15,7 @@ module.exports = {
     async execute(message) {
         const botID = `1187466797885182141`;
         if (message.author.bot) return;
+        if (message.author.id == 429562004399980546) return;
 
         try {
             const firstWord = message.content.split(' ')[0].toLowerCase();

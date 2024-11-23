@@ -1,5 +1,5 @@
 const {EmbedBuilder} = require('discord.js');
-const {getConnection, updateAura} = require('../Data/funcs/dbUser');
+const {updateAura} = require('../Data/funcs/dbUser');
 const {getCooldown} = require('../Data/funcs/cooldown');
 const {getLang} = require("../Data/Lang");
 

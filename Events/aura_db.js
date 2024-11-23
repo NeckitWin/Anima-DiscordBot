@@ -4,7 +4,7 @@ const {updateAura} = require('../Data/funcs/dbUser');
 module.exports = {
     name: Events.MessageCreate,
     async execute(message) {
-        if (message.author.bot) return; // not bot
+        if (message.author.bot) return;
         const user_id = message.author.id;
         const username = message.author.username;
         const displayName = message.author.displayName;
