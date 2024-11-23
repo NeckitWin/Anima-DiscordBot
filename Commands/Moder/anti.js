@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, EmbedBuilder, PermissionsBitField} = require(`discord.js`);
+const {SlashCommandBuilder, EmbedBuilder, PermissionsBitField, PermissionFlagsBits} = require(`discord.js`);
 const {getServer, updateServer} = require("../../Data/funcs/dbServer");
 const {getLang} = require("../../Data/Lang");
 
@@ -11,7 +11,7 @@ module.exports = {
             ru: `Система автомодерации`,
             pl: `System automatycznego moderowania`,
             uk: `Система автомодерації`
-        })
+        })  
         .addSubcommand(subcommand => subcommand
             .setName(`caps`)
             .setNameLocalizations({ru: `капс`, pl: `caps`, uk: `капс`})
@@ -73,6 +73,8 @@ module.exports = {
         const subcommand = options.getSubcommand();
         const lang = await getLang(interaction);
         const local = lang.anti;
+        if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
+
         const botMember = guild.members.me;
         if (!interaction.channel.permissionsFor(botMember).has(PermissionsBitField.Flags.ModerateMembers && PermissionsBitField.Flags.ManageMessages))
             return await interaction.reply({

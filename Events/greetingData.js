@@ -1,39 +1,32 @@
 const {Events} = require(`discord.js`);
-const path = require("node:path");
-const fs = require("node:fs");
-const lang = require("../Data/Lang");
 const {getLang} = require("../Data/Lang");
+const {updateGreet} = require("../Data/funcs/dbGreet");
 
 module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
-        if (!interaction.isModalSubmit()) return;
-        if (interaction.customId !== `modalGreeting`) return;
-        const serverID = interaction.guild.id;
+        try {
+            if (!interaction.isModalSubmit()) return;
+            if (interaction.customId !== `modalGreeting`) return;
+            const serverID = interaction.guild.id;
 
-        const lang = await getLang(interaction);
-        const local = lang.greeting;
+            const lang = await getLang(interaction);
+            const local = lang.greeting;
 
-        const obj = interaction.fields.fields.map(el=>el.value);
+            const obj = interaction.fields.fields.map(el => el.value);
 
-        const newData = {
-            server: serverID,
-            title: obj[0],
-            content: obj[1],
-            picture: obj[2],
-            channel: obj[3]
+            const newData = {
+                serverId: serverID,
+                title: obj[0],
+                content: obj[1],
+                picture: obj[2],
+                channelId: BigInt(obj[3])
+            }
+
+            await updateGreet(newData.serverId, newData.title, newData.content, newData.picture, newData.channelId);
+            await interaction.reply({content: `${local.success} <#${newData.channelId}>`, ephemeral: true})
+        } catch (err) {
+            console.error(err);
         }
-
-        const pathFile = path.join(__dirname, "../Data/jsons/greeting.json");
-        const data = await fs.promises.readFile(pathFile, 'utf8');
-        let jsonData = JSON.parse(data);
-        const thisServer = jsonData.find(el=>el.server===serverID);
-        if (thisServer) {
-            jsonData = jsonData.filter(el=>el.server!==serverID)
-        }
-        jsonData.push(newData);
-        const newJson = JSON.stringify(jsonData, null, 2);
-        await fs.promises.writeFile(pathFile, newJson);
-        await interaction.reply({content: `${local.success} <#${newData.channel}>`, ephemeral: true})
     }
 }

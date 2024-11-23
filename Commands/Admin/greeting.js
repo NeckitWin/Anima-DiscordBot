@@ -7,13 +7,12 @@ const {
     PermissionFlagsBits,
     PermissionsBitField
 } = require(`discord.js`);
-const fs = require("node:fs");
-const path = require("node:path");
 const {getLang} = require("../../Data/Lang");
+const {removeGreet} = require("../../Data/funcs/dbGreet");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`greeting`)
+        .setName(`greet`)
         .setNameLocalizations({ru: `приветствие`, pl: `powitanie`, uk: `привітання`})
         .setDescription(`Set channel for greeting new members`)
         .setDescriptionLocalizations({
@@ -51,79 +50,81 @@ module.exports = {
                 uk: `Видалити привітання`
             })),
     async execute(interaction) {
-        let modal;
+        try {
+            let modal;
 
-        const lang = await getLang(interaction);
-        const local = lang.greeting
-        if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
+            const lang = await getLang(interaction);
+            const local = lang.greeting
+            if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({
+                content: lang.error.commandforadmin,
+                ephemeral: true
+            });
 
-        const pathFile = path.join(__dirname, `../../Data/jsons/greeting.json`);
-        const serverID = interaction.guild.id;
+            const serverID = interaction.guild.id;
 
-        const subcommand = interaction.options.getSubcommand();
-        if (subcommand === `set`) {
-            const channel = interaction.options.getChannel(`channel`);
-            if (channel.type !== 0) return interaction.reply({content: local.nottext, ephemeral: true});
-            if (!channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.SendMessages)) return await interaction.reply({content: lang.error.botdontpermsendmessage, ephemeral: true});
+            const subcommand = interaction.options.getSubcommand();
+            if (subcommand === `set`) {
+                const channel = interaction.options.getChannel(`channel`);
+                if (channel.type !== 0) return interaction.reply({content: local.nottext, ephemeral: true});
+                if (!channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.SendMessages)) return await interaction.reply({
+                    content: lang.error.botdontpermsendmessage,
+                    ephemeral: true
+                });
 
-            modal = new ModalBuilder()
-                .setTitle(local.title)
-                .setCustomId(`modalGreeting`);
+                modal = new ModalBuilder()
+                    .setTitle(local.title)
+                    .setCustomId(`modalGreeting`);
 
-            const greetingTitle = new TextInputBuilder()
-                .setCustomId('greetingTitle')
-                .setLabel(local.titlecontent)
-                .setPlaceholder(local.titleplace)
-                .setStyle(TextInputStyle.Short);
+                const greetingTitle = new TextInputBuilder()
+                    .setCustomId('greetingTitle')
+                    .setLabel(local.titlecontent)
+                    .setPlaceholder(local.titleplace)
+                    .setStyle(TextInputStyle.Short);
 
-            const greetingContent = new TextInputBuilder()
-                .setCustomId('greetingContent')
-                .setLabel(local.content)
-                .setPlaceholder(local.contentplace)
-                .setStyle(TextInputStyle.Paragraph);
+                const greetingContent = new TextInputBuilder()
+                    .setCustomId('greetingContent')
+                    .setLabel(local.content)
+                    .setPlaceholder(local.contentplace)
+                    .setStyle(TextInputStyle.Paragraph);
 
-            const greetingPicture = new TextInputBuilder()
-                .setCustomId('greetingPicture')
-                .setLabel(local.picture)
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder(`https://media.tenor.com/example.gif`)
-                .setRequired(false);
+                const greetingPicture = new TextInputBuilder()
+                    .setCustomId('greetingPicture')
+                    .setLabel(local.picture)
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder(`https://media.tenor.com/example.gif`)
+                    .setRequired(false);
 
-            const greetingChannel = new TextInputBuilder()
-                .setCustomId('greetingChannel')
-                .setLabel(local.channel)
-                .setStyle(TextInputStyle.Short)
-                .setValue(channel.id)
-                .setPlaceholder(channel.id)
-                .setRequired(true);
+                const greetingChannel = new TextInputBuilder()
+                    .setCustomId('greetingChannel')
+                    .setLabel(local.channel)
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(channel.id)
+                    .setPlaceholder(channel.id)
+                    .setRequired(true);
 
-            const firstComponent = new ActionRowBuilder()
-                .addComponents(greetingTitle);
+                const firstComponent = new ActionRowBuilder()
+                    .addComponents(greetingTitle);
 
-            const secondComponent = new ActionRowBuilder()
-                .addComponents(greetingContent)
+                const secondComponent = new ActionRowBuilder()
+                    .addComponents(greetingContent);
 
-            const thirdComponent = new ActionRowBuilder()
-                .addComponents(greetingPicture);
+                const thirdComponent = new ActionRowBuilder()
+                    .addComponents(greetingPicture);
 
-            const fourthComponent = new ActionRowBuilder()
-                .addComponents(greetingChannel);
+                const fourthComponent = new ActionRowBuilder()
+                    .addComponents(greetingChannel);
 
-            modal.addComponents(firstComponent, secondComponent, thirdComponent, fourthComponent);
+                modal.addComponents(firstComponent, secondComponent, thirdComponent, fourthComponent);
 
-            await interaction.showModal(modal);
-            await interaction.followUp({content: local.response, ephemeral: true});
+                await interaction.showModal(modal);
+                await interaction.followUp({content: local.response, ephemeral: true});
 
-        } else if (subcommand === `remove`) {
-
-            const jsonData = await fs.promises.readFile(pathFile);
-            const dataServers = JSON.parse(jsonData);
-            const searchServer = dataServers.find(el => el.server === serverID);
-            if (!searchServer) return interaction.reply({content: local.dontset, ephemeral: true});
-            const deleteServer = dataServers.filter(el => el.server !== serverID);
-            const newData = JSON.stringify(deleteServer, null, 2);
-            await fs.promises.writeFile(pathFile, newData);
-            interaction.reply({content: local.remove, ephemeral: true});
+            } else if (subcommand === `remove`) {
+                await removeGreet(serverID);
+                interaction.reply({content: local.remove, ephemeral: true});
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 }

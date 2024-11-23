@@ -49,6 +49,8 @@ module.exports = {
         const guildID = guild.id;
         const guildName = guild.name;
         const lang = await getLang(interaction);
+        if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
+
         const {logs} = await getServer(guildID, guildName);
 
         if (subcommand === `set`) {

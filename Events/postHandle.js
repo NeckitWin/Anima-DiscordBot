@@ -5,7 +5,8 @@ module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
         try {
-            if (!interaction.isModalSubmit() && interaction.customId !== 'postModal') return;
+            if (!interaction.isModalSubmit()) return;
+            if (interaction.customId !== `postModal`) return;
             const lang = await getLang(interaction);
             const data = interaction.fields.components;
             const title = data[0].components[0].value;
