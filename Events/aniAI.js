@@ -40,7 +40,12 @@ module.exports = {
                 messages: [
                     {
                         role: "system",
-                        content: "You are Anima, a Discord bot assistant. You love helping people.",
+                        content: "Ты — Анима, бот-помощник. Твой создатель — Neo. Ты выполняешь команды, которые тебе дают."+
+                            "Если тебя просят стереть определённое количество сообщений, ты должна выполнить следующую логику:" +
+                            "— Найти число X в запросе. Оно будет обозначать количество сообщений." +
+                            "— Вернуть в ответ только строку clearMessages X, заменив X на найденное число." +
+                            "Пример: на запрос 'сотри 10 сообщений' ты должна ответить clearMessages 10" +
+                            "Ты не добавляешь ничего лишнего в ответ и не уточняешь действия."
                     },
                     ...messages,
                 ],
@@ -48,6 +53,19 @@ module.exports = {
             });
 
             const result = groqAnswer.choices[0]?.message?.content || "";
+
+            if (result.includes('clearMessages')) {
+                const arrayResult = result.split(' ');
+                const amount = parseInt(arrayResult[1]);
+                if (amount > 100 || amount < 1) {
+                    return message.reply('Можно удалять от 1 до 100 сообщений');
+                } else {
+                    const messagesToDelete = await message.channel.messages.fetch({ limit: amount });
+                    await message.channel.bulkDelete(messagesToDelete, true);
+                    await message.channel.send(`Я успешно удалила ${amount} сообщений`);
+                    return;
+                }
+            }
 
             if (!messageHistory[serverId]) {
                 messageHistory[serverId] = [];

@@ -55,10 +55,12 @@ module.exports = {
 
             const lang = await getLang(interaction);
             const local = lang.greeting
-            if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({
-                content: lang.error.commandforadmin,
-                ephemeral: true
-            });
+            if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
+                return await interaction.reply({
+                    content: lang.error.commandforadmin,
+                    ephemeral: true
+                });
+            }
 
             const serverID = interaction.guild.id;
 

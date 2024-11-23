@@ -36,8 +36,7 @@ module.exports = {
         if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
         const target = interaction.options.getString('language');
         const serverID = interaction.guild.id;
-        const serverName = interaction.guild.name;
-        await updateServer(serverID, serverName, target);
+        await updateServer(serverID, 'lang', target);
 
         lang = await getLang(interaction);
         const local = lang.language;

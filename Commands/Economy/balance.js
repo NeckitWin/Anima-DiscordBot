@@ -21,7 +21,6 @@ module.exports = {
                 uk: 'Користувач для показу балансу'
             }).setRequired(false)),
     async execute(interaction) {
-        const lang = await getLang(interaction);
         try {
             const user = interaction.options.getUser('user') || interaction.user;
             const guildID = interaction.guild.id;

@@ -11,7 +11,7 @@ const getLang = async (interaction) => {
         const guildName = interaction.guild.name;
 
         const serverData = await getServer(guildId, guildName);
-        return index[serverData[0].lang];
+        return index[serverData.lang];
     } catch (error) {
         console.error(error);
         return index[`en`];

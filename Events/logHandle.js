@@ -315,27 +315,50 @@ module.exports = [
     {
         name: Events.GuildMemberUpdate,
         async execute(oldMember, newMember) {
-            const logChannel = await checkServer(newMember);
-            if (!logChannel) return;
-            const newGuildMember = newMember.guild.members.cache.get(newMember.id);
-            const embed = new EmbedBuilder()
-                .setTitle(`Member update profile`)
-                .setDescription(`Member: ${newMember}`)
-                .setThumbnail(newGuildMember.displayAvatarURL())
-                .setColor(`#00d9ff`);
+            try {
+                const logChannel = await checkServer(newMember);
+                if (!logChannel) return;
+                const newGuildMember = newMember.guild.members.cache.get(newMember.id);
+                const userColor = newGuildMember.displayColor;
+                const embed = new EmbedBuilder()
+                    .setTitle(`Member ${newMember.user.displayName} updated`)
+                    .setDescription(`Member: ${newMember}\nMember ID: \`${newMember.id}\`\nUsername: \`${newMember.user.username}\``)
+                    .setThumbnail(newGuildMember.displayAvatarURL())
+                    .setColor(userColor)
+                    .setTimestamp(new Date());
+                const oldRoles = oldMember.roles.cache;
+                const newRoles = newMember.roles.cache;
 
-            if (oldMember.displayName !== newMember.displayName) {
-                embed.addFields(
-                    {name: `Old server name`, value: `\`\`\`${oldMember.displayName}\`\`\``, inline: true},
-                    {name: `New server name`, value: `\`\`\`${newMember.displayName}\`\`\``, inline: true}
-                );
+                if (oldMember.displayName !== newMember.displayName) {
+                    embed.addFields(
+                        {name: `Old server name`, value: `\`\`\`${oldMember.displayName}\`\`\``, inline: true},
+                        {name: `New server name`, value: `\`\`\`${newMember.displayName}\`\`\``, inline: true}
+                    );
+                }
+                if (oldMember.displayAvatarURL() !== newMember.displayAvatarURL()) {
+                    embed.addFields(
+                        {name: `Обновление аватара`, value: `[Ссылка на аватар](${newGuildMember.displayAvatarURL()})`, inline: true}
+                    );
+                }
+
+                if (oldRoles !== newRoles) {
+                    if (oldRoles.size > newRoles.size) {
+                        const role = oldRoles.filter(role => !newRoles.has(role.id)).first();
+                        embed.addFields(
+                            {name: `Изменении роли`, value: `Снята роль: ${role}\nID роли: \`${role.id}\``, inline: true}
+                        );
+                    } else if (oldRoles.size < newRoles.size) {
+                        const role = newRoles.filter(role => !oldRoles.has(role.id)).first();
+                        embed.addFields(
+                            {name: `Изменении роли`, value: `Добавлена роль: ${role}\nID роли: \`${role.id}\``, inline: true}
+                        );
+                    }
+                }
+
+                await sendLog(logChannel, embed);
+            } catch (err) {
+                console.error(err);
             }
-            if (oldMember.displayAvatarURL() !== newMember.displayAvatarURL()) {
-                embed.addFields(
-                    {name: `New avatar`, value: `\`\`\`${newGuildMember.displayAvatarURL()}\`\`\``, inline: true}
-                );
-            }
-            await sendLog(logChannel, embed);
         }
     }
 ]
