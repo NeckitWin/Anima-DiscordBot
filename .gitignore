@@ -1,7 +1,5 @@
 Data/config.json
 node_modules
 .idea
-Data/reactions
 Data/database.json
 CommandsNoSlash/gemini.js
-Data/jsons

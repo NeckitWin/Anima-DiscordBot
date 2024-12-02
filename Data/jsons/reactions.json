@@ -1,0 +1,477 @@
+{
+  "reaction": [
+    {
+      "name": "hug",
+      "name_localizations": {
+        "ru": "обнять",
+        "pl": "przytulić",
+        "uk": "обійняти"
+      },
+      "value": "hug"
+    },
+    {
+      "name": "kiss",
+      "name_localizations": {
+        "ru": "поцеловать",
+        "pl": "pocałować",
+        "uk": "поцілувати"
+      },
+      "value": "kiss"
+    },
+    {
+      "name": "pat",
+      "name_localizations": {
+        "ru": "погладить",
+        "pl": "pogłaskać",
+        "uk": "погладити"
+      },
+      "value": "pat"
+    },
+    {
+      "name": "bite",
+      "name_localizations": {
+        "ru": "укусить",
+        "pl": "ugryźć",
+        "uk": "укусити"
+      },
+      "value": "bite"
+    },
+    {
+      "name": "cry",
+      "name_localizations": {
+        "ru": "плакать",
+        "pl": "płakać",
+        "uk": "плакати"
+      },
+      "value": "cry"
+    },
+    {
+      "name": "laugh",
+      "name_localizations": {
+        "ru": "смеяться",
+        "pl": "śmiać się",
+        "uk": "сміятися"
+      },
+      "value": "laugh"
+    },
+    {
+      "name": "shocked",
+      "name_localizations": {
+        "ru": "в шоке",
+        "pl": "zszokowany",
+        "uk": "в шоці"
+      },
+      "value": "shocked"
+    },
+    {
+      "name": "love",
+      "name_localizations": {
+        "ru": "любовь",
+        "pl": "miłość",
+        "uk": "любов"
+      },
+      "value": "love"
+    },
+    {
+      "name": "angry",
+      "name_localizations": {
+        "ru": "злой",
+        "pl": "zły",
+        "uk": "злий"
+      },
+      "value": "angry"
+    },
+    {
+      "name": "think",
+      "name_localizations": {
+        "ru": "думать",
+        "pl": "myśleć",
+        "uk": "думати"
+      },
+      "value": "think"
+    },
+    {
+      "name": "sad",
+      "name_localizations": {
+        "ru": "грустить",
+        "pl": "smutny",
+        "uk": "сумувати"
+      },
+      "value": "sad"
+    },
+    {
+      "name": "happy",
+      "name_localizations": {
+        "ru": "счастливый",
+        "pl": "szczęśliwy",
+        "uk": "щасливий"
+      },
+      "value": "happy"
+    },
+    {
+      "name": "sleep",
+      "name_localizations": {
+        "ru": "спать",
+        "pl": "spać",
+        "uk": "спати"
+      },
+      "value": "sleep"
+    },
+    {
+      "name": "dance",
+      "name_localizations": {
+        "ru": "танцевать",
+        "pl": "tańczyć",
+        "uk": "танцювати"
+      },
+      "value": "dance"
+    },
+    {
+      "name": "punch",
+      "name_localizations": {
+        "ru": "ударить",
+        "pl": "uderzyć",
+        "uk": "ударити"
+      },
+      "value": "punch"
+    }
+  ],
+  "reactions": {
+    "hug": [
+      {"gif": "https://media1.tenor.com/m/UjqV3yBW6bkAAAAC/kanna-kanna-dragon.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/ByQPYaYo-gcAAAAC/please-sad.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/JEF0J3lnj98AAAAC/hestia-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/JSc-J4cBaWIAAAAC/kotarou-pay-attention.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/t5lYAeU4S-wAAAAC/i-want-a-hug-hug.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/IMqO9qMSWjUAAAAC/ryoko-okami-pillow-hug.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/aXQIC-mWPL0AAAAC/hug-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/ZXGiDa8Qlm8AAAAC/tower-of-god-kami-no-tou.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/Z8niQ-7jwmkAAAAC/anime-longing.gif", "g": 2}
+    ],
+    "kiss": [
+      {"gif": "https://media1.tenor.com/m/Gv38EiXASmoAAAAC/frieren-sousou-no-frieren.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/IY9Hmz9B-vgAAAAC/kiss-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/SfasqcIIGP0AAAAC/hetalia-aphjapan.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/xb1sLPwwRScAAAAd/akagi-miria-miria-akagi.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/7s-3eQ3MNtsAAAAC/laughs-kiis.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/NVXDVw1U2GYAAAAC/kiss-blow-a-kiss.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/7-ZkKJ22bcgAAAAC/blow-kiss-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/yqXUcXLV6gsAAAAC/kisses-hearts.gif", "g": 2}
+    ],
+    "pat": [
+        {"gif": "https://media1.tenor.com/m/94Q3UpAfpVEAAAAC/yui-yui-hirasawa.gif", "g": 1},
+        {"gif": "https://media1.tenor.com/m/U8jMjHZJrfQAAAAC/rikekoi-ibarada.gif", "g": 1},
+        {"gif": "https://media1.tenor.com/m/7-C-O-5gqhUAAAAd/pats.gif", "g": 1},
+        {"gif": "https://media1.tenor.com/m/ixtSH1LN5Z8AAAAC/head-pat.gif", "g": 1},
+        {"gif": "https://media1.tenor.com/m/KK7sRvUZdswAAAAC/good-boy-dog.gif", "g": 2}
+        ],
+    "bite": [
+      {"gif": "https://media1.tenor.com/m/1AxqGIb7VP8AAAAd/call-of-the-night-yofukashi-no-uta.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/RXxHOmjleVoAAAAd/vnc-vanitas.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/BGKTRiL0Ho8AAAAC/anime-girl.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/wZYsQLtmNJQAAAAC/hidan-lick-lips.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/NR5VjH5-Id0AAAAC/hisoka-hisoka-lengua.gif", "g": 2}
+    ],
+    "cry": [
+      {"gif": "https://media1.tenor.com/m/DifoWwjRvOcAAAAd/tohru-honda-tohru.gif", "g": 1 },
+      {"gif": "https://media1.tenor.com/m/vEcyUvOTLI4AAAAC/adeus-volte-sempre.gif", "g": 1 },
+      {"gif": "https://media1.tenor.com/m/7E7ZvsLgcfAAAAAC/happy-tears-gto.gif", "g": 2 },
+      {"gif": "https://media1.tenor.com/m/Vs9QNG3lQZUAAAAC/luffy-one-piece.gif", "g": 2 },
+      {"gif": "https://media1.tenor.com/m/6qJBThILOTcAAAAC/shikimoris-not-just-cute-shikimori.gif", "g": 1 },
+      {"gif": "https://media1.tenor.com/m/A0g9Rrx4aNsAAAAC/sad-angry.gif", "g": 1 },
+      {"gif": "https://media1.tenor.com/m/FM6cAbvsrbEAAAAC/jujutsu-kaisen-shibuya-arc-choso-shibuya-arc.gif", "g": 2 },
+      {"gif": "https://media1.tenor.com/m/NMiID29TUvIAAAAC/hunter-x-hunter-gon-freecs.gif", "g": 2 },
+      {"gif": "https://media1.tenor.com/m/LeJ3iTQNoxQAAAAd/clannad-sad-anime.gif", "g": 2 },
+      {"gif": "https://media1.tenor.com/m/E-XYn_S8l3sAAAAC/juvia-juvia-lockser.gif", "g": 1 }
+    ],
+    "laugh": [
+      {"gif": "https://media1.tenor.com/m/jz9aJI4fys4AAAAC/laugh-giggle.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/KYVGTRWokQoAAAAC/death-note-light-yagami.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/B-expmjx5R0AAAAC/natsu-lol.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/ETvEeDnbX7AAAAAC/my-dress-up-darling-anime-laugh.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/0BfThbuzteIAAAAC/itsuomi-laughing-cutie-pie.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/QT7B-4g9hQwAAAAC/nagomi-yui-delicious-party-precure.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/_YilpkDhcccAAAAC/outlaw-star-laugh.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/RAAbLf9JenAAAAAC/laugh-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/74Win7VdWDoAAAAC/anime-laughing.gif", "g": 1}
+    ],
+    "shocked": [
+      {"gif": "https://media1.tenor.com/m/v3BB4d8pbFoAAAAC/one-piece-one-piece-movie-6.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/TYW-RNzp6hEAAAAC/sousou-no-frieren-frieren-beyond-journey.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/RoVRc5Y0HcQAAAAC/demon-slayer-tanjiro.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/dpX8CAec-Y4AAAAC/cute-surprised.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/uxgJVrF1_LQAAAAC/anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/IRhGe-a-8dEAAAAC/yuji-breakdown-jujutsu-kaisen.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/RzXeK4k7kQwAAAAC/yuki-yuki-itose.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/8q6Jwj0as2wAAAAC/killua-huh.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/XuZ0B2dmV2AAAAAC/anya-anya-forger.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/SfcW-9zKesoAAAAd/shikimori-shikimori-not-just-cute.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/l3rQ307fiNEAAAAd/anime-disgust.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/R1IUWvBoAK8AAAAd/sourvision-woozlereacts.gif", "g": 2}
+    ],
+    "love": [
+      {"gif": "https://media1.tenor.com/m/U_xkoJxRcYYAAAAC/anime-cute.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/uZYtpZzgIvoAAAAd/kitagawa-kitagawa-marin.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/MLzqGrgRe1IAAAAC/senko-san-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/73cUvhdcbKUAAAAC/anime-love.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/hwbtIh-CwqEAAAAC/in-love-boy.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/QuFsC2i6-8IAAAAC/naruto-in-love.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/HlX6hDvy698AAAAC/one-piece-sanji.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/oiKM9wNGuV4AAAAC/natsu-blushing.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/PDeQcm7NkfwAAAAC/rin-okumura-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/pWfWglH0C-IAAAAC/vnc-vanitas.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/t631PT6UALkAAAAC/bang-dream-bandori.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/5559TGz29qEAAAAC/juvia-gray.gif", "g": 1}
+    ],
+    "angry": [
+      {"gif": "https://media1.tenor.com/m/pbqNBWOx6xUAAAAC/annoyed-anime-girl-annoyed.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/rzDkOlEDun0AAAAC/hayase-nagatoro-nagatoro-angry.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/CDbvm1wkFsUAAAAC/sololeveling-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/Afe5GH-oIUAAAAAC/anime-chainsaw.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/pS7NXIeIhkoAAAAC/anime-mad.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/MvKZZ7JCkUMAAAAC/anime-angry.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/e94jYOfCH2YAAAAC/hxh-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/Lz2K6kD5Z9MAAAAC/nagatoro-angry.gif", "g": 1}
+    ],
+    "think": [
+      {"gif": "https://media1.tenor.com/m/vSTMJK6qiakAAAAC/anime-anna.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/IwyNIipPItQAAAAC/anime-naruto.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/lERYpKta0wIAAAAd/think-never-thought-of-that.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/YBDLlOOCtrsAAAAC/anime-think.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/xrBy6-7YlWYAAAAC/tanjiro-wince.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/wp2GoailYtcAAAAd/anime-thinking-benisumomo.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/TTqnvWQJn_AAAAAC/killua-hxh.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/aHOMEkkIVIcAAAAC/gojo-gojo-satoru.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/vfvlq0vmir0AAAAC/makima-chainsaw-man.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/UP6DnWdxPIQAAAAd/anime-senko-san.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/gndFmTFSBpYAAAAC/playing-with-hair-hmm.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/dzenlM_bTtYAAAAC/death-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/mOo_ZXzyAJwAAAAC/hair-twirl-anime.gif", "g": 1}
+    ],
+    "sad": [
+      {"gif": "https://media1.tenor.com/m/9RuzyPx3j3sAAAAd/anime-sorrow.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/7ENDCWgOVm0AAAAd/anime-bocchi-the-rock.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/tuH4YoEV63oAAAAd/giyuu-giyu.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/_z0gtWtWHVEAAAAC/anime-kanna.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/qcE5sfKEgKsAAAAC/girl-sad.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/RviiIb0aykUAAAAC/sad-a.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/6OayBOo0di8AAAAC/anime-abood.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/FAE3AVLkjY4AAAAC/anime-sad.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/3srSOnT18PQAAAAC/anime-look-away.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/Tn9mzxqYNs4AAAAd/kukuru-misakino-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/-Iw8oCIT0BMAAAAC/tokyo-ghoul-coffee.gif", "g": 2}
+    ],
+    "happy": [
+      {"gif": "https://media1.tenor.com/m/UemiFBIwaU4AAAAd/sono-bisque-doll-wa-koi-wo-suru-royalmale.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/ZQndYO4NwBcAAAAC/gojo-satoru.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/lAfLMj3TnCYAAAAC/noela-fox-girl.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/A8Xon5cq5sQAAAAC/bell-cranel-dan-machi.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/NACzM0o4iv4AAAAC/happy-easter.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/mOBUiJkUH7YAAAAC/haru-yoshida-tonari-no-kaibutsu-kun.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/uAXB-EGyHrQAAAAC/anime-anime-girl.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/uOOtPN8R5OoAAAAC/sasayaku-you-ni-koi-wo-utau-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/WU4iBeEeK88AAAAd/anime-excited.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/RLB68K-kfmwAAAAC/beautiful-in.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/kiw3AxGnfSgAAAAC/anime-smile-anime-cute-boy.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/-n2jhe7c1MUAAAAC/anime-my-dress-up-darling.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/w7vlKQgcZM0AAAAC/zenith-mushoku-tensei.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/ydJjui6E2y8AAAAC/lisanna-fairy-tail.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/ZxqndIR7PaoAAAAC/my-little-monster-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/U7l4HnwwmXkAAAAC/yukiteru-amano-future-diary.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/7vi-DvOOfGkAAAAC/naruko-anime.gif", "g": 1}
+    ],
+    "sleep": [
+      {"gif": "https://media1.tenor.com/m/d9AcU5UmEdoAAAAC/anime-fran.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/MmjEo1QitoAAAAAC/little-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/AUOqFNAZxX8AAAAd/good-morning-my-king.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/Hehsl_icRLIAAAAC/senko-san-senko.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/T-kYUqVODMkAAAAC/gif-sleepy.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/faQ4oQImga0AAAAC/konosuba-konosuba-s3.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/BeQ5xGQ_pHAAAAAC/akame-ga-kill-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/-yFcDy-4T8wAAAAd/anya-spy-x-family.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/fBOhx_wbz1kAAAAC/yawn-tired.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/F3foEvNxDMwAAAAC/sleepy-sleep.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/PeJDbGLmjIYAAAAd/anime-sleep.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/tbHvAZtMUSUAAAAC/rwby-tired-rwby-ruby-rose.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/0zQYI-GHNqEAAAAC/anime-discord.gif", "g": 1}
+    ],
+    "dance": [
+      {"gif": "https://media1.tenor.com/m/8WUdf7R3GRQAAAAd/dance-girl.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/y9wCPf0zWTgAAAAC/tobi-naruto.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/qs5pVKHIyTUAAAAC/kakashi-hatake-kakashi.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/BgjMvz_ELtsAAAAd/anime-dance.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/UaKnT2g0OIgAAAAC/esiledoodles-esiledoodles-cora.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/5swdaNmQ8csAAAAd/anime-dance.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/KDmXV7XX2ccAAAAC/ai-hoshino-oshi-no-ko.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/jY84qSwONRwAAAAC/anime-happy.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/YGa-HRwKCJEAAAAd/dance-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/jxoSU-VpuzQAAAAC/anime-anime-girl.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/C9obk-FaXL0AAAAC/anime-dance.gif", "g": 1}
+    ],
+    "punch": [
+      {"gif": "https://media1.tenor.com/m/-Q0ppvJmyKUAAAAC/anime-cute.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/AKf16y8IL0YAAAAC/jahy-sama-punch.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/UyqTkkAxpioAAAAd/my-oni-girl-myonigirl.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/z7me-L2i62sAAAAC/anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/bq_SR9TEx54AAAAd/anime-higurashi.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/rEz7paWkfUsAAAAC/taiga.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/iHUK_6t5sr4AAAAC/when-i-get-kicked-in-the-balls-bakugou-katsuki.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/RkiJ7E4zUmQAAAAC/triggered-anime.gif", "g": 2}
+    ]
+  },
+  "interactions": {
+    "hug": [
+      {"gif": "https://media1.tenor.com/m/J7eGDvGeP9IAAAAC/enage-kiss-anime-hug.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/kCZjTqCKiggAAAAC/hug.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/c2SMIhi33DMAAAAC/cuddle-bed-hug.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/7oCaSR-q1kkAAAAC/alice-vt.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/sl3rfZ7mQBsAAAAC/anime-hug-canary-princess.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/xhYyRJVZeZoAAAAd/anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/Ta7V9zu43h8AAAAC/hug-surprise-chuunibyou.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/mB_y2KUsyuoAAAAd/cuddle-anime-hug.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/udohH7XQDHEAAAAC/hug.gif", "g": 1}
+    ],
+    "kiss": [
+      {"gif": "https://media1.tenor.com/m/OByUsNZJyWcAAAAC/emre-ada.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/YHxJ9NvLYKsAAAAC/anime-kiss.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/1SBrq4NinsEAAAAC/yoshikazu-kisses-kiyone-on-her-cheeks.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/BZyWzw2d5tAAAAAC/hyakkano-100-girlfriends.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/9u2vmryDP-cAAAAC/horimiya-animes.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/1TDajWHZF_IAAAAC/berran%C4%B1n-opucugu.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/XB3mEB77l7EAAAAC/kiss.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/HJLEYgQcvEAAAAAd/yosuga-no-sora-kiss.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/xGfzOqMVt4AAAAAC/anime.gif", "g": 1}
+    ],
+    "pat": [
+      {"gif": "https://media1.tenor.com/m/E6fMkQRZBdIAAAAC/kanna-kamui-pat.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/kIh2QZ7MhBMAAAAC/tsumiki-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/wLqFGYigJuIAAAAC/mai-sakurajima.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/Dbg-7wAaiJwAAAAC/aharen-aharen-san.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/Zm71HaIh7wwAAAAC/pat-pat.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/E7Ll04_an30AAAAC/anime-pat.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/ylN-PYv8vcgAAAAd/anime-anime-girl.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/iAO3Gzwjq2IAAAAd/anime-mushoku-tensei.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/DleYy__UtwYAAAAd/shiomi-jun-yukihira-jouichirou.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/Hgt-mT0KXN0AAAAd/chtholly-tiat.gif", "g": 2}
+    ],
+    "bite": [
+      {"gif": "https://media1.tenor.com/m/n__KGrZPlQEAAAAC/bite.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/IKDf1NMrzsIAAAAC/anime-acchi-kocchi.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/5mVQ3ffWUTgAAAAC/anime-bite.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/ECCpi63jZlUAAAAC/anime-bite.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/n0DPyBDtZHgAAAAC/anime-bite.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/6HhJw-4zmQUAAAAC/anime-bite.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/vxFq6lmtdaYAAAAC/bite.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/ld5vyQrrGXUAAAAC/black-butler-sebastian.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/H2bi31hpZnYAAAAC/re-zero-rem.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/Igvo8jM18DAAAAAd/vnc-vanitas.gif", "g": 1}
+    ],
+    "cry": [
+      {"gif": "https://media1.tenor.com/m/ptWrmhe81AkAAAAC/luffy-sad.gif", "g": 2 },
+      {"gif": "https://media1.tenor.com/m/IS_Wc-1N30oAAAAC/nogamenolife-sora.gif", "g": 3 },
+      {"gif": "https://media1.tenor.com/m/hsuYf5TRnOQAAAAC/anime-anime-cry.gif", "g": 2 },
+      {"gif": "https://media1.tenor.com/m/ktAi03HwBnEAAAAC/hugging-rain.gif", "g": 2 },
+      {"gif": "https://media1.tenor.com/m/AdRQmd3QbegAAAAC/tama-and-pochi-cry-cute.gif", "g": 1 },
+      {"gif": "https://media1.tenor.com/m/ldQpO3c1FU4AAAAC/kyoukainokanata.gif", "g": 1 }
+    ],
+    "laugh": [
+      {"gif": "https://media1.tenor.com/m/jvlF9DC_okwAAAAC/laughing-happy.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/sjwys63--akAAAAC/laughing-laugh.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/HtPHDhqGRGgAAAAC/hunter-x-hunter-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/oo5fk499iS0AAAAC/anime-laughing.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/zpv_5bQVifEAAAAd/laughing-crying.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/QKbe-PoBipYAAAAd/fushi-and-the-two-old-couple-laugh-fushi-laugh.gif", "g": 2}
+    ],
+    "shocked": [
+      {"gif": "https://media1.tenor.com/m/smzl8keNfmUAAAAC/one-piece-ussop.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/_ZMvd2eIEtkAAAAC/aikatsu-aikatsu-stars.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/puWAb2B4grYAAAAC/dakaretai-otoko1i-ni-odosarete-imasu-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/SZ7qUAIWeDcAAAAC/maid-anime.gif", "g": 1}
+    ],
+    "love": [
+      {"gif": "https://media1.tenor.com/m/MS5qy7kP870AAAAC/anime-love.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/7dlYb2DlH4MAAAAC/anim-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/AsXMyjtnseUAAAAC/gray-juvia.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/yyLcAViKiWwAAAAC/forehead-forehead-kiss.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/CjgGdAA9KwYAAAAC/my-dress-up-darling-anime-love.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/TGf-v9YcpnUAAAAC/juvia-gray.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/4mhBQhgW_g8AAAAC/dusk-maiden-of-amnesia-tasogare-otome-x-amnesia.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/QbYxVBr1p5MAAAAC/rikekoi-anime-love-kiss.gif", "g": 1}
+      ],
+    "angry": [
+      {"gif": "https://media1.tenor.com/m/f67kcuOjUO4AAAAC/alisa-mikhailovna-kujou-alya.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/sdGxO6qEeSIAAAAC/fruits-basket-angry.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/ANlZqSYodd4AAAAC/inazuma-eleven-go-chrono-stone-inago-cs.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/ZxQzm7Hjg5oAAAAd/mine-angry.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/Kih1acu1jRQAAAAC/anime-anime-girl.gif", "g": 1}
+    ],
+    "think": [
+      {"gif": "https://media1.tenor.com/m/CV5he012hfAAAAAC/a-sign-of-affection-sign-of-affection.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/JaCVVnjTUkEAAAAC/pjsk-pjsk-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/EkBSHJD9EfwAAAAd/oreki-hyouka.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/QQHbKHMd_fUAAAAd/makima-chainsaw-man.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/h6UtQgUFmBwAAAAd/mugino-toaru.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/5lIyWxyKKYYAAAAC/irisviel-von-einzbern-fate-zero.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/IyKy95tPdNgAAAAC/smiling-thinking.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/ibZNK42yowQAAAAC/ashita-no-joe-joe-yabuki.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/GbIhyvdAW1AAAAAC/hxh-killua.gif", "g": 2}
+    ],
+    "sad": [
+      {"gif": "https://media1.tenor.com/m/S8eNtIeDHtQAAAAC/anime-couple.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/Hdlwzt6vs0kAAAAd/zero-darling-sad.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/LoO528x9iEUAAAAC/zero-two-smile.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/XzSz2ZL3qLAAAAAC/friends-beach.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/VEbhagxSZEkAAAAC/anime-ignored.gif", "g": 3}
+    ],
+    "happy": [
+      {"gif": "https://media1.tenor.com/m/1eNCY5Ar1tQAAAAC/slow-loop-anime-happy.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/Gu27vzlmHRMAAAAd/kenji-kenji-miyazawa.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/3uKGN-Zh-OsAAAAC/hanamichi-ran-shinada-takumi.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/c78-WkiijtYAAAAC/bakuman-saiko.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/KzHRIh0Vb0QAAAAC/brushing-my.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/L0-gIHrrrvoAAAAC/chuunibyou-rikka-takanashi.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/9TN_Wmmvh7sAAAAC/anime-cuddle.gif", "g": 1}
+    ],
+    "sleep": [
+      {"gif": "https://media1.tenor.com/m/vpE7LGJcq2gAAAAC/val-ally-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/-8u2hwF_ElMAAAAC/sakuta-azusagawa-mai-sakurajima.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/PeG3ys7ZqSIAAAAd/chocola-vanilla.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/23NQtnQLhLQAAAAC/rit-red.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/0fWLcZsWFV4AAAAd/couple-hug-couple-sleep.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/VzJtkXVo06wAAAAC/yuru-yuri-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/fKajedt2GVYAAAAC/sleep-anime.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/vXele79we3EAAAAC/bed-animeyuri.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/UuLz9tf4VnMAAAAd/reina-kumiko.gif", "g": 1}
+    ],
+    "dance": [
+      {"gif": "https://media1.tenor.com/m/vgNSixxe7MIAAAAC/j%C3%A1-a-comrade-v-yellowjacku-u-jukeboxu.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/7dlYb2DlH4MAAAAC/anim-anime.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/KlihBLr2xRQAAAAd/sousou-no-frieren-frieren-beyond-journey%27s-end.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/yaLDvz_IYMUAAAAC/anime-shingeki-no-bahamut.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/-HfnlRcSLOcAAAAC/skip-to-loafer-dance.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/iNXpCIMMYu4AAAAd/dance-anime.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/KzHRIh0Vb0QAAAAC/brushing-my.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/uI6q5m3CZrUAAAAd/anime-dancing.gif", "g": 3},
+      {"gif": "https://media1.tenor.com/m/lye7F7It6KUAAAAC/sigzai-sigma.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/FbOt4_a9FGsAAAAC/dancing-dance.gif", "g": 2}
+    ],
+    "punch": [
+      {"gif": "https://media1.tenor.com/m/yA_KtmPI1EMAAAAd/hxh-hunter-x-hunter.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/BoYBoopIkBcAAAAC/anime-smash.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/p_mMicg1pgUAAAAC/anya-forger-damian-spy-x-family.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/qDDsivB4UEkAAAAC/anime-fight.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/SwMgGqBirvcAAAAC/saki-saki-kanojo-mo-kanojo.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/pHCT4ynbGIUAAAAC/anime-girl.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/o8RbiF5-9dYAAAAd/killua-hxh.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/2An5JdBiT9YAAAAC/baka-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/mGAb7-9NdGUAAAAC/anime-bleach.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/0vILKVxQcqwAAAAd/anime-punch.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/QMtGat5suzEAAAAC/anime-punch.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/1T5bgBYtMgUAAAAC/head-hit-anime.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/i3hP7zju5JYAAAAd/higurashi-sotsu.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/GR_ia5xLWkkAAAAC/koiseka-anime-punch.gif", "g": 1},
+      {"gif": "https://media1.tenor.com/m/vBguwqFg-MsAAAAd/kimihito-monster-musume.gif", "g": 2},
+      {"gif": "https://media1.tenor.com/m/_PPOYsb1GeIAAAAd/anime-fight.gif", "g": 2}
+    ]
+  }
+}

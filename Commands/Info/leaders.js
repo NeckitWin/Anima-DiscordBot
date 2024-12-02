@@ -30,6 +30,7 @@ module.exports = {
         let nextNumber = 10;
 
         const lang = await getLang(interaction);
+        if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
 
         const leaderboard = await getLeaderboard(interaction.guild.id);
 

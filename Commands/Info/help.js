@@ -81,7 +81,7 @@ module.exports = {
                     },
                     {
                         name: `👑・${local.admin.label}`,
-                        value: `</language:1292081237837611079>, </autorole add:1290435224072884264>, </autorole list:1290435224072884264>, </autorole remove:1290435224072884264>, </greeting set:1290765643011981323>, </greeting remove:1290765643011981323>, </logs set:1299470943638519890>, </logs remove:1299470943638519890>, </post:1302340870892163093>, </anonim-messages set:1302707977546895472>, </anonim-messages disable:1302707977546895472>`,
+                        value: `</language:1292081237837611079>, </greet set:1309910521654542470>, </greet remove:1309910521654542470>, </logs set:1299470943638519890>, </logs remove:1299470943638519890>, </post:1302340870892163093>`,
                         inline: false
                     },
                     {
@@ -91,12 +91,12 @@ module.exports = {
                     },
                     {
                         name: `🪙・${local.economy.label}`,
-                        value: `</balance:1297200872304021504>, </daily>`,
+                        value: `</balance:1297200872304021504>, </daily:1313136006362562590>`,
                         inline: false
                     },
                     {
                         name: `🔧・${local.util.label}`,
-                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>, </random:1294775882124361819>, </anonim-message:1302707978008531125>',
+                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>, </random:1294775882124361819>',
                         inline: false
                     },
                     {

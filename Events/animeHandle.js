@@ -7,6 +7,7 @@ module.exports = {
     async execute(interaction) {
         try {
             if (!interaction.isButton()) return;
+            if (!interaction.guild) return;
             const customId = interaction.customId;
             const correctAnswer = customId.startsWith(`correct_`);
             const interactionID = interaction.message.interaction.id;

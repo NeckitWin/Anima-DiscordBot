@@ -26,6 +26,7 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction) {
         const lang = await getLang(interaction);
+        if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         const local = lang.clear;
         const amount = interaction.options.getInteger('amount');
         try {
@@ -42,7 +43,7 @@ module.exports = {
 
             await interaction.reply({embeds: [embedLoading], ephemeral: true});
 
-            if (!interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ManageMessages))
+            if (interaction.guild && !interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ManageMessages))
                 return await interaction.editReply({embeds: [embedPerm]});
 
             if (amount < 1 || amount > 100) return await interaction.editReply({embeds: [embedPerm.setTitle(local.amount)]});

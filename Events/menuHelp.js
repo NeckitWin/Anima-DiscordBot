@@ -33,16 +33,11 @@ module.exports = {
 
                 const admincontent =
                     `</language:1292081237837611079> - ${localinfo.admin[0]} \n` +
-                    `</autorole add:1290435224072884264> - ${localinfo.admin[1]} \n` +
-                    `</autorole list:1290435224072884264> - ${localinfo.admin[2]} \n` +
-                    `</autorole remove:1290435224072884264> - ${localinfo.admin[3]} \n` +
-                    `</greeting set:1290765643011981323> - ${localinfo.admin[4]} \n` +
-                    `</greeting remove:1290765643011981323> - ${localinfo.admin[5]} \n` +
+                    `</greet set:1309910521654542470> - ${localinfo.admin[4]} \n` +
+                    `</greet remove:1309910521654542470> - ${localinfo.admin[5]} \n` +
                     `</logs set:1299470943638519890> - ${localinfo.admin[6]} \n` +
                     `</logs remove:1299470943638519890> - ${localinfo.admin[7]} \n` +
-                    `</post:1302340870892163093> - ${localinfo.admin[8]} \n` +
-                    `</anonim-messages set:1302707977546895472> - ${localinfo.admin[9]} \n` +
-                    `</anonim-messages disable:1302707977546895472> - ${localinfo.admin[10]}`;
+                    `</post:1302340870892163093> - ${localinfo.admin[8]} \n`;
 
                 const modercontent =
                     `</clear:1285287069676994609> - ${localinfo.moder[0]} \n`+
@@ -51,7 +46,7 @@ module.exports = {
 
                 const economycontent =
                     `</balance:1297200872304021504> - ${localinfo.economy[0]} \n` +
-                    `</daily:1285287069756690489> - ${localinfo.economy[1]}`;
+                    `</daily:1313136006362562590> - ${localinfo.economy[1]}`;
 
                 const utilcontent =
                     `</calc:1285287069756690488> - ${localinfo.util[0]} \n` +

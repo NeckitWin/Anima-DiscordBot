@@ -42,10 +42,10 @@ module.exports = [
 
             const embed = new EmbedBuilder()
                 .setTitle(localMember.join)
-                .setDescription(`${localMember.name}: \`\`\`${member.user.displayName}\`\`\``)
+                .setDescription(`Имя: \`\`\`${member.user.displayName}\`\`\``)
                 .addFields([
-                    {name: localMember.user_id, value: `\`\`\`${member.user.id}\`\`\``, inline: true},
-                    {name: localMember.username, value: `\`\`\`${member.user.username}\`\`\``, inline: true}
+                    {name: "ID пользователя", value: `\`\`\`${member.user.id}\`\`\``, inline: true},
+                    {name: "Имя пользователя", value: `\`\`\`${member.user.username}\`\`\``, inline: true}
                 ])
                 .setThumbnail(member.user.displayAvatarURL())
                 .setTimestamp()
@@ -64,11 +64,11 @@ module.exports = [
             const localMember = lang.loggs.member;
 
             const embed = new EmbedBuilder()
-                .setTitle(localMember.leave)
-                .setDescription(`${localMember.name}: \`\`\`${member.user.displayName}\`\`\``)
+                .setTitle("Пользователь вышел")
+                .setDescription(`Имя: \`\`\`${member.user.displayName}\`\`\``)
                 .addFields([
-                    {name: localMember.user_id, value: `\`\`\`${member.user.id}\`\`\``, inline: true},
-                    {name: localMember.username, value: `\`\`\`${member.user.username}\`\`\``, inline: true}
+                    {name: "ID пользователя", value: `\`\`\`${member.user.id}\`\`\``, inline: true},
+                    {name: "Имя пользователя", value: `\`\`\`${member.user.username}\`\`\``, inline: true}
                 ])
                 .setThumbnail(member.user.displayAvatarURL())
                 .setTimestamp()
@@ -88,16 +88,16 @@ module.exports = [
             const localMessage = lang.loggs.message;
 
             const embed = new EmbedBuilder()
-                .setTitle(localMessage.delete)
-                .setDescription(`${localMessage.content}: \`\`\`${message.content}\`\`\``)
+                .setTitle("Сообщение удалено")
+                .setDescription(`Содержимое: \`\`\`${message.content}\`\`\``)
                 .addFields([
-                    {name: localMessage.message_id, value: `\`\`\`${message.id}\`\`\``, inline: false},
-                    {name: localMessage.channel, value: `\`\`\`${message.channel.name}\`\`\``, inline: true},
-                    {name: localMessage.channel_id, value: `\`\`\`${message.channel.id}\`\`\``, inline: true}
+                    {name: "ID сообщения", value: `\`\`\`${message.id}\`\`\``, inline: false},
+                    {name: "Канал", value: `\`\`\`${message.channel.name}\`\`\``, inline: true},
+                    {name: "ID канала", value: `\`\`\`${message.channel.id}\`\`\``, inline: true}
                 ])
                 .setThumbnail(message.author.displayAvatarURL())
                 .setFooter({
-                    text: `${localMessage.author}: ${message.author.username}`,
+                    text: `Автор: ${message.author.username}`,
                     iconURL: message.author.displayAvatarURL()
                 })
                 .setTimestamp()
@@ -117,10 +117,10 @@ module.exports = [
             const localMessage = lang.loggs.message;
 
             const embed = new EmbedBuilder()
-                .setTitle(localMessage.edit)
-                .setDescription(`${localMessage.old}: \`\`\`${oldMessage.content}\`\`\`\n${localMessage.new}: \`\`\`${newMessage.content}\`\`\``)
+                .setTitle("Сообщение изменено")
+                .setDescription(`Старое: \`\`\`${oldMessage.content}\`\`\`\nНовое: \`\`\`${newMessage.content}\`\`\``)
                 .setFooter({
-                    text: `${localMessage.author}: ${oldMessage.author.username}`,
+                    text: `Автор: ${oldMessage.author.username}`,
                     iconURL: oldMessage.author.displayAvatarURL()
                 })
                 .setTimestamp()
@@ -140,13 +140,13 @@ module.exports = [
 
             const channelType = getTypeChannel(channel.type);
             const embed = new EmbedBuilder()
-                .setTitle(localChannel.create)
-                .setDescription(`${localChannel.channel}: ${channel}`)
+                .setTitle("Канал создан")
+                .setDescription(`Канал: ${channel}`)
                 .addFields([
-                    {name: localChannel.name, value: `\`\`\`${channel.name}\`\`\``, inline: true},
-                    {name: localChannel.type, value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: true},
-                    {name: localChannel.channel_id, value: `\`\`\`${channel.id}\`\`\``, inline: false},
-                    {name: `nsfw`, value: `\`\`\`${channel.nsfw}\`\`\``, inline: true}
+                    {name: "Имя канала", value: `\`\`\`${channel.name}\`\`\``, inline: true},
+                    {name: "Тип канала", value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: true},
+                    {name: "ID канала", value: `\`\`\`${channel.id}\`\`\``, inline: false},
+                    {name: "NSFW", value: `\`\`\`${channel.nsfw}\`\`\``, inline: true}
                 ])
                 .setThumbnail(channel.guild.iconURL())
                 .setTimestamp()
@@ -321,7 +321,7 @@ module.exports = [
                 const newGuildMember = newMember.guild.members.cache.get(newMember.id);
                 const userColor = newGuildMember.displayColor;
                 const embed = new EmbedBuilder()
-                    .setTitle(`Member ${newMember.user.displayName} updated`)
+                    .setTitle(`Участник ${newMember.user.displayName} обновлён`)
                     .setDescription(`Member: ${newMember}\nMember ID: \`${newMember.id}\`\nUsername: \`${newMember.user.username}\``)
                     .setThumbnail(newGuildMember.displayAvatarURL())
                     .setColor(userColor)
@@ -343,14 +343,16 @@ module.exports = [
 
                 if (oldRoles !== newRoles) {
                     if (oldRoles.size > newRoles.size) {
-                        const role = oldRoles.filter(role => !newRoles.has(role.id)).first();
+                        const role = oldRoles.filter(role => !newRoles.has(role.id));
+                        const rolesName = role.map(role => role).join(`\n`);
                         embed.addFields(
-                            {name: `Изменении роли`, value: `Снята роль: ${role}\nID роли: \`${role.id}\``, inline: true}
+                            {name: `Изменении роли`, value: `Потеряны роль:\n${rolesName}`, inline: true}
                         );
                     } else if (oldRoles.size < newRoles.size) {
-                        const role = newRoles.filter(role => !oldRoles.has(role.id)).first();
+                        const role = newRoles.filter(role => !oldRoles.has(role.id));
+                        const rolesName = role.map(role => role).join(`\n`);
                         embed.addFields(
-                            {name: `Изменении роли`, value: `Добавлена роль: ${role}\nID роли: \`${role.id}\``, inline: true}
+                            {name: `Изменении роли`, value: `Добавлены роли:\n${rolesName}`, inline: true}
                         );
                     }
                 }

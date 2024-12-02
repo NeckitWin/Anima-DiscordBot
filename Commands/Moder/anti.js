@@ -72,6 +72,7 @@ module.exports = {
         const {options, guild} = interaction;
         const subcommand = options.getSubcommand();
         const lang = await getLang(interaction);
+        if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         const local = lang.anti;
         if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
 

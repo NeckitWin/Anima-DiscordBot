@@ -23,8 +23,11 @@ module.exports = {
     async execute(interaction) {
         try {
             const user = interaction.options.getUser('user') || interaction.user;
-            const guildID = interaction.guild.id;
-            const userMember = await interaction.guild.members.fetch(user.id);
+            const {guild} = interaction;
+            const lang = await getLang(interaction);
+            if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
+            const guildID = guild.id;
+            const userMember = await guild.members.fetch(user.id);
             const balance = await getUserServer(user.id, guildID);
             const userAvatar = user.displayAvatarURL();
             const userColor = userMember.displayColor;

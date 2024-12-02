@@ -35,9 +35,10 @@ module.exports = {
         const lang = await getLang(interaction);
         const local = lang.nsfw;
         if (count < 1 || count > 10) return await interaction.reply({content: local.errcount, ephemeral: true});
-        const parentChannel = interaction.channel.parent;
+        const parentChannel = interaction.channel?.parent;
         try {
-            if (!(interaction.channel.nsfw || parentChannel.nsfw)) return await interaction.reply({content: local.error, ephemeral: true});
+            if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
+            if (interaction.guild && !(interaction.channel.nsfw || parentChannel.nsfw)) return await interaction.reply({content: local.error, ephemeral: true});
             await interaction.deferReply();
 
             const target = interaction.options.getString('search');

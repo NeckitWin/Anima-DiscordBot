@@ -32,10 +32,12 @@ module.exports = {
                 )
                 .setRequired(true)),
     async execute(interaction) {
+        const {guild, options} = interaction;
         let lang = await getLang(interaction);
+        if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
-        const target = interaction.options.getString('language');
-        const serverID = interaction.guild.id;
+        const target = options.getString('language');
+        const serverID = guild.id;
         await updateServer(serverID, 'lang', target);
 
         lang = await getLang(interaction);

@@ -46,11 +46,12 @@ module.exports = {
     async execute(interaction) {
         const {options, guild} = interaction;
         const subcommand = options.getSubcommand();
-        const guildID = guild.id;
-        const guildName = guild.name;
         const lang = await getLang(interaction);
+        if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
 
+        const guildID = guild.id;
+        const guildName = guild.name;
         const {logs} = await getServer(guildID, guildName);
 
         if (subcommand === `set`) {

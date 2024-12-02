@@ -75,6 +75,7 @@ module.exports = {
         }),
     async execute(interaction) {
         const lang = await getLang(interaction);
+        if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         const local = lang.user;
         try {
             const target = interaction.options.getUser('user');

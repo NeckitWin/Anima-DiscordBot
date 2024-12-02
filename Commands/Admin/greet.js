@@ -52,8 +52,9 @@ module.exports = {
     async execute(interaction) {
         try {
             let modal;
-
+            const {guild} = interaction;
             const lang = await getLang(interaction);
+            if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.greeting
             if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
                 return await interaction.reply({

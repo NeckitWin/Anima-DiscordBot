@@ -20,6 +20,7 @@ module.exports = [
         name: Events.MessageCreate,
         async execute(message) {
             try {
+                if (!message.guild) return;
                 const content = message.content;
                 if (content.length < 5) return;
                 if (containsURL(content)) return;
@@ -56,6 +57,7 @@ module.exports = [
         name: Events.MessageCreate,
         async execute(message) {
             try {
+                if (!message.guild) return;
                 const content = message.content;
                 if (content.length < 7) return;
                 if (!containsURL(content)) return;

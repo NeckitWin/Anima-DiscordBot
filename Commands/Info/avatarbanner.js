@@ -1,5 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
+const {guild} = require("@megavasiliy007/sdc-api");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -28,10 +29,10 @@ module.exports = {
             await userLink.fetch();
 
             const avatarURL = userLink.avatarURL({dynamic: true, size: 4096});
-            const serverAvatarURL = interaction.guild.members.cache.get(userLink.id).avatarURL({
+            const serverAvatarURL = interaction.guild ? interaction.guild.members.cache.get(userLink.id).avatarURL({
                 dynamic: true,
                 size: 4096
-            });
+            }) : null;
             const bannerURL = userLink.bannerURL({dynamic: true, size: 4096});
 
             const embed = new EmbedBuilder()

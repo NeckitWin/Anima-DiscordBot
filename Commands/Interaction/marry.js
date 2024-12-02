@@ -24,7 +24,8 @@ module.exports = {
                 .setRequired(false)),
     async execute(interaction) {
         try {
-            const lang = await getLang(interaction)
+            const lang = await getLang(interaction);
+            if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.marry;
             const mentionUser = interaction.options.getUser(`user`);
             const checkRelation = await getRelation(interaction.guild.id, interaction.user.id);

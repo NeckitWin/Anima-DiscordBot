@@ -15,11 +15,6 @@ module.exports = {
         }),
     async execute(interaction) {
         try {
-            const totalMemory = os.totalmem();
-            const transferTotalMemory = (totalMemory / 1024 / 1024).toFixed(2);
-            const memoryUsage = process.memoryUsage();
-            const usedMemoryMB = (memoryUsage.rss / 1024 / 1024).toFixed(2);
-
             const lang = await getLang(interaction);
             const local = lang.bot;
             const bot = await interaction.client.user.fetch();
@@ -47,8 +42,7 @@ module.exports = {
                 .addFields(
                     {name: `📅 ${local.create}`, value: `╰ **\`${botCreated}\`**`, inline: false},
                     {name: `❤️‍🔥 ${local.use}`, value: `╰ **\`${serversCount}\`** ${local.servers}`, inline: false},
-                    {name: `👥 ${local.help}`, value: `╰ **\`${usersCount}\`** ${local.users}`, inline: false},
-                    {name: `🧠 ${local.ram}`, value: `╰ **\`${transferTotalMemory}\`/\`${usedMemoryMB}\`** ${local.mb}`, inline: false}
+                    {name: `👥 ${local.help}`, value: `╰ **\`${usersCount}\`** ${local.users}`, inline: false}
                 )
                 .setFooter({iconURL: botOwner.displayAvatarURL(), text: `${botOwner.username} - ${local.dev}⚙️`});
 

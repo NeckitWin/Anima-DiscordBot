@@ -12,7 +12,7 @@ module.exports = {
             const DivorceActions = ['marryDivorce', 'marryDivorceAccept', 'marryDivorceDecline'];
             const authorInteraction = message.interaction.user;
             const mentionUser = message.mentions?.users?.first() || false;
-            const getAuthorMarried = await getRelation(guild.id, authorInteraction.id);
+            const getAuthorMarried = await getRelation(guild?.id, authorInteraction.id);
             const isAuthorMarried = getAuthorMarried.length > 0;
             const embedError = new EmbedBuilder()
                 .setColor(`#c30000`);

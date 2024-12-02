@@ -25,6 +25,7 @@ module.exports = {
     async execute(interaction) {
         try {
             const lang = await getLang(interaction);
+            if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.role;
 
             const role = interaction.options.getRole('role');

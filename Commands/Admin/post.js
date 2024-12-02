@@ -33,7 +33,7 @@ module.exports = {
         try {
             const lang = await getLang(interaction);
             const local = lang.post;
-            if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
+            if (interaction.guild && !interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
             const target = interaction.options.getUser(`author`);
             const modal = new ModalBuilder()
                 .setCustomId(`postModal`)

@@ -3,6 +3,7 @@
   "yes": "Yes",
   "no": "No",
   "error": {
+    "notguild": "This command can only be used in servers",
     "commandforadmin": "This command is only for server administrators",
     "rolesEqual": "User's role is the same as yours",
     "usernotfound": "User not found in the server",

@@ -29,6 +29,7 @@ module.exports = {
         }),
     async execute(interaction) {
         const lang = await getLang(interaction);
+        if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         const local = lang.server;
 
         const guild = interaction.guild;
