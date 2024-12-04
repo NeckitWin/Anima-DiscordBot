@@ -1,15 +1,10 @@
 const { Events, AttachmentBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
-const Groq = require("groq-sdk");
-const { groqKey, groqKey2 } = require('../Data/config.json');
-const {getServer} = require("../Data/funcs/dbServer");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { geminiApiKey } = require('../Data/config.json');
 
 const messageHistory = {};
-
-async function createGroqClient(apiKey) {
-    return new Groq({ apiKey });
-}
 
 module.exports = {
     name: Events.MessageCreate,
@@ -19,92 +14,50 @@ module.exports = {
 
         try {
             const firstWord = message.content.split(' ')[0].toLowerCase();
-            const isBotNameMention = firstWord === `anima,` || firstWord === `анима,` || firstWord === `anima` || firstWord === `анима` || firstWord === `<@${botID}>`;
+            const isBotNameMention = firstWord === `anima,` || firstWord === `ани` || firstWord === `анима,` || firstWord === `anima` || firstWord === `анима` || firstWord === `<@${botID}>`;
             if (!isBotNameMention) return;
-
-            const server = await getServer(message.guild.id, message.guild.name);
-            const serverLang = server.lang;
-
-            const timeNow = new Date();
 
             await message.channel.sendTyping();
 
-            const userQuestion = message.content;
+            const userQuestion = `User ID:${message.author.id}, content: ${message.content}`;
+
             const serverId = message.guild.id;
             const history = messageHistory[serverId] || [];
+            const chatHistory = history.map(entry => ({
+                role: entry.role,
+                parts: [{ text: entry.content }]
+            }));
 
-            const messages = [];
-            history.forEach(entry => {
-                messages.push({ role: "user", content: `user: ${entry.user}, question: ${entry.content}` });
-                messages.push({ role: "assistant", content: entry.answer });
-            });
+            const genAI = new GoogleGenerativeAI(geminiApiKey);
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash",  systemInstruction: `You are Anima, a Discord bot assistant. Your owner is Neo (id: 429562004399980546). You were created on December 21, 2023. You are female. The current time is: ${new Date()}` });
 
-            messages.push({ role: "user", content: `user: ${message.author.displayName}, question: ${userQuestion}` });
+            const chat = model.startChat({ history: chatHistory });
 
-            let groqAnswer;
-            try {
-                const groq = await createGroqClient(groqKey);
-                groqAnswer = await groq.chat.completions.create({
-                    messages: [
-                        {
-                            role: "system",
-                            content: `You are Anima, a Discord bot assistant. You love helping people. You must reply in ${serverLang} language. Time: ${timeNow}`,
-                        },
-                        ...messages,
-                    ],
-                    model: "llama3-8b-8192",
-                });
-            } catch (error) {
-                console.error("Error with primary API key, trying backup key...", error);
+            let result = await chat.sendMessage(userQuestion);
 
-                try {
-                    const groqBackup = await createGroqClient(groqKey2);
-                    groqAnswer = await groqBackup.chat.completions.create({
-                        messages: [
-                            {
-                                role: "system",
-                                content: "You are Anima, a Discord bot assistant. You love helping people.",
-                            },
-                            ...messages,
-                        ],
-                        model: "llama3-8b-8192",
-                    });
-                } catch (backupError) {
-                    console.error("Both API keys failed", backupError);
-                    return await message.reply("I'm having trouble connecting to the service. Please try again later.");
-                }
-            }
-
-            let result = groqAnswer.choices[0]?.message?.content || "";
-
-            if (result.includes('@')) {
-                result = result.replace(/@/g, ' ');
-            }
+            const responseText = result.response.text();
 
             if (!messageHistory[serverId]) {
                 messageHistory[serverId] = [];
             }
             messageHistory[serverId].push({
-                content: userQuestion,
-                answer: result,
-                serverid: serverId,
-                user: message.author.displayName,
+                role: "user",
+                content: userQuestion
+            });
+            messageHistory[serverId].push({
+                role: "model",
+                content: responseText
             });
 
-            if (messageHistory[serverId].length > 200) {
-                messageHistory[serverId].shift();
+            if (messageHistory[serverId].length > 300) {
+                messageHistory[serverId] = messageHistory[serverId].slice(-100);
             }
 
-            if (result.length < 1990) {
-                await message.reply(result);
+            if (responseText.length < 1990) {
+                await message.reply(responseText);
             } else {
                 const filePath = path.join(__dirname, 'temp.txt');
-                await fs.promises.writeFile(filePath, result, 'utf8', (err) => {
-                    if (err) {
-                        console.error(err);
-                        return message.reply("error in console");
-                    }
-                });
+                await fs.promises.writeFile(filePath, responseText, 'utf8');
                 const attachment = new AttachmentBuilder(filePath, 'message.txt');
                 await message.reply({ files: [attachment] })
                     .then(() => fs.unlink(filePath, (err) => {

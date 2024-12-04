@@ -15,8 +15,8 @@ module.exports = {
     async execute(interaction) {
         if (await getCooldown('daily', interaction, 60*60*24)) return;
         // return await interaction.reply(`Команда в разработке`);
-        const minSalary = 500;
-        const maxSalary = 1000;
+        const minSalary = 1;
+        const maxSalary = 10;
         const gifLootBox = `https://media1.tenor.com/m/XUZtiluznZkAAAAd/kamiru-motivation.gif`;
         const userID = interaction.user.id;
         const serverID = interaction.guild.id;
