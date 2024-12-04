@@ -1,5 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
 const {updateUserWallet} = require("../../Data/funcs/dbUser");
+const {getCooldown} = require("../../Data/funcs/cooldown");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,7 +13,8 @@ module.exports = {
             uk: `Отримати щоденне винагородження`
         }),
     async execute(interaction) {
-        if (interaction.user.id != `429562004399980546`) return await interaction.reply(`Команда в разработке`);
+        if (await getCooldown('daily', interaction, 60*60*24)) return;
+        // return await interaction.reply(`Команда в разработке`);
         const minSalary = 500;
         const maxSalary = 1000;
         const gifLootBox = `https://media1.tenor.com/m/XUZtiluznZkAAAAd/kamiru-motivation.gif`;
@@ -24,11 +26,16 @@ module.exports = {
             .setDescription(`<a:loading:1295096250609172611> Открытие ежедневного вознаграждения...`)
             .setImage(gifLootBox);
 
+        const embedReward = new EmbedBuilder()
+            .setTitle(`Ежедневное вознаграждение`)
+            .setDescription(`Вы получили ${salary} шардов <:shard:1296969847690760234>`)
+            .setColor(`#00ff00`);
+
 
         await interaction.reply({embeds: [embedLoading]});
         setTimeout(async() => {
             await updateUserWallet(userID, serverID, 'shards', salary);
-            await interaction.editReply(`Вы получили ${salary} шардов <:shard:1296969847690760234>`);
+            await interaction.editReply({embeds: [embedReward]});
         }, 3000);
     }
 }

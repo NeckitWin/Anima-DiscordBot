@@ -34,7 +34,7 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setTitle(`Баланс пользователя ${user.displayName}`)
-                .setDescription(`Баланс составляет ${balance[0].shards} осколков<:shard:1296969847690760234>`)
+                .setDescription(`Баланс составляет ${balance[0]?.shards ?? 0} осколков<:shard:1296969847690760234>`)
                 .setThumbnail(userAvatar)
                 .setColor(userColor);
 

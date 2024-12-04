@@ -1,8 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const {Client, Events, GatewayIntentBits, Collection, ActivityType, EmbedBuilder} = require('discord.js');
-const {token, sdcKEY} = require('./Data/config.json');
-const SDC = require("@megavasiliy007/sdc-api");
+const {token} = require('./Data/config.json');
 
 const client = new Client({intents: [GatewayIntentBits.GuildPresences, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.DirectMessages, GatewayIntentBits.DirectMessageReactions, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildVoiceStates]});
 
@@ -86,10 +85,5 @@ for (const file of eventFiles) {
         }
     }
 }
-
-// client.on(Events.ClientReady, async Interaction => {
-//     const sdc = new SDC(sdcKEY);
-//     sdc.setAutoPost(client);
-// })
 
 client.login(token);

@@ -18,6 +18,7 @@ const getCooldown = async (commandEvent, message, time) => {
     setTimeout(() => {
         timeout.delete(key);
     }, seconds);
+    return false;
 };
 
 module.exports = { getCooldown };

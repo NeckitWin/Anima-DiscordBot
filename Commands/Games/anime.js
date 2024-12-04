@@ -29,7 +29,7 @@ module.exports = {
             await interaction.deferReply();
             const lang = await getLang(interaction);
             const local = lang.anime;
-            if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
+            if (!interaction.guild) return await interaction.editReply({content: lang.error.notguild, ephemeral: true});
 
             const correctAnime = getRandomAnime();
             const randomGif = correctAnime.gif[Math.floor(Math.random() * correctAnime.gif.length)];

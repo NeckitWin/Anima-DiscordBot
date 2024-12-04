@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} = require(`discord.js`);
-const {getLang} = require("../../Data/Lang");
+const {getLang, clearLangCache} = require("../../Data/Lang");
 const {updateServer} = require("../../Data/funcs/dbServer");
 
 module.exports = {
@@ -38,6 +38,7 @@ module.exports = {
         if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
         const target = options.getString('language');
         const serverID = guild.id;
+        await clearLangCache(serverID);
         await updateServer(serverID, 'lang', target);
 
         lang = await getLang(interaction);
@@ -47,6 +48,7 @@ module.exports = {
             .setTitle(local.title)
             .setDescription(`${local.description} ${target}`)
             .setColor(`#d998ff`);
+
 
         await interaction.reply({content: " ", embeds: [embed], ephemeral: true});
 

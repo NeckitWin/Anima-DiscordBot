@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const Groq = require("groq-sdk");
 const { groqKey, groqKey2 } = require('../Data/config.json');
+const {getServer} = require("../Data/funcs/dbServer");
 
 const messageHistory = {};
 
@@ -15,12 +16,16 @@ module.exports = {
     async execute(message) {
         const botID = `1187466797885182141`;
         if (message.author.bot) return;
-        if (message.author.id == 429562004399980546) return;
 
         try {
             const firstWord = message.content.split(' ')[0].toLowerCase();
             const isBotNameMention = firstWord === `anima,` || firstWord === `анима,` || firstWord === `anima` || firstWord === `анима` || firstWord === `<@${botID}>`;
             if (!isBotNameMention) return;
+
+            const server = await getServer(message.guild.id, message.guild.name);
+            const serverLang = server.lang;
+
+            const timeNow = new Date();
 
             await message.channel.sendTyping();
 
@@ -43,7 +48,7 @@ module.exports = {
                     messages: [
                         {
                             role: "system",
-                            content: "You are Anima, a Discord bot assistant. You love helping people.",
+                            content: `You are Anima, a Discord bot assistant. You love helping people. You must reply in ${serverLang} language. Time: ${timeNow}`,
                         },
                         ...messages,
                     ],
