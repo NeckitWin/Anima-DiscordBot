@@ -1,16 +1,14 @@
 const {Events, EmbedBuilder} = require("discord.js");
 const {getLang} = require("../Data/Lang");
 const {getTypeChannel} = require("../Data/funcs/getTypeChannel");
-const {getServer} = require("../Data/funcs/dbServer");
+const {ifServerHasLog} = require("../Data/funcs/logCache");
 
 const checkServer = async (message) => {
     try {
-        const guildID = message.guild.id;
-        const guildName = message.guild.name;
-        const {logs} = await getServer(guildID, guildName);
-        if (logs !== 0) {
-            return message.guild.channels.cache.get(logs);
-        } else return false;
+        const {id, name} = message.guild;
+        const logChannel = await ifServerHasLog(id, name);
+        if (!logChannel) return;
+        return message.guild.channels.cache.get(logChannel);
     } catch (err) {
         console.error(err);
     }
@@ -32,20 +30,83 @@ module.exports = [
         }
     },
     {
+        name: Events.MessageUpdate,
+        async execute(oldMessage, newMessage) {
+            const logChannel = await checkServer(newMessage);
+            if (!logChannel) return;
+            if (newMessage.author.bot) return;
+            const lang = await getLang(newMessage);
+            const localMessage = lang.logs.message;
+            const {channel, id, author, guild} = newMessage;
+            const attachments = oldMessage.attachments.map(attachment => attachment.url);
+
+            const embed = new EmbedBuilder()
+                .setTitle(localMessage.edit)
+                oldMessage.content ? embed.addFields({name: localMessage.old, value: `\`\`\`${oldMessage.content}\`\`\``, inline: true}) : undefined
+                newMessage.content && oldMessage.content !== newMessage.content ? embed.addFields({name: localMessage.new, value: `\`\`\`${newMessage.content}\`\`\``, inline: true}) : undefined
+                embed.addFields(
+                    {name: " ", value: `**${localMessage.author}**: ${author}\` | ${author.username} | ${author.id}\``, inline: false},
+                    {name: localMessage.channel, value: `${channel}: \`${channel.name}\``, inline: true},
+                    {name: localMessage.go, value: `https://discord.com/channels/${guild.id}/${channel.id}/${id}`, inline: true}
+                )
+                .setFooter({
+                    text: `${localMessage.id}: ${id}`,
+                    iconURL: oldMessage.author.displayAvatarURL()
+                })
+                .setTimestamp()
+                .setColor(`#00ffc4`);
+
+            attachments.length > 0 ? embed.addFields({name: `${localMessage.attachments}[${attachments.length}]`, value: `${attachments.join(`\n`)}`, inline: false}) : undefined;
+
+            await sendLog(logChannel, embed);
+        }
+    },
+    {
+        name: Events.MessageDelete,
+        async execute(message) {
+            const logChannel = await checkServer(message);
+            if (!logChannel) return;
+            if (message.author.bot) return;
+            const lang = await getLang(message);
+            const localMessage = lang.logs.message;
+
+            const {channel, id, author} = message;
+            const attachments = message.attachments.map(attachment => attachment.url);
+
+            const embed = new EmbedBuilder()
+                .setTitle(localMessage.delete)
+                message.content ? embed.setDescription(`\`\`\`${message.content}\`\`\``) : undefined
+                embed.addFields(
+                    {name: " ", value: `**${localMessage.author}**: ${author}\` | ${author.username} | ${author.id}\``, inline: false},
+                    {name: localMessage.channel, value: `${channel}: \`${channel.name}\``, inline: true}
+                )
+                .setFooter({
+                    text: `${localMessage.id}: ${id}`,
+                    iconURL: message.author.displayAvatarURL()
+                })
+                .setTimestamp()
+                .setColor(`#ff0000`);
+
+            attachments.length > 0 ? embed.addFields({name: `${localMessage.attachments}[${attachments.length}]`, value: `${attachments.join(`\n`)}`, inline: true}) : undefined;
+
+            await sendLog(logChannel, embed);
+        }
+    },
+    {
         name: Events.GuildMemberAdd,
         async execute(member) {
             const logChannel = await checkServer(member);
             if (!logChannel) return;
 
             const lang = await getLang(member);
-            const localMember = lang.loggs.member;
+            const localMember = lang.logs.member;
 
             const embed = new EmbedBuilder()
                 .setTitle(localMember.join)
-                .setDescription(`Имя: \`\`\`${member.user.displayName}\`\`\``)
+                .setDescription(`\`\`\`${member.user.displayName}\`\`\``)
                 .addFields([
-                    {name: "ID пользователя", value: `\`\`\`${member.user.id}\`\`\``, inline: true},
-                    {name: "Имя пользователя", value: `\`\`\`${member.user.username}\`\`\``, inline: true}
+                    {name: localMember.user_id, value: `\`\`\`${member.user.id}\`\`\``, inline: true},
+                    {name: localMember.username, value: `\`\`\`${member.user.username}\`\`\``, inline: true}
                 ])
                 .setThumbnail(member.user.displayAvatarURL())
                 .setTimestamp()
@@ -61,7 +122,7 @@ module.exports = [
             if (!logChannel) return;
 
             const lang = await getLang(member);
-            const localMember = lang.loggs.member;
+            const localMember = lang.logs.member;
 
             const embed = new EmbedBuilder()
                 .setTitle("Пользователь вышел")
@@ -78,65 +139,13 @@ module.exports = [
         }
     },
     {
-        name: Events.MessageDelete,
-        async execute(message) {
-            const logChannel = await checkServer(message);
-            if (!logChannel) return;
-            if (message.author.bot) return;
-
-            const lang = await getLang(message);
-            const localMessage = lang.loggs.message;
-
-            const embed = new EmbedBuilder()
-                .setTitle("Сообщение удалено")
-                .setDescription(`Содержимое: \`\`\`${message.content}\`\`\``)
-                .addFields([
-                    {name: "ID сообщения", value: `\`\`\`${message.id}\`\`\``, inline: false},
-                    {name: "Канал", value: `\`\`\`${message.channel.name}\`\`\``, inline: true},
-                    {name: "ID канала", value: `\`\`\`${message.channel.id}\`\`\``, inline: true}
-                ])
-                .setThumbnail(message.author.displayAvatarURL())
-                .setFooter({
-                    text: `Автор: ${message.author.username}`,
-                    iconURL: message.author.displayAvatarURL()
-                })
-                .setTimestamp()
-                .setColor(`#ff0000`);
-
-            await sendLog(logChannel, embed);
-        }
-    },
-    {
-        name: Events.MessageUpdate,
-        async execute(oldMessage, newMessage) {
-            const logChannel = await checkServer(newMessage);
-            if (!logChannel) return;
-            if (newMessage.author.bot) return;
-
-            const lang = await getLang(newMessage);
-            const localMessage = lang.loggs.message;
-
-            const embed = new EmbedBuilder()
-                .setTitle("Сообщение изменено")
-                .setDescription(`Старое: \`\`\`${oldMessage.content}\`\`\`\nНовое: \`\`\`${newMessage.content}\`\`\``)
-                .setFooter({
-                    text: `Автор: ${oldMessage.author.username}`,
-                    iconURL: oldMessage.author.displayAvatarURL()
-                })
-                .setTimestamp()
-                .setColor(`#00d9ff`);
-
-            await sendLog(logChannel, embed);
-        }
-    },
-    {
         name: Events.ChannelCreate,
         async execute(channel) {
             const logChannel = await checkServer(channel);
             if (!logChannel) return;
 
             const lang = await getLang(channel);
-            const localChannel = lang.loggs.channel;
+            const localChannel = lang.logs.channel;
 
             const channelType = getTypeChannel(channel.type);
             const embed = new EmbedBuilder()
@@ -162,7 +171,7 @@ module.exports = [
             if (!logChannel) return;
 
             const lang = await getLang(channel);
-            const localChannel = lang.loggs.channel;
+            const localChannel = lang.logs.channel;
             const channelType = getTypeChannel(channel.type);
 
             const embed = new EmbedBuilder()
@@ -188,7 +197,7 @@ module.exports = [
             if (!logChannel) return;
 
             const lang = await getLang(newChannel);
-            const localChannel = lang.loggs.channel;
+            const localChannel = lang.logs.channel;
             const channelType = getTypeChannel(newChannel.type);
             if (oldChannel.position !== newChannel.position) return;
 
@@ -220,7 +229,7 @@ module.exports = [
             if (!logChannel) return;
 
             const lang = await getLang(role);
-            const localRole = lang.loggs.role;
+            const localRole = lang.logs.role;
 
             const embed = new EmbedBuilder()
                 .setTitle(localRole.create)
@@ -251,7 +260,7 @@ module.exports = [
             if (!logChannel) return;
 
             const lang = await getLang(newRole);
-            const localRole = lang.loggs.role;
+            const localRole = lang.logs.role;
 
             if (oldRole.position !== newRole.position) return;
 
@@ -288,7 +297,7 @@ module.exports = [
             if (!logChannel) return;
 
             const lang = await getLang(role);
-            const localRole = lang.loggs.role;
+            const localRole = lang.logs.role;
 
             const embed = new EmbedBuilder()
                 .setTitle(localRole.delete)
@@ -337,7 +346,11 @@ module.exports = [
                 }
                 if (oldMember.displayAvatarURL() !== newMember.displayAvatarURL()) {
                     embed.addFields(
-                        {name: `Обновление аватара`, value: `[Ссылка на аватар](${newGuildMember.displayAvatarURL()})`, inline: true}
+                        {
+                            name: `Обновление аватара`,
+                            value: `[Ссылка на аватар](${newGuildMember.displayAvatarURL()})`,
+                            inline: true
+                        }
                     );
                 }
 

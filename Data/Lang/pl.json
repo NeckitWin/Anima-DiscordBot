@@ -186,24 +186,32 @@
     "noresult": "Nie znaleziono wyników",
     "errcount": "Liczba: wprowadź liczbę od 1 do 10"
   },
-  "loggs": {
+  "logs": {
+    "title": "Logi serwera",
+    "set": "Logi zostały ustawione na kanał",
+    "remove": "Logi zostały usunięte z serwera",
+    "notset": "Logi nie są ustawione na serwerze",
+    "same": "Ten kanał jest już ustawiony dla logów",
+    "nottext": "Ten kanał nie jest kanałem tekstowym",
+    "message": {
+      "delete": "Wiadomość usunięta",
+      "edit": "Wiadomość edytowana",
+      "old": "Edytowana wiadomość",
+      "new": "Edytowano na",
+      "content": "Treść",
+      "id": "ID wiadomości",
+      "channel": "Kanał",
+      "channel_id": "ID kanału",
+      "author": "Autor",
+      "go": "Przejdź do wiadomości",
+      "attachments": "Załączniki"
+    },
     "member": {
       "join": "Użytkownik dołączył",
       "leave": "Użytkownik opuścił",
       "name": "Wyświetlana nazwa",
       "user_id": "ID użytkownika",
       "username": "Nazwa użytkownika"
-    },
-    "message": {
-      "delete": "Wiadomość usunięta",
-      "edit": "Wiadomość edytowana",
-      "old": "Stara wiadomość",
-      "new": "Nowa wiadomość",
-      "content": "Treść",
-      "message_id": "ID wiadomości",
-      "channel": "Kanał",
-      "channel_id": "ID kanału",
-      "author": "Autor"
     },
     "channel": {
       "create": "Kanał utworzony",
@@ -222,23 +230,23 @@
         "category": "Kategoria",
         "news": "Kanał informacyjny",
         "stage": "Scena",
-        "unknown": "Nieznany"
+        "unknown": "Nieznane"
       }
-    },
-    "role": {
-      "create": "Rola utworzona",
-      "delete": "Rola usunięta",
-      "update": "Rola zaktualizowana",
-      "role": "Rola",
-      "name": "Nazwa roli",
-      "old": "Stara nazwa roli",
-      "new": "Nowa nazwa roli",
-      "role_id": "ID roli",
-      "color": "Kolor roli",
-      "permissions": "Uprawnienia roli",
-      "position": "Pozycja roli",
-      "hoist": "Wyświetl oddzielnie"
     }
+  },
+  "role": {
+    "create": "Rola utworzona",
+    "delete": "Rola usunięta",
+    "update": "Rola zaktualizowana",
+    "role": "Rola",
+    "name": "Nazwa roli",
+    "old": "Stara nazwa roli",
+    "new": "Nowa nazwa roli",
+    "role_id": "ID roli",
+    "color": "Kolor roli",
+    "permissions": "Uprawnienia roli",
+    "position": "Pozycja roli",
+    "hoist": "Wyświetl oddzielnie"
   },
   "auratop": {
     "title": "Tabela liderów aury"

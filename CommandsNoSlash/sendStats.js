@@ -9,13 +9,13 @@ module.exports = {
         if (message.author.id != '429562004399980546') return;
         try {
             const embed = new EmbedBuilder()
-                .setTitle(`<a:loading:1295096250609172611> Статистики Бота отправлены в путь!`)
+                .setTitle(`<a:loading:1295096250609172611> Моя статистика уже в пути!`)
                 .setColor(`#00ff97`);
 
             const sdc = new SDC(sdcKEY);
             sdc.setAutoPost(message.client);
 
-            message.reply({embeds: [embed]});
+            return message.reply({embeds: [embed]});
         } catch (err) {
             console.error(err);
         }

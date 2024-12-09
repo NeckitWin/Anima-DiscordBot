@@ -186,24 +186,32 @@
     "noresult": "No results found",
     "errcount": "Count: enter a number from 1 to 10"
   },
-  "loggs": {
+  "logs": {
+    "title": "Server Logs",
+    "set": "Logs are set to channel",
+    "remove": "Logs are removed from server",
+    "notset": "Logs are not set on the server",
+    "same": "This channel is already set for logs",
+    "nottext": "This channel is not a text channel",
+    "message": {
+      "delete": "Message deleted",
+      "edit": "Message edited",
+      "old": "Edited message",
+      "new": "Edited to",
+      "content": "Content",
+      "id": "Message ID",
+      "channel": "Channel",
+      "channel_id": "Channel ID",
+      "author": "Author",
+      "go": "Go to message",
+      "attachments": "Attachments"
+    },
     "member": {
       "join": "User joined",
       "leave": "User left",
       "name": "Display name",
       "user_id": "User ID",
       "username": "Username"
-    },
-    "message": {
-      "delete": "Message deleted",
-      "edit": "Message edited",
-      "old": "Old message",
-      "new": "New message",
-      "content": "Content",
-      "message_id": "Message ID",
-      "channel": "Channel",
-      "channel_id": "Channel ID",
-      "author": "Author"
     },
     "channel": {
       "create": "Channel created",
@@ -216,11 +224,11 @@
       "channel_id": "Channel ID",
       "type": "Channel type",
       "types": {
-        "text": "Text Channel",
-        "voice": "Voice Channel",
+        "text": "Text channel",
+        "voice": "Voice channel",
         "forum": "Forum",
         "category": "Category",
-        "news": "News Channel",
+        "news": "News channel",
         "stage": "Stage",
         "unknown": "Unknown"
       }
