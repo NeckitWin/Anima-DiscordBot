@@ -55,7 +55,11 @@
     "author": "Add the author ID of the post",
     "fill": "Fill in all fields in the modal window",
     "complete": "The post has been successfully created on the server",
-    "example": "example"
+    "example": "example",
+    "errorContent": "The post content must not be empty",
+    "errorColor": "The color must be in HEX format (e.g., #FF0000)",
+    "errorAuthor": "The author ID must be a number or the author is not found",
+    "errorImage": "The image/gif URL must be a valid URL"
   },
   "marry": {
     "marry": "Marriage",
@@ -249,7 +253,8 @@
     }
   },
   "auratop": {
-    "title": "Aura Leaderboard"
+    "title": "Aura Leaderboard",
+    "empty": "The aura leaderboard is empty"
   },
   "ben": {
     "question": "Question",

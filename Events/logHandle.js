@@ -106,7 +106,8 @@ module.exports = [
                 .setDescription(`\`\`\`${member.user.displayName}\`\`\``)
                 .addFields([
                     {name: localMember.user_id, value: `\`\`\`${member.user.id}\`\`\``, inline: true},
-                    {name: localMember.username, value: `\`\`\`${member.user.username}\`\`\``, inline: true}
+                    {name: localMember.username, value: `\`\`\`${member.user.username}\`\`\``, inline: true},
+                    {name: localMember.created, value: `\`\`\`${member.user.createdAt}\`\`\``, inline: true}
                 ])
                 .setThumbnail(member.user.displayAvatarURL())
                 .setTimestamp()

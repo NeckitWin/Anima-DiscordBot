@@ -34,6 +34,13 @@ module.exports = {
 
         const leaderboard = await getLeaderboard(interaction.guild.id);
 
+        if (!leaderboard) {
+            const embedError = new EmbedBuilder()
+                .setColor("#d80000")
+                .setTitle(lang.auratop.empty)
+            return await interaction.reply({embeds: [embedError]});
+        }
+
         const auraLeaders = leaderboard.slice(prevNumber, nextNumber);
 
         const embed = new EmbedBuilder()

@@ -55,7 +55,11 @@
     "author": "Dodaj ID autora posta",
     "fill": "Wypełnij wszystkie pola w oknie modalnym",
     "complete": "Post został pomyślnie utworzony na serwerze",
-    "example": "przykład"
+    "example": "przykład",
+    "errorContent": "Treść posta nie może być pusta",
+    "errorColor": "Kolor musi być w formacie HEX (np. #FF0000)",
+    "errorAuthor": "ID autora musi być liczbą albo autor nie został znaleziony",
+    "errorImage": "URL obrazka/gifa musi być prawidłowym adresem URL"
   },
   "marry": {
     "marry": "Ślub",
@@ -249,7 +253,8 @@
     "hoist": "Wyświetl oddzielnie"
   },
   "auratop": {
-    "title": "Tabela liderów aury"
+    "title": "Tabela liderów aury",
+    "empty": "Tabela liderów aury jest pusta"
   },
   "ben": {
     "question": "Pytanie",
