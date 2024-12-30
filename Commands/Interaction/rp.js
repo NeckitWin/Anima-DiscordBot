@@ -1,14 +1,15 @@
 const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
-
 const data = require("../../Data/jsons/reactions.json")
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'rp';
 
 const maleEmoji = "♂️";
 const femaleEmoji = "♀️";
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("rp")
+        .setName(commandName)
         .setNameLocalizations({ru: "рп", pl: "rp", uk: "рп"})
         .setDescription("Interaction with someone")
         .setDescriptionLocalizations({ru: "взаимодействие с кем-то", pl: "interakcja z kimś", uk: "взаємодія з кимось"})
@@ -65,6 +66,7 @@ module.exports = {
             .setRequired(false)),
     async execute(interaction) {
         try {
+            if (!commandLog(commandName, interaction)) return;
             const target = interaction.options.getString(`reaction`);
             const mentionUser = interaction.options.getUser(`user`);
             const gender = interaction.options.getInteger(`gender`);

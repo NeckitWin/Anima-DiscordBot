@@ -1,11 +1,12 @@
 const {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, Colors} = require("discord.js");
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
-const os = require('os');
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'bot';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`bot`)
+        .setName(commandName)
         .setNameLocalizations({ru: 'бот', pl: 'bot', uk: 'бот'})
         .setDescription('Shows information about the bot')
         .setDescriptionLocalizations({
@@ -15,6 +16,8 @@ module.exports = {
         }),
     async execute(interaction) {
         try {
+            if (!commandLog(commandName, interaction)) return;
+
             const lang = await getLang(interaction);
             const local = lang.bot;
             const bot = await interaction.client.user.fetch();

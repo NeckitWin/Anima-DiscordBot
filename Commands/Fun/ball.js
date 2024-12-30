@@ -1,7 +1,7 @@
 const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
-
-// Классические ответы магического шара
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'ball';
 const answers = [
     {value: "yes", color: "#00ff95"},
     {value: "no", color: "#ff0044"},
@@ -13,7 +13,7 @@ const answers = [
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`ball`)
+        .setName(commandName)
         .setDescription(`Ask the magic ball a question and get an answer`)
         .setNameLocalizations({ru: `шар`, pl: `kula`, uk: `куля`})
         .setDescriptionLocalizations({
@@ -33,6 +33,7 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction) {
         try {
+            if (!commandLog(commandName, interaction)) return;
             const question = interaction.options.getString(`question`);
             const answer = answers[Math.floor(Math.random() * answers.length)];
             const lang = await getLang(interaction);

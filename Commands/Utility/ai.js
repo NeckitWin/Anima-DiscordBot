@@ -3,10 +3,12 @@ const {getLang} = require("../../Data/Lang");
 const {groqAI, gemini} = require("../../Data/funcs/ai");
 const path = require("path");
 const fs = require("fs");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'ai';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`ai`)
+        .setName(commandName)
         .setNameLocalizations({ru: `ии`, pl: `ai`, uk: `іі`})
         .setDescription(`Send your request to the AI`)
         .setDescriptionLocalizations({
@@ -75,6 +77,7 @@ module.exports = {
             )
         ),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
         const lang = await getLang(interaction);
         const local = lang.ai;
         try {
@@ -82,7 +85,7 @@ module.exports = {
             const prompt = interaction.options.getString(`prompt`);
 
             if (subcommand === `ask`) {
-                const result = await  gemini(prompt);
+                const result = await gemini(prompt);
                 if (!result) return;
                 if (result.length<1990) return await interaction.reply(result);
                 const filePath = path.join(__dirname, 'temp.txt');

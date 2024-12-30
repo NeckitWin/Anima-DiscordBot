@@ -1,9 +1,11 @@
 const {SlashCommandBuilder} = require(`discord.js`)
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'nsfw';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`nsfw`)
+        .setName(commandName)
         .setDescription(`NSFW Anime Content`)
         .setNameLocalizations({ru: `нсфв`, pl: `nsfw`, uk: `нсфв`})
         .setDescriptionLocalizations({
@@ -31,6 +33,7 @@ module.exports = {
                 uk: `Кількість зображень для показу`
             }).setRequired(true)),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
         const count = interaction.options.getInteger('count');
         const lang = await getLang(interaction);
         const local = lang.nsfw;

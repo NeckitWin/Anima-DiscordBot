@@ -1,6 +1,7 @@
 const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
-
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'ben';
 const answers = [
     {value: "yes", gif: "https://media1.tenor.com/m/nIsnQBxoRjkAAAAC/ben-yes.gif", color: "#007a00"},
     {value: "no", gif: "https://media1.tenor.com/m/F1bdsKaYe2gAAAAC/ben-no.gif", color: "#ca0000"},
@@ -10,7 +11,7 @@ const answers = [
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`ben`)
+        .setName(commandName)
         .setDescription(`Ask a question and get an answer`)
         .setNameLocalizations({ru: `бен`, pl: `ben`, uk: `бен`})
         .setDescriptionLocalizations({
@@ -29,6 +30,7 @@ module.exports = {
                 })
                 .setRequired(true)),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
         const question = interaction.options.getString(`question`);
         const answer = answers[Math.floor(Math.random() * answers.length)];
         const lang = await getLang(interaction);

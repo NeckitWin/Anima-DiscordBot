@@ -1,11 +1,13 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} = require(`discord.js`);
 const {getRelation} = require("../../Data/funcs/dbUser");
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'marry';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`marry`)
-        .setNameLocalizations({ru: `свадьба`, pl: `ślub`, uk: `весілля`})
+        .setName(commandName)
+        .setNameLocalizations({ru: `брак`, pl: `małżeństwo`, uk: `шлюб`})
         .setDescription(`Start a relationship with someone`)
         .setDescriptionLocalizations({
             ru: `Начните отношения с кем-то`,
@@ -24,6 +26,7 @@ module.exports = {
                 .setRequired(false)),
     async execute(interaction) {
         try {
+            if (!commandLog(commandName, interaction)) return;
             const lang = await getLang(interaction);
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.marry;
@@ -39,14 +42,14 @@ module.exports = {
                 const MentionUserRelation = await getRelation(interaction.guild.id, mentionUser.id);
                 const isMentionUserRelation = MentionUserRelation.length > 0;
 
-                if (mentionUserBot || SelfMention || isRelation) {
+                if (mentionUserBot || SelfMention || isRelation || isMentionUserRelation) {
                     let relationError;
                     if (mentionUserBot) relationError = lang.error.dontbot;
                     if (isMentionUserRelation) relationError = local.wasMarry;
-                    if (SelfMention) relationError = lang.dontyourself
+                    if (SelfMention) relationError = lang.error.dontyourself
                     if (isRelation) relationError = local.youWasMarry;
                     embedError.setTitle(relationError);
-                    return interaction.reply({embeds: [embedError]});
+                    return interaction.reply({embeds: [embedError], ephemeral: true});
                 }
 
                 const embed = new EmbedBuilder()

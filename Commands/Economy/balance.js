@@ -1,10 +1,12 @@
 const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
 const {getUserServer} = require("../../Data/funcs/dbUser");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'balance';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`balance`)
+        .setName(commandName)
         .setNameLocalizations({ru: `баланс`, pl: `bilans`, uk: `баланс`})
         .setDescription(`Shows your shard balance`)
         .setDescriptionLocalizations({
@@ -22,6 +24,7 @@ module.exports = {
             }).setRequired(false)),
     async execute(interaction) {
         try {
+            if (!commandLog(commandName, interaction)) return;
             const user = interaction.options.getUser('user') || interaction.user;
             const {guild} = interaction;
             const lang = await getLang(interaction);

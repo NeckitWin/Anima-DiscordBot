@@ -3,6 +3,8 @@ const fetch = require('node-fetch2');
 const path = require("node:path");
 const sharp = require("sharp");
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'ship';
 
 const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowOffset = 10) => {
     const response = await fetch(url);
@@ -48,7 +50,7 @@ const createTextSVG = (text, fontSize, fillColor = 'white', strokeColor, strokeW
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('ship')
+        .setName(commandName)
         .setNameLocalizations({ru: `пара`, pl: `para`, uk: `пара`})
         .setDescription('Find out users compatibility')
         .setDescriptionLocalizations({
@@ -79,9 +81,9 @@ module.exports = {
             .setRequired(true)
         ),
     async execute(interaction) {
-        const lang = await getLang(interaction);
-
         try {
+            if (!commandLog(commandName, interaction)) return;
+            const lang = await getLang(interaction);
             const embedLoading = new EmbedBuilder()
                 .setTitle(`<a:loading:1295096250609172611> ${lang.ai.loading}...`)
                 .setColor(`#ff0062`);

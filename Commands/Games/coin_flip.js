@@ -1,5 +1,7 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'coin';
 
 const coinGifs = [
     "https://media.tenor.com/dexjLvFk3_MAAAAM/misaka-mikoto-misaka.gif",
@@ -12,9 +14,9 @@ const coinGifs = [
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('coin_flip')
+        .setName(commandName)
         .setDescription('Flips a coin')
-        .setNameLocalizations({ru: 'монетка', pl: 'rzuć_monetą', uk: 'підкинь_монету'})
+        .setNameLocalizations({ru: 'монетка', pl: 'moneta', uk: 'монетка'})
         .setDescriptionLocalizations({
             ru: 'Подбрасывает монетку',
             pl: 'Rzuca monetą',
@@ -35,6 +37,8 @@ module.exports = {
                 {name: 'Tails', name_localizations: {ru: 'Решка', pl: 'Reszka', uk: 'Решка'}, value: 'tails'}
             )),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
+
         const lang = await getLang(interaction);
         const local = lang.coin;
 

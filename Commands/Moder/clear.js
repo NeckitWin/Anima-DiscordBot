@@ -1,9 +1,11 @@
 const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'clear';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('clear')
+        .setName(commandName)
         .setNameLocalizations({ru: 'очистить', pl: 'wyczyść', uk: 'очистити'})
         .setDescription('Clears chat for specified amount of messages')
         .setDescriptionLocalizations({
@@ -25,11 +27,13 @@ module.exports = {
                 .setMaxValue(100)
                 .setRequired(true)),
     async execute(interaction) {
-        const lang = await getLang(interaction);
-        if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
-        const local = lang.clear;
-        const amount = interaction.options.getInteger('amount');
         try {
+            if (!commandLog(commandName, interaction)) return;
+            const lang = await getLang(interaction);
+            if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
+            const local = lang.clear;
+            const amount = interaction.options.getInteger('amount');
+
             const embedLoading = new EmbedBuilder()
                 .setTitle(`<a:loading:1295096250609172611> ${lang.loading}`)
                 .setColor(`#00ffd0`);

@@ -1,6 +1,8 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 const {getLeaderboard} = require("../../Data/funcs/dbUser");
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'leaders';
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -17,7 +19,7 @@ const row = new ActionRowBuilder()
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('leaders')
+        .setName(commandName)
         .setNameLocalizations({ru: 'лидеры', pl: 'liderzy', uk: 'лідери'})
         .setDescription('Leaders aura')
         .setDescriptionLocalizations({
@@ -26,6 +28,8 @@ module.exports = {
             uk: 'Лідери аури'
         }),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
+
         let prevNumber = 0;
         let nextNumber = 10;
 

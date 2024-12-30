@@ -1,8 +1,10 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} = require(`discord.js`);
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'mystery-doors';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`mystery-doors`)
+        .setName(commandName)
         .setDescription(`Open one of the doors and get a prize!`)
         .setNameLocalizations({
             ru: `тайные-двери`,
@@ -15,6 +17,8 @@ module.exports = {
             uk: `Відкрийте одні з дверей і отримайте приз!`
         }),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
+
         const embed = new EmbedBuilder()
             .setTitle(`Mystery doors`)
             .setDescription(`Choose one of the doors below and get a prize!`)

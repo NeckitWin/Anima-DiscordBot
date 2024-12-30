@@ -1,10 +1,12 @@
 const {SlashCommandBuilder, EmbedBuilder, PermissionsBitField, PermissionFlagsBits} = require(`discord.js`);
 const {getServer, updateServer} = require("../../Data/funcs/dbServer");
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'anti';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`anti`)
+        .setName(commandName)
         .setNameLocalizations({ru: `анти`, pl: `anti`, uk: `анті`})
         .setDescription(`System of automoderation`)
         .setDescriptionLocalizations({
@@ -69,6 +71,7 @@ module.exports = {
                 .setRequired(true))
         ),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
         const {options, guild} = interaction;
         const subcommand = options.getSubcommand();
         const lang = await getLang(interaction);

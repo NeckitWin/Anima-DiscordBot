@@ -2,6 +2,8 @@ const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const {getUserServer, getRelation} = require('../../Data/funcs/dbUser')
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'user';
 
 const getActivityType = (type) => {
     switch (type) {
@@ -52,7 +54,7 @@ const getBadgeEmoji = (badge) => {
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('user')
+        .setName(commandName)
         .setNameLocalizations({ru: 'пользователь', pl: 'użytkownik', uk: 'користувач'})
         .setDescription('Shows information about a user or about a user that was mentioned')
         .setDescriptionLocalizations({
@@ -74,6 +76,7 @@ module.exports = {
             uk: "Виберіть учасника для відображення інформації"
         }),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
         const lang = await getLang(interaction);
         if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         const local = lang.user;

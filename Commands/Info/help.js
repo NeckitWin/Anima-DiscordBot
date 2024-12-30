@@ -1,9 +1,11 @@
 const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require("discord.js");
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'help';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('help')
+        .setName(commandName)
         .setNameLocalizations({ru: 'помощь', pl: 'pomoc', uk: 'допомога'})
         .setDescription('Shows list of commands')
         .setDescriptionLocalizations({
@@ -13,6 +15,8 @@ module.exports = {
         }),
     async execute(interaction) {
         try {
+            if (!commandLog(commandName, interaction)) return;
+
             const lang = await getLang(interaction);
             const local = lang.menuhelp;
 

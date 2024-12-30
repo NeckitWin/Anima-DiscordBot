@@ -95,7 +95,8 @@ module.exports = {
                         .setImage(`https://media1.tenor.com/m/-YBoNtfhc0UAAAAd/kai-and-afine-kiss.gif`)
                         .setColor(`#ffc5d9`);
 
-                    await message.edit({embeds: [marryEmbed], components: []});
+                    await message.channel.send({content: `${authorInteraction} ${mentionUser}` ,embeds: [marryEmbed], components: []});
+                    await message.delete();
                 } else if (customId === `marryDecline`) {
                     if (!(mentionUser.id === user.id || user.id === authorInteraction.id)   ) {
                         error = lang.error.notforyou;

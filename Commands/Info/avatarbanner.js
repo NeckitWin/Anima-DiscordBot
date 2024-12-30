@@ -1,10 +1,11 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
-const {guild} = require("@megavasiliy007/sdc-api");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'avatar-banner';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('avatar-banner')
+        .setName(commandName)
         .setNameLocalizations({ru: 'аватар-баннер', pl: 'awatar-banner', uk: 'аватар-банер'})
         .setDescription('Shows avatar and banner of a user or of a user that was mentioned)')
         .setDescriptionLocalizations({
@@ -25,6 +26,8 @@ module.exports = {
     async execute(interaction) {
         const lang = await getLang(interaction);
         try {
+            if (!commandLog(commandName, interaction)) return;
+
             const userLink = interaction.options.getUser('user') || interaction.user;
             await userLink.fetch();
 

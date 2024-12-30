@@ -192,16 +192,16 @@
   },
   "logs": {
     "title": "Logi serwera",
-    "set": "Logi zostały ustawione na kanał",
-    "remove": "Logi zostały usunięte z serwera",
+    "set": "Logi ustawione na kanał",
+    "remove": "Logi usunięte z serwera",
     "notset": "Logi nie są ustawione na serwerze",
-    "same": "Ten kanał jest już ustawiony dla logów",
-    "nottext": "Ten kanał nie jest kanałem tekstowym",
+    "same": "Ten kanał jest już ustawiony na logi",
+    "nottext": "Ten kanał nie jest tekstowy",
     "message": {
       "delete": "Wiadomość usunięta",
-      "edit": "Wiadomość edytowana",
-      "old": "Edytowana wiadomość",
-      "new": "Edytowano na",
+      "edit": "Wiadomość zmieniona",
+      "old": "Zmieniona wiadomość",
+      "new": "Zmieniono na",
       "content": "Treść",
       "id": "ID wiadomości",
       "channel": "Kanał",
@@ -213,9 +213,19 @@
     "member": {
       "join": "Użytkownik dołączył",
       "leave": "Użytkownik opuścił",
+      "update": "Zaktualizował profil",
+      "member": "Użytkownik",
       "name": "Wyświetlana nazwa",
       "user_id": "ID użytkownika",
-      "username": "Nazwa użytkownika"
+      "username": "Nazwa użytkownika",
+      "created": "Data utworzenia konta",
+      "old": "Stara wyświetlana nazwa",
+      "new": "Nowa wyświetlana nazwa",
+      "avatarUpdate": "Zaktualizował awatar",
+      "avatarLink": "Link do awatara",
+      "rolesChange": "Zmiana ról",
+      "rolesAdd": "Dodano role",
+      "rolesRemove": "Usunięto role"
     },
     "channel": {
       "create": "Kanał utworzony",
@@ -227,30 +237,31 @@
       "new": "Nowa nazwa kanału",
       "channel_id": "ID kanału",
       "type": "Typ kanału",
+      "go": "Przejdź do kanału",
       "types": {
-        "text": "Kanał tekstowy",
-        "voice": "Kanał głosowy",
+        "text": "Tekstowy",
+        "voice": "Głosowy",
         "forum": "Forum",
         "category": "Kategoria",
-        "news": "Kanał informacyjny",
+        "news": "Aktualności",
         "stage": "Scena",
         "unknown": "Nieznane"
       }
+    },
+    "role": {
+      "create": "Rola utworzona",
+      "delete": "Rola usunięta",
+      "update": "Rola zaktualizowana",
+      "role": "Rola",
+      "name": "Nazwa roli",
+      "old": "Stara nazwa roli",
+      "new": "Nowa nazwa roli",
+      "role_id": "ID roli",
+      "color": "Kolor roli",
+      "permissions": "Uprawnienia roli",
+      "position": "Pozycja roli",
+      "hoist": "Wyświetlana osobno"
     }
-  },
-  "role": {
-    "create": "Rola utworzona",
-    "delete": "Rola usunięta",
-    "update": "Rola zaktualizowana",
-    "role": "Rola",
-    "name": "Nazwa roli",
-    "old": "Stara nazwa roli",
-    "new": "Nowa nazwa roli",
-    "role_id": "ID roli",
-    "color": "Kolor roli",
-    "permissions": "Uprawnienia roli",
-    "position": "Pozycja roli",
-    "hoist": "Wyświetl oddzielnie"
   },
   "auratop": {
     "title": "Tabela liderów aury",

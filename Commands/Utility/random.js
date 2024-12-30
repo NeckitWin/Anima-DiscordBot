@@ -1,5 +1,7 @@
 const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'random';
 
 const gifs = [
     "https://media1.tenor.com/m/6cMOFYs7U5AAAAAC/crazy-slots-spin.gif",
@@ -10,7 +12,7 @@ const gifs = [
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`random`)
+        .setName(commandName)
         .setNameLocalizations({ru: `рандом`, pl: `losowy`, uk: `рандом`})
         .setDescription(`Generates a random number`)
         .setDescriptionLocalizations({
@@ -39,6 +41,7 @@ module.exports = {
             })
             .setRequired(true)),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
         const lang = await getLang(interaction);
         const local = lang.random;
         try {

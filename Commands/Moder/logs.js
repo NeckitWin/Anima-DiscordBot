@@ -2,10 +2,12 @@ const {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} = require(`discor
 const {updateServer, getServer} = require("../../Data/funcs/dbServer");
 const {getLang} = require("../../Data/Lang");
 const {clearLogCache} = require("../../Data/funcs/logCache");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'logs';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`logs`)
+        .setName(commandName)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setNameLocalizations({ru: `логи`, pl: `logi`, uk: `логи`})
         .setDescription(`Set the channel for logs`)
@@ -45,6 +47,7 @@ module.exports = {
             })
         ),
     async execute(interaction) {
+        if (!commandLog(commandName, interaction)) return;
         const {options, guild} = interaction;
         const subcommand = options.getSubcommand();
         const lang = await getLang(interaction);

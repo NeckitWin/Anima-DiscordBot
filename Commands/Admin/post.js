@@ -7,10 +7,12 @@ const {
     PermissionFlagsBits
 } = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'post';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`post`)
+        .setName(commandName)
         .setNameLocalizations({ru: `пост`, pl: `post`, uk: `пост`})
         .setDescription(`Post a embed message to a channel`)
         .setDescriptionLocalizations({
@@ -31,6 +33,7 @@ module.exports = {
                 .setRequired(false)),
     async execute(interaction) {
         try {
+            if (!commandLog(commandName, interaction)) return;
             const lang = await getLang(interaction);
             const local = lang.post;
             if (interaction.guild && !interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});

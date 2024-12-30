@@ -2,6 +2,7 @@ const {Events, EmbedBuilder} = require("discord.js");
 const {getLang} = require("../Data/Lang");
 const {getTypeChannel} = require("../Data/funcs/getTypeChannel");
 const {ifServerHasLog} = require("../Data/funcs/logCache");
+const {formatDate} = require("../Data/utility");
 
 const checkServer = async (message) => {
     try {
@@ -23,12 +24,6 @@ const sendLog = async (channel, embed) => {
 }
 
 module.exports = [
-    {
-        name: Events.MessageCreate,
-        async execute(message) {
-            if (!message.author.bot) return console.log(`${message.guild}|${message.author.username} - ${message.content}`);
-        }
-    },
     {
         name: Events.MessageUpdate,
         async execute(oldMessage, newMessage) {
@@ -101,19 +96,86 @@ module.exports = [
             const lang = await getLang(member);
             const localMember = lang.logs.member;
 
+            const dataCreated = formatDate(member.user.createdAt);
+
             const embed = new EmbedBuilder()
                 .setTitle(localMember.join)
-                .setDescription(`\`\`\`${member.user.displayName}\`\`\``)
-                .addFields([
-                    {name: localMember.user_id, value: `\`\`\`${member.user.id}\`\`\``, inline: true},
+                .setDescription(`${localMember.member}: ${member}`)
+                .addFields(
+                    {name: localMember.name, value: `\`\`\`${member.user.displayName}\`\`\``, inline: true},
                     {name: localMember.username, value: `\`\`\`${member.user.username}\`\`\``, inline: true},
-                    {name: localMember.created, value: `\`\`\`${member.user.createdAt}\`\`\``, inline: true}
-                ])
+                    {name: localMember.created, value: `\`\`\`${dataCreated}\`\`\``, inline: true}
+                )
+                .setFooter({text: `${localMember.user_id}: ${member.user.id}`, iconURL: member.guild.iconURL()})
                 .setThumbnail(member.user.displayAvatarURL())
                 .setTimestamp()
                 .setColor(`#00ff00`);
 
             await sendLog(logChannel, embed);
+        }
+    },
+    {
+        name: Events.GuildMemberUpdate,
+        async execute(oldMember, newMember) {
+            try {
+                const logChannel = await checkServer(newMember);
+                if (!logChannel) return;
+
+                const lang = await getLang(newMember);
+                const localMember = lang.logs.member;
+
+                const newGuildMember = newMember.guild.members.cache.get(newMember.id);
+                const embed = new EmbedBuilder()
+                    .setTitle(`${localMember.member} ${newMember.user.displayName} ${localMember.update}`)
+                    .setDescription(`${localMember.member}: ${newMember}\n${localMember.user_id}: \`${newMember.id}\`\n${localMember.username}: \`${newMember.user.username}\``)
+                    .setThumbnail(newGuildMember.displayAvatarURL())
+                    .setColor(`#00d9ff`)
+                    .setTimestamp();
+                const oldRoles = oldMember.roles.cache;
+                const newRoles = newMember.roles.cache;
+
+                let changes = 0;
+
+                if (oldMember.displayName !== newMember.displayName) {
+                    embed.addFields(
+                        {name: localMember.old, value: `\`\`\`${oldMember.displayName}\`\`\``, inline: true},
+                        {name: localMember.new, value: `\`\`\`${newMember.displayName}\`\`\``, inline: true}
+                    );
+                    changes++;
+                }
+                if (oldMember.displayAvatarURL() !== newMember.displayAvatarURL()) {
+                    embed.addFields(
+                        {
+                            name: localMember.avatarUpdate,
+                            value: `[${localMember.avatarLink}](${newGuildMember.displayAvatarURL()})`,
+                            inline: true
+                        }
+                    );
+                    changes++;
+                }
+
+                if (oldRoles !== newRoles) {
+                    if (oldRoles.size > newRoles.size) {
+                        const role = oldRoles.filter(role => !newRoles.has(role.id));
+                        const rolesName = role.map(role => role).join(`\n`);
+                        embed.addFields(
+                            {name: localMember.rolesChange, value: `${localMember.rolesRemove}:\n${rolesName}`, inline: true}
+                        );
+                    } else if (oldRoles.size < newRoles.size) {
+                        const role = newRoles.filter(role => !oldRoles.has(role.id));
+                        const rolesName = role.map(role => role).join(`\n`);
+                        embed.addFields(
+                            {name: localMember.rolesChange, value: `${localMember.rolesAdd}:\n${rolesName}`, inline: true}
+                        );
+                    }
+                    changes++;
+                }
+
+                if (changes === 0) return;
+                await sendLog(logChannel, embed);
+            } catch (err) {
+                console.error(err);
+            }
         }
     },
     {
@@ -126,15 +188,17 @@ module.exports = [
             const localMember = lang.logs.member;
 
             const embed = new EmbedBuilder()
-                .setTitle("Пользователь вышел")
-                .setDescription(`Имя: \`\`\`${member.user.displayName}\`\`\``)
-                .addFields([
-                    {name: "ID пользователя", value: `\`\`\`${member.user.id}\`\`\``, inline: true},
-                    {name: "Имя пользователя", value: `\`\`\`${member.user.username}\`\`\``, inline: true}
-                ])
+                .setTitle(localMember.leave)
+                .setDescription(`${localMember.member}: ${member}`)
+                .addFields(
+                    {name: localMember.name, value: `\`\`\`${member.user.displayName}\`\`\``, inline: true},
+                    {name: localMember.username, value: `\`\`\`${member.user.username}\`\`\``, inline: true},
+                    {name: localMember.join, value: `\`\`\`${formatDate(member.joinedAt)}\`\`\``, inline: true}
+                )
+                .setFooter({text: `${localMember.user_id}: ${member.user.id}`, iconURL: member.guild.iconURL()})
                 .setThumbnail(member.user.displayAvatarURL())
                 .setTimestamp()
-                .setColor(`#ff0000`);
+                .setColor(`#d80000`);
 
             await sendLog(logChannel, embed);
         }
@@ -149,16 +213,16 @@ module.exports = [
             const localChannel = lang.logs.channel;
 
             const channelType = getTypeChannel(channel.type);
+
             const embed = new EmbedBuilder()
-                .setTitle("Канал создан")
-                .setDescription(`Канал: ${channel}`)
-                .addFields([
-                    {name: "Имя канала", value: `\`\`\`${channel.name}\`\`\``, inline: true},
-                    {name: "Тип канала", value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: true},
-                    {name: "ID канала", value: `\`\`\`${channel.id}\`\`\``, inline: false},
-                    {name: "NSFW", value: `\`\`\`${channel.nsfw}\`\`\``, inline: true}
-                ])
+                .setTitle(localChannel.create)
+                .addFields(
+                    {name: localChannel.channel, value: channel.toString(), inline: true},
+                    {name: localChannel.name, value: `\`${channel.name}\``, inline: true},
+                    {name: localChannel.type, value: `\`${localChannel.types[channelType]}\``, inline: true}
+                )
                 .setThumbnail(channel.guild.iconURL())
+                .setFooter({text: `${localChannel.channel_id}: ${channel.id}`, iconURL: channel.guild.iconURL()})
                 .setTimestamp()
                 .setColor(`#00ff00`);
 
@@ -173,17 +237,18 @@ module.exports = [
 
             const lang = await getLang(channel);
             const localChannel = lang.logs.channel;
+
             const channelType = getTypeChannel(channel.type);
+            const nsfw = channel.nsfw;
 
             const embed = new EmbedBuilder()
                 .setTitle(localChannel.delete)
-                .setDescription(`${localChannel.channel}: ${channel}`)
-                .addFields([
-                    {name: localChannel.name, value: `\`\`\`${channel.name}\`\`\``, inline: true},
-                    {name: localChannel.type, value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: true},
-                    {name: localChannel.channel_id, value: `\`\`\`${channel.id}\`\`\``, inline: false},
-                    {name: `nsfw`, value: `\`\`\`${channel.nsfw}\`\`\``, inline: true}
-                ])
+                .setDescription(` `)
+                .addFields(
+                    {name: localChannel.channel, value: `\`${channel.name}\``, inline: true},
+                    {name: localChannel.type, value: `\`${localChannel.types[channelType]}\``, inline: true},
+                    {name: localChannel.channel_id, value: `\`${channel.id}\``, inline: true}
+                )
                 .setThumbnail(channel.guild.iconURL())
                 .setTimestamp()
                 .setColor(`#ff0000`);
@@ -214,7 +279,7 @@ module.exports = [
                     {name: localChannel.new, value: `\`\`\`${newChannel.name}\`\`\``, inline: true},
                     {name: localChannel.type, value: `\`\`\`${localChannel.types[channelType]}\`\`\``, inline: false},
                     {name: localChannel.channel_id, value: `\`\`\`${newChannel.id}\`\`\``, inline: false},
-                    {name: `nsfw`, value: `\`\`\`${newChannel.nsfw}\`\`\``, inline: true}
+                    {name: `NSFW`, value: `\`\`\`${newChannel.nsfw}\`\`\``, inline: true}
                 ].filter(Boolean))
                 .setThumbnail(newChannel.guild.iconURL())
                 .setTimestamp()
@@ -320,61 +385,6 @@ module.exports = [
                 .setColor(`#ff0000`);
 
             await sendLog(logChannel, embed);
-        }
-    },
-    {
-        name: Events.GuildMemberUpdate,
-        async execute(oldMember, newMember) {
-            try {
-                const logChannel = await checkServer(newMember);
-                if (!logChannel) return;
-                const newGuildMember = newMember.guild.members.cache.get(newMember.id);
-                const userColor = newGuildMember.displayColor;
-                const embed = new EmbedBuilder()
-                    .setTitle(`Участник ${newMember.user.displayName} обновлён`)
-                    .setDescription(`Member: ${newMember}\nMember ID: \`${newMember.id}\`\nUsername: \`${newMember.user.username}\``)
-                    .setThumbnail(newGuildMember.displayAvatarURL())
-                    .setColor(userColor)
-                    .setTimestamp(new Date());
-                const oldRoles = oldMember.roles.cache;
-                const newRoles = newMember.roles.cache;
-
-                if (oldMember.displayName !== newMember.displayName) {
-                    embed.addFields(
-                        {name: `Old server name`, value: `\`\`\`${oldMember.displayName}\`\`\``, inline: true},
-                        {name: `New server name`, value: `\`\`\`${newMember.displayName}\`\`\``, inline: true}
-                    );
-                }
-                if (oldMember.displayAvatarURL() !== newMember.displayAvatarURL()) {
-                    embed.addFields(
-                        {
-                            name: `Обновление аватара`,
-                            value: `[Ссылка на аватар](${newGuildMember.displayAvatarURL()})`,
-                            inline: true
-                        }
-                    );
-                }
-
-                if (oldRoles !== newRoles) {
-                    if (oldRoles.size > newRoles.size) {
-                        const role = oldRoles.filter(role => !newRoles.has(role.id));
-                        const rolesName = role.map(role => role).join(`\n`);
-                        embed.addFields(
-                            {name: `Изменении роли`, value: `Потеряны роль:\n${rolesName}`, inline: true}
-                        );
-                    } else if (oldRoles.size < newRoles.size) {
-                        const role = newRoles.filter(role => !oldRoles.has(role.id));
-                        const rolesName = role.map(role => role).join(`\n`);
-                        embed.addFields(
-                            {name: `Изменении роли`, value: `Добавлены роли:\n${rolesName}`, inline: true}
-                        );
-                    }
-                }
-
-                await sendLog(logChannel, embed);
-            } catch (err) {
-                console.error(err);
-            }
         }
     }
 ]

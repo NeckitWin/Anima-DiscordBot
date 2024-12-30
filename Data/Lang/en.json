@@ -192,8 +192,8 @@
   },
   "logs": {
     "title": "Server Logs",
-    "set": "Logs are set to channel",
-    "remove": "Logs are removed from server",
+    "set": "Logs set to the channel",
+    "remove": "Logs removed from the server",
     "notset": "Logs are not set on the server",
     "same": "This channel is already set for logs",
     "nottext": "This channel is not a text channel",
@@ -211,11 +211,21 @@
       "attachments": "Attachments"
     },
     "member": {
-      "join": "User joined",
-      "leave": "User left",
+      "join": "Member joined",
+      "leave": "Member left",
+      "update": "Updated profile",
+      "member": "Member",
       "name": "Display name",
       "user_id": "User ID",
-      "username": "Username"
+      "username": "Username",
+      "created": "Account creation date",
+      "old": "Old display name",
+      "new": "New display name",
+      "avatarUpdate": "Updated avatar",
+      "avatarLink": "Avatar link",
+      "rolesChange": "Roles changed",
+      "rolesAdd": "Roles added",
+      "rolesRemove": "Roles removed"
     },
     "channel": {
       "create": "Channel created",
@@ -227,12 +237,13 @@
       "new": "New channel name",
       "channel_id": "Channel ID",
       "type": "Channel type",
+      "go": "Go to channel",
       "types": {
-        "text": "Text channel",
-        "voice": "Voice channel",
+        "text": "Text",
+        "voice": "Voice",
         "forum": "Forum",
         "category": "Category",
-        "news": "News channel",
+        "news": "News",
         "stage": "Stage",
         "unknown": "Unknown"
       }
@@ -246,9 +257,9 @@
       "old": "Old role name",
       "new": "New role name",
       "role_id": "Role ID",
-      "color": "Color",
-      "permissions": "Permissions",
-      "position": "Role hierarchy",
+      "color": "Role color",
+      "permissions": "Role permissions",
+      "position": "Role position",
       "hoist": "Displayed separately"
     }
   },

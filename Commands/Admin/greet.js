@@ -9,10 +9,12 @@ const {
 } = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
 const {removeGreet} = require("../../Data/funcs/dbGreet");
+const {commandLog} = require("../../Data/funcs/commandLog");
+const commandName = 'greet';
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`greet`)
+        .setName(commandName)
         .setNameLocalizations({ru: `приветствие`, pl: `powitanie`, uk: `привітання`})
         .setDescription(`Set channel for greeting new members`)
         .setDescriptionLocalizations({
@@ -51,6 +53,7 @@ module.exports = {
             })),
     async execute(interaction) {
         try {
+            if (!commandLog(commandName, interaction)) return;
             let modal;
             const {guild} = interaction;
             const lang = await getLang(interaction);
