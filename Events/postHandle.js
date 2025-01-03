@@ -1,5 +1,6 @@
 const {Events, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../Data/Lang");
+const {commandLog} = require("../Data/funcs/commandLog");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -7,10 +8,11 @@ module.exports = {
         try {
             if (!interaction.isModalSubmit()) return;
             if (interaction.customId !== `postModal`) return;
+            if (!commandLog("postHandle", interaction, 1)) return;
             const lang = await getLang(interaction);
             const local = lang.post;
             const data = interaction.fields.components;
-            const title = data[0].components[0].value;
+            const text = data[0].components[0].value;
             const description = data[1].components[0].value;
             const color = data[2].components[0].value;
             const image = data[3].components[0].value;
@@ -18,7 +20,7 @@ module.exports = {
             const mebmer = interaction.guild.members.cache.get(authorID);
 
             let errorMessage;
-            if (!title && !description && !image) errorMessage = local.errorContent;
+            if (!text && !description && !image) errorMessage = local.errorContent;
             if (color && !/^#[0-9A-F]{6}$/i.test(color)) errorMessage = local.errorColor;
             if (authorID && !mebmer) errorMessage = local.errorAuthor;
             if (image && !/^https?:\/\/.+\..+/i.test(image)) errorMessage = local.errorImage;
@@ -31,7 +33,6 @@ module.exports = {
 
             const embed = new EmbedBuilder()
 
-            if (title) embed.setTitle(title);
             if (description) embed.setDescription(description);
             if (color) embed.setColor(color);
             if (image) embed.setImage(image);
@@ -40,7 +41,10 @@ module.exports = {
                 iconURL: mebmer.user.displayAvatarURL({dynamic: true})
             });
 
-            await interaction.channel.send({embeds: [embed]});
+            await interaction.channel.send({
+                content: text ? text : " "
+                , embeds: [embed]
+            });
             await interaction.reply({content: lang.post.complete, ephemeral: true});
 
         } catch (err) {

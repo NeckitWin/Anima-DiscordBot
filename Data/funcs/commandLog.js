@@ -1,28 +1,67 @@
-let usedCommandsCount = 0;
-const commandSendTime = 1000 * 60 * 15;
 const blacklist = require('../jsons/blacklist.json');
 const {updateUsedCommandsCount} = require("./dbStats");
 
-const commandLog = (commandName, interaction) => {
-    const {user} = interaction;
-    if (blacklist.includes(user.id)) return false;
+const commandSendTime = 1000 * 60 * 20; // 20 min
 
-    usedCommandsCount++;
-    console.log(`User "${user.username}" - use command: /${commandName}`);
+const blacklistSet = new Set(blacklist);
+
+const isBlacklisted = (id) => blacklistSet.has(id);
+
+const commandType = Object.freeze({
+    COMMAND: 0,
+    EVENT: 1,
+    AI: 2
+});
+
+const typeMap = {
+    [commandType.COMMAND]: 'uc',
+    [commandType.EVENT]: 'ue',
+    [commandType.AI]: 'uai'
+};
+
+const getType = (type) => typeMap[type] || 'Unknown';
+
+const commandCounter = (() => {
+    let count = 0;
+
+    return {
+        increment: () => { count++; },
+        reset: () => { count = 0; },
+        getCount: () => count
+    };
+})();
+
+const commandLog = (name, interaction, type = 0) => {
+    const {user, author, guild} = interaction;
+    const stateUser = user || author;
+    const typeAction = getType(type);
+    if (stateUser && isBlacklisted(stateUser.id)) return false;
+    if (guild && isBlacklisted(guild.id)) return false;
+    console.log(`${guild ? `Server: ${guild.name} | ` : ""}${stateUser ? `User "${stateUser.username}" | ` : ""}${typeAction}: ${name}`);
+
+    if (type === commandType.COMMAND) commandCounter.increment();
     return true;
 }
 
-setInterval(async () => {
+const sendUsedCommandsCount = async () => {
     try {
-        if (await updateUsedCommandsCount(usedCommandsCount)) {
-            console.log(`Used commands count ${usedCommandsCount} sent to DB`);
-            usedCommandsCount = 0;
+        const count = commandCounter.getCount();
+        if (count === 0) return;
+        if (await updateUsedCommandsCount(count)) {
+            console.log(`Used commands count ${count} sent to DB`);
+            commandCounter.reset();
         } else {
-            console.error(`Used commands count ${usedCommandsCount} not sent to DB`);
+            console.error(`Used commands count ${count} not sent to DB`);
         }
     } catch (err) {
         console.error('Error updating used commands count:', err);
     }
-}, commandSendTime);
+}
+const startCommandCountSync = async () => {
+    await sendUsedCommandsCount();
+    setTimeout(startCommandCountSync, commandSendTime);
+};
 
-module.exports = {commandLog};
+setTimeout(startCommandCountSync, commandSendTime);
+
+module.exports = {commandLog, sendUsedCommandsCount};

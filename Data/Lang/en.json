@@ -48,7 +48,7 @@
   },
   "post": {
     "title": "Create a post on your server",
-    "titlecontent": "Write the post title",
+    "text": "Message text above the post (mentions)",
     "content": "Write the post content",
     "color": "Set the post color",
     "image": "Add the image/gif URL to the post",

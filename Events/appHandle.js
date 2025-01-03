@@ -2,6 +2,7 @@ const {Events, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle} = req
 const fetch = require(`node-fetch2`);
 const config = require("../Data/config.json");
 const {GoogleGenerativeAI, HarmCategory, HarmBlockThreshold} = require("@google/generative-ai");
+const {commandLog} = require("../Data/funcs/commandLog");
 process.env.GOOGLE_API_KEY = config.geminiApiKey;
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
@@ -26,6 +27,7 @@ module.exports = [
             if (!message.isMessageContextMenuCommand()) return;
             if (message.commandName !== `emoji-sticker`) return;
             try {
+                if (!commandLog("emoji-sticker", message, 1)) return;
                 await message.deferReply({ephemeral: true});
                 const messageID = message.targetId;
                 const getMessage = await message.channel?.messages.fetch(messageID) || false;
@@ -99,6 +101,7 @@ module.exports = [
             if (!message.isMessageContextMenuCommand()) return;
             if (message.commandName !== `describe-picture`) return;
             try {
+                commandLog("describe-picture", message, 1);
 
                 await message.deferReply({ephemeral: true});
                 const userColor = message.member.displayColor;

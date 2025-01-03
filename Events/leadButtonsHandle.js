@@ -1,6 +1,7 @@
 const {EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events} = require("discord.js");
 const {getLeaderboard} = require('../Data/funcs/dbUser');
 const {getLang} = require("../Data/Lang");
+const {commandLog} = require("../Data/funcs/commandLog");
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -33,6 +34,7 @@ module.exports = {
     async execute(interaction) {
         if (!interaction.isButton()) return;
         if (!(interaction.customId === `nextLeaders` || interaction.customId === `prevLeaders`)) return;
+        if (!commandLog("leadButtonsHandle", interaction, 1)) return;
         const lang = await getLang(interaction);
         const local = lang.error;
 

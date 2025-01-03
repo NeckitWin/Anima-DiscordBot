@@ -1,6 +1,7 @@
 const {Events, ButtonBuilder, ActionRowBuilder, EmbedBuilder} = require(`discord.js`);
 const {removeRelation, setRelation, getRelation} = require("../Data/funcs/dbUser");
 const {getLang} = require("../Data/Lang");
+const {commandLog} = require("../Data/funcs/commandLog");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -10,6 +11,8 @@ module.exports = {
             const {customId, guild, user, message} = interaction;
             const marryActions = ['marryAccept', 'marryDecline', 'marryDivorce', 'marryDivorceAccept', 'marryDivorceDecline'];
             const DivorceActions = ['marryDivorce', 'marryDivorceAccept', 'marryDivorceDecline'];
+            if (!marryActions.includes(customId)) return;
+            if (!commandLog("marryHandle", interaction, 1)) return;
             const authorInteraction = message.interaction.user;
             const mentionUser = message.mentions?.users?.first() || false;
             const getAuthorMarried = await getRelation(guild?.id, authorInteraction.id);
@@ -17,7 +20,6 @@ module.exports = {
             const embedError = new EmbedBuilder()
                 .setColor(`#c30000`);
 
-            if (!marryActions.includes(customId)) return;
             const lang = await getLang(interaction)
             const local = lang.marry;
             const embedDivorce = new EmbedBuilder()

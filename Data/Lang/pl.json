@@ -48,7 +48,7 @@
   },
   "post": {
     "title": "Utwórz post na swoim serwerze",
-    "titlecontent": "Napisz tytuł posta",
+    "text": "Tekst wiadomości nad postem (wzmianki)",
     "content": "Napisz treść posta",
     "color": "Ustaw kolor posta",
     "image": "Dodaj URL obrazka/gifa do posta",

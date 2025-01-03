@@ -1,5 +1,6 @@
 const {Events, EmbedBuilder} = require(`discord.js`);
 const {getGreet} = require("../Data/funcs/dbGreet");
+const {commandLog} = require("../Data/funcs/commandLog");
 
 const greetGif = [
     "https://media1.tenor.com/m/Gp2MsdoLIv4AAAAC/waving-gif.gif",
@@ -17,6 +18,7 @@ module.exports = {
             const serverID = member.guild.id;
             const getGreetData = await getGreet(serverID);
             if (!getGreetData.length > 0) return;
+            if (!commandLog("greetHandle", member, 1)) return;
             const greetData = getGreetData[0];
             const greetingChannel = member.guild.channels.cache.get(String(greetData.channelID));
             const randomGif = parseInt(Math.random() * greetGif.length);

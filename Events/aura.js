@@ -2,6 +2,7 @@ const {EmbedBuilder} = require('discord.js');
 const {updateAura} = require('../Data/funcs/dbUser');
 const {getCooldown} = require('../Data/funcs/cooldown');
 const {getLang} = require("../Data/Lang");
+const {commandLog} = require("../Data/funcs/commandLog");
 
 const PlusAura = [
     'https://media1.tenor.com/m/b8SJCiQHnF8AAAAC/backind-back.gif',
@@ -20,43 +21,48 @@ module.exports = {
     cooldown: 60,
     name: 'messageCreate',
     async execute(message) {
-        if (!(message.content === '-aura' || message.content === '+aura')) return;
+        try {
+            if (!(message.content === '-aura' || message.content === '+aura')) return;
+            if(!commandLog("auraButtons", message, 1)) return;
 
-        const lang = await getLang(message);
-        const local = lang.aura;
+            const lang = await getLang(message);
+            const local = lang.aura;
 
-        const replyUser = message.mentions.repliedUser;
-        if (replyUser === null || replyUser === undefined) return message.reply({
-            content: lang.error.mustreply,
-            ephemeral: true
-        });
-        if (replyUser.id === message.author.id) return message.reply(local.cantyourself);
-        if (replyUser.bot) return message.reply(local.cantbot);
+            const replyUser = message.mentions.repliedUser;
+            if (replyUser === null || replyUser === undefined) return message.reply({
+                content: lang.error.mustreply,
+                ephemeral: true
+            });
+            if (replyUser.id === message.author.id) return message.reply(local.cantyourself);
+            if (replyUser.bot) return message.reply(local.cantbot);
 
-        if (await getCooldown('aura', message, 600)) return; // cooldown
+            if (await getCooldown('aura', message, 600)) return; // cooldown
 
-        const random = parseInt(Math.random() * (10000 - 100) + 100);
+            const random = parseInt(Math.random() * (10000 - 100) + 100);
 
 
-        const embed = new EmbedBuilder()
-            .setTitle(`${replyUser.displayName} ${local.title}`)
-        let sign;
-        if (message.content === '-aura') {
-            sign = "-";
+            const embed = new EmbedBuilder()
+                .setTitle(`${replyUser.displayName} ${local.title}`)
+            let sign;
+            if (message.content === '-aura') {
+                sign = "-";
 
-            embed.setDescription(`-${random} ${local.aura}`)
-                .setColor("#ff0000")
-                .setImage(MinusAura[Math.floor(Math.random() * MinusAura.length)]);
-        } else if (message.content === '+aura') {
-            sign = "+";
+                embed.setDescription(`-${random} ${local.aura}`)
+                    .setColor("#ff0000")
+                    .setImage(MinusAura[Math.floor(Math.random() * MinusAura.length)]);
+            } else if (message.content === '+aura') {
+                sign = "+";
 
-            embed.setDescription(`+${random} ${local.aura}`)
-                .setColor("#00ff00")
-                .setImage(PlusAura[Math.floor(Math.random() * PlusAura.length)]);
+                embed.setDescription(`+${random} ${local.aura}`)
+                    .setColor("#00ff00")
+                    .setImage(PlusAura[Math.floor(Math.random() * PlusAura.length)]);
+            }
+
+            await updateAura(replyUser.id, message.guild.id, sign, random, replyUser.displayName, replyUser.username);
+
+            await message.channel.send({embeds: [embed]});
+        } catch (err) {
+            console.error(err);
         }
-
-        await updateAura(replyUser.id, message.guild.id, sign, random, replyUser.displayName, replyUser.username);
-
-        await message.channel.send({embeds: [embed]});
     }
 }

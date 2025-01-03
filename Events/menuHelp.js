@@ -1,11 +1,13 @@
 const {Events, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../Data/Lang");
+const {commandLog} = require("../Data/funcs/commandLog");
 
 module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {
             try {
+                if (!commandLog("menuButtonHandle", interaction, 1)) return;
                 const lang = await getLang(interaction);
                 const local = lang.menuhelp;
                 const localinfo = lang.commandsdesc;

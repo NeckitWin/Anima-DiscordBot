@@ -42,9 +42,9 @@ module.exports = {
                 .setCustomId(`postModal`)
                 .setTitle(local.title);
 
-            const postTitle = new TextInputBuilder()
-                .setCustomId('postTitle')
-                .setLabel(local.titlecontent)
+            const postText = new TextInputBuilder()
+                .setCustomId('postText')
+                .setLabel(local.text)
                 .setStyle(TextInputStyle.Short)
                 .setRequired(false);
 
@@ -77,7 +77,7 @@ module.exports = {
                 .setStyle(TextInputStyle.Short)
                 .setRequired(false);
 
-            const firstActionRow = new ActionRowBuilder().addComponents(postTitle);
+            const firstActionRow = new ActionRowBuilder().addComponents(postText);
             const secondActionRow = new ActionRowBuilder().addComponents(postDescription);
             const thirdActionRow = new ActionRowBuilder().addComponents(postColor);
             const fourthActionRow = new ActionRowBuilder().addComponents(postImage);

@@ -1,6 +1,7 @@
 const {Events} = require(`discord.js`);
 const {getLang} = require("../Data/Lang");
 const {updateGreet} = require("../Data/funcs/dbGreet");
+const {commandLog} = require("../Data/funcs/commandLog");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -8,6 +9,7 @@ module.exports = {
         try {
             if (!interaction.isModalSubmit()) return;
             if (interaction.customId !== `modalGreeting`) return;
+            if(!commandLog("modalGreetHandle", interaction, 1)) return;
             const serverID = interaction.guild.id;
 
             const lang = await getLang(interaction);
