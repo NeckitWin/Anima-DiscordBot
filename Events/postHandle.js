@@ -41,9 +41,11 @@ module.exports = {
                 iconURL: mebmer.user.displayAvatarURL({dynamic: true})
             });
 
+            console.log( )
+
             await interaction.channel.send({
-                content: text ? text : " "
-                , embeds: [embed]
+                content: text ? text : " ",
+                embeds: Object.keys(embed.data).length > 0 ? [embed] : []
             });
             await interaction.reply({content: lang.post.complete, ephemeral: true});
 
