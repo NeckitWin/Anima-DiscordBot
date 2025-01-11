@@ -15,13 +15,18 @@ module.exports = {
             const greetingChannel = member.guild.channels.cache.get(String(greetData.channelID));
 
             let messageContent = greetData.title;
+            let embedContent = greetData.content;
 
             if (messageContent.includes(`{user}`)) {
                 messageContent = messageContent.replace(`{user}`, member);
             }
 
+            if (embedContent.includes(`{user}`)) {
+                embedContent = embedContent.replace(`{user}`, member);
+            }
+
             const embed = new EmbedBuilder()
-                .setDescription(greetData.content)
+                .setDescription(`{user} ${embedContent}`)
                 .setThumbnail(member.user.avatarURL());
             if (greetData.picture) embed.setImage(greetData.picture)
 

@@ -141,15 +141,20 @@ module.exports = {
                 const greetData = getGreetData[0];
 
                 let messageContent = greetData.title;
-                if (messageContent && messageContent.includes(`{user}`)) {
-                    messageContent = messageContent.replace(`{user}`, interaction.user);
+                let embedContent = greetData.content;
+
+                if (messageContent.includes(`{user}`)) {
+                    messageContent = messageContent.replace(`{user}`, member);
+                }
+
+                if (embedContent.includes(`{user}`)) {
+                    embedContent = embedContent.replace(`{user}`, member);
                 }
 
                 let embed;
                 if (greetData.content || greetData.picture) {
                     embed = new EmbedBuilder()
-                        .setDescription(greetData.content)
-                        .setColor(`#ffffff`)
+                        .setDescription(`{user} ${embedContent}`)
                         .setThumbnail(interaction.user.avatarURL());
                     if (greetData.picture) embed.setImage(greetData.picture)
                 }
