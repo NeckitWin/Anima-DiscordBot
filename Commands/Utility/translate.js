@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const axios = require('axios');
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'translate';
 
 module.exports = {
@@ -30,7 +29,6 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             const text = interaction.options.getString('text');
             const target = interaction.options.getString('language');
             const response = await axios.get(`https://translate.googleapis.com/translate_a/single?format=text&client=gtx&sl=auto&tl=${target}&dt=t&q=${encodeURI(text)}`);

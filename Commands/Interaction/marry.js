@@ -1,7 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} = require(`discord.js`);
 const {getRelation} = require("../../Data/funcs/dbUser");
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'marry';
 
 module.exports = {
@@ -26,7 +25,6 @@ module.exports = {
                 .setRequired(false)),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             const lang = await getLang(interaction);
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.marry;

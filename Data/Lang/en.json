@@ -1,4 +1,5 @@
 {
+  "lang": "English",
   "loading": "Loading",
   "yes": "Yes",
   "no": "No",
@@ -27,7 +28,12 @@
     "wait": "Please wait",
     "minutes": "minutes",
     "seconds": "seconds",
-    "error": "Error"
+    "error": "Error",
+    "unknown": "Unknown error. Please contact the support server for assistance"
+  },
+  "cooldown": {
+    "wait": "Please wait",
+    "again": "you will be able to use the command again"
   },
   "anonim": {
     "systemTitle": "Anonymous Messaging System",
@@ -187,7 +193,7 @@
   "nsfw": {
     "error": "This command can only be used in NSFV channels",
     "tags": "Tags",
-    "noresult": "No results found",
+    "noresult": "No results found, use English letters and try again",
     "errcount": "Count: enter a number from 1 to 10"
   },
   "logs": {
@@ -271,7 +277,7 @@
     "question": "Question",
     "yes": "Yes",
     "no": "No",
-    "Ugh": "Ugh",
+    "ugh": "Ugh",
     "haha": "Ho ho ho"
   },
   "request": "Request from ",

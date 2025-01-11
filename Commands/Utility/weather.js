@@ -1,7 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const axios = require('axios');
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'weather';
 
 module.exports = {
@@ -25,7 +24,6 @@ module.exports = {
             })
             .setRequired(true)),
     async execute(interaction) {
-        if (!commandLog(commandName, interaction)) return;
         const lang = await getLang(interaction);
         const local = lang.weather;
         try {

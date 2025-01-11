@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'role';
 
 module.exports = {
@@ -26,7 +25,6 @@ module.exports = {
             .setRequired(true)),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             const lang = await getLang(interaction);
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.role;

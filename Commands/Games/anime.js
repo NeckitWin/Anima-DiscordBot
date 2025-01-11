@@ -1,7 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require(`discord.js`);
 const anime = require(`../../Data/jsons/anime.json`);
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'anime';
 
 const timers = new Map();
@@ -28,7 +27,6 @@ module.exports = {
         }),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             await interaction.deferReply();
             const lang = await getLang(interaction);
             const local = lang.anime;

@@ -1,6 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'calc';
 
 module.exports = {
@@ -24,7 +23,6 @@ module.exports = {
                 })
                 .setRequired(true)),
     async execute(interaction) {
-        if (!commandLog(commandName, interaction)) return;
         const expression = interaction.options.getString('expression');
 
         const lang = await getLang(interaction);

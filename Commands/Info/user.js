@@ -2,7 +2,6 @@ const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const {getUserServer, getRelation} = require('../../Data/funcs/dbUser')
 const {formatDate} = require("../../Data/utility");
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'user';
 
 const getActivityType = (type) => {
@@ -76,7 +75,6 @@ module.exports = {
             uk: "Виберіть учасника для відображення інформації"
         }),
     async execute(interaction) {
-        if (!commandLog(commandName, interaction)) return;
         const lang = await getLang(interaction);
         if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         const local = lang.user;

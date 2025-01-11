@@ -1,6 +1,5 @@
 const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'clear';
 
 module.exports = {
@@ -28,7 +27,6 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             const lang = await getLang(interaction);
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.clear;

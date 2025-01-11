@@ -5,7 +5,6 @@ const {Routes} = require('discord-api-types/v9');
 const {token, clientId} = require('../../Data/config.json');
 const {SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'reload';
 
 module.exports = {
@@ -21,7 +20,6 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             allowedUserIds = ['429562004399980546'];
             const lang = await getLang(interaction);
             const local = lang.error;

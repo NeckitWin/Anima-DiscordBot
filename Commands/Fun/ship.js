@@ -3,7 +3,6 @@ const fetch = require('node-fetch2');
 const path = require("node:path");
 const sharp = require("sharp");
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'ship';
 
 const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowOffset = 10) => {
@@ -49,6 +48,7 @@ const createTextSVG = (text, fontSize, fillColor = 'white', strokeColor, strokeW
 
 
 module.exports = {
+    cooldown: 10,
     data: new SlashCommandBuilder()
         .setName(commandName)
         .setNameLocalizations({ru: `пара`, pl: `para`, uk: `пара`})
@@ -82,7 +82,6 @@ module.exports = {
         ),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             const lang = await getLang(interaction);
             const embedLoading = new EmbedBuilder()
                 .setTitle(`<a:loading:1295096250609172611> ${lang.ai.loading}...`)
@@ -103,8 +102,6 @@ module.exports = {
             const randomNumber = Math.floor(Math.random() * (100 + 1));
 
             const textSVG = createTextSVG((randomNumber+"%"), 80, 'white','#450000', 3, true)
-            // const username1 = createTextSVG(user1.displayName, 24, 'white', true);
-            // const username2 = createTextSVG(user2.displayName,24, 'white', true);
 
             const result = await bgImage
                 .composite([

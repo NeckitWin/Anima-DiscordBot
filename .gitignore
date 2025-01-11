@@ -2,4 +2,3 @@ Data/config.json
 node_modules
 .idea
 Data/database.json
-CommandsNoSlash/gemini.js

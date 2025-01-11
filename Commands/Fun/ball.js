@@ -1,6 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'ball';
 const answers = [
     {value: "yes", color: "#00ff95"},
@@ -33,7 +32,6 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             const question = interaction.options.getString(`question`);
             const answer = answers[Math.floor(Math.random() * answers.length)];
             const lang = await getLang(interaction);

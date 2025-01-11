@@ -1,4 +1,5 @@
 {
+  "lang": "Polish",
   "loading": "Ładowanie",
   "yes": "Tak",
   "no": "Nie",
@@ -27,7 +28,12 @@
     "wait": "Proszę czekać",
     "minutes": "minut",
     "seconds": "sekund",
-    "error": "Błąd"
+    "error": "Błąd",
+    "unknown": "Nieznany błąd. Proszę skontaktować się z serwerem wsparcia w celu uzyskania pomocy"
+  },
+  "cooldown": {
+    "wait": "Proszę czekać",
+    "again": "będziesz mógł ponownie użyć polecenia"
   },
   "anonim": {
     "systemTitle": "System anonimowych wiadomości",
@@ -187,7 +193,7 @@
   "nsfw": {
     "error": "To polecenie można używać tylko w NSFW kanałach",
     "tags": "Tagi",
-    "noresult": "Nie znaleziono wyników",
+    "noresult": "Wyniki nie zostały znalezione, użyj angielskich liter i spróbuj ponownie",
     "errcount": "Liczba: wprowadź liczbę od 1 do 10"
   },
   "logs": {

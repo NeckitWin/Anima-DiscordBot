@@ -2,7 +2,6 @@ const {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} = require(`discor
 const {updateServer, getServer} = require("../../Data/funcs/dbServer");
 const {getLang} = require("../../Data/Lang");
 const {clearLogCache} = require("../../Data/funcs/logCache");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'logs';
 
 module.exports = {
@@ -47,7 +46,6 @@ module.exports = {
             })
         ),
     async execute(interaction) {
-        if (!commandLog(commandName, interaction)) return;
         const {options, guild} = interaction;
         const subcommand = options.getSubcommand();
         const lang = await getLang(interaction);

@@ -4,6 +4,7 @@ const path = require('path');
 const {GoogleGenerativeAI} = require("@google/generative-ai");
 const {geminiApiKey} = require('../Data/config.json');
 const {commandLog} = require("../Data/funcs/commandLog");
+const {getLang} = require("../Data/Lang");
 
 const messageHistory = {};
 
@@ -12,11 +13,14 @@ module.exports = {
     async execute(message) {
         try {
             if (message.author.bot) return;
-            const botID = `1187466797885182141`;
+            const botID = `<@1187466797885182141>`;
+            const testBotID = `<@1165781260203986994>`;
+            const mentionWords = [botID, testBotID, "anima,", "anima", "ani,", "ani", "анима,", "анима", "ани,", "ани"];
             const firstWord = message.content.split(' ')[0].toLowerCase();
-            const isBotNameMention = firstWord === `anima,` || firstWord === `ани` || firstWord === `анима,` || firstWord === `anima` || firstWord === `анима` || firstWord === `<@${botID}>`;
+            const isBotNameMention = mentionWords.includes(firstWord);
             if (!isBotNameMention) return;
             if (!commandLog("Anima", message, 2)) return;
+            const lang = await getLang(message);
 
             await message.channel.sendTyping();
 
@@ -32,7 +36,7 @@ module.exports = {
             const genAI = new GoogleGenerativeAI(geminiApiKey);
             const model = genAI.getGenerativeModel({
                 model: "gemini-1.5-flash",
-                systemInstruction: `You are Anima, a Discord bot assistant. Your owner is Neo (id: 429562004399980546). Do not address users by their ID. You were created on December 21, 2023. You are female. The current time is: ${new Date()}`
+                systemInstruction: `You are a Discord bot named Anima (or Ani), and you always try to help users in any way possible. Your creator is Neo. You do not refer to users by their ID. You have a pleasant and even playful character, and you love to show your emotions. Time is now ${new Date()}. Your lang: ${lang.lang}`,
             });
 
             const chat = model.startChat({history: chatHistory});

@@ -1,6 +1,5 @@
-const {SlashCommandBuilder} = require(`discord.js`)
+const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`)
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'nsfw';
 
 module.exports = {
@@ -31,29 +30,40 @@ module.exports = {
                 ru: `Количество изображений для показа`,
                 pl: `Liczba obrazów do pokazania`,
                 uk: `Кількість зображень для показу`
-            }).setRequired(true)),
+            })
+            .setRequired(true)
+            .setMinValue(1)
+            .setMaxValue(10)),
     async execute(interaction) {
-        if (!commandLog(commandName, interaction)) return;
-        const count = interaction.options.getInteger('count');
+        const count = interaction.options.getInteger('count') || 1;
         const lang = await getLang(interaction);
         const local = lang.nsfw;
-        if (count < 1 || count > 10) return await interaction.reply({content: local.errcount, ephemeral: true});
-        const parentChannel = interaction.channel?.parent;
+        const target = interaction.options.getString('search');
+
+        const embedError = new EmbedBuilder()
+            .setColor(`#d80000`)
+            .setDescription(local.noresult)
+            .setFooter({text: target});
         try {
+            const parentChannel = interaction.channel?.parent;
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             if (interaction.guild && !(interaction.channel.nsfw || parentChannel.nsfw)) return await interaction.reply({content: local.error, ephemeral: true});
             await interaction.deferReply();
 
-            const target = interaction.options.getString('search');
             const request = target.replace(/ /g, '%20');
 
             const data = await fetch(`https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&limit=1000&tags=${request}`);
             const jsonData = data.ok ? await data.json() : null;
 
             if (!jsonData || jsonData.length === 0) return await interaction.followUp({
-                content: local.noresult,
+                embeds: [embedError],
                 ephemeral: true
             });
+
+            const embedSuccess = new EmbedBuilder()
+                .setColor(`#00ff00`)
+                .setDescription(`${local.tags}: ${target}`);
+            await interaction.followUp({embeds: [embedSuccess], ephemeral: false});
 
             const sendResultsPromises = [];
 
@@ -66,8 +76,7 @@ module.exports = {
 
             await Promise.all(sendResultsPromises);
         } catch (e) {
-            console.error(e);
-            await interaction.editReply({content: local.noresult, ephemeral: true});
+            await interaction.followUp({embeds: [embedError], ephemeral: true});
         }
     }
 

@@ -36,7 +36,9 @@ const commandLog = (name, interaction, type = 0) => {
     const stateUser = user || author;
     const typeAction = getType(type);
     if (stateUser && isBlacklisted(stateUser.id)) return false;
-    if (guild && isBlacklisted(guild.id)) return false;
+    if (guild) {
+        if (isBlacklisted(guild.id)) return false;
+    }
     console.log(`${guild ? `Server: ${guild.name} | ` : ""}${stateUser ? `User "${stateUser.username}" | ` : ""}${typeAction}: ${name}`);
 
     if (type === commandType.COMMAND) commandCounter.increment();

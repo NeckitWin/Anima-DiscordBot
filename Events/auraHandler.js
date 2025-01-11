@@ -1,8 +1,8 @@
 const {EmbedBuilder} = require('discord.js');
 const {updateAura} = require('../Data/funcs/dbUser');
-const {getCooldown} = require('../Data/funcs/cooldown');
 const {getLang} = require("../Data/Lang");
 const {commandLog} = require("../Data/funcs/commandLog");
+const {setCooldown} = require("../Data/funcs/customCooldown");
 
 const PlusAura = [
     'https://media1.tenor.com/m/b8SJCiQHnF8AAAAC/backind-back.gif',
@@ -36,7 +36,7 @@ module.exports = {
             if (replyUser.id === message.author.id) return message.reply(local.cantyourself);
             if (replyUser.bot) return message.reply(local.cantbot);
 
-            if (await getCooldown('aura', message, 600)) return; // cooldown
+            if (!await setCooldown("aura", message, 60)) return;
 
             const random = parseInt(Math.random() * (10000 - 100) + 100);
 

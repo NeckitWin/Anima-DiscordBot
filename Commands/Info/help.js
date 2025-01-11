@@ -1,6 +1,5 @@
 const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require("discord.js");
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'help';
 
 module.exports = {
@@ -15,8 +14,6 @@ module.exports = {
         }),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
-
             const lang = await getLang(interaction);
             const local = lang.menuhelp;
 
