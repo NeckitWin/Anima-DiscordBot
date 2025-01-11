@@ -7,7 +7,6 @@ const {
     PermissionFlagsBits
 } = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
-const {commandLog} = require("../../Data/funcs/commandLog");
 const commandName = 'post';
 
 module.exports = {
@@ -33,7 +32,6 @@ module.exports = {
                 .setRequired(false)),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             const lang = await getLang(interaction);
             const local = lang.post;
             if (interaction.guild && !interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});

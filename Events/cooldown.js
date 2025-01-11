@@ -44,22 +44,21 @@ module.exports = {
         try {
             await command.execute(interaction);
         } catch (error) {
-
+            console.error(error);
             const embedError = new EmbedBuilder()
                 .setColor('#bc0000')
                 .setTitle('Error')
-                .setDescription(`${lang.error.unknown}: https://discord.gg/d8kCF4c3t5`)
+                .setDescription(`${lang.error.unknown}: https://discord.gg/d8kCF4c3t5`);
 
-            console.error(error);
             if (interaction.replied || interaction.deferred) {
                 await interaction.followUp({
                     embeds: [embedError],
                     ephemeral: true
                 });
             } else {
-                await interaction.reply({
-                    embeds: [embedError],
-                    ephemeral: true
+                await interaction.deferReply({ephemeral: true});
+                await interaction.editReply({
+                    embeds: [embedError]
                 });
             }
         }

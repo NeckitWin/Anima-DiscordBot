@@ -439,17 +439,18 @@
   },
   "greeting": {
     "title": "Set a greeting for the channel",
-    "titlecontent": "Write the greeting title",
-    "titleplace": "Welcome to the server",
-    "content": "Write a greeting message",
+    "message": "Greeting message, mentions",
+    "messageplace": "- mention the newcomer",
+    "content": "Write a welcome message",
     "contentplace": "We are glad to see you on the server!",
-    "picture": "Add a picture/gif URL to the greeting",
-    "channel": "Channel ID (no need to change)",
+    "picture": "Add a URL of an image/gif to the greeting",
+    "channel": "Channel ID (do not change)",
     "response": "Fill in the data in the modal window.",
-    "nottext": "You specified a non-text channel.",
+    "nottext": "You selected a non-text channel.",
     "dontset": "You haven't set a greeting on this server.",
-    "remove": "The greeting has been successfully removed from the server.",
-    "success": "The greeting has been successfully set on the channel"
+    "remove": "Greeting successfully removed from the server.",
+    "success": "Greeting successfully set for the channel",
+    "noset": "Greeting is not set on the server"
   },
   "aura": {
     "cantyourself": "You can't give aura to yourself!",

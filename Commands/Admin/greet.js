@@ -5,11 +5,10 @@ const {
     TextInputStyle,
     ActionRowBuilder,
     PermissionFlagsBits,
-    PermissionsBitField
+    PermissionsBitField, EmbedBuilder
 } = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
-const {removeGreet} = require("../../Data/funcs/dbGreet");
-const {commandLog} = require("../../Data/funcs/commandLog");
+const {removeGreet, getGreet} = require("../../Data/funcs/dbGreet");
 const commandName = 'greet';
 
 module.exports = {
@@ -43,6 +42,15 @@ module.exports = {
                 .setRequired(true)
             ))
         .addSubcommand(subcommand => subcommand
+            .setName('preview')
+            .setNameLocalizations({ru: `предпросмотр`, pl: `podgląd`, uk: `перегляд`})
+            .setDescription('Preview greeting')
+            .setDescriptionLocalizations({
+                ru: `Предпросмотр приветствия`,
+                pl: `Podgląd powitania`,
+                uk: `Попередній перегляд привітання`
+                }))
+        .addSubcommand(subcommand => subcommand
             .setName('remove')
             .setNameLocalizations({ru: `удалить`, pl: `usuń`, uk: `видалити`})
             .setDescription('Remove greeting')
@@ -53,7 +61,6 @@ module.exports = {
             })),
     async execute(interaction) {
         try {
-            if (!commandLog(commandName, interaction)) return;
             let modal;
             const {guild} = interaction;
             const lang = await getLang(interaction);
@@ -81,17 +88,19 @@ module.exports = {
                     .setTitle(local.title)
                     .setCustomId(`modalGreeting`);
 
-                const greetingTitle = new TextInputBuilder()
-                    .setCustomId('greetingTitle')
-                    .setLabel(local.titlecontent)
-                    .setPlaceholder(local.titleplace)
-                    .setStyle(TextInputStyle.Short);
+                const greetingMessage = new TextInputBuilder()
+                    .setCustomId('greetingMessage')
+                    .setLabel(local.message)
+                    .setPlaceholder(`{user} ${local.messageplace}`)
+                    .setStyle(TextInputStyle.Short)
+                    .setRequired(false);
 
                 const greetingContent = new TextInputBuilder()
                     .setCustomId('greetingContent')
                     .setLabel(local.content)
                     .setPlaceholder(local.contentplace)
-                    .setStyle(TextInputStyle.Paragraph);
+                    .setStyle(TextInputStyle.Paragraph)
+                    .setRequired(false);
 
                 const greetingPicture = new TextInputBuilder()
                     .setCustomId('greetingPicture')
@@ -109,7 +118,7 @@ module.exports = {
                     .setRequired(true);
 
                 const firstComponent = new ActionRowBuilder()
-                    .addComponents(greetingTitle);
+                    .addComponents(greetingMessage);
 
                 const secondComponent = new ActionRowBuilder()
                     .addComponents(greetingContent);
@@ -124,6 +133,28 @@ module.exports = {
 
                 await interaction.showModal(modal);
                 await interaction.followUp({content: local.response, ephemeral: true});
+
+            } else if (subcommand === `preview`) {
+
+                const getGreetData = await getGreet(serverID);
+                if (!getGreetData.length > 0) return await interaction.reply({content: local.noset, ephemeral: true});
+                const greetData = getGreetData[0];
+
+                let messageContent = greetData.title;
+                if (messageContent && messageContent.includes(`{user}`)) {
+                    messageContent = messageContent.replace(`{user}`, interaction.user);
+                }
+
+                let embed;
+                if (greetData.content || greetData.picture) {
+                    embed = new EmbedBuilder()
+                        .setDescription(greetData.content)
+                        .setColor(`#ffffff`)
+                        .setThumbnail(interaction.user.avatarURL());
+                    if (greetData.picture) embed.setImage(greetData.picture)
+                }
+
+                await interaction.reply({content: messageContent ? messageContent : ``, embeds: embed ? [embed] : []});
 
             } else if (subcommand === `remove`) {
                 await removeGreet(serverID);

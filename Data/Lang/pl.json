@@ -438,18 +438,19 @@
     "successSecond": "wiadomości"
   },
   "greeting": {
-    "title": "Ustaw powitanie dla kanału",
-    "titlecontent": "Napisz tytuł powitania",
-    "titleplace": "Witamy na serwerze",
+    "title": "Ustaw przywitanie dla kanału",
+    "message": "Wiadomość powitalna, wzmianki",
+    "messageplace": "- wzmianka o nowym użytkowniku",
     "content": "Napisz wiadomość powitalną",
-    "contentplace": "Cieszymy się, że cię widzimy na serwerze!",
-    "picture": "Dodaj URL obrazka/gifa do powitania",
-    "channel": "ID kanału (nie trzeba zmieniać)",
+    "contentplace": "Cieszymy się, że jesteś na serwerze!",
+    "picture": "Dodaj URL obrazu/animacji do przywitania",
+    "channel": "ID kanału (nie zmieniaj)",
     "response": "Wypełnij dane w oknie modalnym.",
-    "nottext": "Podany kanał nie jest kanałem tekstowym.",
+    "nottext": "Wybrałeś kanał, który nie jest tekstowy.",
     "dontset": "Nie ustawiłeś powitania na tym serwerze.",
     "remove": "Powitanie zostało pomyślnie usunięte z serwera.",
-    "success": "Powitanie zostało pomyślnie ustawione na kanale"
+    "success": "Powitanie zostało pomyślnie ustawione na kanale",
+    "noset": "Powitanie nie zostało ustawione na serwerze"
   },
   "aura": {
     "cantyourself": "Nie możesz dać aury sobie!",
