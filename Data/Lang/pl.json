@@ -37,6 +37,25 @@
     "wait": "Proszę czekać",
     "again": "będziesz mógł ponownie użyć polecenia"
   },
+  "autoroles": {
+    "title": "Automatyczne Role",
+    "addandedit": "Dodawaj i edytuj automatyczne role dla nowych członków serwera",
+    "select": "Wybierz rolę",
+    "add": "Dodaj automatyczną rolę",
+    "edit": "Edytuj automatyczne role",
+    "editTitle": "Edycja automatycznych ról",
+    "clear": "Wszystkie automatyczne role zostały pomyślnie usunięte z serwera",
+    "max": "Maksymalna liczba automatycznych ról na serwerze",
+    "firstlySelect": "Najpierw wybierz rolę",
+    "rolePosition": "Rola musi być poniżej mojej roli",
+    "alreadySet": "Rola została już dodana",
+    "success": "Automatyczna rola została pomyślnie dodana",
+    "empty": "Lista automatycznych ról jest pusta",
+    "deleted": "Automatyczna rola została pomyślnie usunięta",
+    "return": "Powrót",
+    "delete": "Usuń automatyczną rolę",
+    "clearAll": "Wyczyść wszystkie automatyczne role"
+  },
   "anonim": {
     "systemTitle": "System anonimowych wiadomości",
     "channelAlreadySet": "Kanał anonimowych wiadomości `został już ustawiony` na twoim serwerze.",

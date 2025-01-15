@@ -37,6 +37,25 @@
     "wait": "Please wait",
     "again": "you will be able to use the command again"
   },
+  "autoroles": {
+    "title": "Auto Roles",
+    "addandedit": "Add and edit automatic roles for new server members",
+    "select": "Select a role",
+    "add": "Add auto role",
+    "edit": "Edit auto roles",
+    "editTitle": "Editing auto roles",
+    "clear": "All auto roles have been successfully removed from the server",
+    "max": "Maximum number of auto roles on the server",
+    "firstlySelect": "Select a role first",
+    "rolePosition": "The role must be below my role",
+    "alreadySet": "The role has already been added",
+    "success": "Auto role successfully added",
+    "empty": "The list of auto roles is empty",
+    "deleted": "Auto role successfully removed",
+    "return": "Return",
+    "delete": "Delete auto role",
+    "clearAll": "Clear all auto roles"
+  },
   "anonim": {
     "systemTitle": "Anonymous Messaging System",
     "channelAlreadySet": "The anonymous message channel has `already been set` on your server.",

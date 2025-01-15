@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, PermissionFlagsBits, RoleSelectMenuBuilder, ActionRowBuilder, ButtonBuilder, EmbedBuilder} = require('discord.js');
+const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, RoleSelectMenuBuilder, ActionRowBuilder, ButtonBuilder, EmbedBuilder} = require('discord.js');
 const {getLang} = require("../../Data/Lang");
 
 const commandName = 'autoroles';
@@ -17,26 +17,31 @@ module.exports = {
     async execute(interaction) {
         try {
             const lang = await getLang(interaction);
-            const {guild} = interaction;
+            const local = lang.autoroles;
+            const {guild, channel} = interaction;
             if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
+            if (!channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({
+                content: lang.error.botdontpermrole,
+                ephemeral: true
+            });
 
             const embed = new EmbedBuilder()
-                .setTitle('Авто роли')
+                .setTitle(local.title)
                 .setColor('#00ff00')
-                .setDescription(`Добаляйте и редактируйте автоматические роли для новых участников`);
+                .setDescription(local.addandedit);
 
             const menuRole = new RoleSelectMenuBuilder()
                 .setCustomId('autoRolesMenu')
-                .setPlaceholder('Выберите роль');
+                .setPlaceholder(local.select);
 
             const buttonAdd = new ButtonBuilder()
                 .setCustomId('addAutoRole')
-                .setLabel('Добавить роль')
+                .setLabel(local.add)
                 .setStyle('Success');
 
             const buttonEdit = new ButtonBuilder()
                 .setCustomId('editAutoRole')
-                .setLabel('Редактировать авто роли')
+                .setLabel(local.edit)
                 .setStyle('Secondary');
 
             const rowRoleMenu = new ActionRowBuilder()

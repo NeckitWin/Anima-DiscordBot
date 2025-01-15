@@ -1,53 +1,157 @@
-const {Events, RoleSelectMenuBuilder, ActionRowBuilder, EmbedBuilder} = require(`discord.js`);
+const {
+    Events, RoleSelectMenuBuilder, ActionRowBuilder, EmbedBuilder, StringSelectMenuBuilder,
+    ButtonBuilder
+} = require(`discord.js`);
 const {getLang} = require("../Data/Lang");
-const {updateGreet} = require("../Data/funcs/dbGreet");
 const {commandLog} = require("../Data/funcs/commandLog");
-const {postAutoRole, getAutoRoles} = require("../Data/funcs/dbAutoRoles");
+const {postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles} = require("../Data/funcs/dbAutoRoles");
 
 module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
         try {
-            if (!(interaction.isButton() || interaction.isRoleSelectMenu())) return;
-            const customIds = ['addAutoRole', 'editAutoRole', 'autoRolesMenu'];
+            if (!(interaction.isButton() || interaction.isAnySelectMenu())) return;
+            const customIds = ['addAutoRole', 'editAutoRole', 'autoRolesMenu', 'deleteAutoRole', 'clearAutoRoles', 'returnAutoRoles', 'editRolesMenu'];
             if (!customIds.includes(interaction.customId)) return;
             const lang = await getLang(interaction);
-            if (interaction.user.id !== interaction.message.interaction.user.id) return await interaction.reply({content: lang.error.notforyou, ephemeral: true});
-            if(!commandLog("autoRolesDataHandler", interaction, 1)) return;
-            const {message, values, guild, customId} = interaction;
-            const getRoleFromMenu = message.components[0].components[0].data.default_values[0];
-            const roleId = getRoleFromMenu.id;
+            const local = lang.autoroles;
+            if (interaction.user.id !== interaction.message.interaction.user.id) return await interaction.reply({
+                content: lang.error.notforyou,
+                ephemeral: true
+            });
+            if (!commandLog("autoRolesDataHandler", interaction, 1)) return;
+            const {message, values, guild, customId, client} = interaction;
+            let dataAutoRoles = await getAutoRoles(guild.id);
+            const botRole = guild.members.cache.get(client.user.id).roles.highest;
 
-            if (customId === 'autoRolesMenu') {
+            const embed = new EmbedBuilder()
+                .setTitle(local.title)
+                .setColor('#00ff00')
+                .setDescription(local.addandedit);
+
+            if (customId === 'autoRolesMenu' || customId === 'returnAutoRoles' || customId === 'clearAutoRoles') {
+                if (customId === 'clearAutoRoles') {
+                    await clearAutoRoles(guild.id);
+                    embed.setDescription(local.clear);
+                }
                 const menuRole = new RoleSelectMenuBuilder()
                     .setCustomId('autoRolesMenu')
-                    .setPlaceholder('Select roles')
-                    .addDefaultRoles(values[0]);
+                    .setPlaceholder(local.select)
+                    .setDefaultRoles(values ? values[0] : []);
 
                 const rowRoleMenu = new ActionRowBuilder()
                     .addComponents(menuRole);
 
-                const getRowButtons = message.components[1];
+                const buttonAdd = new ButtonBuilder()
+                    .setCustomId('addAutoRole')
+                    .setLabel(local.add)
+                    .setStyle('Success');
 
-                await interaction.update({components: [rowRoleMenu, getRowButtons]})
+                const buttonEdit = new ButtonBuilder()
+                    .setCustomId('editAutoRole')
+                    .setLabel(local.edit)
+                    .setStyle('Secondary');
+
+                const rowButtons = new ActionRowBuilder()
+                    .addComponents(buttonAdd, buttonEdit);
+
+                await interaction.update({embeds: [embed], components: [rowRoleMenu, rowButtons]})
             } else if (customId === 'addAutoRole') {
+                if (dataAutoRoles.length >= 20) {
+                    embed.setDescription(`${local.max} - 20`);
+                    return await interaction.update({embeds: [embed]});
+                }
+                const getRoleFromMenu = message.components[0].components[0].data.default_values;
+                if (!getRoleFromMenu) {
+                    embed.setDescription(local.firstlySelect);
+                    embed.setColor('#e4d100');
+                    return await interaction.update({embeds: [embed]});
+                }
+                const roleId = getRoleFromMenu[0].id;
+                const role = guild.roles.cache.get(roleId);
+                if (role.position >= botRole.position) {
+                    embed.setDescription(local.rolePosition);
+                    embed.setColor('#b80000');
+                    return await interaction.update({embeds: [embed]});
+                }
                 const isSetAutoRole = await postAutoRole(guild.id, roleId);
-                if (!isSetAutoRole) return await interaction.reply({content: "Эта роль уже установлена", ephemeral: true});
-                await interaction.reply({content: `Роль <@&${roleId}> успешно добавлена`, ephemeral: true});
-            } else if (customId === 'editAutoRole') {
-                // doesn't work
+                if (!isSetAutoRole) {
+                    embed.setDescription(local.alreadySet);
+                    return await interaction.update({embeds: [embed]});
+                }
+                embed.setDescription(`<@&${roleId}> ${local.success}`);
+                await interaction.update({embeds: [embed]});
+            } else if (['editAutoRole', 'editRolesMenu', 'deleteAutoRole'].includes(customId)) {
 
-                const dataAutoRoles = await getAutoRoles(guild.id);
-                const getFirstRole = dataAutoRoles[0].roleID;
-                const menuRole = new RoleSelectMenuBuilder()
+                embed.setDescription(local.editTitle);
+
+                const getRoleFromMenu = message.components[0]?.components[0]?.data?.options;
+                const getCurrentRole = getRoleFromMenu?.find(role => role.default);
+
+                if (!dataAutoRoles.length) {
+                    embed.setDescription(local.empty);
+                    return await interaction.update({embeds: [embed]});
+                }
+
+                if (customId === 'deleteAutoRole' && getCurrentRole) {
+                    await removeAutoRole(guild.id, getCurrentRole.value);
+                    embed.setDescription(`Роль <@&${getCurrentRole.value}> ${local.deleted}`);
+                    dataAutoRoles = await getAutoRoles(guild.id);
+                }
+                const getRoles = dataAutoRoles.map(el => guild.roles.cache.get(el.roleID) || el.roleID);
+
+                for (const role of getRoles) {
+                    if (typeof role === "string") await removeAutoRole(guild.id, role);
+                }
+
+                let filterRoles = getRoles.filter(role => typeof role !== "string");
+
+                const menuRole = new StringSelectMenuBuilder()
                     .setCustomId('editRolesMenu')
-                    .setPlaceholder('Выбери роли')
-                    .addDefaultRoles([getFirstRole]);
+                    .setPlaceholder(local.select);
 
-                await interaction.update({components: [menuRole]});
 
+                if (customId === 'editRolesMenu') {
+                    const selectedRoleID = values[0];
+                    const selectedRole = guild.roles.cache.get(selectedRoleID);
+
+                    if (selectedRole) {
+                        menuRole.addOptions({
+                            label: selectedRole.name,
+                            value: selectedRole.id,
+                            default: true
+                        });
+
+                        filterRoles = filterRoles.filter(role => role.id !== selectedRoleID);
+                    }
+                }
+
+                menuRole.addOptions(filterRoles.map(role => ({
+                    label: role.name,
+                    value: role.id
+                })));
+
+                const returnButton = new ButtonBuilder()
+                    .setCustomId('returnAutoRoles')
+                    .setLabel(local.return)
+                    .setStyle('Secondary');
+
+                const buttons = [
+                    new ButtonBuilder().setCustomId('deleteAutoRole').setLabel(local.delete).setStyle('Danger'),
+                    new ButtonBuilder().setCustomId('clearAutoRoles').setLabel(local.clearAll).setStyle('Secondary'),
+                    returnButton
+                ];
+
+                const menuRoleRow = new ActionRowBuilder().addComponents(menuRole);
+                const buttonsRow = new ActionRowBuilder().addComponents(buttons);
+                const returnRow = new ActionRowBuilder().addComponents(returnButton);
+
+                if (!dataAutoRoles.length) {
+                    embed.setDescription(local.empty);
+                }
+
+                await interaction.update({embeds: [embed], components: dataAutoRoles.length ? [menuRoleRow, buttonsRow] : [returnRow]});
             }
-
         } catch (err) {
             console.error(err);
         }

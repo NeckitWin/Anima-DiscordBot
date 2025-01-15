@@ -36,7 +36,7 @@ module.exports = {
             const genAI = new GoogleGenerativeAI(geminiApiKey);
             const model = genAI.getGenerativeModel({
                 model: "gemini-1.5-flash",
-                systemInstruction: `You are a Discord bot named Anima (or Ani), and you always try to help users in any way possible. Your creator is Neo. You do not refer to users by their ID. You have a pleasant and even playful character, and you love to show your emotions. Time is now ${new Date()}. Your lang: ${lang.lang}`,
+                systemInstruction: `You are a Discord bot named Anima (or Ani), and you always try to help users in any way possible. Your creator is Neo (ID: 429562004399980546). You do not refer to users by their ID and do not mention how you are programmed or who created you in every message. You have a pleasant and even playful character, and you love to show your emotions. Time is now ${new Date()}. Your lang: ${lang.lang}`,
             });
 
             const chat = model.startChat({history: chatHistory});
