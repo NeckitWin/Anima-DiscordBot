@@ -40,12 +40,6 @@ module.exports = {
                         emoji: '👮‍♂️',
                     },
                     {
-                        label: local.economy.label,
-                        description: local.economy.description,
-                        value: 'economy',
-                        emoji: '🪙',
-                    },
-                    {
                         label: `${local.util.label}`,
                         description: `${local.util.description}`,
                         value: 'utils',
@@ -82,17 +76,12 @@ module.exports = {
                     },
                     {
                         name: `👑・${local.admin.label}`,
-                        value: `</language:1292081237837611079>, </greet set:1309910521654542470>, </greet remove:1309910521654542470>, </logs set:1299470943638519890>, </logs remove:1299470943638519890>, </post:1302340870892163093>`,
+                        value: `</language:1292081237837611079>, </autoroles:1329204198402953417>, </welcome set:1329204198402953419>, </welcome preview:1329204198402953419>, </welcome remove:1329204198402953419>, </logs set:1299470943638519890>, </logs remove:1299470943638519890>`,
                         inline: false
                     },
                     {
                         name: `👮‍♂️・${local.moder.label}`,
-                        value: '</clear:1285287069676994609>',
-                        inline: false
-                    },
-                    {
-                        name: `🪙・${local.economy.label}`,
-                        value: ``,
+                        value: '</clear:1285287069676994609>, </post:1302340870892163093>',
                         inline: false
                     },
                     {
@@ -117,8 +106,8 @@ module.exports = {
                 },
             };
             interaction.reply({embeds: [embed], components: [rowForHelp],});
-        }catch (err){
-            console.error("Error in file help.js: " + err);
+        } catch (err){
+            console.error(err);
         }
     },
 };

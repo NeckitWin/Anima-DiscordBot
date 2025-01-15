@@ -74,13 +74,19 @@ module.exports = {
                     embed.setColor('#b80000');
                     return await interaction.update({embeds: [embed]});
                 }
-                const isSetAutoRole = await postAutoRole(guild.id, roleId);
-                if (!isSetAutoRole) {
-                    embed.setDescription(local.alreadySet);
+                if (role.permissions.has('Administrator')) {
+                    embed.setDescription(local.prohibitAdminRole);
+                    embed.setColor('#b80000');
                     return await interaction.update({embeds: [embed]});
+
+                    const isSetAutoRole = await postAutoRole(guild.id, roleId);
+                    if (!isSetAutoRole) {
+                        embed.setDescription(local.alreadySet);
+                        return await interaction.update({embeds: [embed]});
+                    }
+                    embed.setDescription(`<@&${roleId}> ${local.success}`);
+                    await interaction.update({embeds: [embed]});
                 }
-                embed.setDescription(`<@&${roleId}> ${local.success}`);
-                await interaction.update({embeds: [embed]});
             } else if (['editAutoRole', 'editRolesMenu', 'deleteAutoRole'].includes(customId)) {
 
                 embed.setDescription(local.editTitle);
@@ -150,8 +156,12 @@ module.exports = {
                     embed.setDescription(local.empty);
                 }
 
-                await interaction.update({embeds: [embed], components: dataAutoRoles.length ? [menuRoleRow, buttonsRow] : [returnRow]});
+                await interaction.update({
+                    embeds: [embed],
+                    components: dataAutoRoles.length ? [menuRoleRow, buttonsRow] : [returnRow]
+                });
             }
+
         } catch (err) {
             console.error(err);
         }

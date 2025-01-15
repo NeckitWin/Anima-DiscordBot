@@ -19,7 +19,7 @@ module.exports = {
             pl: `Wyślij wiadomość na kanał`,
             uk: `Відправити повідомлення в канал`
         })
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
         .addUserOption(option =>
             option.setName(`author`)
                 .setNameLocalizations({ru: `автор`, pl: `autor`, uk: `автор`})
@@ -34,7 +34,7 @@ module.exports = {
         try {
             const lang = await getLang(interaction);
             const local = lang.post;
-            if (interaction.guild && !interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
+            if (interaction.guild && !interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({content: lang.error.commandformanageserver, ephemeral: true});
             const target = interaction.options.getUser(`author`);
             const modal = new ModalBuilder()
                 .setCustomId(`postModal`)

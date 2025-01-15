@@ -54,7 +54,8 @@
     "deleted": "Auto role successfully removed",
     "return": "Return",
     "delete": "Delete auto role",
-    "clearAll": "Clear all auto roles"
+    "clearAll": "Clear all auto roles",
+    "prohibitAdminRole": "You can't add an administrator role to the auto role list"
   },
   "anonim": {
     "systemTitle": "Anonymous Messaging System",
@@ -513,45 +514,34 @@
   "commandsdesc": {
     "info": [
       "Shows a list of all commands",
-      "Shows bot information",
+      "Shows information about the bot",
       "Shows user information",
       "Displays the aura leaderboard",
-      "Shows user avatar",
+      "Shows the user's avatar",
       "Shows server information",
       "Shows role information"
     ],
     "admin": [
       "Set the language for your server",
-      "Set an autorole for new members",
-      "View the autorole list",
-      "Remove an autorole from the list",
-      "Set a welcome channel for new members",
-      "Remove the welcome from the server",
-      "Set a log channel for the server",
-      "Remove logs from the server",
-      "Create a post with an image on the server on behalf of someone",
-      "Set a channel for anonymous messages",
-      "Disable anonymous messages on the server"
+      "Configure auto roles for new members",
+      "Set the welcome channel for new members",
+      "Preview the welcome message on the server",
+      "Remove the welcome message from the server",
+      "Set the log channel for the server",
+      "Remove logs from the server"
     ],
     "moder": [
       "Delete messages in the channel from 1 to 100",
-      "Forbid messages containing 60% or more caps lock (doesn't delete if user role is higher than bot)",
-      "Auto-delete messages with links (doesn't delete if user role is higher than bot)"
-    ],
-    "economy": [
-      "Shows user balance",
-      "Claim daily bonus"
+      "Create a post with a tag/text/color/image/author"
     ],
     "util": [
-      "Solves mathematical examples",
-      "Translates text, automatically detects language for translation",
+      "Solves mathematical problems",
+      "Translates text, automatically detecting the language for translation",
       "Weather in your city",
-      "Generates a random number",
-      "Send an anonymous message to the server's anonymous channel"
+      "Generates a random number"
     ],
     "games": [
       "Guess the anime by the picture",
-      "Heads or tails",
       "Give aura to another user",
       "Take aura from another user"
     ],
@@ -559,9 +549,9 @@
       "Show your emotions or interact with another user",
       "Propose a relationship to another user",
       "Request adult anime content",
-      "Find out compatibility percentage between two users",
+      "Find out the compatibility percentage between two users",
       "Ask Ben a question",
-      "Discover your fate with a magic prediction ball"
+      "Learn your fate with the help of the prediction ball"
     ]
   }
 }

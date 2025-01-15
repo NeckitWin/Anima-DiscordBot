@@ -13,7 +13,7 @@ module.exports = {
             pl: `Ustaw język dla swojego serwera`,
             uk: `Встановити мову для вашого сервера`
         })
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
         .addStringOption(option =>
             option.setName('language')
                 .setNameLocalizations({ru: `язык`, pl: `język`, uk: `мова`})
@@ -36,7 +36,7 @@ module.exports = {
         const {guild, options} = interaction;
         let lang = await getLang(interaction);
         if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
-        if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
+        if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({content: lang.error.commandformanageserver, ephemeral: true});
         const target = options.getString('language');
         const serverID = guild.id;
         await clearLangCache(serverID);

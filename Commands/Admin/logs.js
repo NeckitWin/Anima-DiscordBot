@@ -51,7 +51,7 @@ module.exports = {
         const lang = await getLang(interaction);
         const local = lang.logs;
         if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
-        if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
+        if (!interaction.member.permissions.has(PermissionFlagsBits.ManageServer)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
 
         const guildID = guild.id;
         clearLogCache(guildID);

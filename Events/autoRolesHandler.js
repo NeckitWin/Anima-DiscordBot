@@ -6,11 +6,13 @@ module.exports = {
     name: Events.GuildMemberAdd,
     async execute(member) {
         try {
+            const autoRoles = await getAutoRoles(member.guild.id);
+            if (!autoRoles.length > 0) return;
             if (!commandLog("autoRolesHandler", member)) return;
+
             const botMember = await member.guild.members.fetch(member.client.user.id);
             const botRole = botMember.roles.highest;
-            const autoRoles = await getAutoRoles(member.guild.id);
-            if (!autoRoles.length) return;
+
             for (const role of autoRoles) {
                 const guildRole = member.guild.roles.cache.get(role.roleID);
                 const rolePosition = guildRole.position;

@@ -54,7 +54,8 @@
     "deleted": "Automatyczna rola została pomyślnie usunięta",
     "return": "Powrót",
     "delete": "Usuń automatyczną rolę",
-    "clearAll": "Wyczyść wszystkie automatyczne role"
+    "clearAll": "Wyczyść wszystkie automatyczne role",
+    "prohibitAdminRole": "Nie możesz dodać roli administratora jako automatycznej roli"
   },
   "anonim": {
     "systemTitle": "System anonimowych wiadomości",
@@ -512,56 +513,45 @@
   },
   "commandsdesc": {
     "info": [
-      "Pokazuje listę wszystkich komend",
+      "Pokazuje listę wszystkich poleceń",
       "Pokazuje informacje o bocie",
       "Pokazuje informacje o użytkowniku",
       "Pokazuje tabelę liderów aury",
-      "Pokazuje avatar użytkownika",
+      "Pokazuje awatar użytkownika",
       "Pokazuje informacje o serwerze",
       "Pokazuje informacje o roli"
     ],
     "admin": [
       "Ustaw język dla swojego serwera",
-      "Ustaw autorolę dla nowych członków",
-      "Zobacz listę autoroli",
-      "Usuń autorolę z listy",
-      "Ustaw kanał powitania nowych członków",
+      "Skonfiguruj automatyczne role dla nowych członków",
+      "Ustaw kanał powitalny dla nowych członków",
+      "Podgląd powitania na serwerze",
       "Usuń powitanie z serwera",
       "Ustaw kanał logów dla serwera",
-      "Usuń logi z serwera",
-      "Utwórz post ze zdjęciem na serwerze w imieniu kogoś",
-      "Ustaw kanał anonimowych wiadomości na serwerze",
-      "Wyłącz anonimowe wiadomości na serwerze"
+      "Usuń logi z serwera"
     ],
     "moder": [
-      "Usuń wiadomości w kanale od 1 do 100",
-      "Zabroń wiadomości wielkimi literami 60% lub więcej (nie usuwa, jeśli rola użytkownika jest wyższa niż bota)",
-      "Automatyczne usuwanie wiadomości z linkami (nie usuwa, jeśli rola użytkownika jest wyższa niż bota)"
-    ],
-    "economy": [
-      "Pokazuje saldo użytkownika",
-      "Odbierz codzienny bonus"
+      "Usuń wiadomości na kanale od 1 do 100",
+      "Utwórz post z tagiem/tekstem/kolorem/obrazem/autorem"
     ],
     "util": [
       "Rozwiązuje przykłady matematyczne",
-      "Tłumaczy tekst, automatycznie wykrywa język do tłumaczenia",
-      "Pogoda w Twoim mieście",
-      "Generuje losową liczbę",
-      "Wysyła anonimową wiadomość do użytkownika na anonimowym kanale serwera"
+      "Tłumaczy tekst, automatycznie rozpoznając język do tłumaczenia",
+      "Pogoda w twoim mieście",
+      "Generuje losową liczbę"
     ],
     "games": [
       "Zgadnij anime po obrazku",
-      "Orzeł czy reszka",
       "Podaruj aurę innemu użytkownikowi",
-      "Zabierz aurę od innego użytkownika"
+      "Zabierz aurę innemu użytkownikowi"
     ],
     "fun": [
-      "Pokaż swoje emocje lub wejdź w interakcję z innym użytkownikiem",
+      "Pokaż swoje emocje lub wchodź w interakcje z innym użytkownikiem",
       "Zaproponuj związek innemu użytkownikowi",
-      "Poproś o treści anime dla dorosłych",
-      "Sprawdź procent kompatybilności między dwoma użytkownikami",
+      "Poproś o anime dla dorosłych",
+      "Poznaj procent kompatybilności między dwoma użytkownikami",
       "Zadaj pytanie Benowi",
-      "Odkryj swój los za pomocą kuli wróżb"
+      "Poznaj swoją przyszłość za pomocą kuli przepowiedni"
     ]
   }
 }

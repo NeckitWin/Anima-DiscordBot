@@ -35,33 +35,27 @@ module.exports = {
 
                 const admincontent =
                     `</language:1292081237837611079> - ${localinfo.admin[0]} \n` +
-                    `</greet set:1309910521654542470> - ${localinfo.admin[4]} \n` +
-                    `</greet remove:1309910521654542470> - ${localinfo.admin[5]} \n` +
-                    `</logs set:1299470943638519890> - ${localinfo.admin[6]} \n` +
-                    `</logs remove:1299470943638519890> - ${localinfo.admin[7]} \n` +
-                    `</post:1302340870892163093> - ${localinfo.admin[8]} \n`;
+                    `</autoroles:1329204198402953417> - ${localinfo.admin[1]} \n` +
+                    `</welcome set:1329204198402953419> - ${localinfo.admin[2]} \n` +
+                    `</welcome preview:1329204198402953419> - ${localinfo.admin[3]} \n` +
+                    `</welcome remove:1329204198402953419> - ${localinfo.admin[4]} \n` +
+                    `</logs set:1299470943638519890> - ${localinfo.admin[5]} \n` +
+                    `</logs remove:1299470943638519890> - ${localinfo.admin[6]} \n`;
 
                 const modercontent =
-                    `</clear:1285287069676994609> - ${localinfo.moder[0]} \n`+
-                    `</anti caps:1299470943638519889> - ${localinfo.moder[1]} \n`+
-                    `</anti links:1299470943638519889> - ${localinfo.moder[2]}`;
-
-                const economycontent =
-                    `</balance:1297200872304021504> - ${localinfo.economy[0]} \n` +
-                    `</daily:1313136006362562590> - ${localinfo.economy[1]}`;
+                    `</clear:1285287069676994609> - ${localinfo.moder[0]} \n` +
+                    `</post:1302340870892163093> - ${localinfo.moder[1]} \n`;
 
                 const utilcontent =
                     `</calc:1285287069756690488> - ${localinfo.util[0]} \n` +
                     `</translate:1285287069756690490> - ${localinfo.util[1]} \n` +
                     `</weather:1285287069756690491> - ${localinfo.util[2]} \n` +
-                    `</random:1294775882124361819> - ${localinfo.util[3]}\n` +
-                    `</anonim-message:1302707978008531125> - ${localinfo.util[4]}`;
+                    `</random:1294775882124361819> - ${localinfo.util[3]}\n`
 
                 const gamescontent =
                     `</anime:1294302199869997197> - ${localinfo.games[0]} \n` +
-                    `</coin_flip:1294379110197624924> - ${localinfo.games[1]} \n` +
-                    `\`+aura\` - ${localinfo.games[2]} \n` +
-                    `\`-aura\` - ${localinfo.games[3]}`
+                    `\`+aura\` - ${localinfo.games[1]} \n` +
+                    `\`-aura\` - ${localinfo.games[2]}`
 
                 const funcontent =
                     `</rp:1299513629934223493> - ${localinfo.fun[0]} \n` +
