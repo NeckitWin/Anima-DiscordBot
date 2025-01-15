@@ -9,7 +9,7 @@ const {
 } = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
 const {removeGreet, getGreet} = require("../../Data/funcs/dbGreet");
-const commandName = 'greet';
+const commandName = 'welcome';
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -66,11 +66,11 @@ module.exports = {
             const lang = await getLang(interaction);
             if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.greeting
-            if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) {
                 return await interaction.reply({
-                    content: lang.error.commandforadmin,
+                    content: lang.error.commandformanageserver,
                     ephemeral: true
-                });
+                })
             }
 
             const serverID = interaction.guild.id;
@@ -144,17 +144,17 @@ module.exports = {
                 let embedContent = greetData.content;
 
                 if (messageContent.includes(`{user}`)) {
-                    messageContent = messageContent.replace(`{user}`, member);
+                    messageContent = messageContent.replace(`{user}`, interaction.user);
                 }
 
                 if (embedContent.includes(`{user}`)) {
-                    embedContent = embedContent.replace(`{user}`, member);
+                    embedContent = embedContent.replace(`{user}`, interaction.user);
                 }
 
                 let embed;
                 if (greetData.content || greetData.picture) {
                     embed = new EmbedBuilder()
-                        .setDescription(`{user} ${embedContent}`)
+                        .setDescription(embedContent)
                         .setThumbnail(interaction.user.avatarURL());
                     if (greetData.picture) embed.setImage(greetData.picture)
                 }

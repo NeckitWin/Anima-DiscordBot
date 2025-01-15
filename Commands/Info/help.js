@@ -87,22 +87,22 @@ module.exports = {
                     },
                     {
                         name: `👮‍♂️・${local.moder.label}`,
-                        value: '</clear:1285287069676994609>, </anti caps:1299470943638519889>, </anti links:1299470943638519889>',
+                        value: '</clear:1285287069676994609>',
                         inline: false
                     },
                     {
                         name: `🪙・${local.economy.label}`,
-                        value: `</balance:1297200872304021504>, </daily:1313136006362562590>`,
+                        value: ``,
                         inline: false
                     },
                     {
                         name: `🔧・${local.util.label}`,
-                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>, </random:1294775882124361819>',
+                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>',
                         inline: false
                     },
                     {
                         name: `🎮・${local.games.label}`,
-                        value: '</anime:1294302199869997197>, </coin_flip:1294379110197624924>, `+aura`, `-aura`',
+                        value: '</anime:1294302199869997197>, `+aura`, `-aura`',
                         inline: false
                     },
                     {

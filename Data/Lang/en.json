@@ -6,6 +6,8 @@
   "error": {
     "notguild": "This command can only be used in servers",
     "commandforadmin": "This command is only for server administrators",
+    "commandformanageserver": "You need permission to manage the server",
+    "commandformanageroles": "You need permission to manage roles",
     "rolesEqual": "User's role is the same as yours",
     "usernotfound": "User not found in the server",
     "bothigherrole": "User's role is higher than mine",

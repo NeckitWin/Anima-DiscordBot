@@ -6,6 +6,8 @@
   "error": {
     "notguild": "Ta komenda jest przeznaczona tylko dla serwerów",
     "commandforadmin": "Ta komenda jest przeznaczona tylko dla administratorów serwera",
+    "commandformanageserver": "Musisz mieć uprawnienia do zarządzania serwerem",
+    "commandformanageroles": "Musisz mieć uprawnienia do zarządzania rolami",
     "rolesEqual": "Rola użytkownika jest taka sama jak twoja",
     "usernotfound": "Użytkownik nie znaleziony na serwerze",
     "bothigherrole": "Rola użytkownika jest wyższa niż moja",

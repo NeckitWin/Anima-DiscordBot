@@ -8,11 +8,11 @@ module.exports = {
         try {
             if (member.user.bot) return;
             const serverID = member.guild.id;
-            if (!commandLog("greetHandle", member, 1)) return;
             const getGreetData = await getGreet(serverID);
             if (!getGreetData.length > 0) return;
             const greetData = getGreetData[0];
             const greetingChannel = member.guild.channels.cache.get(String(greetData.channelID));
+            if (!commandLog("greetHandle", member, 1)) return;
 
             let messageContent = greetData.title;
             let embedContent = greetData.content;
@@ -26,7 +26,7 @@ module.exports = {
             }
 
             const embed = new EmbedBuilder()
-                .setDescription(`{user} ${embedContent}`)
+                .setDescription(embedContent)
                 .setThumbnail(member.user.avatarURL());
             if (greetData.picture) embed.setImage(greetData.picture)
 
