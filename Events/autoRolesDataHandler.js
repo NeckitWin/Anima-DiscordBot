@@ -78,15 +78,16 @@ module.exports = {
                     embed.setDescription(local.prohibitAdminRole);
                     embed.setColor('#b80000');
                     return await interaction.update({embeds: [embed]});
-
-                    const isSetAutoRole = await postAutoRole(guild.id, roleId);
-                    if (!isSetAutoRole) {
-                        embed.setDescription(local.alreadySet);
-                        return await interaction.update({embeds: [embed]});
-                    }
-                    embed.setDescription(`<@&${roleId}> ${local.success}`);
-                    await interaction.update({embeds: [embed]});
                 }
+
+                const isSetAutoRole = await postAutoRole(guild.id, roleId);
+                if (!isSetAutoRole) {
+                    embed.setDescription(local.alreadySet);
+                    return await interaction.update({embeds: [embed]});
+                }
+                embed.setDescription(`<@&${roleId}> ${local.success}`);
+                await interaction.update({embeds: [embed]});
+
             } else if (['editAutoRole', 'editRolesMenu', 'deleteAutoRole'].includes(customId)) {
 
                 embed.setDescription(local.editTitle);
