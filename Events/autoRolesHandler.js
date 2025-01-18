@@ -9,7 +9,7 @@ module.exports = {
             const autoRoles = await getAutoRoles(member.guild.id);
             if (!autoRoles.length > 0) return;
             if (!commandLog("autoRolesHandler", member)) return;
-
+            if (member.user.bot) return;
             const botMember = await member.guild.members.fetch(member.client.user.id);
             const botRole = botMember.roles.highest;
 
