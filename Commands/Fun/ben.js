@@ -2,10 +2,10 @@ const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
 const commandName = 'ben';
 const answers = [
-    {value: "yes", gif: "https://media1.tenor.com/m/nIsnQBxoRjkAAAAC/ben-yes.gif", color: "#007a00"},
-    {value: "no", gif: "https://media1.tenor.com/m/F1bdsKaYe2gAAAAC/ben-no.gif", color: "#ca0000"},
-    {value: "ugh", gif: "https://media1.tenor.com/m/fr6i8VzKJuEAAAAd/talking-ben-ugh.gif", color: "#0066ff"},
-    {value: "haha", gif: "https://media1.tenor.com/m/agrQMQjQTzgAAAAd/talking-ben-laugh.gif", color: "#ffcc7f"}
+    {"value": "yes", "gif": "https://c.tenor.com/nIsnQBxoRjkAAAAC/ben-yes.gif", "color": "#007a00"},
+    {"value": "no", "gif": "https://c.tenor.com/F1bdsKaYe2gAAAAC/ben-no.gif", "color": "#ca0000"},
+    {"value": "ugh", "gif": "https://c.tenor.com/fr6i8VzKJuEAAAAd/talking-ben-ugh.gif", "color": "#0066ff"},
+    {"value": "haha", "gif": "https://c.tenor.com/agrQMQjQTzgAAAAd/talking-ben-laugh.gif", "color": "#ffcc7f"}
 ]
 
 module.exports = {

@@ -33,25 +33,32 @@ module.exports = {
                 )
                 .setRequired(true)),
     async execute(interaction) {
-        const {guild, options} = interaction;
-        let lang = await getLang(interaction);
-        if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
-        if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({content: lang.error.commandformanageserver, ephemeral: true});
-        const target = options.getString('language');
-        const serverID = guild.id;
-        await clearLangCache(serverID);
-        await updateServer(serverID, 'lang', target);
+        try {
+            const {guild, options} = interaction;
+            let lang = await getLang(interaction);
+            if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({
+                content: lang.error.commandformanageserver,
+                ephemeral: true
+            });
+            const target = options.getString('language');
+            const serverID = guild.id;
+            await clearLangCache(serverID);
+            await updateServer(serverID, 'lang', target);
 
-        lang = await getLang(interaction);
-        const local = lang.language;
+            lang = await getLang(interaction);
+            const local = lang.language;
 
-        const embed = new EmbedBuilder()
-            .setTitle(local.title)
-            .setDescription(`${local.description} ${target}`)
-            .setColor(`#d998ff`);
+            const embed = new EmbedBuilder()
+                .setTitle(local.title)
+                .setDescription(`${local.description} ${target}`)
+                .setColor(`#d998ff`);
 
 
-        await interaction.reply({content: " ", embeds: [embed], ephemeral: true});
+            await interaction.reply({content: " ", embeds: [embed], ephemeral: true});
 
+        } catch (err) {
+            console.error(err);
+        }
     }
 }

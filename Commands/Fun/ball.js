@@ -40,7 +40,7 @@ module.exports = {
             const embedLoading = new EmbedBuilder()
                 .setTitle(local.loading)
                 .setColor(`#00ffec`)
-                .setImage(`https://media1.tenor.com/m/sl3UIRK455QAAAAC/8ball-bart-simpson.gif`);
+                .setImage(`https://c.tenor.com/sl3UIRK455QAAAAC/tenor.gif`);
 
             await interaction.reply({embeds: [embedLoading]});
 
