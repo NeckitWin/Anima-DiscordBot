@@ -94,7 +94,7 @@ module.exports = {
                     marryEmbed
                         .setAuthor({iconURL: `https://cdn-icons-png.flaticon.com/512/5065/5065586.png`, name: local.wedding})
                         .setDescription(`${local.congratulations} <:hearts:1300282044047429682>`)
-                        .setImage(`https://media1.tenor.com/m/-YBoNtfhc0UAAAAd/kai-and-afine-kiss.gif`)
+                        .setImage(`https://c.tenor.com/-YBoNtfhc0UAAAAd/tenor.gif`)
                         .setColor(`#ffc5d9`);
 
                     await message.channel.send({content: `${authorInteraction} ${mentionUser}` ,embeds: [marryEmbed], components: []});
