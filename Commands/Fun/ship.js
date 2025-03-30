@@ -1,6 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import fetch from 'node-fetch2';
 import path from 'node:path';
+import url from 'node:url';
 import sharp from 'sharp';
 import { getLang } from "../../Data/Lang/index.js";
 
@@ -96,6 +97,7 @@ export default {
 
             const userAvatar1 = await getCircleBufferImage(user1.avatarURL({size: 256}));
             const userAvatar2 = await getCircleBufferImage(user2.avatarURL({size: 256}));
+            const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
             const bgPath = path.join(__dirname, "../../Data/img/heartbg.png");
             const bgImage = sharp(bgPath);
             const randomNumber = Math.floor(Math.random() * (100 + 1));
