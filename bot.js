@@ -3,6 +3,7 @@ import {Client, GatewayIntentBits, Collection, ActivityType} from 'discord.js';
 import url, {fileURLToPath} from 'node:url';
 import path, {dirname} from 'node:path';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const client = new Client({
@@ -56,29 +57,24 @@ client.on("ready", () => {
     });
 })
 
-const eventsPath = path.join(__dirname, 'Events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+try {
+    const eventFiles = fs.readdirSync(path.join(__dirname, 'Events')).filter(file => file.endsWith('.js'));
 
-for (const file of eventFiles) {
-    const filePath = path.join(eventsPath, file);
-    const fileURL = url.pathToFileURL(filePath);
-    const events = await import(fileURL);
+    for (const file of eventFiles) {
+        const { default: event } = await import(url.pathToFileURL(path.join(__dirname, 'Events', file)));
 
-    if (Array.isArray(events)) {
-        for (const event of events) {
-            if (event.once) {
-                client.once(event.default.name, (...args) => event.default.execute(...args));
-            } else {
-                client.on(event.default.name, (...args) => event.default.execute(...args));
+        if (!event) continue;
+
+        const events = Array.isArray(event) ? event : [event];
+
+        events.forEach(e => {
+            if (e && e.name && e.execute) {
+                client[e.once ? 'once' : 'on'](e.name, e.execute);
             }
-        }
-    } else {
-        if (events.once) {
-            client.once(events.default.name, (...args) => events.default.execute(...args));
-        } else {
-            client.on(events.default.name, (...args) => events.default.execute(...args));
-        }
+        });
     }
+} catch (error) {
+    console.error('Error loading events:', error);
 }
 
 client.login(process.env.TOKEN);
