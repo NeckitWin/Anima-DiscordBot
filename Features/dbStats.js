@@ -1,4 +1,4 @@
-const {sqlPost} = require(`./db`);
+import {sqlPost} from "./db.js";
 
 const updateUsedCommandsCount = async (count) => {
     const sql = `UPDATE stats SET usedCommandsCount = usedCommandsCount + ?`;
@@ -12,4 +12,4 @@ const updateUsedCommandsCount = async (count) => {
 };
 
 
-module.exports = {updateUsedCommandsCount};
+export {updateUsedCommandsCount};

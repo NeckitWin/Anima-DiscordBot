@@ -1,11 +1,9 @@
-const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, RoleSelectMenuBuilder, ActionRowBuilder, ButtonBuilder, EmbedBuilder} = require('discord.js');
-const {getLang} = require("../../Data/Lang");
+import {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, RoleSelectMenuBuilder, ActionRowBuilder, ButtonBuilder, EmbedBuilder} from 'discord.js';
+import { getLang } from "../../Data/Lang/index.js";
 
-const commandName = 'autoroles';
-
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('autoroles')
         .setNameLocalizations({ru: 'автороли', pl: 'autorole', uk: 'авторолі'})
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
         .setDescription('Setting up autoroles for new members')

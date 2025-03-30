@@ -1,9 +1,8 @@
-const {ContextMenuCommandBuilder, ApplicationCommandType} = require(`discord.js`);
-const commandName = `emoji-sticker`;
+import {ContextMenuCommandBuilder, ApplicationCommandType} from 'discord.js';
 
-module.exports = {
+export default {
     data: new ContextMenuCommandBuilder()
-        .setName(commandName)
+        .setName(`emoji-sticker`)
         .setNameLocalizations({ru: `стикер-эмодзи`, pl: `naklejka-emoji`, uk: `стікер-емодзі`})
         .setType(ApplicationCommandType.Message),
     async execute(interaction) {}

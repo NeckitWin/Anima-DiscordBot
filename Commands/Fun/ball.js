@@ -1,6 +1,6 @@
-const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
-const {getLang} = require("../../Data/Lang");
-const commandName = 'ball';
+import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
+import { getLang } from "../../Data/Lang/index.js";
+
 const answers = [
     {value: "yes", color: "#00ff95"},
     {value: "no", color: "#ff0044"},
@@ -10,9 +10,9 @@ const answers = [
     {value: "doubtful", color: "#ff6c6c"},
 ];
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('ball')
         .setDescription(`Ask the magic ball a question and get an answer`)
         .setNameLocalizations({ru: `шар`, pl: `kula`, uk: `куля`})
         .setDescriptionLocalizations({

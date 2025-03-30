@@ -1,8 +1,7 @@
-const {Events, EmbedBuilder} = require("discord.js");
-const {getLang} = require("../Data/Lang");
-const {getTypeChannel} = require("../Features/getTypeChannel");
-const {ifServerHasLog} = require("../Features/logCache");
-const {formatDate} = require("../Features/utility");
+import { Events, EmbedBuilder } from 'discord.js';
+import { getLang } from '../Data/Lang/index.js';
+import { ifServerHasLog } from '../Features/logCache.js';
+import { formatDate, getTypeChannel } from '../Features/utility.js';
 
 const checkServer = async (message) => {
     try {
@@ -23,7 +22,7 @@ const sendLog = async (channel, embed) => {
     }
 }
 
-module.exports = [
+export default [
     {
         name: Events.MessageUpdate,
         async execute(oldMessage, newMessage) {

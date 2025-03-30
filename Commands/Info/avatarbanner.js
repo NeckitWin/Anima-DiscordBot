@@ -1,10 +1,9 @@
-const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
-const {getLang} = require("../../Data/Lang");
-const commandName = 'avatar-banner';
+import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
+import { getLang } from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('avatar-banner')
         .setNameLocalizations({ru: 'аватар-баннер', pl: 'awatar-banner', uk: 'аватар-банер'})
         .setDescription('Shows avatar and banner of a user or of a user that was mentioned)')
         .setDescriptionLocalizations({

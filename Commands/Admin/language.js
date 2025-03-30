@@ -1,11 +1,10 @@
-const {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} = require(`discord.js`);
-const {getLang, clearLangCache} = require("../../Data/Lang");
-const {updateServer} = require("../../Features/dbServer");
-const commandName = 'language';
+import { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } from 'discord.js';
+import { getLang } from "../../Data/Lang/index.js";
+import {updateServer} from "../../Features/dbServer.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('language')
         .setNameLocalizations({ru: `язык`, pl: `język`, uk: `мова`})
         .setDescription(`Set language for your server`)
         .setDescriptionLocalizations({

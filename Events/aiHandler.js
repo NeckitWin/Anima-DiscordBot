@@ -1,14 +1,16 @@
-const {Events, AttachmentBuilder} = require('discord.js');
-const fs = require('fs');
-const path = require('path');
-const {GoogleGenerativeAI} = require("@google/generative-ai");
-const {geminiApiKey} = require('../Data/config.json');
-const {commandLog} = require("../Features/commandLog");
-const {getLang} = require("../Data/Lang");
+import { Events, AttachmentBuilder } from 'discord.js';
+import fs from 'node:fs';
+import path from 'node:path';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { commandLog } from '../Features/commandLog.js';
+import { getLang } from '../Data/Lang/index.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const messageHistory = {};
 
-module.exports = {
+export default {
     name: Events.MessageCreate,
     async execute(message) {
         try {
@@ -33,7 +35,7 @@ module.exports = {
                 parts: [{text: entry.content}]
             }));
 
-            const genAI = new GoogleGenerativeAI(geminiApiKey);
+            const genAI = new GoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY });
             const model = genAI.getGenerativeModel({
                 model: "gemini-1.5-flash",
                 systemInstruction: `You are a Discord bot named Anima (or Ani), and you always try to help users in any way possible. Your creator is Neo (ID: 429562004399980546). You do not refer to users by their ID and do not mention how you are programmed or who created you in every message. You have a pleasant and even playful character, and you love to show your emotions. Time is now ${new Date()}. Your lang: ${lang.lang}`,

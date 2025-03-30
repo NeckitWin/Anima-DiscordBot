@@ -1,12 +1,12 @@
-const {
+import {
     Events, RoleSelectMenuBuilder, ActionRowBuilder, EmbedBuilder, StringSelectMenuBuilder,
     ButtonBuilder
-} = require(`discord.js`);
-const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Features/commandLog");
-const {postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles} = require("../Features/dbAutoRoles");
+} from 'discord.js';
+import { getLang } from '../Data/Lang/index.js';
+import { commandLog } from '../Features/commandLog.js';
+import { postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles } from '../Features/dbAutoRoles.js';
 
-module.exports = {
+export default {
     name: Events.InteractionCreate,
     async execute(interaction) {
         try {

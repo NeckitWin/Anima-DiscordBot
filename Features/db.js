@@ -1,5 +1,12 @@
-const mysql = require("mysql");
-const config = require("../Data/config.json");
+import mysql from "mysql";
+import dotenv from "dotenv";
+dotenv.config();
+
+const config = {
+    dbHost: process.env.DB_HOST,
+    dbUser: process.env.DB_USER,
+    dbPassword: process.env.DB_PASSWORD
+}
 
 const getConnection = () => {
     const conn = mysql.createConnection({
@@ -59,4 +66,4 @@ const sqlPost = async (sql, params) => {
     }
 }
 
-module.exports = {sqlRequest, sqlPost}
+export {sqlRequest, sqlPost}

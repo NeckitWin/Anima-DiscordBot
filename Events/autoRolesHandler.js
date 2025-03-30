@@ -1,8 +1,8 @@
-const {Events} = require('discord.js');
-const {getAutoRoles, removeAutoRole} = require("../Features/dbAutoRoles");
-const {commandLog} = require("../Features/commandLog");
+import { Events } from 'discord.js';
+import { getAutoRoles, removeAutoRole } from '../Features/dbAutoRoles.js';
+import { commandLog } from '../Features/commandLog.js';
 
-module.exports = {
+export default {
     name: Events.GuildMemberAdd,
     async execute(member) {
         try {

@@ -1,9 +1,8 @@
-const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
-const fetch = require('node-fetch2');
-const path = require("node:path");
-const sharp = require("sharp");
-const {getLang} = require("../../Data/Lang");
-const commandName = 'ship';
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import fetch from 'node-fetch2';
+import path from 'node:path';
+import sharp from 'sharp';
+import { getLang } from "../../Data/Lang/index.js";
 
 const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowOffset = 10) => {
     const response = await fetch(url);
@@ -47,10 +46,10 @@ const createTextSVG = (text, fontSize, fillColor = 'white', strokeColor, strokeW
 };
 
 
-module.exports = {
+export default {
     cooldown: 10,
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('ship')
         .setNameLocalizations({ru: `пара`, pl: `para`, uk: `пара`})
         .setDescription('Find out users compatibility')
         .setDescriptionLocalizations({

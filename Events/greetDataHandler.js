@@ -1,9 +1,9 @@
-const {Events} = require(`discord.js`);
-const {getLang} = require("../Data/Lang");
-const {updateGreet} = require("../Features/dbGreet");
-const {commandLog} = require("../Features/commandLog");
+import { Events } from 'discord.js';
+import { getLang } from '../Data/Lang/index.js';
+import { updateGreet } from '../Features/dbGreet.js';
+import { commandLog } from '../Features/commandLog.js';
 
-module.exports = {
+export default {
     name: Events.InteractionCreate,
     async execute(interaction) {
         try {

@@ -1,6 +1,7 @@
-const {EmbedBuilder} = require("discord.js");
-const {sendUsedCommandsCount} = require("../Data/funcs/commandLog");
-module.exports = {
+import { EmbedBuilder } from "discord.js";
+import { sendUsedCommandsCount } from "../Features/commandLog";
+
+export default {
     name: 'reboot',
     description: 'Reboot the bot',
     async execute(message) {

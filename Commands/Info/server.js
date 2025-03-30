@@ -1,26 +1,11 @@
-const {SlashCommandBuilder, EmbedBuilder, ChannelType} = require("discord.js");
-const {formatDate} = require("../../Features/utility");
-const {getLang} = require("../../Data/Lang");
-const commandName = 'server';
+import {SlashCommandBuilder, EmbedBuilder, ChannelType} from "discord.js";
+import {formatDate, serverProtection} from "../../Features/utility.js";
+import { getLang } from "../../Data/Lang/index.js";
 
-const serverProtection = (number) => {
-    switch (number) {
-        case 0:
-            return 'none';
-        case 1:
-            return 'low';
-        case 2:
-            return 'medium';
-        case 3:
-            return 'high';
-        case 4:
-            return 'veryhigh';
-    }
-}
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('server')
         .setNameLocalizations({ru: 'сервер', pl: 'serwer', uk: 'сервер'})
         .setDescription('Shows information about the server')
         .setDescriptionLocalizations({

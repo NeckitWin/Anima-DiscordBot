@@ -1,11 +1,10 @@
-const {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, Colors} = require("discord.js");
-const {formatDate} = require("../../Features/utility");
-const {getLang} = require("../../Data/Lang");
-const commandName = 'bot';
+import {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder} from "discord.js";
+import {formatDate} from "../../Features/utility.js";
+import { getLang } from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('bot')
         .setNameLocalizations({ru: 'бот', pl: 'bot', uk: 'бот'})
         .setDescription('Shows information about the bot')
         .setDescriptionLocalizations({

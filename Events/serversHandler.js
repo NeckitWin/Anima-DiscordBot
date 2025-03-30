@@ -1,14 +1,12 @@
-const {Events, EmbedBuilder} = require('discord.js')
+import {Events, EmbedBuilder} from 'discord.js';
+import {Webhooks} from "../Config/Webhooks.js";
 
-module.exports = [
+export default [
     {
         name: Events.GuildCreate,
         async execute(guild) {
             try {
-                const myServerId = `1246052791097622528`;
-                const myChannelId = `1289145043873169438`;
-                const myServer = guild.client.guilds.cache.get(myServerId);
-                const myChannel = myServer.channels.cache.get(myChannelId);
+                if (!guild) return;
                 const getOwner = await guild.members.fetch(guild.ownerId);
                 const owner = getOwner.user;
                 const memberCount = guild.memberCount;
@@ -25,7 +23,7 @@ module.exports = [
                         {name: `Owner ID`, value: `\`\`\`fix\n${owner.id}\`\`\``, inline: true}
                     );
 
-                await myChannel.send({embeds: [embed]})
+                await Webhooks.webhookServerHandler.send({embeds: [embed]})
             } catch (e) {
                 console.error(e);
             }
@@ -35,10 +33,7 @@ module.exports = [
         name: Events.GuildDelete,
         async execute(guild) {
             try {
-                const myServerId = `1246052791097622528`;
-                const myChannelId = `1289145043873169438`;
-                const myServer = guild.client.guilds.cache.get(myServerId);
-                const myChannel = myServer.channels.cache.get(myChannelId);
+                if (!guild) return console.log(guild);
                 const memberCount = guild.memberCount;
 
                 const embed = new EmbedBuilder()
@@ -49,7 +44,7 @@ module.exports = [
                         {name: `Guild Name:`, value: `\`\`\`fix\n${guild.name}\`\`\``, inline: false},
                         {name: `User count`, value: `\`\`\`fix\n${memberCount}\`\`\``, inline: true}
                     );
-                await myChannel.send({embeds: [embed]})
+                await Webhooks.webhookServerHandler.send({embeds: [embed]})
             } catch (e) {
                 console.error(e);
             }

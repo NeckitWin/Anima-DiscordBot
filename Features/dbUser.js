@@ -1,4 +1,4 @@
-const {sqlRequest, sqlPost} = require(`./db`)
+import {sqlPost, sqlRequest} from "./db.js";
 
 // functions
 const getUser = async (user_id) => {
@@ -75,4 +75,4 @@ const removeRelation = async (server_id, user_id) => {
     return true;
 }
 
-module.exports = {getUser, getUserServer, getLeaderboard, postNewUser, updateAura, getRelation, setRelation, removeRelation, updateUserWallet};
+export {getUser, getUserServer, getLeaderboard, postNewUser, updateAura, getRelation, setRelation, removeRelation, updateUserWallet};

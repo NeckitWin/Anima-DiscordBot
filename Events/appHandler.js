@@ -1,21 +1,10 @@
-const {Events, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle} = require(`discord.js`);
-const fetch = require(`node-fetch2`);
-const {commandLog} = require("../Features/commandLog");
+import { Events, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } from 'discord.js';
+import fetch from 'node-fetch2';
+import { commandLog } from '../Features/commandLog.js';
+import {getStickerFormat} from "../Features/utility.js";
 
-const getStickerFormat = (format) => {
-    switch (format) {
-        case 1:
-            return `png`;
-        case 2:
-            return `png`;
-        case 3:
-            return `webp`;
-        case 4:
-            return `gif`;
-    }
-}
 
-module.exports = [
+export default [
     {
         // emoji-sticker
         name: Events.InteractionCreate,

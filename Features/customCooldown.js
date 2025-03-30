@@ -1,4 +1,4 @@
-const {getLang} = require("../Data/Lang");
+import {getLang} from "../Data/Lang/index.js";
 const timeout = new Map();
 
 const setCooldown = async (commandEvent, message, time) => {
@@ -26,4 +26,4 @@ const setCooldown = async (commandEvent, message, time) => {
     return true;
 };
 
-module.exports = { setCooldown };
+export { setCooldown };

@@ -1,11 +1,10 @@
-const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} = require(`discord.js`);
-const {getRelation} = require("../../Features/dbUser");
-const {getLang} = require("../../Data/Lang");
-const commandName = 'marry';
+import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} from 'discord.js';
+import {getRelation} from "../../Features/dbUser.js";
+import {getLang} from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('marry')
         .setNameLocalizations({ru: `брак`, pl: `małżeństwo`, uk: `шлюб`})
         .setDescription(`Start a relationship with someone`)
         .setDescriptionLocalizations({
@@ -51,7 +50,10 @@ module.exports = {
                 }
 
                 const embed = new EmbedBuilder()
-                    .setAuthor({iconURL: `https://cdn-icons-png.flaticon.com/512/5065/5065586.png`, name: local.wedding})
+                    .setAuthor({
+                        iconURL: `https://cdn-icons-png.flaticon.com/512/5065/5065586.png`,
+                        name: local.wedding
+                    })
                     .setDescription(`${interaction.user} ${local.proposal}`)
                     .setThumbnail(interaction.user.displayAvatarURL({dynamic: true}))
                     .setFooter({iconURL: interaction.guild.iconURL({dynamic: true}), text: interaction.guild.name})

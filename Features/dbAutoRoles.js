@@ -1,4 +1,4 @@
-const {sqlPost, sqlRequest} = require(`./db`);
+import {sqlPost, sqlRequest} from "./db.js";
 
 const getAutoRoles = async (server_id) => {
     try {
@@ -52,4 +52,4 @@ const clearAutoRoles = async (server_id) => {
     }
 }
 
-module.exports = {getAutoRoles, getAutoRole, removeAutoRole, postAutoRole, clearAutoRoles};
+export {getAutoRoles, getAutoRole, removeAutoRole, postAutoRole, clearAutoRoles};

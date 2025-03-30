@@ -1,10 +1,9 @@
-const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require("discord.js");
-const {getLang} = require("../../Data/Lang");
-const commandName = 'help';
+import {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} from "discord.js";
+import { getLang } from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('help')
         .setNameLocalizations({ru: 'помощь', pl: 'pomoc', uk: 'допомога'})
         .setDescription('Shows list of commands')
         .setDescriptionLocalizations({
@@ -106,7 +105,7 @@ module.exports = {
                 },
             };
             interaction.reply({embeds: [embed], components: [rowForHelp],});
-        } catch (err){
+        } catch (err) {
             console.error(err);
         }
     },

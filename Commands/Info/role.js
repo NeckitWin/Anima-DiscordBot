@@ -1,11 +1,10 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const {formatDate} = require("../../Features/utility");
-const {getLang} = require("../../Data/Lang");
-const commandName = 'role';
+import {SlashCommandBuilder, EmbedBuilder} from 'discord.js';
+import {formatDate} from "../../Features/utility.js";
+import { getLang } from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('role')
         .setDescription('Shows information about the role')
         .setNameLocalizations({ru: 'роль', pl: 'rola', uk: 'роль'})
         .setDescriptionLocalizations({
@@ -35,12 +34,20 @@ module.exports = {
                 .setTitle(`${local.title}: ${role.name}`)
                 .setThumbnail(role.iconURL({size: 4096}))
                 .addFields(
-                    {name:`🆔 ${local.roleid}`, value:"```fix\n"+role.id+"```", inline: true},
-                    {name:`🌈 ${local.color}`, value:"```"+"#"+role.color.toString(16)+"```", inline: false},
-                    {name:`📅 ${local.date}`, value:"```"+formatDate(role.createdAt)+"```", inline: true},
-                    {name:`👥 ${local.owners}`, value:"```"+role.members.size+"```", inline: true},
-                    {name:`👑 ${local.position}`, value:"```"+(role.guild.roles.cache.size - role.position)+"```", inline: true},
-                    {name:`🔒 ${local.permissions}`, value:"```"+role.permissions.toArray().join(", ")+"```", inline: false}
+                    {name: `🆔 ${local.roleid}`, value: "```fix\n" + role.id + "```", inline: true},
+                    {name: `🌈 ${local.color}`, value: "```" + "#" + role.color.toString(16) + "```", inline: false},
+                    {name: `📅 ${local.date}`, value: "```" + formatDate(role.createdAt) + "```", inline: true},
+                    {name: `👥 ${local.owners}`, value: "```" + role.members.size + "```", inline: true},
+                    {
+                        name: `👑 ${local.position}`,
+                        value: "```" + (role.guild.roles.cache.size - role.position) + "```",
+                        inline: true
+                    },
+                    {
+                        name: `🔒 ${local.permissions}`,
+                        value: "```" + role.permissions.toArray().join(", ") + "```",
+                        inline: false
+                    }
                 );
             interaction.reply({embeds: [embed]});
         } catch (error) {

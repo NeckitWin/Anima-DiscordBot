@@ -1,8 +1,9 @@
-const {sdcKEY} = require('../Data/config.json');
-const SDC = require("@megavasiliy007/sdc-api");
-const {EmbedBuilder} = require("discord.js");
+import SDC from "@megavasiliy007/sdc-api";
+import { EmbedBuilder } from "discord.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
-module.exports = {
+export default {
     name: 'send_stats',
     description: 'Send stats for sdc',
     execute(message) {
@@ -12,7 +13,7 @@ module.exports = {
                 .setTitle(`<a:loading:1295096250609172611> Моя статистика уже в пути!`)
                 .setColor(`#00ff97`);
 
-            const sdc = new SDC(sdcKEY);
+            const sdc = new SDC(process.env.SDC_KEY);
             sdc.setAutoPost(message.client);
 
             return message.reply({embeds: [embed]});

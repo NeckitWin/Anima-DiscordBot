@@ -1,9 +1,9 @@
-const {Events, ButtonBuilder, ActionRowBuilder, EmbedBuilder} = require(`discord.js`);
-const {removeRelation, setRelation, getRelation} = require("../Features/dbUser");
-const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Features/commandLog");
+import { Events, ButtonBuilder, ActionRowBuilder, EmbedBuilder } from 'discord.js';
+import { removeRelation, setRelation, getRelation } from '../Features/dbUser.js';
+import { getLang } from '../Data/Lang/index.js';
+import { commandLog } from '../Features/commandLog.js';
 
-module.exports = {
+export default {
     name: Events.InteractionCreate,
     async execute(interaction) {
         try {

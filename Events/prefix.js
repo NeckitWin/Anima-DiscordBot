@@ -1,8 +1,8 @@
-const {Message} = require('discord.js');
-const fs = require('fs');
-const path = require('path');
+import { Message } from 'discord.js';
+import fs from 'node:fs';
+import path from 'node:path';
 
-module.exports = {
+export default {
     name: 'messageCreate',
     async execute(message = new Message()) {
         if (!message.content.startsWith("!") || message.author.bot) return;

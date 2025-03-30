@@ -1,11 +1,10 @@
-const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
-const axios = require('axios');
-const {getLang} = require("../../Data/Lang");
-const commandName = 'weather';
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import axios from 'axios';
+import { getLang } from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('weather')
         .setNameLocalizations({ru: 'погода', pl: 'pogoda', uk: 'погода'})
         .setDescription('Shows the weather in a city')
         .setDescriptionLocalizations({

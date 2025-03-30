@@ -1,12 +1,11 @@
-const {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} = require(`discord.js`);
-const {updateServer, getServer} = require("../../Features/dbServer");
-const {getLang} = require("../../Data/Lang");
-const {clearLogCache} = require("../../Features/logCache");
-const commandName = 'logs';
+import {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} from 'discord.js';
+import {updateServer, getServer} from "../../Features/dbServer.js";
+import { getLang } from "../../Data/Lang/index.js";
+import {clearLogCache} from "../../Features/logCache.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('logs')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setNameLocalizations({ru: `логи`, pl: `logi`, uk: `логи`})
         .setDescription(`Set the channel for logs`)
@@ -51,7 +50,10 @@ module.exports = {
         const lang = await getLang(interaction);
         const local = lang.logs;
         if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
-        if (!interaction.member.permissions.has(PermissionFlagsBits.ManageServer)) return await interaction.reply({content: lang.error.commandforadmin, ephemeral: true});
+        if (!interaction.member.permissions.has(PermissionFlagsBits.ManageServer)) return await interaction.reply({
+            content: lang.error.commandforadmin,
+            ephemeral: true
+        });
 
         const guildID = guild.id;
         clearLogCache(guildID);

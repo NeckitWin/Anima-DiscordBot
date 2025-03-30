@@ -1,19 +1,19 @@
-const {
+import {
     SlashCommandBuilder,
     ModalBuilder,
     TextInputBuilder,
     TextInputStyle,
     ActionRowBuilder,
     PermissionFlagsBits,
-    PermissionsBitField, EmbedBuilder
-} = require(`discord.js`);
-const {getLang} = require("../../Data/Lang");
-const {removeGreet, getGreet} = require("../../Features/dbGreet");
-const commandName = 'welcome';
+    PermissionsBitField,
+    EmbedBuilder
+} from 'discord.js';
+import { getLang } from "../../Data/Lang/index.js";
+import {removeGreet, getGreet} from "../../Features/dbGreet.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('welcome')
         .setNameLocalizations({ru: `приветствие`, pl: `powitanie`, uk: `привітання`})
         .setDescription(`Set channel for greeting new members`)
         .setDescriptionLocalizations({
@@ -49,7 +49,7 @@ module.exports = {
                 ru: `Предпросмотр приветствия`,
                 pl: `Podgląd powitania`,
                 uk: `Попередній перегляд привітання`
-                }))
+            }))
         .addSubcommand(subcommand => subcommand
             .setName('remove')
             .setNameLocalizations({ru: `удалить`, pl: `usuń`, uk: `видалити`})

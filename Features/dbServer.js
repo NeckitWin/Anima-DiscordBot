@@ -1,4 +1,4 @@
-const {sqlPost, sqlRequest} = require(`./db`);
+import {sqlPost, sqlRequest} from "./db.js";
 
 const postNewServer = async (server_id, server_name) => {
     await sqlPost(`INSERT INTO servers (serverID, serverName) VALUES (?, ?)`, [server_id, server_name]);
@@ -26,4 +26,4 @@ const updateServer = async (server_id, column, data) => {
     await sqlPost(sql, [data, server_id]);
 }
 
-module.exports = {postNewServer, getServer, updateServer};
+export {postNewServer, getServer, updateServer};

@@ -1,7 +1,6 @@
-const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
-const {getLeaderboard} = require("../../Features/dbUser");
-const {getLang} = require("../../Data/Lang");
-const commandName = 'leaders';
+import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} from "discord.js";
+import {getLeaderboard} from "../../Features/dbUser.js";
+import { getLang } from "../../Data/Lang/index.js";
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -16,9 +15,9 @@ const nextButton = new ButtonBuilder()
 const row = new ActionRowBuilder()
     .addComponents(prevButton, nextButton)
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('leaders')
         .setNameLocalizations({ru: 'лидеры', pl: 'liderzy', uk: 'лідери'})
         .setDescription('Leaders aura')
         .setDescriptionLocalizations({
@@ -56,7 +55,11 @@ module.exports = {
 
         auraLeaders.forEach((leader, index) => {
             embed.addFields([
-                {name: `#${index + 1}. ${leader.serverName}`, value: `**${lang.aura.aura}**: ${leader.aura}`, inline: false},
+                {
+                    name: `#${index + 1}. ${leader.serverName}`,
+                    value: `**${lang.aura.aura}**: ${leader.aura}`,
+                    inline: false
+                },
             ])
         })
 

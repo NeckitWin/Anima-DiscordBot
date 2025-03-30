@@ -1,10 +1,10 @@
-const en = require('../../Data/Lang/en.json');
-const ru = require('../../Data/Lang/ru.json');
-const uk = require('../../Data/Lang/uk.json');
-const pl = require('../../Data/Lang/pl.json');
-const {getServer} = require("../../Features/dbServer");
-const index = {ru, en, uk, pl};
+import en from '../../Data/Lang/en.json' with {type: 'json'};
+import ru from '../../Data/Lang/ru.json' with {type: 'json'};
+import uk from '../../Data/Lang/uk.json' with {type: 'json'};
+import pl from '../../Data/Lang/pl.json' with {type: 'json'};
+import {getServer} from "../../Features/dbServer.js";
 
+const index = {ru, en, uk, pl};
 const langCache = new Map();
 
 const getLang = async (interaction) => {
@@ -37,4 +37,4 @@ const clearLangCache = (guildId) => {
     langCache.delete(guildId);
 };
 
-module.exports = {getLang, clearLangCache};
+export {getLang, clearLangCache};

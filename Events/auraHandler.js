@@ -1,23 +1,23 @@
-const {EmbedBuilder} = require('discord.js');
-const {updateAura} = require('../Features/dbUser');
-const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Features/commandLog");
-const {setCooldown} = require("../Features/customCooldown");
+import { EmbedBuilder } from 'discord.js';
+import { updateAura } from '../Features/dbUser.js';
+import { getLang } from '../Data/Lang/index.js';
+import { commandLog } from '../Features/commandLog.js';
+import { setCooldown } from '../Features/customCooldown.js';
 
 const PlusAura = [
-    'https://media1.tenor.com/m/b8SJCiQHnF8AAAAC/backind-back.gif',
+    'https://c.tenor.com/b8SJCiQHnF8AAAAC/tenor.gif',
     'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VlNzAwbWxvcm8xZmg1MmppeDdjNmk5NzQxN3R3ZXVqcmJzN25jayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/u2Wgd4OwsA0Ny69v20/giphy.gif',
     'https://media.tenor.com/mawaqOU-OiQAAAAM/smoke-packwatch.gif',
     "https://media.tenor.com/iwQGIHTc7vkAAAAM/dragon-ball-dragon-ball-super.gif"
 ]
 const MinusAura = [
-    'https://media1.tenor.com/m/0x5op-jCThgAAAAC/aura-diagnosis.gif',
-    'https://media1.tenor.com/m/0Ln8TCeAVPQAAAAC/backind-backind-aura.gif',
+    'https://c.tenor.com/0x5op-jCThgAAAAC/tenor.gif',
+    'https://c.tenor.com/0Ln8TCeAVPQAAAAC/tenor.gif',
     'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ24zZmZ6anphaXE2dGRhZnl2d2NpbHI4ZHFjY2RhcWFvdGZzNGk2bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4NM2GkFUSPLiVQP0c9/giphy.gif',
-    'https://media1.tenor.com/m/F-D5EhlQXdMAAAAC/nalog.gif'
+    'https://c.tenor.com/F-D5EhlQXdMAAAAC/tenor.gif'
 ]
 
-module.exports = {
+export default {
     cooldown: 60,
     name: 'messageCreate',
     async execute(message) {

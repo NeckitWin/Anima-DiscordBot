@@ -1,4 +1,4 @@
-const {sqlPost, sqlRequest} = require(`./db`);
+import {sqlPost, sqlRequest} from "./db.js";
 
 const getGreet = async (server_id) => {
     const sql = `SELECT * FROM greet WHERE serverID = ?`;
@@ -18,4 +18,4 @@ const removeGreet = async (server_id) => {
     await sqlPost(`DELETE FROM greet WHERE serverID = ?`, [server_id]);
 }
 
-module.exports = {getGreet, updateGreet, removeGreet};
+export {getGreet, updateGreet, removeGreet};

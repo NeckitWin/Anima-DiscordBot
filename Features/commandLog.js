@@ -1,5 +1,5 @@
-const blacklist = require('../Data/jsons/blacklist.json');
-const {updateUsedCommandsCount} = require("./dbStats");
+import blacklist from '../Data/jsons/blacklist.json' with {type: 'json'};
+import {updateUsedCommandsCount} from "./dbStats.js";
 
 const commandSendTime = 1000 * 60 * 20; // 20 min
 
@@ -66,4 +66,4 @@ const startCommandCountSync = async () => {
 
 setTimeout(startCommandCountSync, commandSendTime);
 
-module.exports = {commandLog, sendUsedCommandsCount};
+export {commandLog, sendUsedCommandsCount};

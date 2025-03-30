@@ -1,15 +1,16 @@
-const fs = require('fs');
-const path = require('path');
-const {REST} = require('@discordjs/rest');
-const {Routes} = require('discord-api-types/v9');
-const {token, clientId} = require('../../Data/config.json');
-const {SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
-const {getLang} = require("../../Data/Lang");
-const commandName = 'reload';
+import fs from 'node:fs';
+import path, {dirname} from 'node:path';
+import url, {fileURLToPath} from 'node:url';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
+import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
+import { getLang } from "../../Data/Lang/index.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('reload')
         .setNameLocalizations({ru: 'перезагрузить', pl: 'przeładuj', uk: 'перезавантажити'})
         .setDescription('Owner command, you cant use it')
         .setDescriptionLocalizations({
@@ -20,7 +21,7 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
         try {
-            allowedUserIds = ['429562004399980546'];
+            const allowedUserIds = ['429562004399980546'];
             const lang = await getLang(interaction);
             const local = lang.error;
 
@@ -29,7 +30,9 @@ module.exports = {
             }
 
             const commands = [];
-            const foldersPath = path.join(__dirname, '../');
+
+            const __dirname = dirname(fileURLToPath(import.meta.url));
+            const foldersPath = path.join(__dirname, '../../Commands');
             const commandFolders = fs.readdirSync(foldersPath);
 
             for (const folder of commandFolders) {
@@ -37,23 +40,25 @@ module.exports = {
                 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
                 for (const file of commandFiles) {
-                    const command = require(path.join(commandsPath, file));
-                    if (command.data) {
-                        commands.push(command.data.toJSON());
+                    const filePath = path.join(commandsPath, file);
+                    const fileUrl = url.pathToFileURL(filePath);
+                    const command = await import(fileUrl);
+                    if (command.default.data && typeof command.default.data.toJSON === 'function') {
+                        commands.push(command.default.data.toJSON());
                     } else {
-                        console.warn(`Command ${file} does not have a data property`);
+                        console.warn(`File ${file} does not export a command with data and a toJSON method.`);
                     }
                 }
             }
 
-            const rest = new REST({version: '9'}).setToken(token);
+            const rest = new REST({version: '9'}).setToken(process.env.TOKEN);
 
             (async () => {
                 try {
                     console.log('Started refreshing application (/) commands.');
 
                     await rest.put(
-                        Routes.applicationCommands(clientId),
+                        Routes.applicationCommands(process.env.CLIENT_ID),
                         {body: commands},
                     );
 

@@ -1,8 +1,8 @@
-const {Events, EmbedBuilder} = require(`discord.js`);
-const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Features/commandLog");
+import { Events, EmbedBuilder } from 'discord.js';
+import { getLang } from '../Data/Lang/index.js';
+import { commandLog } from '../Features/commandLog.js';
 
-module.exports = {
+export default {
     name: Events.InteractionCreate,
     async execute(interaction) {
         try {

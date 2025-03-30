@@ -1,4 +1,4 @@
-const {getServer} = require("./dbServer");
+import {getServer} from "./dbServer.js";
 const logCache = new Map();
 
 const ifServerHasLog = async (guildId, guildName) => {
@@ -20,4 +20,4 @@ const clearLogCache = (guildId) => {
     logCache.delete(guildId);
 }
 
-module.exports = {ifServerHasLog, clearLogCache};
+export {ifServerHasLog, clearLogCache};

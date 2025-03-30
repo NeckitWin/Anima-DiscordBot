@@ -1,10 +1,9 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const axios = require('axios');
-const commandName = 'translate';
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import axios from 'axios';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('translate')
         .setNameLocalizations({ru: 'перевести', pl: 'przetłumacz', uk: 'перекласти'})
         .setDescription('Translate text')
         .setDescriptionLocalizations({ru: 'Перевести текст', pl: 'Przetłumacz tekst', uk: 'Перекласти текст'})

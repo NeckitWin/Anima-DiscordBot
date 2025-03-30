@@ -1,59 +1,11 @@
-const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
-const {getUserServer, getRelation} = require('../../Features/dbUser')
-const {formatDate} = require("../../Features/utility");
-const {getLang} = require("../../Data/Lang");
-const commandName = 'user';
+import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
+import {getUserServer, getRelation} from '../../Features/dbUser.js';
+import {formatDate, getStatusEmoji, getActivityType, getBadgeEmoji} from "../../Features/utility.js";
+import {getLang} from "../../Data/Lang/index.js";
 
-const getActivityType = (type) => {
-    switch (type) {
-        case 0:
-            return 'play';
-        case 1:
-            return 'stream';
-        case 2:
-            return 'listen';
-        case 3:
-            return 'watch';
-        case 4:
-            return 'custom';
-        case 5:
-            return 'compete';
-        default:
-            return false;
-    }
-}
-
-const getStatusEmoji = (status) => {
-    switch (status) {
-        case 'online':
-            return '<:online:1294745413085302925>';
-        case 'idle':
-            return '<:idle:1294745429451473048>';
-        case 'dnd':
-            return '<:dnd:1294745439567876250>';
-        case 'offline':
-            return '<:invisible:1294745501941501952>';
-        default:
-            return '<:invisible:1294745501941501952>';
-    }
-}
-
-const getBadgeEmoji = (badge) => {
-    switch (badge) {
-        case `HypeSquadOnlineHouse1`:
-            return `<:badge_bravery:1295007106813919324>`;
-        case `HypeSquadOnlineHouse2`:
-            return `<:badge_brillance:1295007063281242173>`;
-        case `HypeSquadOnlineHouse3`:
-            return `<:badge_balance:1295007143807811614>`;
-        case `ActiveDeveloper`:
-            return `<:badge_active:1295006989025542205>`;
-    }
-}
-
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('user')
         .setNameLocalizations({ru: 'пользователь', pl: 'użytkownik', uk: 'користувач'})
         .setDescription('Shows information about a user or about a user that was mentioned')
         .setDescriptionLocalizations({
@@ -88,7 +40,7 @@ module.exports = {
             const userColor = member.displayColor;
             const guildID = interaction.guild.id;
             const highestRole = member.roles.highest;
-            const rolesCount = member.roles.cache.size-1;
+            const rolesCount = member.roles.cache.size - 1;
             const status = member.presence?.status || 'offline';
             const activityType = getActivityType(member.presence?.activities[0]?.type);
             const activityName = member.presence?.activities[0]?.name;
@@ -112,17 +64,17 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle(`${local.title} — ${user.displayName}`)
                 .setColor(userColor)
-                .setDescription(`<:user:1297197580903645319> **${local.username}** \`${user.username}\` \n`+
+                .setDescription(`<:user:1297197580903645319> **${local.username}** \`${user.username}\` \n` +
                     `<:date:1297196424882294796> **${local.reg}**: \`${formatDate(user.createdAt)}\`\n` +
                     `<:date:1297196424882294796> **${local.entry}**: \`${formatDate(member.joinedAt)}\`\n` +
                     `<:moon:1297194475780575242> **${local.status}**: ${getStatusEmoji(status)} ${local.statusName[status]}\n` +
                     (bage ? `<:badge:1297195546041385042> **${local.badge}**: ${bage}\n` : ``) +
-                    (activityType ? `<:activity:1297194463776604233> **${local.active}**: ${activityType === `custom` ? (activityState ?? `\`❔\`\n` ) : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
+                    (activityType ? `<:activity:1297194463776604233> **${local.active}**: ${activityType === `custom` ? (activityState ?? `\`❔\`\n`) : (local.activity[activityType] + ` ` + activityName)}\n` : ` `) +
                     `<:Roles:1297191708848689166> **${local.role}[${rolesCount}]**: ${highestRole}\n` +
                     (relation ? `<:hearts:1300282044047429682> ${local.married} <@${relationUser}>\n` : ``) +
                     `<:shard:1296969847690760234> **${local.shard}**: ${shards}\n` +
                     `<:aura:1297189989498753076> **${local.aura}**: ${aura}`
-                    )
+                )
                 .setFooter({text: `${local.user_id}: ${userID}`});
             if (avatar) embed.setThumbnail(avatar);
             if (banner) embed.setImage(banner);

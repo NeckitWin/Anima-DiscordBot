@@ -1,17 +1,16 @@
-const {
+import {
     SlashCommandBuilder,
     TextInputStyle,
     ModalBuilder,
     ActionRowBuilder,
     TextInputBuilder,
     PermissionFlagsBits
-} = require(`discord.js`);
-const {getLang} = require("../../Data/Lang");
-const commandName = 'post';
+} from 'discord.js';
+import { getLang } from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('post')
         .setNameLocalizations({ru: `пост`, pl: `post`, uk: `пост`})
         .setDescription(`Post a embed message to a channel`)
         .setDescriptionLocalizations({
@@ -34,7 +33,10 @@ module.exports = {
         try {
             const lang = await getLang(interaction);
             const local = lang.post;
-            if (interaction.guild && !interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({content: lang.error.commandformanageserver, ephemeral: true});
+            if (interaction.guild && !interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({
+                content: lang.error.commandformanageserver,
+                ephemeral: true
+            });
             const target = interaction.options.getUser(`author`);
             const modal = new ModalBuilder()
                 .setCustomId(`postModal`)

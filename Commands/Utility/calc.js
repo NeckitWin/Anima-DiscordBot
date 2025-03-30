@@ -1,10 +1,9 @@
-const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
-const {getLang} = require("../../Data/Lang");
-const commandName = 'calc';
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import { getLang } from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('calc')
         .setDescription('Calculate the expression')
         .setNameLocalizations({ru: 'калькулятор', pl: 'kalkulator', uk: 'калькулятор'})
         .setDescriptionLocalizations({

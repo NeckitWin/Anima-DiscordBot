@@ -1,10 +1,9 @@
-const {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder} = require('discord.js');
-const {getLang} = require("../../Data/Lang");
-const commandName = 'clear';
+import { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder } from 'discord.js';
+import { getLang } from "../../Data/Lang/index.js";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('clear')
         .setNameLocalizations({ru: 'очистить', pl: 'wyczyść', uk: 'очистити'})
         .setDescription('Clears chat for specified amount of messages')
         .setDescriptionLocalizations({

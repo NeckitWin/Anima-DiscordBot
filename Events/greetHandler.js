@@ -1,8 +1,8 @@
-const {Events, EmbedBuilder} = require(`discord.js`);
-const {getGreet} = require("../Features/dbGreet");
-const {commandLog} = require("../Features/commandLog");
+import { Events, EmbedBuilder } from 'discord.js';
+import { getGreet } from '../Features/dbGreet.js';
+import { commandLog } from '../Features/commandLog.js';
 
-module.exports = {
+export default {
     name: Events.GuildMemberAdd,
     async execute(member) {
         try {

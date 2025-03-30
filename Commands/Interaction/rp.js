@@ -1,14 +1,13 @@
-const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
-const data = require("../../Data/jsons/reactions.json")
-const {getLang} = require("../../Data/Lang");
-const commandName = 'rp';
+import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import data from "../../Data/jsons/reactions.json" with {type: 'json'};
+import { getLang } from "../../Data/Lang/index.js";
 
 const maleEmoji = "♂️";
 const femaleEmoji = "♀️";
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('rp')
         .setNameLocalizations({ru: "рп", pl: "rp", uk: "рп"})
         .setDescription("Interaction with someone")
         .setDescriptionLocalizations({ru: "взаимодействие с кем-то", pl: "interakcja z kimś", uk: "взаємодія з кимось"})

@@ -1,6 +1,6 @@
-const {SlashCommandBuilder, EmbedBuilder} = require(`discord.js`);
-const {getLang} = require("../../Data/Lang");
-const commandName = 'ben';
+import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
+import { getLang } from "../../Data/Lang/index.js";
+
 const answers = [
     {"value": "yes", "gif": "https://c.tenor.com/nIsnQBxoRjkAAAAC/ben-yes.gif", "color": "#007a00"},
     {"value": "no", "gif": "https://c.tenor.com/F1bdsKaYe2gAAAAC/ben-no.gif", "color": "#ca0000"},
@@ -8,9 +8,9 @@ const answers = [
     {"value": "haha", "gif": "https://c.tenor.com/agrQMQjQTzgAAAAd/talking-ben-laugh.gif", "color": "#ffcc7f"}
 ]
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('ben')
         .setDescription(`Ask a question and get an answer`)
         .setNameLocalizations({ru: `бен`, pl: `ben`, uk: `бен`})
         .setDescriptionLocalizations({

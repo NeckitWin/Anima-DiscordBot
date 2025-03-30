@@ -1,13 +1,12 @@
-const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require(`discord.js`);
-const anime = require(`../../Data/jsons/anime.json`);
-const {getLang} = require("../../Data/Lang");
-const commandName = 'anime';
+import { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } from "discord.js";
+import anime from "../../Data/jsons/anime.json" with {type: 'json'};
+import { getLang } from "../../Data/Lang/index.js";
 
 const timers = new Map();
 
 const getRandomAnime = () => { return anime[Math.floor(Math.random() * anime.length)] };
 
-const clearTimer = (interactionId) => {
+export const clearTimer = (interactionId) => {
     const timeoutID = timers.get(interactionId);
     if (timeoutID) {
         clearTimeout(timeoutID);
@@ -15,9 +14,9 @@ const clearTimer = (interactionId) => {
     }
 }
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
-        .setName(commandName)
+        .setName('anime')
         .setDescription(`Guess the anime by the picture`)
         .setNameLocalizations({ru: `аниме`, pl: `anime`, uk: `аниме`})
         .setDescriptionLocalizations({

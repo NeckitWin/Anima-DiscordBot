@@ -1,7 +1,7 @@
-const {EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events} = require("discord.js");
-const {getLeaderboard} = require('../Features/dbUser');
-const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Features/commandLog");
+import { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events } from 'discord.js';
+import { getLeaderboard } from '../Features/dbUser.js';
+import { getLang } from '../Data/Lang/index.js';
+import { commandLog } from '../Features/commandLog.js';
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -29,7 +29,7 @@ const leadersFiltr = (embed, result, prevNumber, nextNumber) => {
     });
 };
 
-module.exports = {
+export default {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isButton()) return;

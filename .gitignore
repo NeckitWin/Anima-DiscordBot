@@ -2,3 +2,4 @@ Data/config.json
 node_modules
 .idea
 Data/database.json
+.env

@@ -1,10 +1,14 @@
-const fs = require('fs');
-const path = require('path');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const { token, clientId } = require('./Data/config.json');
+import fs from 'node:fs';
+import path, {dirname} from 'node:path';
+import url, {fileURLToPath} from 'node:url';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const commands = [];
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const foldersPath = path.join(__dirname, 'Commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
@@ -13,9 +17,11 @@ for (const folder of commandFolders) {
     const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
     for (const file of commandFiles) {
-        const command = require(path.join(commandsPath, file));
-        if (command.data && typeof command.data.toJSON === 'function') {
-            commands.push(command.data.toJSON());
+        const filePath = path.join(commandsPath, file);
+        const fileUrl = url.pathToFileURL(filePath);
+        const command = await import(fileUrl);
+        if (command.default.data && typeof command.default.data.toJSON === 'function') {
+            commands.push(command.default.data.toJSON());
         } else {
             console.warn(`File ${file} does not export a command with data and a toJSON method.`);
         }
