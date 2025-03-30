@@ -1,5 +1,5 @@
 import { EmbedBuilder } from "discord.js";
-import { sendUsedCommandsCount } from "../Features/commandLog";
+import { sendUsedCommandsCount } from "../Features/commandLog.js";
 
 export default {
     name: 'reboot',

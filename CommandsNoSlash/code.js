@@ -1,6 +1,7 @@
 import { AttachmentBuilder } from 'discord.js';
 import fs from 'node:fs';
 import path from 'node:path';
+import url from 'node:url';
 
 export default {
     name: 'code',
@@ -13,6 +14,7 @@ export default {
         let args = message.content.slice(5).trim().split(/ +/);
         let name = args[0];
 
+        const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
         const directoryPath = path.join(__dirname, '../');
 
         async function getFiles(dir) {
