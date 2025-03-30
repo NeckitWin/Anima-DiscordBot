@@ -1,7 +1,7 @@
 const {EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events} = require("discord.js");
-const {getLeaderboard} = require('../Data/funcs/dbUser');
+const {getLeaderboard} = require('../Features/dbUser');
 const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Data/funcs/commandLog");
+const {commandLog} = require("../Features/commandLog");
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")

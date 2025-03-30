@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} = require(`discord.js`);
-const {getRelation} = require("../../Data/funcs/dbUser");
+const {getRelation} = require("../../Features/dbUser");
 const {getLang} = require("../../Data/Lang");
 const commandName = 'marry';
 

@@ -1,4 +1,4 @@
-const blacklist = require('../jsons/blacklist.json');
+const blacklist = require('../Data/jsons/blacklist.json');
 const {updateUsedCommandsCount} = require("./dbStats");
 
 const commandSendTime = 1000 * 60 * 20; // 20 min

@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, EmbedBuilder, ChannelType} = require("discord.js");
-const {formatDate} = require("../../Data/utility");
+const {formatDate} = require("../../Features/utility");
 const {getLang} = require("../../Data/Lang");
 const commandName = 'server';
 

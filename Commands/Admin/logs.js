@@ -1,7 +1,7 @@
 const {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} = require(`discord.js`);
-const {updateServer, getServer} = require("../../Data/funcs/dbServer");
+const {updateServer, getServer} = require("../../Features/dbServer");
 const {getLang} = require("../../Data/Lang");
-const {clearLogCache} = require("../../Data/funcs/logCache");
+const {clearLogCache} = require("../../Features/logCache");
 const commandName = 'logs';
 
 module.exports = {

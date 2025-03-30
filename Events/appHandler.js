@@ -1,6 +1,6 @@
 const {Events, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle} = require(`discord.js`);
 const fetch = require(`node-fetch2`);
-const {commandLog} = require("../Data/funcs/commandLog");
+const {commandLog} = require("../Features/commandLog");
 
 const getStickerFormat = (format) => {
     switch (format) {

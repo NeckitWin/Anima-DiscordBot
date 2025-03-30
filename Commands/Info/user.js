@@ -1,6 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
-const {getUserServer, getRelation} = require('../../Data/funcs/dbUser')
-const {formatDate} = require("../../Data/utility");
+const {getUserServer, getRelation} = require('../../Features/dbUser')
+const {formatDate} = require("../../Features/utility");
 const {getLang} = require("../../Data/Lang");
 const commandName = 'user';
 

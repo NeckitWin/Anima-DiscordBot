@@ -1,7 +1,7 @@
 const {Events} = require(`discord.js`);
 const {getLang} = require("../Data/Lang");
-const {updateGreet} = require("../Data/funcs/dbGreet");
-const {commandLog} = require("../Data/funcs/commandLog");
+const {updateGreet} = require("../Features/dbGreet");
+const {commandLog} = require("../Features/commandLog");
 
 module.exports = {
     name: Events.InteractionCreate,

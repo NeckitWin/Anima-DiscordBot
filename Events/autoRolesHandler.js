@@ -1,6 +1,6 @@
 const {Events} = require('discord.js');
-const {getAutoRoles, removeAutoRole} = require("../Data/funcs/dbAutoRoles");
-const {commandLog} = require("../Data/funcs/commandLog");
+const {getAutoRoles, removeAutoRole} = require("../Features/dbAutoRoles");
+const {commandLog} = require("../Features/commandLog");
 
 module.exports = {
     name: Events.GuildMemberAdd,

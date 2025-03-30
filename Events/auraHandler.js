@@ -1,8 +1,8 @@
 const {EmbedBuilder} = require('discord.js');
-const {updateAura} = require('../Data/funcs/dbUser');
+const {updateAura} = require('../Features/dbUser');
 const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Data/funcs/commandLog");
-const {setCooldown} = require("../Data/funcs/customCooldown");
+const {commandLog} = require("../Features/commandLog");
+const {setCooldown} = require("../Features/customCooldown");
 
 const PlusAura = [
     'https://media1.tenor.com/m/b8SJCiQHnF8AAAAC/backind-back.gif',

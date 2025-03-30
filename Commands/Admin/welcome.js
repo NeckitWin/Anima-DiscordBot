@@ -8,7 +8,7 @@ const {
     PermissionsBitField, EmbedBuilder
 } = require(`discord.js`);
 const {getLang} = require("../../Data/Lang");
-const {removeGreet, getGreet} = require("../../Data/funcs/dbGreet");
+const {removeGreet, getGreet} = require("../../Features/dbGreet");
 const commandName = 'welcome';
 
 module.exports = {

@@ -1,6 +1,6 @@
 const {Events, EmbedBuilder} = require(`discord.js`);
 const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Data/funcs/commandLog");
+const {commandLog} = require("../Features/commandLog");
 
 module.exports = {
     name: Events.InteractionCreate,

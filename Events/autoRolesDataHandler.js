@@ -3,8 +3,8 @@ const {
     ButtonBuilder
 } = require(`discord.js`);
 const {getLang} = require("../Data/Lang");
-const {commandLog} = require("../Data/funcs/commandLog");
-const {postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles} = require("../Data/funcs/dbAutoRoles");
+const {commandLog} = require("../Features/commandLog");
+const {postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles} = require("../Features/dbAutoRoles");
 
 module.exports = {
     name: Events.InteractionCreate,

@@ -1,8 +1,8 @@
 const {Events, EmbedBuilder} = require("discord.js");
 const {getLang} = require("../Data/Lang");
-const {getTypeChannel} = require("../Data/funcs/getTypeChannel");
-const {ifServerHasLog} = require("../Data/funcs/logCache");
-const {formatDate} = require("../Data/utility");
+const {getTypeChannel} = require("../Features/getTypeChannel");
+const {ifServerHasLog} = require("../Features/logCache");
+const {formatDate} = require("../Features/utility");
 
 const checkServer = async (message) => {
     try {

@@ -1,4 +1,4 @@
-const {Events, EmbedBuilder, PermissionFlagsBits} = require('discord.js')
+const {Events, EmbedBuilder} = require('discord.js')
 
 module.exports = [
     {

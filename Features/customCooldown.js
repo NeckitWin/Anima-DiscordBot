@@ -1,4 +1,4 @@
-const {getLang} = require("../Lang");
+const {getLang} = require("../Data/Lang");
 const timeout = new Map();
 
 const setCooldown = async (commandEvent, message, time) => {

@@ -1,6 +1,6 @@
 const {Events, EmbedBuilder} = require(`discord.js`);
-const {getGreet} = require("../Data/funcs/dbGreet");
-const {commandLog} = require("../Data/funcs/commandLog");
+const {getGreet} = require("../Features/dbGreet");
+const {commandLog} = require("../Features/commandLog");
 
 module.exports = {
     name: Events.GuildMemberAdd,

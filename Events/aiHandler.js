@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const {GoogleGenerativeAI} = require("@google/generative-ai");
 const {geminiApiKey} = require('../Data/config.json');
-const {commandLog} = require("../Data/funcs/commandLog");
+const {commandLog} = require("../Features/commandLog");
 const {getLang} = require("../Data/Lang");
 
 const messageHistory = {};
