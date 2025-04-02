@@ -36,7 +36,7 @@ export default {
             const user = await getUser.fetch();
             const userID = user.id;
             const member = await interaction.guild.members.fetch(userID);
-            if (!member) return await interaction.reply({content: local.notFound, ephemeral: true});
+            if (!member) return await interaction.reply({content: lang.error.usernotfound, ephemeral: true});
             const userColor = member.displayColor;
             const guildID = interaction.guild.id;
             const highestRole = member.roles.highest;
@@ -83,7 +83,7 @@ export default {
 
         } catch (error) {
             console.error(error);
-            await interaction.reply({content: local.error, ephemeral: true});
+            await interaction.reply({content: lang.error.usernotfound, ephemeral: true});
         }
     },
 };

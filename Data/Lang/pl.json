@@ -17,6 +17,7 @@
     "botdontpermban": "Nie mam uprawnień do banowania członków",
     "botdontpermmute": "Nie mam uprawnień do wyciszania członków",
     "botdontpermclear": "Nie mam uprawnień do usuwania wiadomości",
+    "botdontpermviewchannel": "Nie mam uprawnień do przeglądania kanału",
     "botdontpermsendmessage": "Nie mam uprawnień do wysyłania wiadomości na tym kanale",
     "dontperm": "Nie masz uprawnień do korzystania z tego",
     "notyourcommand": "Komenda nie została wywołana przez ciebie",

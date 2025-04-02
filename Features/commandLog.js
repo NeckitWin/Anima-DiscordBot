@@ -31,10 +31,20 @@ const commandCounter = (() => {
     };
 })();
 
+const data = {
+    usedCommands: commandCounter.getCount(),
+    servers: 0,
+    users: 0
+}
+
 const commandLog = (name, interaction, type = 0) => {
     const {user, author, guild} = interaction;
     const stateUser = user || author;
     const typeAction = getType(type);
+    const servers = interaction.client.guilds.cache.size;
+    const users = interaction.client.users.cache.size;
+    data.servers = servers;
+    data.users = users;
     if (stateUser && isBlacklisted(stateUser.id)) return false;
     if (guild) {
         if (isBlacklisted(guild.id)) return false;
@@ -49,7 +59,7 @@ const sendUsedCommandsCount = async () => {
     try {
         const count = commandCounter.getCount();
         if (count === 0) return;
-        if (await updateUsedCommandsCount(count)) {
+        if (await updateUsedCommandsCount(data)) {
             console.log(`Used commands count ${count} sent to DB`);
             commandCounter.reset();
         } else {

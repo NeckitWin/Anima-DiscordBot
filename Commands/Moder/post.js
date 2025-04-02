@@ -6,7 +6,7 @@ import {
     TextInputBuilder,
     PermissionFlagsBits
 } from 'discord.js';
-import { getLang } from "../../Data/Lang/index.js";
+import {getLang} from "../../Data/Lang/index.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -37,6 +37,23 @@ export default {
                 content: lang.error.commandformanageserver,
                 ephemeral: true
             });
+            const botMember = await interaction.guild.members.fetchMe();
+            const channel = interaction.guild.channels.cache.get(interaction.channelId);
+
+            if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.ViewChannel)) {
+                return await interaction.reply({
+                    content: lang.error.botdontpermviewchannel,
+                    ephemeral: true
+                });
+            }
+
+            if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.SendMessages)) {
+                return await interaction.reply({
+                    content: lang.error.botdontpermsendmessage,
+                    ephemeral: true
+                });
+            }
+
             const target = interaction.options.getUser(`author`);
             const modal = new ModalBuilder()
                 .setCustomId(`postModal`)
@@ -87,6 +104,7 @@ export default {
 
             await interaction.showModal(modal);
             await interaction.followUp({content: local.fill, ephemeral: true});
+
         } catch (err) {
             console.error(err);
         }

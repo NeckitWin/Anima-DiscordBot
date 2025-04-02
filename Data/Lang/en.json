@@ -17,6 +17,7 @@
     "botdontpermban": "I don't have permission to ban members",
     "botdontpermmute": "I don't have permission to mute members",
     "botdontpermclear": "I don't have permission to delete messages",
+    "botdontpermviewchannel":  "I don't have permission to view the channel",
     "botdontpermsendmessage": "I don't have permission to send messages in this channel",
     "dontperm": "You do not have permission to use this",
     "notyourcommand": "The command was not invoked by you",
