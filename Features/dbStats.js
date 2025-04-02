@@ -1,7 +1,7 @@
 import {sqlPost} from "./db.js";
 
 const updateUsedCommandsCount = async (data) => {
-    const sql = `UPDATE stats SET usedCommandsCount = usedCommandsCount + ?`;
+    const sql = `UPDATE stats SET usedCommandsCount = usedCommandsCount + ?, servers = ?, users = ?`;
     try {
         await sqlPost(sql, [data.usedCommands, data.servers, data.users]);
         return true;

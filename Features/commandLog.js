@@ -42,7 +42,7 @@ const commandLog = (name, interaction, type = 0) => {
     const stateUser = user || author;
     const typeAction = getType(type);
     const servers = interaction.client.guilds.cache.size;
-    const users = interaction.client.users.cache.size;
+    const users = interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
     data.servers = servers;
     data.users = users;
     if (stateUser && isBlacklisted(stateUser.id)) return false;
