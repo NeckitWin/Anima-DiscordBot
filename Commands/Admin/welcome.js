@@ -79,6 +79,11 @@ export default {
             if (subcommand === `set`) {
                 const channel = interaction.options.getChannel(`channel`);
                 if (channel.type !== 0) return interaction.reply({content: local.nottext, ephemeral: true});
+                if (!channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ViewChannel)) return await interaction.reply({
+                    content: lang.error.botdontpermviewchannel,
+                    ephemeral: true
+                });
+
                 if (!channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.SendMessages)) return await interaction.reply({
                     content: lang.error.botdontpermsendmessage,
                     ephemeral: true

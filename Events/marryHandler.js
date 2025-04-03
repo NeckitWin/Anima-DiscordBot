@@ -30,7 +30,7 @@ export default {
 
             if (DivorceActions.includes(customId)) {
                 const partner = getAuthorMarried[0].userID1 === user.id ? getAuthorMarried[0].userID2 : getAuthorMarried[0].userID1;
-                const partnerMember = `<@${partner}>`;
+                const partnerMember = partner ? `<@${partner}>` : lang.error.usernotfound;
                 if (user.id !== authorInteraction.id) {
                     embedError.setTitle(lang.error.notyourcommand);
                     return interaction.reply({embeds: [embedError], ephemeral: true});

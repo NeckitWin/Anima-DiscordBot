@@ -8,7 +8,8 @@ const PlusAura = [
     'https://c.tenor.com/b8SJCiQHnF8AAAAC/tenor.gif',
     'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VlNzAwbWxvcm8xZmg1MmppeDdjNmk5NzQxN3R3ZXVqcmJzN25jayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/u2Wgd4OwsA0Ny69v20/giphy.gif',
     'https://media.tenor.com/mawaqOU-OiQAAAAM/smoke-packwatch.gif',
-    "https://media.tenor.com/iwQGIHTc7vkAAAAM/dragon-ball-dragon-ball-super.gif"
+    "https://media.tenor.com/iwQGIHTc7vkAAAAM/dragon-ball-dragon-ball-super.gif",
+    "https://c.tenor.com/V-hBwZY0QQ0AAAAd/tenor.gif"
 ]
 const MinusAura = [
     'https://c.tenor.com/0x5op-jCThgAAAAC/tenor.gif',

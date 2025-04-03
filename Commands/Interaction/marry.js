@@ -82,16 +82,20 @@ export default {
                 }
                 const relation = checkRelation[0];
                 const getRelationUser = interaction.user.id === relation.userID1 ? relation.userID2 : relation.userID1;
-                const relationUser = await interaction.guild.members.fetch(getRelationUser);
+                const relationUser = await interaction.guild.members.fetch(getRelationUser).catch(() => lang.error.usernotfound);
+
                 const relationDate = Math.floor(new Date(relation.date).getTime() / 1000);
                 const embed = new EmbedBuilder()
                     .setAuthor({iconURL: `https://cdn-icons-png.flaticon.com/512/852/852536.png`, name: local.marry})
-                    .setDescription(`<:hearts:1300282044047429682> ${local.yourLove}: **${relationUser.user.displayName}** (${relationUser})\n` +
+                    .setDescription(`<:hearts:1300282044047429682> ${local.yourLove}: **${relationUser.user ? relationUser.user.displayName : relationUser}** (${relationUser})\n` +
                         `<:date:1297196424882294796> ${local.date}: **<t:${relationDate}:R>**`)
                     .setColor(`#ffc5d9`)
-                    .setThumbnail(interaction.user.displayAvatarURL({dynamic: true}))
                     .setFooter({iconURL: interaction.guild.iconURL({dynamic: true}), text: interaction.guild.name})
                     .setTimestamp(new Date());
+
+                if (relationUser.user) {
+                    embed.setThumbnail(interaction.user.displayAvatarURL({dynamic: true}))
+                }
 
                 const buttonDivorce = new ButtonBuilder()
                     .setLabel(local.divorce)
