@@ -66,6 +66,22 @@ export default {
 
         if (subcommand === `set`) {
             const channel = options.getChannel(`channel`);
+
+            const botMember = await interaction.guild.members.fetchMe();
+            if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.ViewChannel)) {
+                return await interaction.reply({
+                    content: lang.error.botdontpermviewchannel,
+                    ephemeral: true
+                });
+            }
+
+            if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.SendMessages)) {
+                return await interaction.reply({
+                    content: lang.error.botdontpermsendmessage,
+                    ephemeral: true
+                });
+            }
+
             const channelID = channel.id;
             if (logs === channelID) {
                 embed.setDescription(local.same).setColor(`#ffd600`);
