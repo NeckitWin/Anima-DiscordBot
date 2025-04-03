@@ -1,5 +1,5 @@
-import { EmbedBuilder } from "discord.js";
-import { sendUsedCommandsCount } from "../Features/commandLog.js";
+import {EmbedBuilder} from "discord.js";
+import {updateServerCount} from "../Features/commandLog.js";
 
 export default {
     name: 'reboot',
@@ -11,8 +11,8 @@ export default {
             .setTitle(`<a:loading:1295096250609172611> Рестарчусь...`)
             .setColor(`#00ff97`);
 
-        await sendUsedCommandsCount();
-        await message.reply({embeds: [embed]}).then(()=>{
+        await updateServerCount();
+        await message.reply({embeds: [embed]}).then(() => {
             console.log('Stop system work!')
             process.exit(0);
         })

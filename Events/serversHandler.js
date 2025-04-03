@@ -1,5 +1,6 @@
 import {Events, EmbedBuilder} from 'discord.js';
 import {Webhooks} from "../Config/Webhooks.js";
+import {updateServerCount} from "../Features/commandLog.js";
 
 export default [
     {
@@ -23,6 +24,7 @@ export default [
                         {name: `Owner ID`, value: `\`\`\`fix\n${owner.id}\`\`\``, inline: true}
                     );
 
+                await updateServerCount();
                 await Webhooks.webhookServerHandler.send({embeds: [embed]})
             } catch (e) {
                 console.error(e);
@@ -44,6 +46,8 @@ export default [
                         {name: `Guild Name:`, value: `\`\`\`fix\n${guild.name}\`\`\``, inline: false},
                         {name: `User count`, value: `\`\`\`fix\n${memberCount}\`\`\``, inline: true}
                     );
+
+                await updateServerCount();
                 await Webhooks.webhookServerHandler.send({embeds: [embed]})
             } catch (e) {
                 console.error(e);

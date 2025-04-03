@@ -25,8 +25,12 @@ const commandCounter = (() => {
     let count = 0;
 
     return {
-        increment: () => { count++; },
-        reset: () => { count = 0; },
+        increment: () => {
+            count++;
+        },
+        reset: () => {
+            count = 0;
+        },
         getCount: () => count
     };
 })();
@@ -69,6 +73,19 @@ const sendUsedCommandsCount = async () => {
         console.error('Error updating used commands count:', err);
     }
 }
+
+const updateServerCount = async () => {
+    try {
+        if (await updateUsedCommandsCount(data)) {
+            commandCounter.reset();
+        } else {
+            console.error(`Update server count not sent to DB`);
+        }
+    } catch (err) {
+        console.error('Error updating used commands count:', err);
+    }
+}
+
 const startCommandCountSync = async () => {
     await sendUsedCommandsCount();
     setTimeout(startCommandCountSync, commandSendTime);
@@ -76,4 +93,4 @@ const startCommandCountSync = async () => {
 
 setTimeout(startCommandCountSync, commandSendTime);
 
-export {commandLog, sendUsedCommandsCount};
+export {commandLog, sendUsedCommandsCount, updateServerCount};
