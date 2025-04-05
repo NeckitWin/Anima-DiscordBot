@@ -7,7 +7,7 @@ export default [
         name: Events.GuildCreate,
         async execute(guild) {
             try {
-                if (!guild.name) return console.log(guild);
+                if (!guild.name) return;
                 const getOwner = await guild.members.fetch(guild.ownerId);
                 const owner = getOwner.user;
                 const memberCount = guild.memberCount;
@@ -35,7 +35,7 @@ export default [
         name: Events.GuildDelete,
         async execute(guild) {
             try {
-                if (!guild.name) return console.log(guild);
+                if (!guild.name) return;
                 const memberCount = guild.memberCount;
 
                 const embed = new EmbedBuilder()
