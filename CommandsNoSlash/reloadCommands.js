@@ -12,12 +12,12 @@ export default {
     async execute(message) {
         try {
             const allowedUserIds = ['429562004399980546'];
-            if (!allowedUserIds.includes(message.user.id)) return;
+            if (!allowedUserIds.includes(message.author.id)) return;
 
             const commands = [];
 
             const __dirname = dirname(fileURLToPath(import.meta.url));
-            const foldersPath = path.join(__dirname, '../../Commands');
+            const foldersPath = path.join(__dirname, '../Commands');
             const commandFolders = fs.readdirSync(foldersPath);
 
             for (const folder of commandFolders) {
@@ -52,7 +52,7 @@ export default {
                     console.error(error);
                 }
             })();
-            await interaction.reply({content: 'Commands successfully registered!✅', ephemeral: true});
+            await message.reply({content: 'Commands successfully registered!✅', ephemeral: true});
         } catch (err) {
             console.error(err);
         }
