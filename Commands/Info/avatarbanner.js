@@ -1,5 +1,6 @@
 import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -56,7 +57,7 @@ export default {
             }
             interaction.reply({embeds: embeds});
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
             interaction.reply({content: lang.user.error, ephemeral: true});
         }
     }

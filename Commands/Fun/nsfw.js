@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -74,8 +75,8 @@ export default {
             }
 
             await Promise.all(sendResultsPromises);
-        } catch (e) {
-            await interaction.followUp({embeds: [embedError], ephemeral: true});
+        } catch (err) {
+            await errorLog(err);
         }
     }
 

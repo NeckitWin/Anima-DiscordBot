@@ -1,7 +1,8 @@
 import {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} from 'discord.js';
 import {updateServer, getServer} from "../../Repo/dbServer.js";
-import { getLang } from "../../Utils/lang.js";
+import {getLang} from "../../Utils/lang.js";
 import {clearLogCache} from "../../Utils/logCache.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -49,60 +50,65 @@ export default {
         const subcommand = options.getSubcommand();
         const lang = await getLang(interaction);
         const local = lang.logs;
-        if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
-        if (!interaction.member.permissions.has(PermissionFlagsBits.ManageServer)) return await interaction.reply({
-            content: lang.error.commandforadmin,
-            ephemeral: true
-        });
+        try {
 
-        const guildID = guild.id;
-        clearLogCache(guildID);
+            if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageServer)) return await interaction.reply({
+                content: lang.error.commandforadmin,
+                ephemeral: true
+            });
 
-        const guildName = guild.name;
-        const {logs} = await getServer(guildID, guildName);
+            const guildID = guild.id;
+            clearLogCache(guildID);
 
-        const embed = new EmbedBuilder()
-            .setTitle(local.title);
+            const guildName = guild.name;
+            const {logs} = await getServer(guildID, guildName);
 
-        if (subcommand === `set`) {
-            const channel = options.getChannel(`channel`);
+            const embed = new EmbedBuilder()
+                .setTitle(local.title);
 
-            const botMember = await interaction.guild.members.fetchMe();
-            if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.ViewChannel)) {
-                return await interaction.reply({
-                    content: lang.error.botdontpermviewchannel,
-                    ephemeral: true
-                });
+            if (subcommand === `set`) {
+                const channel = options.getChannel(`channel`);
+
+                const botMember = await interaction.guild.members.fetchMe();
+                if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.ViewChannel)) {
+                    return await interaction.reply({
+                        content: lang.error.botdontpermviewchannel,
+                        ephemeral: true
+                    });
+                }
+
+                if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.SendMessages)) {
+                    return await interaction.reply({
+                        content: lang.error.botdontpermsendmessage,
+                        ephemeral: true
+                    });
+                }
+
+                const channelID = channel.id;
+                if (logs === channelID) {
+                    embed.setDescription(local.same).setColor(`#ffd600`);
+                    return await interaction.reply({embeds: [embed], ephemeral: true});
+                }
+                if (channel.type !== 0) {
+                    embed.setDescription(local.nottext).setColor(`#d80000`);
+                    return await interaction.reply({embeds: [embed], ephemeral: true});
+                }
+                await updateServer(guildID, "logs", BigInt(channelID));
+                embed.setDescription(`${local.set} <#${channelID}>`).setColor(`#00ff9d`);
+                await interaction.reply({embeds: [embed], ephemeral: true});
+            } else if (subcommand === `remove`) {
+                embed.setColor(`#d80000`);
+                if (logs == false) {
+                    embed.setDescription(local.notset);
+                    return await interaction.reply({embeds: [embed], ephemeral: true});
+                }
+                await updateServer(guildID, "logs", 0);
+                embed.setDescription(local.remove);
+                await interaction.reply({embeds: [embed], ephemeral: true});
             }
-
-            if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.SendMessages)) {
-                return await interaction.reply({
-                    content: lang.error.botdontpermsendmessage,
-                    ephemeral: true
-                });
-            }
-
-            const channelID = channel.id;
-            if (logs === channelID) {
-                embed.setDescription(local.same).setColor(`#ffd600`);
-                return await interaction.reply({embeds: [embed], ephemeral: true});
-            }
-            if (channel.type !== 0) {
-                embed.setDescription(local.nottext).setColor(`#d80000`);
-                return await interaction.reply({embeds: [embed], ephemeral: true});
-            }
-            await updateServer(guildID, "logs", BigInt(channelID));
-            embed.setDescription(`${local.set} <#${channelID}>`).setColor(`#00ff9d`);
-            await interaction.reply({embeds: [embed], ephemeral: true});
-        } else if (subcommand === `remove`) {
-            embed.setColor(`#d80000`);
-            if (logs == false) {
-                embed.setDescription(local.notset);
-                return await interaction.reply({embeds: [embed], ephemeral: true});
-            }
-            await updateServer(guildID, "logs", 0);
-            embed.setDescription(local.remove);
-            await interaction.reply({embeds: [embed], ephemeral: true});
+        } catch (err) {
+            await errorLog(err);
         }
     }
 }

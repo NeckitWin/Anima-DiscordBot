@@ -2,6 +2,7 @@ import { Events, EmbedBuilder } from 'discord.js';
 import { clearTimer } from '../Commands/Games/anime.js';
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
+import errorLog from "../Utils/errorLog.js";
 
 export default {
     name: Events.InteractionCreate,
@@ -36,8 +37,8 @@ export default {
                 updateEmbed.setFooter({text: `${local.incorrect} - ${correctAnimeName}`, iconURL: userAvatar});
             }
             await interaction.message.edit({embeds: [updateEmbed], components: []});
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            await errorLog(err);
         }
     }
 }

@@ -1,5 +1,6 @@
 import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 const answers = [
     {value: "yes", color: "#00ff95"},
@@ -52,8 +53,8 @@ export default {
             setTimeout(async () => {
                 await interaction.editReply({embeds: [embed]});
             }, 3 * 1000);
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            await errorLog(err);
         }
     }
 }

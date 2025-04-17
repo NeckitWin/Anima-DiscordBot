@@ -1,6 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import axios from 'axios';
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -67,8 +68,8 @@ export default {
                 .setThumbnail("https://cdn.dribbble.com/users/2120934/screenshots/6193524/19_mostlysunny.gif");
 
             await interaction.reply({embeds: [embed]});
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            await errorLog(err);
             await interaction.reply({content: local.error, ephemeral: true});
         }
     },

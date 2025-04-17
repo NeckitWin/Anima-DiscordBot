@@ -2,6 +2,7 @@ import { Events, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } fr
 import fetch from 'node-fetch2';
 import { commandLog } from '../Utils/commandLog.js';
 import {getStickerFormat} from "../Utils/utility.js";
+import errorLog from "../Utils/errorLog.js";
 
 
 export default [
@@ -75,8 +76,8 @@ export default [
                 } else {
                     await message.editReply({content: `No emoji or sticker found`, ephemeral: true});
                 }
-            } catch (e) {
-                console.error(e);
+            } catch (err) {
+                await errorLog(err);
             }
         }
     }

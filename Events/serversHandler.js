@@ -1,6 +1,7 @@
 import {Events, EmbedBuilder} from 'discord.js';
 import {Webhooks} from "../Config/Webhooks.js";
 import {updateServerCount} from "../Utils/commandLog.js";
+import errorLog from "../Utils/errorLog.js";
 
 export default [
     {
@@ -25,9 +26,9 @@ export default [
                     );
 
                 await updateServerCount();
-                await Webhooks.webhookServerHandler.send({embeds: [embed]})
-            } catch (e) {
-                console.error(e);
+                await Webhooks.ServerHandler.send({embeds: [embed]});
+            } catch (err) {
+                await errorLog(err);
             }
         }
     },
@@ -48,9 +49,9 @@ export default [
                     );
 
                 await updateServerCount();
-                await Webhooks.webhookServerHandler.send({embeds: [embed]})
-            } catch (e) {
-                console.error(e);
+                await Webhooks.ServerHandler.send({embeds: [embed]});
+            } catch (err) {
+                await errorLog(err);
             }
         }
     }

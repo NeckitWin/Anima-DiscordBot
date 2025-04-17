@@ -2,6 +2,7 @@ import { Events, EmbedBuilder } from 'discord.js';
 import { getLang } from '../Utils/lang.js';
 import { ifServerHasLog } from '../Utils/logCache.js';
 import { formatDate, getTypeChannel } from '../Utils/utility.js';
+import errorLog from "../Utils/errorLog.js";
 
 const checkServer = async (message) => {
     try {
@@ -10,7 +11,7 @@ const checkServer = async (message) => {
         if (!logChannel) return;
         return message.guild.channels.cache.get(logChannel);
     } catch (err) {
-        console.error(err);
+        await errorLog(err);
     }
 }
 
@@ -18,7 +19,7 @@ const sendLog = async (channel, embed) => {
     try {
         await channel.send({embeds: [embed]});
     } catch (err) {
-        console.error(err);
+        await errorLog(err);
     }
 }
 

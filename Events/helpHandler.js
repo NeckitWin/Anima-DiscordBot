@@ -2,6 +2,7 @@ import {Events, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder} from 'd
 import {getLang} from '../Utils/lang.js';
 import {commandLog} from '../Utils/commandLog.js';
 import {menuHelp} from "../Components/Menus/helpMenu.js";
+import errorLog from "../Utils/errorLog.js";
 
 export default {
     name: Events.InteractionCreate,
@@ -95,8 +96,8 @@ export default {
                         break;
                 }
                 await interaction.update({embeds: [embed], components: [rowForHelpEvent]});
-            } catch (error) {
-                console.error(error);
+            } catch (err) {
+                await errorLog(err);
             }
         }
     }

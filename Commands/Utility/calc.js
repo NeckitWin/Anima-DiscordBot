@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -22,31 +23,35 @@ export default {
                 })
                 .setRequired(true)),
     async execute(interaction) {
-        const expression = interaction.options.getString('expression');
+        try {
+            const expression = interaction.options.getString('expression');
 
-        const lang = await getLang(interaction);
-        const local = lang.calc;
+            const lang = await getLang(interaction);
+            const local = lang.calc;
 
-        const safeEval = (expression) => {
-            try {
-                if (/^[0-9+\-*/().\s]+$/.test(expression)) {
-                    return eval(expression);
-                } else {
-                    return local.error;
+            const safeEval = (expression) => {
+                try {
+                    if (/^[0-9+\-*/().\s]+$/.test(expression)) {
+                        return eval(expression);
+                    } else {
+                        return local.error;
+                    }
+                } catch (error) {
+                    return console.error(error);
                 }
-            } catch (error) {
-                return console.error(error);
             }
+
+            const result = safeEval(expression);
+            const embed = new EmbedBuilder()
+                .setColor('Blue')
+                .setTitle(local.title)
+                .setDescription(`🔢 **${local.calc}:**\n\`\`\`js\n${expression}\`\`\`\n✅ **${local.res}:**\n\`\`\`js\n${result}\`\`\``)
+                .setThumbnail("https://i.pinimg.com/originals/50/da/8c/50da8c44ba216bd8d5c20992bc8ce939.gif");
+
+            await interaction.reply({embeds: [embed]});
+
+        } catch (err) {
+            await errorLog(err);
         }
-
-        const result = safeEval(expression);
-        const embed = new EmbedBuilder()
-            .setColor('Blue')
-            .setTitle(local.title)
-            .setDescription(`🔢 **${local.calc}:**\n\`\`\`js\n${expression}\`\`\`\n✅ **${local.res}:**\n\`\`\`js\n${result}\`\`\``)
-            .setThumbnail("https://i.pinimg.com/originals/50/da/8c/50da8c44ba216bd8d5c20992bc8ce939.gif");
-
-        await interaction.reply({embeds: [embed]});
-
     }
 }

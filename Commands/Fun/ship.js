@@ -4,6 +4,7 @@ import path from 'node:path';
 import url from 'node:url';
 import sharp from 'sharp';
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowOffset = 10) => {
     const response = await fetch(url);
@@ -113,8 +114,8 @@ export default {
 
             await interaction.editReply({content:`${user1} ${user2}`, embeds: [], files: [result]});
 
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            await errorLog(err);
         }
     }
 }

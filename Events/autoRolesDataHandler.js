@@ -5,6 +5,7 @@ import {
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
 import { postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles } from '../Repo/dbAutoRoles.js';
+import errorLog from "../Utils/errorLog.js";
 
 export default {
     name: Events.InteractionCreate,
@@ -164,7 +165,7 @@ export default {
             }
 
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

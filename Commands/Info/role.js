@@ -1,6 +1,7 @@
 import {SlashCommandBuilder, EmbedBuilder} from 'discord.js';
 import {formatDate} from "../../Utils/utility.js";
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -50,9 +51,8 @@ export default {
                     }
                 );
             interaction.reply({embeds: [embed]});
-        } catch (error) {
-            console.error(error);
-            interaction.reply('Error.', {ephemeral: true});
+        } catch (err) {
+            await errorLog(err);
         }
     }
 }

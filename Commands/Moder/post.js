@@ -7,6 +7,7 @@ import {
     PermissionFlagsBits
 } from 'discord.js';
 import {getLang} from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -106,7 +107,7 @@ export default {
             await interaction.followUp({content: local.fill, ephemeral: true});
 
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

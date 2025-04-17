@@ -1,6 +1,7 @@
 import {SlashCommandBuilder, EmbedBuilder, ChannelType} from "discord.js";
 import {formatDate, serverProtection} from "../../Utils/utility.js";
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 
 export default {
@@ -91,8 +92,8 @@ export default {
             if (serverBanner) embed.setImage(serverBanner);
 
             await interaction.reply({embeds: [embed]});
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            await errorLog(err);
         }
     }
 }

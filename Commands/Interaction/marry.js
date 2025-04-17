@@ -1,6 +1,7 @@
 import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} from 'discord.js';
 import {getRelation} from "../../Repo/dbUser.js";
 import {getLang} from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -109,7 +110,7 @@ export default {
                 interaction.reply({embeds: [embed], components: [ActionRow]});
             }
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

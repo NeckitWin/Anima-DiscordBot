@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder } from 'discord.js';
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -52,7 +53,7 @@ export default {
             await interaction.deleteReply();
             await interaction.followUp({embeds: [embedSuccess], ephemeral: false});
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

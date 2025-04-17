@@ -1,6 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } from "discord.js";
 import anime from "../../Data/jsons/anime.json" with {type: 'json'};
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 const timers = new Map();
 
@@ -76,8 +77,8 @@ export default {
             }, 15 * 1000);
 
             timers.set(interaction.id, timeoutID);
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            await errorLog(err);
         }
     },
     clearTimer

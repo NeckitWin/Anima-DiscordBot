@@ -1,5 +1,6 @@
 import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
-import { getLang } from "../../Utils/lang.js";
+import {getLang} from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 const answers = [
     {"value": "yes", "gif": "https://c.tenor.com/nIsnQBxoRjkAAAAC/ben-yes.gif", "color": "#007a00"},
@@ -29,17 +30,21 @@ export default {
                 })
                 .setRequired(true)),
     async execute(interaction) {
-        const question = interaction.options.getString(`question`);
-        const answer = answers[Math.floor(Math.random() * answers.length)];
-        const lang = await getLang(interaction);
-        const answerLang = lang.ben[answer.value];
+        try {
+            const question = interaction.options.getString(`question`);
+            const answer = answers[Math.floor(Math.random() * answers.length)];
+            const lang = await getLang(interaction);
+            const answerLang = lang.ben[answer.value];
 
-        const embed = new EmbedBuilder()
-            .setTitle(answerLang)
-            .setDescription(`${lang.ben.question}: ${question}`)
-            .setColor(answer.color)
-            .setImage(answer.gif);
+            const embed = new EmbedBuilder()
+                .setTitle(answerLang)
+                .setDescription(`${lang.ben.question}: ${question}`)
+                .setColor(answer.color)
+                .setImage(answer.gif);
 
-        await interaction.reply({content: ``, embeds: [embed]});
+            await interaction.reply({content: ``, embeds: [embed]});
+        } catch (err) {
+            await errorLog(err);
+        }
     }
 }

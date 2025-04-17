@@ -1,6 +1,7 @@
 import { Events, EmbedBuilder } from 'discord.js';
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
+import errorLog from "../Utils/errorLog.js";
 
 export default {
     name: Events.InteractionCreate,
@@ -48,7 +49,7 @@ export default {
             await interaction.reply({content: lang.post.complete, ephemeral: true});
 
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

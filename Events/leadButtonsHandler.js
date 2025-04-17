@@ -2,6 +2,7 @@ import { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events } fr
 import { getLeaderboard } from '../Repo/dbUser.js';
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
+import errorLog from "../Utils/errorLog.js";
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
@@ -32,60 +33,64 @@ const leadersFiltr = (embed, result, prevNumber, nextNumber) => {
 export default {
     name: Events.InteractionCreate,
     async execute(interaction) {
-        if (!interaction.isButton()) return;
-        if (!(interaction.customId === `nextLeaders` || interaction.customId === `prevLeaders`)) return;
-        if (!commandLog("leadButtonsHandle", interaction, 1)) return;
-        const lang = await getLang(interaction);
-        const local = lang.error;
+        try {
+            if (!interaction.isButton()) return;
+            if (!(interaction.customId === `nextLeaders` || interaction.customId === `prevLeaders`)) return;
+            if (!commandLog("leadButtonsHandle", interaction, 1)) return;
+            const lang = await getLang(interaction);
+            const local = lang.error;
 
-        if (interaction.message.interaction.user.id !== interaction.user.id) return interaction.reply({
-            content: local.notyourcommand,
-            ephemeral: true
-        });
-
-
-        const result = await getLeaderboard(interaction.guild.id);
-
-        const embed = new EmbedBuilder()
-            .setTitle(`🏆 ${lang.auratop.title} ⚖️`)
-            .setColor("#00ffa1")
-            .setThumbnail(interaction.guild.iconURL())
-            .setFooter({
-                text: `${lang.request} ${interaction.user.displayName}`,
-                iconURL: interaction.user.avatarURL({dynamic: true, size: 4096})
+            if (interaction.message.interaction.user.id !== interaction.user.id) return interaction.reply({
+                content: local.notyourcommand,
+                ephemeral: true
             });
 
-        if (!interaction.message.page) {
-            interaction.message.page = 0;
+
+            const result = await getLeaderboard(interaction.guild.id);
+
+            const embed = new EmbedBuilder()
+                .setTitle(`🏆 ${lang.auratop.title} ⚖️`)
+                .setColor("#00ffa1")
+                .setThumbnail(interaction.guild.iconURL())
+                .setFooter({
+                    text: `${lang.request} ${interaction.user.displayName}`,
+                    iconURL: interaction.user.avatarURL({dynamic: true, size: 4096})
+                });
+
+            if (!interaction.message.page) {
+                interaction.message.page = 0;
+            }
+
+            let prevNumber = interaction.message.page * 10;
+            let nextNumber = prevNumber + 10;
+
+            switch (interaction.customId) {
+                case "nextLeaders":
+                    if (nextNumber < result.length) {
+                        interaction.message.page++;
+                    }
+                    break;
+
+                case "prevLeaders":
+                    if (interaction.message.page > 0) {
+                        interaction.message.page--;
+                    }
+                    break;
+            }
+
+            prevNumber = interaction.message.page * 10;
+            nextNumber = prevNumber + 10;
+
+            if (nextNumber > result.length) {
+                nextNumber = result.length;
+            }
+
+            embed.fields = [];
+            leadersFiltr(embed, result, prevNumber, nextNumber);
+
+            await interaction.update({embeds: [embed], components: [row]});
+        } catch (err) {
+            await errorLog(err);
         }
-
-        let prevNumber = interaction.message.page * 10;
-        let nextNumber = prevNumber + 10;
-
-        switch (interaction.customId) {
-            case "nextLeaders":
-                if (nextNumber < result.length) {
-                    interaction.message.page++;
-                }
-                break;
-
-            case "prevLeaders":
-                if (interaction.message.page > 0) {
-                    interaction.message.page--;
-                }
-                break;
-        }
-
-        prevNumber = interaction.message.page * 10;
-        nextNumber = prevNumber + 10;
-
-        if (nextNumber > result.length) {
-            nextNumber = result.length;
-        }
-
-        embed.fields = [];
-        leadersFiltr(embed, result, prevNumber, nextNumber);
-
-        await interaction.update({embeds: [embed], components: [row]});
     }
 };

@@ -1,6 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
 import data from "../../Data/jsons/reactions.json" with {type: 'json'};
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 const maleEmoji = "♂️";
 const femaleEmoji = "♀️";
@@ -96,8 +97,8 @@ export default {
             } else {
                 await interaction.reply({embeds: [embed]});
             }
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            await errorLog(err);
         }
     }
 }

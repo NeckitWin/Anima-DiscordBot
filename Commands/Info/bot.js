@@ -1,6 +1,7 @@
 import {SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder} from "discord.js";
 import {formatDate} from "../../Utils/utility.js";
 import { getLang } from "../../Utils/lang.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -65,8 +66,8 @@ export default {
                 .addComponents(ButtonServer, ButtonWebsite, ButtonGitHub);
 
             await interaction.reply({embeds: [embed], components: [rowLinksForBot]});
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            await errorLog(err);
         }
     }
 };

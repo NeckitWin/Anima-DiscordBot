@@ -1,6 +1,7 @@
 import { Events, EmbedBuilder } from 'discord.js';
 import { getGreet } from '../Repo/dbGreet.js';
 import { commandLog } from '../Utils/commandLog.js';
+import errorLog from "../Utils/errorLog.js";
 
 export default {
     name: Events.GuildMemberAdd,
@@ -32,7 +33,7 @@ export default {
 
             await greetingChannel.send({content: messageContent, embeds: [embed]})
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

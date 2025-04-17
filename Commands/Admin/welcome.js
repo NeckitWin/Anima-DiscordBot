@@ -10,6 +10,7 @@ import {
 } from 'discord.js';
 import { getLang } from "../../Utils/lang.js";
 import {removeGreet, getGreet} from "../../Repo/dbGreet.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -171,7 +172,7 @@ export default {
                 interaction.reply({content: local.remove, ephemeral: true});
             }
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

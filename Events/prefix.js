@@ -2,6 +2,7 @@ import { Message } from 'discord.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import url from 'node:url';
+import errorLog from "../Utils/errorLog.js";
 
 export default {
     name: 'messageCreate',
@@ -31,8 +32,8 @@ export default {
                     }
                 }
             }
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            await errorLog(err);
         }
     }
 }

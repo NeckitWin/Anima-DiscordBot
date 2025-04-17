@@ -2,6 +2,7 @@ import {SlashCommandBuilder, ActionRowBuilder} from "discord.js";
 import { getLang } from "../../Utils/lang.js";
 import {helpEmbed} from "../../Components/Embeds/helpEmbed.js";
 import {menuHelp} from "../../Components/Menus/helpMenu.js";
+import errorLog from "../../Utils/errorLog.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -24,7 +25,7 @@ export default {
             const embed = helpEmbed(interaction, lang);
             interaction.reply({embeds: [embed], components: [rowHelp],});
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     },
 };

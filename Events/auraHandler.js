@@ -3,6 +3,7 @@ import { updateAura } from '../Repo/dbUser.js';
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
 import { setCooldown } from '../Utils/customCooldown.js';
+import errorLog from "../Utils/errorLog.js";
 
 const PlusAura = [
     'https://c.tenor.com/b8SJCiQHnF8AAAAC/tenor.gif',
@@ -63,7 +64,7 @@ export default {
 
             await message.channel.send({embeds: [embed]});
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

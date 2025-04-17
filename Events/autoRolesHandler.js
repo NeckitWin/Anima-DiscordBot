@@ -1,6 +1,7 @@
 import { Events } from 'discord.js';
 import { getAutoRoles, removeAutoRole } from '../Repo/dbAutoRoles.js';
 import { commandLog } from '../Utils/commandLog.js';
+import errorLog from "../Utils/errorLog.js";
 
 export default {
     name: Events.GuildMemberAdd,
@@ -23,7 +24,7 @@ export default {
                 await member.roles.add(guildRole);
             }
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }

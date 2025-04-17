@@ -2,6 +2,7 @@ import { Events } from 'discord.js';
 import { getLang } from '../Utils/lang.js';
 import { updateGreet } from '../Repo/dbGreet.js';
 import { commandLog } from '../Utils/commandLog.js';
+import errorLog from "../Utils/errorLog.js";
 
 export default {
     name: Events.InteractionCreate,
@@ -28,7 +29,7 @@ export default {
             await updateGreet(newData.serverId, newData.title, newData.content, newData.picture, newData.channelId);
             await interaction.reply({content: `${local.success} <#${newData.channelId}>`, ephemeral: true})
         } catch (err) {
-            console.error(err);
+            await errorLog(err);
         }
     }
 }
