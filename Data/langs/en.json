@@ -3,6 +3,8 @@
   "loading": "Loading",
   "yes": "Yes",
   "no": "No",
+  "request": "Request from",
+  "indev": "In development",
   "error": {
     "notguild": "This command can only be used in servers",
     "commandforadmin": "This command is only for server administrators",
@@ -303,7 +305,6 @@
     "ugh": "Ugh",
     "haha": "Ho ho ho"
   },
-  "request": "Request from ",
   "say": {
     "response": "Sending your message..."
   },

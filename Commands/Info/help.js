@@ -1,5 +1,7 @@
-import {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} from "discord.js";
+import {SlashCommandBuilder, ActionRowBuilder} from "discord.js";
 import { getLang } from "../../Utils/lang.js";
+import {helpEmbed} from "../../Components/Embeds/helpEmbed.js";
+import {menuHelp} from "../../Components/Menus/helpMenu.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -14,97 +16,13 @@ export default {
     async execute(interaction) {
         try {
             const lang = await getLang(interaction);
-            const local = lang.menuhelp;
 
-            const menuHelp = new StringSelectMenuBuilder()
-                .setCustomId('menuHelp')
-                .setPlaceholder(local.placeholder)
-                .addOptions([
-                    {
-                        label: `${local.info.label}`,
-                        description: `${local.info.description}`,
-                        value: 'info',
-                        emoji: '📚',
-                    },
-                    {
-                        label: `${local.admin.label}`,
-                        description: `${local.admin.description}`,
-                        value: 'admin',
-                        emoji: '👑',
-                    },
-                    {
-                        label: `${local.moder.label}`,
-                        description: `${local.moder.description}`,
-                        value: 'moderation',
-                        emoji: '👮‍♂️',
-                    },
-                    {
-                        label: `${local.util.label}`,
-                        description: `${local.util.description}`,
-                        value: 'utils',
-                        emoji: '🔧',
-                    },
-                    {
-                        label: `${local.games.label}`,
-                        description: `${local.games.description}`,
-                        value: 'games',
-                        emoji: '🎮',
-                    },
-                    {
-                        label: `${local.fun.label}`,
-                        description: `${local.fun.description}`,
-                        value: 'fun',
-                        emoji: '🎉',
-                    },
-                ]);
+            const helpSelectMenu = menuHelp(lang.menuhelp);
+            const rowHelp = new ActionRowBuilder()
+                .addComponents(helpSelectMenu);
 
-            const rowForHelp = new ActionRowBuilder()
-                .addComponents(menuHelp);
-
-            const embed = {
-                color: interaction.user.color,
-                title: local.placeholder,
-                thumbnail: {
-                    url: interaction.client.user.displayAvatarURL(),
-                },
-                fields: [
-                    {
-                        name: `📚・${local.info.label}`,
-                        value: '</help:1285287069676994605>, </bot:1285287069676994604>, </user:1274053573700878358>, </leaders:1287176496791945268>, </avatar-banner:1285287069676994603>, </server:1285287069676994607>, </role:1285287069676994606>',
-                        inline: false
-                    },
-                    {
-                        name: `👑・${local.admin.label}`,
-                        value: `</language:1292081237837611079>, </autoroles:1329204198402953417>, </welcome set:1329204198402953419>, </welcome preview:1329204198402953419>, </welcome remove:1329204198402953419>, </logs set:1299470943638519890>, </logs remove:1299470943638519890>`,
-                        inline: false
-                    },
-                    {
-                        name: `👮‍♂️・${local.moder.label}`,
-                        value: '</clear:1285287069676994609>, </post:1302340870892163093>',
-                        inline: false
-                    },
-                    {
-                        name: `🔧・${local.util.label}`,
-                        value: '</calc:1285287069756690488>, </translate:1285287069756690490>, </weather:1285287069756690491>',
-                        inline: false
-                    },
-                    {
-                        name: `🎮・${local.games.label}`,
-                        value: '</anime:1294302199869997197>, `+aura`, `-aura`',
-                        inline: false
-                    },
-                    {
-                        name: `🎉・${local.fun.label}`,
-                        value: '</rp:1299513629934223493>, </marry:1302061890201063454>, </nsfw:1293672483869949973>, </ship:1295137310584864868>, </ben:1292452492986155051>, </ball:1300172412628762656>',
-                        inline: false
-                    }
-                ],
-                author: {
-                    name: lang.request + interaction.user.displayName,
-                    icon_url: interaction.user.displayAvatarURL(),
-                },
-            };
-            interaction.reply({embeds: [embed], components: [rowForHelp],});
+            const embed = helpEmbed(interaction, lang);
+            interaction.reply({embeds: [embed], components: [rowHelp],});
         } catch (err) {
             console.error(err);
         }

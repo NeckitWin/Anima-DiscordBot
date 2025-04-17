@@ -3,6 +3,8 @@
   "loading": "Ładowanie",
   "yes": "Tak",
   "no": "Nie",
+  "request": "Żądanie od ",
+  "indev": "W fazie rozwoju",
   "error": {
     "notguild": "Ta komenda jest przeznaczona tylko dla serwerów",
     "commandforadmin": "Ta komenda jest przeznaczona tylko dla administratorów serwera",
@@ -303,7 +305,6 @@
     "ugh": "Ugh",
     "haha": "Ho ho ho"
   },
-  "request": "Żądanie od ",
   "say": {
     "response": "Wysyłanie twojej wiadomości..."
   },
