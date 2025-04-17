@@ -3,7 +3,7 @@ import fetch from 'node-fetch2';
 import path from 'node:path';
 import url from 'node:url';
 import sharp from 'sharp';
-import { getLang } from "../../Data/Lang/index.js";
+import { getLang } from "../../Utils/lang.js";
 
 const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowOffset = 10) => {
     const response = await fetch(url);

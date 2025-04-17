@@ -1,5 +1,5 @@
 import {EmbedBuilder} from "discord.js";
-import {updateServerCount} from "../Features/commandLog.js";
+import {updateServerCount} from "../Utils/commandLog.js";
 
 export default {
     name: 'reboot',

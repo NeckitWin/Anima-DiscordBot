@@ -2,9 +2,9 @@ import {
     Events, RoleSelectMenuBuilder, ActionRowBuilder, EmbedBuilder, StringSelectMenuBuilder,
     ButtonBuilder
 } from 'discord.js';
-import { getLang } from '../Data/Lang/index.js';
-import { commandLog } from '../Features/commandLog.js';
-import { postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles } from '../Features/dbAutoRoles.js';
+import { getLang } from '../Utils/lang.js';
+import { commandLog } from '../Utils/commandLog.js';
+import { postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles } from '../Repo/dbAutoRoles.js';
 
 export default {
     name: Events.InteractionCreate,

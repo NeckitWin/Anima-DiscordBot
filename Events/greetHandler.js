@@ -1,6 +1,6 @@
 import { Events, EmbedBuilder } from 'discord.js';
-import { getGreet } from '../Features/dbGreet.js';
-import { commandLog } from '../Features/commandLog.js';
+import { getGreet } from '../Repo/dbGreet.js';
+import { commandLog } from '../Utils/commandLog.js';
 
 export default {
     name: Events.GuildMemberAdd,

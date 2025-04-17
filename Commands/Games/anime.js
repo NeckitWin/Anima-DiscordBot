@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } from "discord.js";
 import anime from "../../Data/jsons/anime.json" with {type: 'json'};
-import { getLang } from "../../Data/Lang/index.js";
+import { getLang } from "../../Utils/lang.js";
 
 const timers = new Map();
 

@@ -1,7 +1,7 @@
 import { Events, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } from 'discord.js';
 import fetch from 'node-fetch2';
-import { commandLog } from '../Features/commandLog.js';
-import {getStickerFormat} from "../Features/utility.js";
+import { commandLog } from '../Utils/commandLog.js';
+import {getStickerFormat} from "../Utils/utility.js";
 
 
 export default [

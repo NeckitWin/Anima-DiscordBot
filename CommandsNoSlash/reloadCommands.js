@@ -3,31 +3,16 @@ import path, {dirname} from 'node:path';
 import url, {fileURLToPath} from 'node:url';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
-import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
-import { getLang } from "../../Data/Lang/index.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-    data: new SlashCommandBuilder()
-        .setName('reload')
-        .setNameLocalizations({ru: 'перезагрузить', pl: 'przeładuj', uk: 'перезавантажити'})
-        .setDescription('Owner command, you cant use it')
-        .setDescriptionLocalizations({
-            ru: 'Команда владельца, вы не можете использовать её',
-            pl: 'Komenda właściciela, nie możesz jej użyć',
-            uk: 'Команда власника, ви не можете використовувати її'
-        })
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
-    async execute(interaction) {
+    name: 'reload_commands',
+    description:  'Reload commands for the bot',
+    async execute(message) {
         try {
             const allowedUserIds = ['429562004399980546'];
-            const lang = await getLang(interaction);
-            const local = lang.error;
-
-            if (!allowedUserIds.includes(interaction.user.id)) {
-                return interaction.reply({content: local.dontperm, ephemeral: true});
-            }
+            if (!allowedUserIds.includes(message.user.id)) return;
 
             const commands = [];
 

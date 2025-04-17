@@ -1,4 +1,4 @@
-import {getLang} from "../Data/Lang/index.js";
+import {getLang} from "./lang.js";
 const timeout = new Map();
 
 const setCooldown = async (commandEvent, message, time) => {

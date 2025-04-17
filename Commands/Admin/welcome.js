@@ -8,8 +8,8 @@ import {
     PermissionsBitField,
     EmbedBuilder
 } from 'discord.js';
-import { getLang } from "../../Data/Lang/index.js";
-import {removeGreet, getGreet} from "../../Features/dbGreet.js";
+import { getLang } from "../../Utils/lang.js";
+import {removeGreet, getGreet} from "../../Repo/dbGreet.js";
 
 export default {
     data: new SlashCommandBuilder()

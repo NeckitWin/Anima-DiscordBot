@@ -1,7 +1,7 @@
 import {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} from 'discord.js';
-import {updateServer, getServer} from "../../Features/dbServer.js";
-import { getLang } from "../../Data/Lang/index.js";
-import {clearLogCache} from "../../Features/logCache.js";
+import {updateServer, getServer} from "../../Repo/dbServer.js";
+import { getLang } from "../../Utils/lang.js";
+import {clearLogCache} from "../../Utils/logCache.js";
 
 export default {
     data: new SlashCommandBuilder()

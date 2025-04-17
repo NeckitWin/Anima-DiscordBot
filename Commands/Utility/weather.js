@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import axios from 'axios';
-import { getLang } from "../../Data/Lang/index.js";
+import { getLang } from "../../Utils/lang.js";
 
 export default {
     data: new SlashCommandBuilder()

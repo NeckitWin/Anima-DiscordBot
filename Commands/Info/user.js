@@ -1,7 +1,7 @@
 import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
-import {getUserServer, getRelation} from '../../Features/dbUser.js';
-import {formatDate, getStatusEmoji, getActivityType, getBadgeEmoji} from "../../Features/utility.js";
-import {getLang} from "../../Data/Lang/index.js";
+import {getUserServer, getRelation} from '../../Repo/dbUser.js';
+import {formatDate, getStatusEmoji, getActivityType, getBadgeEmoji} from "../../Utils/utility.js";
+import {getLang} from "../../Utils/lang.js";
 
 export default {
     data: new SlashCommandBuilder()

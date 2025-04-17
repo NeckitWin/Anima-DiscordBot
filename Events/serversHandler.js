@@ -1,6 +1,6 @@
 import {Events, EmbedBuilder} from 'discord.js';
 import {Webhooks} from "../Config/Webhooks.js";
-import {updateServerCount} from "../Features/commandLog.js";
+import {updateServerCount} from "../Utils/commandLog.js";
 
 export default [
     {

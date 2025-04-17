@@ -1,7 +1,7 @@
 import { Events, ButtonBuilder, ActionRowBuilder, EmbedBuilder } from 'discord.js';
-import { removeRelation, setRelation, getRelation } from '../Features/dbUser.js';
-import { getLang } from '../Data/Lang/index.js';
-import { commandLog } from '../Features/commandLog.js';
+import { removeRelation, setRelation, getRelation } from '../Repo/dbUser.js';
+import { getLang } from '../Utils/lang.js';
+import { commandLog } from '../Utils/commandLog.js';
 
 export default {
     name: Events.InteractionCreate,

@@ -1,10 +1,10 @@
-import en from '../../Data/Lang/en.json' with {type: 'json'};
-import ru from '../../Data/Lang/ru.json' with {type: 'json'};
-import uk from '../../Data/Lang/uk.json' with {type: 'json'};
-import pl from '../../Data/Lang/pl.json' with {type: 'json'};
-import {getServer} from "../../Features/dbServer.js";
+import en from '../Data/langs/en.json' with {type: 'json'};
+import ru from '../Data/langs/ru.json' with {type: 'json'};
+import uk from '../Data/langs/uk.json' with {type: 'json'};
+import pl from '../Data/langs/pl.json' with {type: 'json'};
+import {getServer} from "../Repo/dbServer.js";
 
-const index = {ru, en, uk, pl};
+const lang = {ru, en, uk, pl};
 const langCache = new Map();
 
 const getLang = async (interaction) => {
@@ -16,20 +16,20 @@ const getLang = async (interaction) => {
 
             if (langCache.has(guildId)) {
                 const cachedLang = langCache.get(guildId);
-                return index[cachedLang] || index[`en`];
+                return lang[cachedLang] || lang[`en`];
             }
 
             const serverData = await getServer(guildId, guildName);
-            const lang = serverData.lang;
+            const serverLang = serverData.lang;
 
-            langCache.set(guildId, lang);
-            return index[lang] || index[`en`];
+            langCache.set(guildId, serverLang);
+            return lang[lang] || lang[`en`];
         } else {
-            return index[locale] || index[`en`];
+            return lang[locale] || lang[`en`];
         }
     } catch (error) {
         console.error(error);
-        return index[`en`];
+        return lang[`en`];
     }
 }
 

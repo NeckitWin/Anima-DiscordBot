@@ -1,6 +1,6 @@
 import {SlashCommandBuilder, EmbedBuilder, ChannelType} from "discord.js";
-import {formatDate, serverProtection} from "../../Features/utility.js";
-import { getLang } from "../../Data/Lang/index.js";
+import {formatDate, serverProtection} from "../../Utils/utility.js";
+import { getLang } from "../../Utils/lang.js";
 
 
 export default {

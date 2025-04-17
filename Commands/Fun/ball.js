@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
-import { getLang } from "../../Data/Lang/index.js";
+import { getLang } from "../../Utils/lang.js";
 
 const answers = [
     {value: "yes", color: "#00ff95"},

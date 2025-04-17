@@ -1,6 +1,6 @@
 import { Events } from 'discord.js';
-import { getAutoRoles, removeAutoRole } from '../Features/dbAutoRoles.js';
-import { commandLog } from '../Features/commandLog.js';
+import { getAutoRoles, removeAutoRole } from '../Repo/dbAutoRoles.js';
+import { commandLog } from '../Utils/commandLog.js';
 
 export default {
     name: Events.GuildMemberAdd,

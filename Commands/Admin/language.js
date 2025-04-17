@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } from 'discord.js';
-import {clearLangCache, getLang} from "../../Data/Lang/index.js";
-import {updateServer} from "../../Features/dbServer.js";
+import {clearLangCache, getLang} from "../../Utils/lang.js";
+import {updateServer} from "../../Repo/dbServer.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -34,26 +34,22 @@ export default {
     async execute(interaction) {
         try {
             const {guild, options} = interaction;
-            let lang = await getLang(interaction);
+            const lang = await getLang(interaction);
             if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({
                 content: lang.error.commandformanageserver,
                 ephemeral: true
             });
             const target = options.getString('language');
-            const serverID = guild.id;
-            await clearLangCache(serverID);
-            await updateServer(serverID, 'lang', target);
-
-            lang = await getLang(interaction);
-            const local = lang.language;
+            await clearLangCache(guild.id);
+            await updateServer(guild.id, 'lang', target);
+            const updateLang = await getLang(interaction);
+            const local = updateLang.language;
 
             const embed = new EmbedBuilder()
                 .setTitle(local.title)
                 .setDescription(`${local.description} ${target}`)
                 .setColor(`#d998ff`);
-
-
             await interaction.reply({content: " ", embeds: [embed], ephemeral: true});
 
         } catch (err) {

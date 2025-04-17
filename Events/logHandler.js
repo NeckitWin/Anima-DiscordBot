@@ -1,7 +1,7 @@
 import { Events, EmbedBuilder } from 'discord.js';
-import { getLang } from '../Data/Lang/index.js';
-import { ifServerHasLog } from '../Features/logCache.js';
-import { formatDate, getTypeChannel } from '../Features/utility.js';
+import { getLang } from '../Utils/lang.js';
+import { ifServerHasLog } from '../Utils/logCache.js';
+import { formatDate, getTypeChannel } from '../Utils/utility.js';
 
 const checkServer = async (message) => {
     try {

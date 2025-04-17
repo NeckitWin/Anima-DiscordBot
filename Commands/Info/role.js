@@ -1,6 +1,6 @@
 import {SlashCommandBuilder, EmbedBuilder} from 'discord.js';
-import {formatDate} from "../../Features/utility.js";
-import { getLang } from "../../Data/Lang/index.js";
+import {formatDate} from "../../Utils/utility.js";
+import { getLang } from "../../Utils/lang.js";
 
 export default {
     data: new SlashCommandBuilder()

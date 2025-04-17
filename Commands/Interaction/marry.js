@@ -1,6 +1,6 @@
 import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} from 'discord.js';
-import {getRelation} from "../../Features/dbUser.js";
-import {getLang} from "../../Data/Lang/index.js";
+import {getRelation} from "../../Repo/dbUser.js";
+import {getLang} from "../../Utils/lang.js";
 
 export default {
     data: new SlashCommandBuilder()

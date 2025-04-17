@@ -1,6 +1,6 @@
 import { Events, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder } from 'discord.js';
-import { getLang } from '../Data/Lang/index.js';
-import { commandLog } from '../Features/commandLog.js';
+import { getLang } from '../Utils/lang.js';
+import { commandLog } from '../Utils/commandLog.js';
 
 export default {
     name: Events.InteractionCreate,

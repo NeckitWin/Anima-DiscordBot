@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
-import { getLang } from "../../Data/Lang/index.js";
+import { getLang } from "../../Utils/lang.js";
 
 const answers = [
     {"value": "yes", "gif": "https://c.tenor.com/nIsnQBxoRjkAAAAC/ben-yes.gif", "color": "#007a00"},

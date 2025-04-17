@@ -1,8 +1,8 @@
 import { EmbedBuilder } from 'discord.js';
-import { updateAura } from '../Features/dbUser.js';
-import { getLang } from '../Data/Lang/index.js';
-import { commandLog } from '../Features/commandLog.js';
-import { setCooldown } from '../Features/customCooldown.js';
+import { updateAura } from '../Repo/dbUser.js';
+import { getLang } from '../Utils/lang.js';
+import { commandLog } from '../Utils/commandLog.js';
+import { setCooldown } from '../Utils/customCooldown.js';
 
 const PlusAura = [
     'https://c.tenor.com/b8SJCiQHnF8AAAAC/tenor.gif',

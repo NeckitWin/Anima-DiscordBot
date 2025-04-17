@@ -1,7 +1,7 @@
 import { Events } from 'discord.js';
-import { getLang } from '../Data/Lang/index.js';
-import { updateGreet } from '../Features/dbGreet.js';
-import { commandLog } from '../Features/commandLog.js';
+import { getLang } from '../Utils/lang.js';
+import { updateGreet } from '../Repo/dbGreet.js';
+import { commandLog } from '../Utils/commandLog.js';
 
 export default {
     name: Events.InteractionCreate,

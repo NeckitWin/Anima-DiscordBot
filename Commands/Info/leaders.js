@@ -1,6 +1,6 @@
 import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} from "discord.js";
-import {getLeaderboard} from "../../Features/dbUser.js";
-import { getLang } from "../../Data/Lang/index.js";
+import {getLeaderboard} from "../../Repo/dbUser.js";
+import { getLang } from "../../Utils/lang.js";
 
 const prevButton = new ButtonBuilder()
     .setCustomId("prevLeaders")
