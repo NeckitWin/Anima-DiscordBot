@@ -36,7 +36,7 @@ export default {
         try {
             if (!interaction.isButton()) return;
             if (!(interaction.customId === `nextLeaders` || interaction.customId === `prevLeaders`)) return;
-            if (!commandLog("leadButtonsHandle", interaction, 1)) return;
+            if (!await commandLog("leadButtonsHandle", interaction, 1)) return;
             const lang = await getLang(interaction);
             const local = lang.error;
 

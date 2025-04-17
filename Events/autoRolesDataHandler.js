@@ -20,7 +20,7 @@ export default {
                 content: lang.error.notforyou,
                 ephemeral: true
             });
-            if (!commandLog("autoRolesDataHandler", interaction, 1)) return;
+            if (!await commandLog("autoRolesDataHandler", interaction, 1)) return;
             const {message, values, guild, customId, client} = interaction;
             let dataAutoRoles = await getAutoRoles(guild.id);
             const botRole = guild.members.cache.get(client.user.id).roles.highest;

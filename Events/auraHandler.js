@@ -25,7 +25,7 @@ export default {
     async execute(message) {
         try {
             if (!(message.content === '-aura' || message.content === '+aura')) return;
-            if(!commandLog("auraButtons", message, 1)) return;
+            if(!await commandLog("auraButtons", message, 1)) return;
 
             const lang = await getLang(message);
             const local = lang.aura;

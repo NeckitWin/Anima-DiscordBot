@@ -9,7 +9,7 @@ export default {
     async execute(interaction) {
         if (interaction.isAnySelectMenu() && interaction.customId === 'menuHelp') {
             try {
-                if (!commandLog("menuButtonHandle", interaction, 1)) return;
+                if (!await commandLog("menuButtonHandle", interaction, 1)) return;
                 const lang = await getLang(interaction);
                 const local = lang.menuhelp;
                 const localinfo = lang.commandsdesc;

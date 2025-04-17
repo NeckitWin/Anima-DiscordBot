@@ -13,7 +13,7 @@ export default [
             if (!message.isMessageContextMenuCommand()) return;
             if (message.commandName !== `emoji-sticker`) return;
             try {
-                if (!commandLog("emoji-sticker", message, 1)) return;
+                if (!await commandLog("emoji-sticker", message, 1)) return;
                 await message.deferReply({ephemeral: true});
                 const messageID = message.targetId;
                 const getMessage = await message.channel?.messages.fetch(messageID) || false;

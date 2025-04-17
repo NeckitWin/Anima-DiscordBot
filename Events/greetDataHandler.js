@@ -10,7 +10,7 @@ export default {
         try {
             if (!interaction.isModalSubmit()) return;
             if (interaction.customId !== `modalGreeting`) return;
-            if(!commandLog("modalGreetHandle", interaction, 1)) return;
+            if(!await commandLog("modalGreetHandle", interaction, 1)) return;
             const serverID = interaction.guild.id;
 
             const lang = await getLang(interaction);

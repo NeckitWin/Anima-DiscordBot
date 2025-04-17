@@ -9,7 +9,7 @@ export default {
         try {
             if (!interaction.isChatInputCommand()) return;
             const {cooldowns} = interaction.client;
-            if (!commandLog(interaction.commandName, interaction)) return;
+            if (!await commandLog(interaction.commandName, interaction)) return;
             const command = interaction.client.commands.get(interaction.commandName);
 
             if (!cooldowns.has(command.data.name)) {

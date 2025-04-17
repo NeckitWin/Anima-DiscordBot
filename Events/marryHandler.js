@@ -13,7 +13,7 @@ export default {
             const marryActions = ['marryAccept', 'marryDecline', 'marryDivorce', 'marryDivorceAccept', 'marryDivorceDecline'];
             const DivorceActions = ['marryDivorce', 'marryDivorceAccept', 'marryDivorceDecline'];
             if (!marryActions.includes(customId)) return;
-            if (!commandLog("marryHandle", interaction, 1)) return;
+            if (!await commandLog("marryHandle", interaction, 1)) return;
             const authorInteraction = message.interaction.user;
             const mentionUser = message.mentions?.users?.first() || false;
             const getAuthorMarried = await getRelation(guild?.id, authorInteraction.id);

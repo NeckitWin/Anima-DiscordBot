@@ -13,7 +13,7 @@ export default {
             if (!getGreetData.length > 0) return;
             const greetData = getGreetData[0];
             const greetingChannel = member.guild.channels.cache.get(String(greetData.channelID));
-            if (!commandLog("greetHandle", member, 1)) return;
+            if (!await commandLog("greetHandle", member, 1)) return;
 
             let messageContent = greetData.title;
             let embedContent = greetData.content;

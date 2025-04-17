@@ -15,7 +15,7 @@ export default {
             const interactionID = interaction.message.interaction.id;
             const incorrectAnswer = customId.startsWith(`r_anime_`);
             if (!(correctAnswer || incorrectAnswer)) return;
-            if (!commandLog("animeHandle", interaction, 1)) return;
+            if (!await commandLog("animeHandle", interaction, 1)) return;
             const lang = await getLang(interaction);
             const local = lang.anime;
             if (interaction.message.interaction.user.id !== interaction.user.id) return await interaction.reply({

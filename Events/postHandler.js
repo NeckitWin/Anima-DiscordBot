@@ -9,7 +9,7 @@ export default {
         try {
             if (!interaction.isModalSubmit()) return;
             if (interaction.customId !== `postModal`) return;
-            if (!commandLog("postHandle", interaction, 1)) return;
+            if (!await commandLog("postHandle", interaction, 1)) return;
             const lang = await getLang(interaction);
             const local = lang.post;
             const data = interaction.fields.components;

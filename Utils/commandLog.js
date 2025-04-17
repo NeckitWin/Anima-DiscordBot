@@ -1,5 +1,6 @@
 import blacklist from '../Data/jsons/blacklist.json' with {type: 'json'};
 import {updateUsedCommandsCount} from "../Repo/dbStats.js";
+import {Webhooks} from "../Config/Webhooks.js";
 
 const commandSendTime = 1000 * 60 * 20; // 20 min
 
@@ -41,7 +42,7 @@ const data = {
     users: 0
 }
 
-const commandLog = (name, interaction, type = 0) => {
+const commandLog = async (name, interaction, type = 0) => {
     const {user, author, guild} = interaction;
     const stateUser = user || author;
     const typeAction = getType(type);
@@ -53,7 +54,7 @@ const commandLog = (name, interaction, type = 0) => {
     if (guild) {
         if (isBlacklisted(guild.id)) return false;
     }
-    console.log(`${guild ? `Server: ${guild.name} | ` : ""}${stateUser ? `User "${stateUser.username}" | ` : ""}${typeAction}: ${name}`);
+    await Webhooks.CommandsHandler.send(`${guild ? `Server: ${guild.name} | ` : ""}${stateUser ? `User "${stateUser.username}" | ` : ""}${typeAction}: ${name}`);
 
     if (type === commandType.COMMAND) commandCounter.increment();
     return true;
@@ -64,7 +65,7 @@ const sendUsedCommandsCount = async () => {
         const count = commandCounter.getCount();
         if (count === 0) return;
         if (await updateUsedCommandsCount(data)) {
-            console.log(`Used commands count ${count} sent to DB`);
+            await Webhooks.CommandsHandler.send(`Used commands count ${count} sent to DB`);
             commandCounter.reset();
         } else {
             console.error(`Used commands count ${count} not sent to DB`);
