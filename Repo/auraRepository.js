@@ -7,10 +7,10 @@ const updateAura = async (userId, serverId, sign, count, displayName, username) 
     return await sqlPost(sqlUpdateAura, [count, serverId, userId]);
 };
 
-const getLeaderboard = async (serverId) => {
-    const sql = `SELECT wallet.serverName, wallet.aura FROM wallet WHERE serverId = ? ORDER BY wallet.aura DESC`;
+const getAuraList = async (serverId) => {
+    const sql = `SELECT wallet.displayName, wallet.aura FROM wallet WHERE serverId = ? ORDER BY wallet.aura DESC`;
     const res = await sqlGet(sql, [serverId]);
     if (res.length > 0) return res;
 };
 
-export {updateAura, getLeaderboard};
+export {updateAura, getAuraList};

@@ -3,6 +3,7 @@ import {formatDate, getStatusEmoji, getActivityType, getBadgeEmoji} from "../../
 import {getLang} from "../../Utils/lang.js";
 import errorLog from "../../Utils/errorLog.js";
 import {getRelation} from "../../Repo/relationRepository.js";
+import {getUserWallet} from "../../Repo/walletRepository.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -54,7 +55,7 @@ export default {
             if (nitro || banner) bage += ` <a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
             if (user.bot) bage = `<a:code:1297250463644782643>`;
 
-            const getUserArray = await getUserServer(userID, guildID);
+            const getUserArray = await getUserWallet(userID, guildID);
             const userInfo = getUserArray[0] || {};
             const shards = userInfo.shards ?? 0;
             const aura = userInfo.aura ?? 0;

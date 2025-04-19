@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} from "discord.js";
-import {getLeaderboard} from "../../Repo/auraRepository.js";
+import {getAuraList} from "../../Repo/auraRepository.js";
 import { getLang } from "../../Utils/lang.js";
 import errorLog from "../../Utils/errorLog.js";
 
@@ -34,7 +34,7 @@ export default {
             const lang = await getLang(interaction);
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
 
-            const leaderboard = await getLeaderboard(interaction.guild.id);
+            const leaderboard = await getAuraList(interaction.guild.id);
 
             if (!leaderboard) {
                 const embedError = new EmbedBuilder()
@@ -58,7 +58,7 @@ export default {
             auraLeaders.forEach((leader, index) => {
                 embed.addFields([
                     {
-                        name: `#${index + 1}. ${leader.serverName}`,
+                        name: `#${index + 1}. ${leader.displayName}`,
                         value: `**${lang.aura.aura}**: ${leader.aura}`,
                         inline: false
                     },

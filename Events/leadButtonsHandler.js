@@ -1,5 +1,5 @@
 import { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Events } from 'discord.js';
-import { getLeaderboard } from '../Repo/auraRepository.js';
+import { getAuraList } from '../Repo/auraRepository.js';
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
 import errorLog from "../Utils/errorLog.js";
@@ -22,7 +22,7 @@ const leadersFiltr = (embed, result, prevNumber, nextNumber) => {
     auraLeaders.forEach((leader, index) => {
         embed.addFields([
             {
-                name: `#${index + prevNumber + 1}. ${leader.serverName}`,
+                name: `#${index + prevNumber + 1}. ${leader.displayName}`,
                 value: `**Aura**: ${leader.aura}`,
                 inline: false
             },
@@ -46,7 +46,7 @@ export default {
             });
 
 
-            const result = await getLeaderboard(interaction.guild.id);
+            const result = await getAuraList(interaction.guild.id);
 
             const embed = new EmbedBuilder()
                 .setTitle(`🏆 ${lang.auratop.title} ⚖️`)
