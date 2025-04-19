@@ -1,5 +1,6 @@
 import mysql from "mysql";
 import dotenv from "dotenv";
+import errorLog from "../Utils/errorLog.js";
 dotenv.config();
 
 const config = {
@@ -42,7 +43,7 @@ const sqlRequest = async (sql, params) => {
             });
         });
     } catch (e) {
-        console.error(e);
+        await errorLog(e);
         throw e;
     } finally {
         conn.end();
@@ -59,7 +60,7 @@ const sqlPost = async (sql, params) => {
             });
         });
     } catch (e) {
-        console.error(e);
+        await errorLog(e);
         throw e;
     } finally {
         conn.end();
