@@ -2,6 +2,7 @@ import {Events, EmbedBuilder} from 'discord.js';
 import {Webhooks} from "../Config/Webhooks.js";
 import {updateServerCount} from "../Utils/commandLog.js";
 import errorLog from "../Utils/errorLog.js";
+import {addServer} from "../Repo/serverRepository.js";
 
 export default [
     {
@@ -25,6 +26,7 @@ export default [
                         {name: `Owner ID`, value: `\`\`\`fix\n${owner.id}\`\`\``, inline: true}
                     );
 
+                await addServer(guild.id, guild.name);
                 await updateServerCount();
                 await Webhooks.ServerHandler.send({embeds: [embed]});
             } catch (err) {

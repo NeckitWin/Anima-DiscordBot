@@ -4,7 +4,7 @@ import {
 } from 'discord.js';
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
-import { postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles } from '../Repo/dbAutoRoles.js';
+import { postAutoRole, getAutoRoles, removeAutoRole, clearAutoRoles } from '../Repo/rolesRepository.js';
 import errorLog from "../Utils/errorLog.js";
 
 export default {

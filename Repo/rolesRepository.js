@@ -1,9 +1,9 @@
-import {sqlPost, sqlRequest} from "./db.js";
+import {sqlPost, sqlGet} from "./db.js";
 
 const getAutoRoles = async (server_id) => {
     try {
         const sql = `SELECT * FROM autoroles WHERE serverID = ?`;
-        return await sqlRequest(sql, [server_id]);
+        return await sqlGet(sql, [server_id]);
     } catch (err) {
         console.error(err);
         throw err;
@@ -13,7 +13,7 @@ const getAutoRoles = async (server_id) => {
 const getAutoRole = async (server_id, role_id) => {
     try {
         const sql = `SELECT * FROM autoroles WHERE serverID = ? AND roleID = ?`;
-        return await sqlRequest(sql, [server_id, role_id]);
+        return await sqlGet(sql, [server_id, role_id]);
     } catch (err) {
         console.error(err);
         throw err;

@@ -1,5 +1,5 @@
 import blacklist from '../Data/jsons/blacklist.json' with {type: 'json'};
-import {updateUsedCommandsCount} from "../Repo/dbStats.js";
+import {updateUsedCommandsCount} from "../Repo/statsRepository.js";
 import {Webhooks} from "../Config/Webhooks.js";
 
 const commandSendTime = 1000 * 60 * 20; // 20 min

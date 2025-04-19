@@ -1,6 +1,6 @@
 import { Events } from 'discord.js';
 import { getLang } from '../Utils/lang.js';
-import { updateGreet } from '../Repo/dbGreet.js';
+import { updateGreet } from '../Repo/greetRepository.js';
 import { commandLog } from '../Utils/commandLog.js';
 import errorLog from "../Utils/errorLog.js";
 

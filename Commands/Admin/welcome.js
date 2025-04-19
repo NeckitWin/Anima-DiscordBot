@@ -9,7 +9,7 @@ import {
     EmbedBuilder
 } from 'discord.js';
 import { getLang } from "../../Utils/lang.js";
-import {removeGreet, getGreet} from "../../Repo/dbGreet.js";
+import {removeGreet, getGreet} from "../../Repo/greetRepository.js";
 import errorLog from "../../Utils/errorLog.js";
 
 export default {

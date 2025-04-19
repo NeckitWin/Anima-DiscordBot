@@ -2,7 +2,7 @@ import en from '../Data/langs/en.json' with {type: 'json'};
 import ru from '../Data/langs/ru.json' with {type: 'json'};
 import uk from '../Data/langs/uk.json' with {type: 'json'};
 import pl from '../Data/langs/pl.json' with {type: 'json'};
-import {getServer} from "../Repo/dbServer.js";
+import {getServer} from "../Repo/serverRepository.js";
 
 const lang = {ru, en, uk, pl};
 const langCache = new Map();

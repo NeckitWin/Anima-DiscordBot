@@ -1,70 +1,49 @@
-import mysql from "mysql";
+import mariadb from "mariadb";
 import dotenv from "dotenv";
 import errorLog from "../Utils/errorLog.js";
+
 dotenv.config();
 
 const config = {
+    dbName: "anima",
     dbHost: process.env.DB_HOST,
     dbUser: process.env.DB_USER,
-    dbPassword: process.env.DB_PASSWORD
+    dbPassword: process.env.DB_PASSWORD,
 }
 
-const getConnection = () => {
-    const conn = mysql.createConnection({
-        host: config.dbHost,
-        user: config.dbUser,
-        password: config.dbPassword,
-        database: "anima",
-        charset: 'utf8mb4',
-        supportBigNumbers: true,
-        bigNumberStrings: true
-    });
+const pool = mariadb.createPool({
+    host: config.dbHost,
+    user: config.dbUser,
+    password: config.dbPassword,
+    database: config.dbName,
+    supportBigNumbers: true,
+    bigNumberStrings: true,
+    connectionLimit: 20,
+    connectTimeout: 10000,
+    acquireTimeout: 10000,
+});
 
-    conn.connect(err => {
-        if (err) console.error(err);
-    });
 
-    conn.on(`error`, (err) => {
-        if (err.code === `PROTOCOL_CONNECTION_LOST`) {
-            console.error(err);
-            getConnection();
-        } else throw err;
-    });
-    return conn;
-};
-
-const sqlRequest = async (sql, params) => {
-    const conn = getConnection();
+const executeQuery = async (sql, params=[]) => {
+    let conn;
     try {
-        return new Promise((resolve, reject) => {
-            conn.query(sql, params, (err, res) => {
-                if (err) return reject(err);
-                else resolve(res);
-            });
-        });
-    } catch (e) {
-        await errorLog(e);
-        throw e;
+        conn = await pool.getConnection();
+        return await conn.query(sql, params);
+    } catch (error) {
+        await errorLog(error);
+        throw error;
     } finally {
-        conn.end();
+        if (conn) await conn.release();
     }
 };
 
-const sqlPost = async (sql, params) => {
-    const conn = getConnection();
-    try {
-        return new Promise((resolve, reject) => {
-            conn.query(sql, params, (err, res) => {
-                if (err) return reject(err);
-                else resolve(true);
-            });
-        });
-    } catch (e) {
-        await errorLog(e);
-        throw e;
-    } finally {
-        conn.end();
-    }
+const sqlGet = async (sql, params=[]) => {
+    return await executeQuery(sql, params);
 }
 
-export {sqlRequest, sqlPost}
+const sqlPost = async (sql, params=[]) => {
+    await executeQuery(sql, params);
+    return true
+}
+
+export {sqlGet, sqlPost}

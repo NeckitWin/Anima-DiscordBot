@@ -1,4 +1,4 @@
-import {getServer} from "../Repo/dbServer.js";
+import {getServer} from "../Repo/serverRepository.js";
 const logCache = new Map();
 
 const ifServerHasLog = async (guildId, guildName) => {

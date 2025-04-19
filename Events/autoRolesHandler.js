@@ -1,5 +1,5 @@
 import { Events } from 'discord.js';
-import { getAutoRoles, removeAutoRole } from '../Repo/dbAutoRoles.js';
+import { getAutoRoles, removeAutoRole } from '../Repo/rolesRepository.js';
 import { commandLog } from '../Utils/commandLog.js';
 import errorLog from "../Utils/errorLog.js";
 

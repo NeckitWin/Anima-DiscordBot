@@ -1,5 +1,5 @@
 import { Events, ButtonBuilder, ActionRowBuilder, EmbedBuilder } from 'discord.js';
-import { removeRelation, setRelation, getRelation } from '../Repo/dbUser.js';
+import { removeRelation, setRelation, getRelation } from '../Repo/relationRepository.js';
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
 import errorLog from "../Utils/errorLog.js";

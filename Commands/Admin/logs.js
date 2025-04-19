@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder} from 'discord.js';
-import {updateServer, getServer} from "../../Repo/dbServer.js";
+import {updateServer, getServer} from "../../Repo/serverRepository.js";
 import {getLang} from "../../Utils/lang.js";
 import {clearLogCache} from "../../Utils/logCache.js";
 import errorLog from "../../Utils/errorLog.js";

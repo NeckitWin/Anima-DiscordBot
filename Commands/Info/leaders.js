@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} from "discord.js";
-import {getLeaderboard} from "../../Repo/dbUser.js";
+import {getLeaderboard} from "../../Repo/auraRepository.js";
 import { getLang } from "../../Utils/lang.js";
 import errorLog from "../../Utils/errorLog.js";
 

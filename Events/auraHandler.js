@@ -1,5 +1,5 @@
 import { EmbedBuilder } from 'discord.js';
-import { updateAura } from '../Repo/dbUser.js';
+import { updateAura } from '../Repo/auraRepository.js';
 import { getLang } from '../Utils/lang.js';
 import { commandLog } from '../Utils/commandLog.js';
 import { setCooldown } from '../Utils/customCooldown.js';
@@ -25,7 +25,7 @@ export default {
     async execute(message) {
         try {
             if (!(message.content === '-aura' || message.content === '+aura')) return;
-            if(!await commandLog("auraButtons", message, 1)) return;
+            if(!await commandLog("auraButtons", message, 0)) return;
 
             const lang = await getLang(message);
             const local = lang.aura;

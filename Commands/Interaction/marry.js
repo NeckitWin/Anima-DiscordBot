@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} from 'discord.js';
-import {getRelation} from "../../Repo/dbUser.js";
+import {getRelation} from "../../Repo/relationRepository.js";
 import {getLang} from "../../Utils/lang.js";
 import errorLog from "../../Utils/errorLog.js";
 
