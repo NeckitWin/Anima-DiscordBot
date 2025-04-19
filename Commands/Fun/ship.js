@@ -1,52 +1,61 @@
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
-import fetch from 'node-fetch2';
+import { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } from 'discord.js';
+import fetch from 'node-fetch';
+import { createCanvas, loadImage } from 'canvas';
 import path from 'node:path';
 import url from 'node:url';
-import sharp from 'sharp';
 import { getLang } from "../../Utils/lang.js";
 import errorLog from "../../Utils/errorLog.js";
 
-const getCircleBufferImage = async (url, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowOffset = 10) => {
-    const response = await fetch(url);
-    const buffer = await response.buffer();
+async function createCircularAvatar(imageUrl, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowBlur = 10) {
+    const canvas = createCanvas(size + shadowBlur * 2, size + shadowBlur * 2);
+    const ctx = canvas.getContext('2d');
 
-    const image = sharp(buffer).resize(size, size);
+    const response = await fetch(imageUrl);
+    const buffer = await response.arrayBuffer();
+    const image = await loadImage(Buffer.from(buffer));
 
-    const svgCircle = `<svg width="${size}" height="${size}">
-                          <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="white" />
-                      </svg>`;
-    const circleBuffer = Buffer.from(svgCircle);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, size / 2 + shadowBlur / 2, 0, Math.PI * 2);
+    ctx.fillStyle = shadowColor;
+    ctx.shadowColor = shadowColor;
+    ctx.shadowBlur = shadowBlur;
+    ctx.fill();
+    ctx.restore();
 
-    const circularImage = await image
-        .composite([{input: circleBuffer, blend: 'dest-in'}])
-        .png()
-        .toBuffer();
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, size / 2, 0, Math.PI * 2);
+    ctx.clip();
 
-    const svgShadow = `<svg width="${size + shadowOffset * 2}" height="${size + shadowOffset * 2}">
-                          <circle cx="${(size + shadowOffset * 2) / 2}" cy="${(size + shadowOffset * 2) / 2}" r="${(size + shadowOffset) / 2}" fill="${shadowColor}" />
-                      </svg>`;
-    const shadowBuffer = Buffer.from(svgShadow);
+    ctx.drawImage(image, shadowBlur, shadowBlur, size, size);
+    ctx.restore();
 
-    const shadow = await sharp(shadowBuffer)
-        .blur(10)
-        .toBuffer();
-
-    return await sharp(shadow)
-        .composite([{input: circularImage, top: shadowOffset, left: shadowOffset, blend: 'over'}])
-        .png()
-        .toBuffer();
+    return canvas;
 }
 
-const createTextSVG = (text, fontSize, fillColor = 'white', strokeColor, strokeWidth, center = false) => {
-    return `<svg xmlns="http://www.w3.org/2000/svg" height="${fontSize + 10}" ${center ? 'width="240"' : ''}>
-                <text x="${center ? '50%' : '0'}" y="${fontSize}" font-size="${fontSize}" font-family="Comic Sans MS, cursive, sans-serif" fill="${fillColor}" 
-                       ${strokeColor ? `stroke="${strokeColor}"` : ''} 
-                       stroke-width="${strokeWidth}" text-anchor="${center ? 'middle' : 'start'}" dominant-baseline="hanging" font-weight="bold">
-                      ${text}
-                </text>
-            </svg>`;
-};
+function createText(text, fontSize, fillColor = 'white', strokeColor = null, strokeWidth = 0, center = false) {
+    const canvas = createCanvas(240, fontSize + 10);
+    const ctx = canvas.getContext('2d');
 
+    ctx.font = `bold ${fontSize}px "Comic Sans MS", cursive, sans-serif`;
+    ctx.textAlign = center ? 'center' : 'left';
+    ctx.textBaseline = 'top';
+
+    const x = center ? canvas.width / 2 : 0;
+    const y = 0;
+
+    if (strokeColor && strokeWidth) {
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = strokeWidth;
+        ctx.strokeText(text, x, y);
+    }
+
+    ctx.fillStyle = fillColor;
+    ctx.fillText(text, x, y);
+
+    return canvas;
+}
 
 export default {
     cooldown: 10,
@@ -84,10 +93,12 @@ export default {
     async execute(interaction) {
         try {
             const lang = await getLang(interaction);
+
             const embedLoading = new EmbedBuilder()
                 .setTitle(`<a:loading:1295096250609172611> ${lang.ai.loading}...`)
                 .setColor(`#ff0062`);
             await interaction.reply({embeds: [embedLoading]});
+
             const user1 = interaction.options.getUser('user1');
             const user2 = interaction.options.getUser('user2');
 
@@ -96,23 +107,33 @@ export default {
                 return interaction.editReply({embeds: [embedLoading]});
             }
 
-            const userAvatar1 = await getCircleBufferImage(user1.avatarURL({size: 256}));
-            const userAvatar2 = await getCircleBufferImage(user2.avatarURL({size: 256}));
+            const avatar1 = await createCircularAvatar(user1.displayAvatarURL({extension: 'png', size: 256}));
+            const avatar2 = await createCircularAvatar(user2.displayAvatarURL({extension: 'png', size: 256}));
+
             const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
             const bgPath = path.join(__dirname, "../../Data/img/heartbg.png");
-            const bgImage = sharp(bgPath);
-            const randomNumber = Math.floor(Math.random() * (100 + 1));
+            const bgImage = await loadImage(bgPath);
 
-            const textSVG = createTextSVG((randomNumber+"%"), 80, 'white','#450000', 3, true)
+            const compatibilityScore = Math.floor(Math.random() * 101);
+            const scoreText = createText(`${compatibilityScore}%`, 80, 'white', '#450000', 3, true);
 
-            const result = await bgImage
-                .composite([
-                    {input: userAvatar1, top: 100, left: 0},
-                    {input: userAvatar2, top: 100, left: 440},
-                    {input: Buffer.from(textSVG), top: 110, left: 210}
-                ]).toBuffer();
+            const finalCanvas = createCanvas(bgImage.width, bgImage.height);
+            const ctx = finalCanvas.getContext('2d');
 
-            await interaction.editReply({content:`${user1} ${user2}`, embeds: [], files: [result]});
+            ctx.drawImage(bgImage, 0, 0);
+
+            ctx.drawImage(avatar1, 0, 100);
+            ctx.drawImage(avatar2, finalCanvas.width - avatar2.width, 100);
+
+            ctx.drawImage(scoreText, (finalCanvas.width - scoreText.width) / 2, 110);
+
+            const attachment = new AttachmentBuilder(finalCanvas.toBuffer(), {name: 'ship.png'});
+
+            await interaction.editReply({
+                content: `${user1} ${user2}`,
+                embeds: [],
+                files: [attachment]
+            });
 
         } catch (err) {
             await errorLog(err);

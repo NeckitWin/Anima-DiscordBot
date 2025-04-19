@@ -47,15 +47,6 @@ const updateAura = async (user_id, server_id, sign, count, servername, username)
     }
 }
 
-const updateUserWallet = async (user_id, server_id, target, value) => {
-    const isUserServer = await getUserServer(user_id, server_id);
-    if (isUserServer.length > 0) {
-        const sql = `UPDATE wallet SET ${target} = ${target}+? WHERE userID = ? AND serverID = ?`;
-        await sqlPost(sql, [value, user_id, server_id]);
-        return true;
-    }
-}
-
 const getRelation = async (server_id, user_id) => {
     const sql = `SELECT * FROM relation WHERE serverID = ? AND (userID1 = ? OR userID2 = ?)`;
     return await sqlRequest(sql, [server_id, user_id, user_id]);
@@ -75,4 +66,4 @@ const removeRelation = async (server_id, user_id) => {
     return true;
 }
 
-export {getUser, getUserServer, getLeaderboard, postNewUser, updateAura, getRelation, setRelation, removeRelation, updateUserWallet};
+export {getUser, getUserServer, getLeaderboard, postNewUser, updateAura, getRelation, setRelation, removeRelation};
