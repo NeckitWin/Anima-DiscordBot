@@ -50,6 +50,7 @@ export default {
                         `\`+aura\` - ${localinfo.games[1]} \n` +
                         `\`-aura\` - ${localinfo.games[2]}`,
                     fun:
+                        `</ai-animal:1365688051745165423> - ${localinfo.fun[6]} \n` +
                         `</rp:1299513629934223493> - ${localinfo.fun[0]} \n` +
                         `</marry:1302061890201063454> - ${localinfo.fun[1]} \n` +
                         `</nsfw:1293672483869949973> - ${localinfo.fun[2]} \n` +

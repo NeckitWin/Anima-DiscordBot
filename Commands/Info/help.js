@@ -17,12 +17,11 @@ export default {
     async execute(interaction) {
         try {
             const lang = await getLang(interaction);
-
+            const embed = helpEmbed(interaction, lang);
             const helpSelectMenu = menuHelp(lang.menuhelp);
             const rowHelp = new ActionRowBuilder()
                 .addComponents(helpSelectMenu);
 
-            const embed = helpEmbed(interaction, lang);
             interaction.reply({embeds: [embed], components: [rowHelp],});
         } catch (err) {
             await errorLog(err);
