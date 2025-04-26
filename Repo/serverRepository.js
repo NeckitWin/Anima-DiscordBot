@@ -5,7 +5,13 @@ const getServer = async (serverId) => {
     return await sqlGet(sql, [serverId]);
 }
 
+const serverExists = async (serverId) => {
+    const server = await getServer(serverId);
+    return server.length > 0;
+}
+
 const addServer = async (serverId, serverName) => {
+    if (await serverExists(serverId)) return;
     await sqlPost(`INSERT INTO servers (serverId, name) VALUES (?, ?)`, [serverId, serverName]);
 }
 

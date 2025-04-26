@@ -20,7 +20,7 @@ const getLang = async (interaction) => {
             }
 
             const serverData = await getServer(guildId, guildName);
-            const serverLang = serverData.lang;
+            const serverLang = serverData?.[0]?.lang;
 
             langCache.set(guildId, serverLang);
             return lang[serverLang] || lang[`en`];
