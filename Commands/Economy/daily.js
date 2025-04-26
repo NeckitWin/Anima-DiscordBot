@@ -11,13 +11,13 @@ const imgs = [
 
 export  default {
     data: new SlashCommandBuilder()
-        .setName('work')
-        .setNameLocalizations({ ru: 'работать', pl: 'pracować', uk: 'працювати' })
-        .setDescription('Work for shards')
+        .setName('daily')
+        .setNameLocalizations({ ru: 'ежедневка', pl: 'dzienna', uk: 'щоденна' })
+        .setDescription("Claim your daily reward")
         .setDescriptionLocalizations({
-            ru: 'Работать за осколки',
-            pl: 'Pracować za odłamki',
-            uk: 'Працювати за осколки',
+            ru: "Забрать ежедневную награду",
+            pl: "Odbierz dzienną nagrodę",
+            uk: "Отримати щоденну нагороду"
         }),
     async execute(interaction) {
         try {
