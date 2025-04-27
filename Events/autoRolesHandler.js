@@ -15,10 +15,10 @@ export default {
             const botRole = botMember.roles.highest;
 
             for (const role of autoRoles) {
-                const guildRole = member.guild.roles.cache.get(role.roleID);
+                const guildRole = member.guild.roles.cache.get(role.roleId);
                 const rolePosition = guildRole.position;
                 if (!guildRole || rolePosition >= botRole.position) {
-                    await removeAutoRole(member.guild.id, role.roleID);
+                    await removeAutoRole(member.guild.id, role.roleId);
                     continue;
                 }
                 await member.roles.add(guildRole);
