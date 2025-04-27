@@ -39,7 +39,7 @@ for (const folder of commandFolders) {
         if ('data' in command.default && 'execute' in command.default) {
             client.commands.set(command.default.data.name, command.default);
         } else {
-            console.log(`Ошибка в файле ${file} не найдены 'data' или 'execute' свойства!`);
+            console.error(`Error in file ${file} 'data' or 'execute' properties not found!`);
         }
     }
 }

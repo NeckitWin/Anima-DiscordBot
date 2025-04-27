@@ -46,7 +46,7 @@ export default {
             try {
                 await command.execute(interaction);
             } catch (error) {
-                console.error(error);
+                await errorLog(error);
                 const embedError = new EmbedBuilder()
                     .setColor('#bc0000')
                     .setTitle('Error')

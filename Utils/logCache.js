@@ -6,9 +6,10 @@ const ifServerHasLog = async (guildId, guildName) => {
         return logCache.get(guildId);
     } else {
             const server = await getServer(guildId, guildName);
-            if (server.logs != false) {
-                logCache.set(guildId, server.logs);
-                return server.logs;
+            const {logs} = server[0];
+            if (logs && logs !== 0) {
+                logCache.set(guildId, logs);
+                return logs;
             } else {
                 logCache.set(guildId, false);
                 return false;
