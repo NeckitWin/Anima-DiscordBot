@@ -40,6 +40,11 @@
     "wait": "Proszę czekać",
     "again": "będziesz mógł ponownie użyć polecenia"
   },
+  "daily": {
+    "load": "Odbieranie dziennej nagrody...",
+    "title": "Dzienna nagroda",
+    "description": "Gratulacje! Otrzymałeś"
+  },
   "autoroles": {
     "title": "Automatyczne Role",
     "addandedit": "Dodawaj i edytuj automatyczne role dla nowych członków serwera",
