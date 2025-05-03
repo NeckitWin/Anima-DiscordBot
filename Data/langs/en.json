@@ -40,6 +40,13 @@
     "wait": "Please wait",
     "again": "you will be able to use the command again"
   },
+  "doors": {
+    "title": "Mystical Doors",
+    "description": "Step into the mystery — choose one of the magical doors!",
+    "win": "You opened the door and discovered sparkling shards in a realm full of wonder!",
+    "none": "The door won’t open… It seems to be sealed by ancient magic.",
+    "lose": "You opened the door — and terror gripped you! Fleeing, you dropped some precious shards."
+  },
   "daily": {
     "load": "Getting daily bonus...",
     "title": "Daily Bonus",

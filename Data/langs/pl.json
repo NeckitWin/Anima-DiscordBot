@@ -40,6 +40,13 @@
     "wait": "Proszę czekać",
     "again": "będziesz mógł ponownie użyć polecenia"
   },
+  "doors": {
+    "title": "Magiczne drzwi",
+    "description": "Wejdź w tajemnicę — wybierz jedne z magicznych drzwi!",
+    "win": "Otworzyłeś drzwi i odkryłeś lśniące odłamki w świecie pełnym cudów!",
+    "none": "Drzwi nie ustępują... Wygląda na to, że zostały zapieczętowane starożytną magią.",
+    "lose": "Otworzyłeś drzwi — i ogarnął cię strach! Uciekając, zgubiłeś kilka cennych odłamków."
+  },
   "daily": {
     "load": "Odbieranie dziennej nagrody...",
     "title": "Dzienna nagroda",

@@ -20,4 +20,10 @@ const addShards = async (userId, serverId, username, displayName, shardsCount) =
     await sqlPost(sql, [shardsCount, serverId, userId]);
 }
 
-export {updateShards, getShardsList, addShards};
+const removeShards = async (userId, serverId, username, displayName, shardsCount) => {
+    if (!await userWalletExists(userId, serverId)) await addUserWallet(userId, serverId, username, displayName);
+    const sql = `UPDATE wallet SET shards=shards-? WHERE serverId = ? AND userId = ?`;
+    await sqlPost(sql, [shardsCount, serverId, userId]);
+}
+
+export {updateShards, getShardsList, addShards, removeShards};
