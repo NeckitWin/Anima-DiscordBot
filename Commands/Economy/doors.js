@@ -42,16 +42,19 @@ export default {
 
             const secondDoor = new ButtonBuilder()
                 .setCustomId('magicDoor2')
-                .setStyle(ButtonStyle.Success)
+                .setStyle(ButtonStyle.Danger)
                 .setEmoji('🚪')
 
             const thirdDoor = new ButtonBuilder()
                 .setCustomId('magicDoor3')
-                .setStyle(ButtonStyle.Success)
+                .setStyle(ButtonStyle.Secondary)
                 .setEmoji('🚪')
 
+            const doors = [firstDoor, secondDoor, thirdDoor];
+            const randomDoors = doors.sort(() => Math.random() - 0.5);
+
             const row = new ActionRowBuilder()
-                .addComponents(firstDoor, secondDoor, thirdDoor);
+                .addComponents(randomDoors);
 
             await interaction.reply({
                 embeds: [embed],
