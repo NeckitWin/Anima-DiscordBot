@@ -36,8 +36,7 @@ export default {
             const target = interaction.options.getUser('user');
             const getUser = target ?? interaction.user;
             const user = await getUser.fetch();
-            const userID = user.id;
-            const member = await interaction.guild.members.fetch(userID);
+            const member = await interaction.guild.members.fetch(user.id);
             if (!member) return await interaction.reply({content: lang.error.usernotfound, ephemeral: true});
             const userColor = member.displayColor;
             const guildID = interaction.guild.id;
@@ -55,13 +54,14 @@ export default {
             if (nitro || banner) bage += ` <a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
             if (user.bot) bage = `<a:code:1297250463644782643>`;
 
-            const getUserArray = await getUserWallet(userID, guildID);
+            const getUserArray = await getUserWallet(user.id, guildID);
             const userInfo = getUserArray[0] || {};
             const shards = userInfo.shards ?? 0;
             const aura = userInfo.aura ?? 0;
-            const getMarried = await getRelation(guildID, userID);
+            const getMarried = await getRelation(guildID, user.id);
+            console.log(getMarried);
             const relation = getMarried && getMarried.length > 0 ? getMarried[0] : false;
-            const relationUser = relation && relation.userID1 === userID ? relation.userID2 : relation.userID1;
+            const relationUser = relation && relation.userId1 === user.id ? relation.userId2 : relation.userId1;
 
             const embed = new EmbedBuilder()
                 .setTitle(`${local.title} — ${user.displayName}`)
@@ -77,7 +77,7 @@ export default {
                     `<:shard:1296969847690760234> **${local.shard}**: ${shards}\n` +
                     `<:aura:1297189989498753076> **${local.aura}**: ${aura}`
                 )
-                .setFooter({text: `${local.user_id}: ${userID}`});
+                .setFooter({text: `${local.user_id}: ${user.id}`});
             if (avatar) embed.setThumbnail(avatar);
             if (banner) embed.setImage(banner);
 
