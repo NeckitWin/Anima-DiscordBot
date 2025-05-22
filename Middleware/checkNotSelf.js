@@ -3,7 +3,7 @@ import {errorEmbed} from "../Components/Embeds/errorEmbed.js";
 
 export const checkNotSelf = async (interaction, user) => {
     const lang = await getLang(interaction);
-    if (user.bot) {
+    if (interaction.user.id === user.id) {
         const embed = errorEmbed(lang, lang.error.dontyourself);
         await interaction.reply({embeds: [embed], ephemeral: true});
         return true;
