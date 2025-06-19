@@ -2,7 +2,6 @@ import {
     SlashCommandBuilder,
     EmbedBuilder,
     ButtonBuilder,
-    // @ts-ignore
     ButtonStyle,
     ActionRowBuilder,
     CommandInteraction
@@ -58,6 +57,7 @@ export default {
             buttons.push(correctButton);
             while (buttons.length < 4) {
                 const randomAnime = getRandomAnime();
+                // @ts-ignore
                 if (!buttons.some(button => button.data.label === local.titles[randomAnime.name])) {
                     const button = new ButtonBuilder()
                         .setCustomId(`r_anime_${randomAnime.name}`)
@@ -69,7 +69,7 @@ export default {
             }
 
             const sortButtons = buttons.sort(() => Math.random() - 0.5);
-            const row = new ActionRowBuilder().addComponents(sortButtons);
+            const row = new ActionRowBuilder<ButtonBuilder>().addComponents(sortButtons);
 
             await interaction.editReply({embeds: [embed], components: [row]});
 

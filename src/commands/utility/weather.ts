@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import {SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction} from 'discord.js';
 import axios from 'axios';
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
@@ -23,7 +23,7 @@ export default {
                 uk: 'Місто, погоду якого потрібно отримати'
             })
             .setRequired(true)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         const lang = await getLang(interaction);
         const local = lang.weather;
         try {

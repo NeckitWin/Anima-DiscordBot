@@ -1,4 +1,4 @@
-import { Events, EmbedBuilder } from 'discord.js';
+import {Events, EmbedBuilder, Interaction} from 'discord.js';
 import { clearTimer } from '../commands/games/anime.ts';
 import { getLang } from '../utils/lang.ts';
 import { commandLog } from '../utils/commandLog.ts';
@@ -6,7 +6,7 @@ import errorLog from "../utils/errorLog.ts";
 
 export default {
     name: Events.InteractionCreate,
-    async execute(interaction) {
+    async execute(interaction: Interaction) {
         try {
             if (!interaction.isButton()) return;
             if (!interaction.guild) return;

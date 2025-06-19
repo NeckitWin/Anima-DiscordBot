@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import {SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction} from 'discord.js';
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
 
@@ -22,14 +22,14 @@ export default {
                     uk: 'Вираз для обчислення'
                 })
                 .setRequired(true)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
-            const expression = interaction.options.getString('expression');
+            const expression = interaction.options.getString('expression')!;
 
             const lang = await getLang(interaction);
             const local = lang.calc;
 
-            const safeEval = (expression) => {
+            const safeEval = (expression: string) => {
                 try {
                     if (/^[0-9+\-*/().\s]+$/.test(expression)) {
                         return eval(expression);

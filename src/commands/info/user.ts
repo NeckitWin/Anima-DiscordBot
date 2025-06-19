@@ -1,4 +1,4 @@
-import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
+import {SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction} from "discord.js";
 import {formatDate, getStatusEmoji, getActivityType, getBadgeEmoji} from "../../utils/utility.ts";
 import {getLang} from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
@@ -28,7 +28,7 @@ export default {
             pl: "Wybierz uczestnika, aby wyświetlić informacje",
             uk: "Виберіть учасника для відображення інформації"
         }),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         const lang = await getLang(interaction);
         if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
         const local = lang.user;
@@ -49,7 +49,7 @@ export default {
             const avatar = user.avatarURL({size: 4096});
             const banner = user.bannerURL({size: 4096});
 
-            let bage = member.user.flags.toArray().map(badge => getBadgeEmoji(badge)).join(' ');
+            let bage = member.user.flags!.toArray().map(badge => getBadgeEmoji(badge)).join(' ');
             const nitro = member.premiumSince;
             if (nitro || banner) bage += ` <a:nitro_gif:1295015596710432859> <:nitro_subscriber:1295015733226377256>`;
             if (user.bot) bage = `<a:code:1297250463644782643>`;

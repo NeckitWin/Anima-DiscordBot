@@ -1,9 +1,10 @@
-import {EmbedBuilder, SlashCommandBuilder} from 'discord.js';
+import {CommandInteraction, EmbedBuilder, SlashCommandBuilder} from 'discord.js';
 import errorLog from "../../utils/errorLog.ts";
 import {getLang} from "../../utils/lang.ts";
 import {addShards} from "../../repo/shardsRepository.ts";
 import {emoji} from "../../components/emoji.js";
 import {setCooldown} from "../../utils/customCooldown.ts";
+import {checkNotGuild} from "../../middleware/checkNotGuild.js";
 
 const gifs = [
     "https://c.tenor.com/Z-rRh8JmyQ8AAAAC/tenor.gif",
@@ -24,8 +25,9 @@ export  default {
             pl: "Odbierz dzienną nagrodę",
             uk: "Отримати щоденну нагороду"
         }),
-    async execute(interaction) {
+    async execute(interaction: CommandInteraction) {
         try {
+            if (await checkNotGuild(interaction)) return;
             const lang = await getLang(interaction);
             const local = lang.daily;
             const {user, guild} = interaction;
@@ -48,7 +50,7 @@ export  default {
 
             await interaction.reply({embeds: [embedLoading]});
 
-            await addShards(user.id, guild.id, user.username, user.displayName, shardsCount );
+            await addShards(user.id, guild!.id, user.username, user.displayName, shardsCount );
 
             await interaction.editReply({embeds: [embed]});
 

@@ -1,4 +1,11 @@
-import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} from "discord.js";
+import {
+    SlashCommandBuilder,
+    EmbedBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ActionRowBuilder,
+    CommandInteraction
+} from "discord.js";
 import {getAuraList} from "../../repo/auraRepository.ts";
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
@@ -13,7 +20,7 @@ const nextButton = new ButtonBuilder()
     .setEmoji("<:emoji:1287203697469689856>")
     .setStyle(ButtonStyle.Success);
 
-const row = new ActionRowBuilder()
+const row = new ActionRowBuilder<ButtonBuilder>()
     .addComponents(prevButton, nextButton)
 
 export default {
@@ -26,7 +33,7 @@ export default {
             pl: 'Liderzy aury',
             uk: 'Лідери аури'
         }),
-    async execute(interaction) {
+    async execute(interaction: CommandInteraction) {
         try {
             let prevNumber = 0;
             let nextNumber = 10;
@@ -51,11 +58,11 @@ export default {
                 .setThumbnail(interaction.guild.iconURL())
                 .setFooter({
                     text: `${lang.request} ${interaction.user.displayName}`,
-                    iconURL: interaction.user.avatarURL({dynamic: true, size: 4096})
+                    iconURL: interaction.user.avatarURL({size: 4096})!
                 })
             ;
 
-            auraLeaders.forEach((leader, index) => {
+            auraLeaders.forEach((leader: any, index: number) => {
                 embed.addFields([
                     {
                         name: `#${index + 1}. ${leader.displayName}`,

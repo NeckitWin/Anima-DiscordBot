@@ -1,6 +1,16 @@
-import {SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, RoleSelectMenuBuilder, ActionRowBuilder, ButtonBuilder, EmbedBuilder} from 'discord.js';
-import { getLang } from "../../utils/lang.ts";
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    PermissionsBitField,
+    RoleSelectMenuBuilder,
+    ActionRowBuilder,
+    ButtonBuilder,
+    EmbedBuilder,
+    CommandInteraction, TextChannel, ButtonStyle
+} from 'discord.js';
+import {getLang} from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
+import {checkNotGuild} from "../../middleware/checkNotGuild.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -13,13 +23,13 @@ export default {
             pl: 'Konfiguracja autoroli dla nowych członków',
             uk: 'Налаштування авторолей для нових учасників'
         }),
-    async execute(interaction) {
+    async execute(interaction: CommandInteraction) {
         try {
             const lang = await getLang(interaction);
             const local = lang.autoroles;
-            const {guild, channel} = interaction;
-            if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
-            if (!channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({
+            const {channel} = interaction;
+            if (await checkNotGuild(interaction)) return;
+            if (channel instanceof TextChannel) if (!channel.permissionsFor(interaction.guild!.members.me!).has(PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({
                 content: lang.error.botdontpermrole,
                 ephemeral: true
             });
@@ -36,17 +46,17 @@ export default {
             const buttonAdd = new ButtonBuilder()
                 .setCustomId('addAutoRole')
                 .setLabel(local.add)
-                .setStyle('Success');
+                .setStyle(ButtonStyle.Success);
 
             const buttonEdit = new ButtonBuilder()
                 .setCustomId('editAutoRole')
                 .setLabel(local.edit)
-                .setStyle('Secondary');
+                .setStyle(ButtonStyle.Secondary);
 
-            const rowRoleMenu = new ActionRowBuilder()
+            const rowRoleMenu = new ActionRowBuilder<RoleSelectMenuBuilder>()
                 .addComponents(menuRole);
 
-            const rowButtons = new ActionRowBuilder()
+            const rowButtons = new ActionRowBuilder<ButtonBuilder>()
                 .addComponents(buttonAdd, buttonEdit);
 
             await interaction.reply({embeds: [embed], components: [rowRoleMenu, rowButtons]});

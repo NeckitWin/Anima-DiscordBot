@@ -1,12 +1,12 @@
-import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
+import {SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction} from "discord.js";
 import {getLang} from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
 
 const answers = [
-    {"value": "yes", "gif": "https://c.tenor.com/nIsnQBxoRjkAAAAC/ben-yes.gif", "color": "#007a00"},
-    {"value": "no", "gif": "https://c.tenor.com/F1bdsKaYe2gAAAAC/ben-no.gif", "color": "#ca0000"},
-    {"value": "ugh", "gif": "https://c.tenor.com/fr6i8VzKJuEAAAAd/talking-ben-ugh.gif", "color": "#0066ff"},
-    {"value": "haha", "gif": "https://c.tenor.com/agrQMQjQTzgAAAAd/talking-ben-laugh.gif", "color": "#ffcc7f"}
+    {"value": "yes", "gif": "https://c.tenor.com/nIsnQBxoRjkAAAAC/ben-yes.gif", "color": 0x007a00},
+    {"value": "no", "gif": "https://c.tenor.com/F1bdsKaYe2gAAAAC/ben-no.gif", "color": 0xca0000},
+    {"value": "ugh", "gif": "https://c.tenor.com/fr6i8VzKJuEAAAAd/talking-ben-ugh.gif", "color": 0x0066ff},
+    {"value": "haha", "gif": "https://c.tenor.com/agrQMQjQTzgAAAAd/talking-ben-laugh.gif", "color": 0xffcc7f}
 ]
 
 export default {
@@ -29,7 +29,7 @@ export default {
                     uk: `Задайте питання`
                 })
                 .setRequired(true)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             const question = interaction.options.getString(`question`);
             const answer = answers[Math.floor(Math.random() * answers.length)];

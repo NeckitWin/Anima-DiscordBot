@@ -6,11 +6,12 @@ import {
     ActionRowBuilder,
     PermissionFlagsBits,
     PermissionsBitField,
-    EmbedBuilder
+    EmbedBuilder, ChatInputCommandInteraction, GuildMember, Channel, MessageFlags
 } from 'discord.js';
 import { getLang } from "../../utils/lang.ts";
 import {removeGreet, getGreet} from "../../repo/greetRepository.ts";
 import errorLog from "../../utils/errorLog.ts";
+import {checkNotGuild} from "../../middleware/checkNotGuild.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -60,34 +61,35 @@ export default {
                 pl: `Usuń powitanie`,
                 uk: `Видалити привітання`
             })),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             let modal;
-            const {guild} = interaction;
             const lang = await getLang(interaction);
-            if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.greeting
-            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) {
+            if (await checkNotGuild(interaction)) return;
+            const guild = interaction.guild!;
+            const member = interaction.member! as GuildMember;
+            if (!member.permissions.has(PermissionFlagsBits.ManageGuild)) {
                 return await interaction.reply({
                     content: lang.error.commandformanageserver,
-                    ephemeral: true
+                    flags: MessageFlags.Ephemeral
                 })
             }
 
-            const serverID = interaction.guild.id;
+            const serverID = guild.id;
 
             const subcommand = interaction.options.getSubcommand();
             if (subcommand === `set`) {
-                const channel = interaction.options.getChannel(`channel`);
-                if (channel.type !== 0) return interaction.reply({content: local.nottext, ephemeral: true});
-                if (!channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ViewChannel)) return await interaction.reply({
+                const channel = interaction.options.getChannel(`channel`)! as Channel;
+                if (channel.type !== 0) return interaction.reply({content: local.nottext, flags: MessageFlags.Ephemeral});
+                if (!channel.permissionsFor(guild.members.me!).has(PermissionsBitField.Flags.ViewChannel)) return await interaction.reply({
                     content: lang.error.botdontpermviewchannel,
-                    ephemeral: true
+                    flags: MessageFlags.Ephemeral
                 });
 
-                if (!channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.SendMessages)) return await interaction.reply({
+                if (!channel.permissionsFor(guild.members.me!).has(PermissionsBitField.Flags.SendMessages)) return await interaction.reply({
                     content: lang.error.botdontpermsendmessage,
-                    ephemeral: true
+                    flags: MessageFlags.Ephemeral
                 });
 
                 modal = new ModalBuilder()
@@ -123,27 +125,27 @@ export default {
                     .setPlaceholder(channel.id)
                     .setRequired(true);
 
-                const firstComponent = new ActionRowBuilder()
+                const firstComponent = new ActionRowBuilder<TextInputBuilder>()
                     .addComponents(greetingMessage);
 
-                const secondComponent = new ActionRowBuilder()
+                const secondComponent = new ActionRowBuilder<TextInputBuilder>()
                     .addComponents(greetingContent);
 
-                const thirdComponent = new ActionRowBuilder()
+                const thirdComponent = new ActionRowBuilder<TextInputBuilder>()
                     .addComponents(greetingPicture);
 
-                const fourthComponent = new ActionRowBuilder()
+                const fourthComponent = new ActionRowBuilder<TextInputBuilder>()
                     .addComponents(greetingChannel);
 
                 modal.addComponents(firstComponent, secondComponent, thirdComponent, fourthComponent);
 
                 await interaction.showModal(modal);
-                await interaction.followUp({content: local.response, ephemeral: true});
+                await interaction.followUp({content: local.response, flags: MessageFlags.Ephemeral});
 
             } else if (subcommand === `preview`) {
 
                 const getGreetData = await getGreet(serverID);
-                if (!getGreetData.length > 0) return await interaction.reply({content: local.noset, ephemeral: true});
+                if (!getGreetData) return await interaction.reply({content: local.noset, flags: MessageFlags.Ephemeral});
                 const greetData = getGreetData[0];
 
                 let messageContent = greetData.title;
@@ -169,7 +171,7 @@ export default {
 
             } else if (subcommand === `remove`) {
                 await removeGreet(serverID);
-                interaction.reply({content: local.remove, ephemeral: true});
+                await interaction.reply({content: local.remove, flags: MessageFlags.Ephemeral});
             }
         } catch (err) {
             await errorLog(err);

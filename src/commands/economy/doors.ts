@@ -1,7 +1,7 @@
 import {
     ActionRowBuilder,
     ButtonBuilder,
-    ButtonStyle,
+    ButtonStyle, CommandInteraction,
     EmbedBuilder,
     SlashCommandBuilder
 } from "discord.js";
@@ -23,7 +23,7 @@ export default {
             pl: "Otwórz drzwi, aby znaleźć skarb",
             uk: "Відкрийте двері, щоб знайти скарб"
         }),
-    async execute(interaction) {
+    async execute(interaction: CommandInteraction) {
         try {
             if (!await setCooldown("doors", interaction, 60)) return;
             const lang = await getLang(interaction);
@@ -53,7 +53,7 @@ export default {
             const doors = [firstDoor, secondDoor, thirdDoor];
             const randomDoors = doors.sort(() => Math.random() - 0.5);
 
-            const row = new ActionRowBuilder()
+            const row = new ActionRowBuilder<ButtonBuilder>()
                 .addComponents(randomDoors);
 
             await interaction.reply({

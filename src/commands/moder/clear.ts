@@ -1,4 +1,10 @@
-import { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder } from 'discord.js';
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    PermissionsBitField,
+    EmbedBuilder,
+    ChatInputCommandInteraction, Channel, TextChannel
+} from 'discord.js';
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
 
@@ -25,12 +31,13 @@ export default {
                 .setMinValue(1)
                 .setMaxValue(100)
                 .setRequired(true)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             const lang = await getLang(interaction);
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.clear;
             const amount = interaction.options.getInteger('amount');
+            const channel = interaction.channel! as Channel;
 
             const embedLoading = new EmbedBuilder()
                 .setTitle(`<a:loading:1295096250609172611> ${lang.loading}`)
@@ -45,11 +52,11 @@ export default {
 
             await interaction.reply({embeds: [embedLoading], ephemeral: true});
 
-            if (interaction.guild && !interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ManageMessages))
+            if (channel instanceof TextChannel) if (!channel.permissionsFor(interaction.guild.members.me!).has(PermissionsBitField.Flags.ManageMessages))
                 return await interaction.editReply({embeds: [embedPerm]});
 
-            if (amount < 1 || amount > 100) return await interaction.editReply({embeds: [embedPerm.setTitle(local.amount)]});
-            await interaction.channel.bulkDelete(amount, true);
+            if (amount! < 1 || amount! > 100) return await interaction.editReply({embeds: [embedPerm.setTitle(local.amount)]});
+            if (channel instanceof TextChannel) await channel.bulkDelete(amount!, true);
             await interaction.deleteReply();
             await interaction.followUp({embeds: [embedSuccess], ephemeral: false});
         } catch (err) {

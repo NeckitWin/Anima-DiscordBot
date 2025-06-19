@@ -1,7 +1,14 @@
-import { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } from 'discord.js';
+import {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    EmbedBuilder,
+    ChatInputCommandInteraction,
+    GuildMember
+} from 'discord.js';
 import {clearLangCache, getLang} from "../../utils/lang.ts";
 import {updateServer} from "../../repo/serverRepository.ts";
 import errorLog from "../../utils/errorLog.ts";
+import {checkNotGuild} from "../../middleware/checkNotGuild.js";
 
 export default {
     data: new SlashCommandBuilder()
@@ -32,18 +39,20 @@ export default {
                     ]
                 )
                 .setRequired(true)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             const {guild, options} = interaction;
             const lang = await getLang(interaction);
-            if (!guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
-            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({
+            if (await checkNotGuild(interaction)) return;
+            const guildId = guild!.id;
+            const member = interaction.member as GuildMember;
+            if (!member!.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({
                 content: lang.error.commandformanageserver,
                 ephemeral: true
             });
             const target = options.getString('language');
-            await clearLangCache(guild.id);
-            await updateServer(guild.id, 'lang', target);
+            await clearLangCache(guildId);
+            await updateServer(guildId, 'lang', target);
             const updateLang = await getLang(interaction);
             const local = updateLang.language;
 
@@ -51,7 +60,7 @@ export default {
                 .setTitle(local.title)
                 .setDescription(`${local.description} ${target}`)
                 .setColor(`#d998ff`);
-            await interaction.reply({content: " ", embeds: [embed], ephemeral: true});
+            await interaction.reply({embeds: [embed], ephemeral: true});
 
         } catch (err) {
             await errorLog(err);

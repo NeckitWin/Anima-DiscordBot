@@ -1,14 +1,14 @@
-import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
+import {SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction} from "discord.js";
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
 
 const answers = [
-    {value: "yes", color: "#00ff95"},
-    {value: "no", color: "#ff0044"},
-    {value: "maybe", color: "#00c4ff"},
-    {value: "tryAgain", color: "#fffd7a"},
-    {value: "certain", color: "#52cc00"},
-    {value: "doubtful", color: "#ff6c6c"},
+    {value: "yes", color: 0x00ff95},
+    {value: "no", color: 0xff0044},
+    {value: "maybe", color: 0x00c4ff},
+    {value: "tryAgain", color: 0xfffd7a},
+    {value: "certain", color: 0x52cc00},
+    {value: "doubtful", color: 0xff6c6c},
 ];
 
 export default {
@@ -31,7 +31,7 @@ export default {
                     uk: `Задайте питання`
                 })
                 .setRequired(true)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             const question = interaction.options.getString(`question`);
             const answer = answers[Math.floor(Math.random() * answers.length)];

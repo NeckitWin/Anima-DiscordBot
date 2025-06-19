@@ -1,4 +1,4 @@
-const getTypeChannel = (type) => {
+const getTypeChannel = (type: number) => {
     switch (type) {
         case 0:
             return `text`;
@@ -17,7 +17,7 @@ const getTypeChannel = (type) => {
     }
 }
 
-const formatDate = (date) => {
+const formatDate = (date: any) => {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
@@ -25,7 +25,7 @@ const formatDate = (date) => {
 };
 
 
-const getStickerFormat = (format) => {
+const getStickerFormat = (format: number) => {
     switch (format) {
         case 1:
             return `png`;
@@ -39,7 +39,7 @@ const getStickerFormat = (format) => {
 }
 
 
-const serverProtection = (number) => {
+const serverProtection = (number: number) => {
     switch (number) {
         case 0:
             return 'none';
@@ -54,7 +54,7 @@ const serverProtection = (number) => {
     }
 }
 
-const getActivityType = (type) => {
+const getActivityType = (type: number) => {
     switch (type) {
         case 0:
             return 'play';
@@ -73,7 +73,7 @@ const getActivityType = (type) => {
     }
 }
 
-const getStatusEmoji = (status) => {
+const getStatusEmoji = (status: 'online' | 'idle' | 'dnd' | 'offline' ) => {
     switch (status) {
         case 'online':
             return '<:online:1294745413085302925>';
@@ -88,7 +88,7 @@ const getStatusEmoji = (status) => {
     }
 }
 
-const getBadgeEmoji = (badge) => {
+const getBadgeEmoji = (badge: string) => {
     switch (badge) {
         case `HypeSquadOnlineHouse1`:
             return `<:badge_bravery:1295007106813919324>`;

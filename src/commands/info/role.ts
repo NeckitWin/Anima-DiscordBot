@@ -1,4 +1,4 @@
-import {SlashCommandBuilder, EmbedBuilder} from 'discord.js';
+import {SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction, Role} from 'discord.js';
 import {formatDate} from "../../utils/utility.ts";
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
@@ -23,13 +23,14 @@ export default {
                 uk: 'Роль, про яку потрібно отримати інформацію'
             })
             .setRequired(true)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             const lang = await getLang(interaction);
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
             const local = lang.role;
 
-            const role = interaction.options.getRole('role');
+            const role = interaction.options.getRole('role') as Role;
+            if (!role) return;
             const embed = new EmbedBuilder()
                 .setColor(role.color)
                 .setTitle(`${local.title}: ${role.name}`)

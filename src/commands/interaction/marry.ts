@@ -1,4 +1,11 @@
-import {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder} from 'discord.js';
+import {
+    SlashCommandBuilder,
+    EmbedBuilder,
+    ButtonBuilder,
+    ActionRowBuilder,
+    ButtonStyle,
+    ChatInputCommandInteraction
+} from 'discord.js';
 import {getRelation} from "../../repo/relationRepository.ts";
 import {getLang} from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
@@ -23,7 +30,7 @@ export default {
                     uk: `Виберіть користувача для початку відносин`
                 })
                 .setRequired(false)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             const lang = await getLang(interaction);
             if (!interaction.guild) return await interaction.reply({content: lang.error.notguild, ephemeral: true});
@@ -56,28 +63,28 @@ export default {
                         name: local.wedding
                     })
                     .setDescription(`${interaction.user} ${local.proposal}`)
-                    .setThumbnail(interaction.user.displayAvatarURL({dynamic: true}))
-                    .setFooter({iconURL: interaction.guild.iconURL({dynamic: true}), text: interaction.guild.name})
+                    .setThumbnail(interaction.user.displayAvatarURL())
+                    .setFooter({iconURL: interaction.guild.iconURL()!, text: interaction.guild.name})
                     .setTimestamp(new Date());
 
                 const ButtonAccept = new ButtonBuilder()
                     .setLabel(local.proposalYes)
-                    .setStyle(`Primary`)
+                    .setStyle(ButtonStyle.Primary)
                     .setEmoji(`💍`)
                     .setCustomId(`marryAccept`);
 
                 const ButtonDecline = new ButtonBuilder()
                     .setLabel(local.proposalNo)
-                    .setStyle(`Secondary`)
+                    .setStyle(ButtonStyle.Secondary)
                     .setEmoji(`❌`)
                     .setCustomId(`marryDecline`);
 
-                const ActionRow = new ActionRowBuilder()
+                const ActionRow = new ActionRowBuilder<ButtonBuilder>()
                     .addComponents(ButtonAccept, ButtonDecline);
 
                 interaction.reply({content: `${mentionUser}`, embeds: [embed], components: [ActionRow]});
             } else {
-                if (!checkRelation.length > 0) {
+                if (!checkRelation) {
                     embedError.setTitle(local.dontHave);
                     return interaction.reply({embeds: [embedError], ephemeral: true});
                 }
@@ -91,23 +98,23 @@ export default {
                     .setDescription(`<:hearts:1300282044047429682> ${local.yourLove}: **${relationUser.user ? relationUser.user.displayName : relationUser}** (${relationUser})\n` +
                         `<:date:1297196424882294796> ${local.date}: **<t:${relationDate}:R>**`)
                     .setColor(`#ffc5d9`)
-                    .setFooter({iconURL: interaction.guild.iconURL({dynamic: true}), text: interaction.guild.name})
+                    .setFooter({iconURL: interaction.guild.iconURL()!, text: interaction.guild.name})
                     .setTimestamp(new Date());
 
                 if (relationUser.user) {
-                    embed.setThumbnail(interaction.user.displayAvatarURL({dynamic: true}))
+                    embed.setThumbnail(interaction.user.displayAvatarURL())
                 }
 
                 const buttonDivorce = new ButtonBuilder()
                     .setLabel(local.divorce)
-                    .setStyle(`Secondary`)
+                    .setStyle(ButtonStyle.Secondary)
                     .setCustomId(`marryDivorce`)
                     .setEmoji(`💔`);
 
-                const ActionRow = new ActionRowBuilder()
+                const ActionRow = new ActionRowBuilder<ButtonBuilder>()
                     .addComponents([buttonDivorce]);
 
-                interaction.reply({embeds: [embed], components: [ActionRow]});
+                await interaction.reply({embeds: [embed], components: [ActionRow]});
             }
         } catch (err) {
             await errorLog(err);

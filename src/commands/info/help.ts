@@ -1,4 +1,10 @@
-import {SlashCommandBuilder, ActionRowBuilder} from "discord.js";
+import {
+    SlashCommandBuilder,
+    ActionRowBuilder,
+    ChatInputCommandInteraction,
+    CommandInteraction,
+    StringSelectMenuBuilder
+} from "discord.js";
 import { getLang } from "../../utils/lang.ts";
 import {helpEmbed} from "../../components/embeds/helpEmbed.js";
 import {menuHelp} from "../../components/menus/helpMenu.js";
@@ -14,15 +20,15 @@ export default {
             pl: 'Pokazuje listę komend',
             uk: 'Показує список команд'
         }),
-    async execute(interaction) {
+    async execute(interaction: CommandInteraction) {
         try {
             const lang = await getLang(interaction);
             const embed = helpEmbed(interaction, lang);
             const helpSelectMenu = menuHelp(lang.menuhelp);
-            const rowHelp = new ActionRowBuilder()
+            const rowHelp = new ActionRowBuilder<StringSelectMenuBuilder>()
                 .addComponents(helpSelectMenu);
 
-            interaction.reply({embeds: [embed], components: [rowHelp],});
+            await interaction.reply({embeds: [embed], components: [rowHelp]});
         } catch (err) {
             await errorLog(err);
         }

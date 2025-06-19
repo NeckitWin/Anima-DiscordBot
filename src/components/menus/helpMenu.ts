@@ -1,7 +1,7 @@
 import {StringSelectMenuBuilder} from "discord.js";
 
 
-export const menuHelp = (local) => {
+export const menuHelp = (local: any) => {
  return new StringSelectMenuBuilder()
      .setCustomId('menuHelp')
      .setPlaceholder(local.placeholder)

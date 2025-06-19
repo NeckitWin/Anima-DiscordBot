@@ -1,4 +1,4 @@
-import {SlashCommandBuilder, EmbedBuilder} from "discord.js";
+import {SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction} from "discord.js";
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
 
@@ -22,18 +22,18 @@ export default {
                 uk: 'Користувач, у якого потрібно отримати аватар і банер'
             })
         ),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         const lang = await getLang(interaction);
         try {
             const userLink = interaction.options.getUser('user') || interaction.user;
             await userLink.fetch();
 
-            const avatarURL = userLink.avatarURL({dynamic: true, size: 4096});
-            const serverAvatarURL = interaction.guild ? interaction.guild.members.cache.get(userLink.id).avatarURL({
-                dynamic: true,
+            const avatarURL = userLink.avatarURL({size: 4096});
+            const member = interaction.guild ? interaction.guild.members.cache.get(userLink.id) : null;
+            const serverAvatarURL = member ? member.avatarURL({
                 size: 4096
             }) : null;
-            const bannerURL = userLink.bannerURL({dynamic: true, size: 4096});
+            const bannerURL = userLink.bannerURL({size: 4096});
 
             const embed = new EmbedBuilder()
                 .setColor("#ff0062")
@@ -52,13 +52,13 @@ export default {
                 const embed2 = new EmbedBuilder()
                     .setColor("#ff0062")
                     .setTimestamp()
-                    .setImage(bannerURL);
+                    .setImage(bannerURL!);
                 embeds.push(embed2);
             }
-            interaction.reply({embeds: embeds});
+            await interaction.reply({embeds: embeds});
         } catch (err) {
             await errorLog(err);
-            interaction.reply({content: lang.user.error, ephemeral: true});
+            await interaction.reply({content: lang.user.error, ephemeral: true});
         }
     }
 }

@@ -4,7 +4,7 @@ import {
     ModalBuilder,
     ActionRowBuilder,
     TextInputBuilder,
-    PermissionFlagsBits
+    PermissionFlagsBits, ChatInputCommandInteraction, GuildMember
 } from 'discord.js';
 import {getLang} from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
@@ -30,16 +30,18 @@ export default {
                     uk: `Виберіть автора поста`
                 })
                 .setRequired(false)),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             const lang = await getLang(interaction);
             const local = lang.post;
-            if (interaction.guild && !interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({
+            const member = interaction.member! as GuildMember;
+            if (interaction.guild && !member.permissions.has(PermissionFlagsBits.ManageGuild)) return await interaction.reply({
                 content: lang.error.commandformanageserver,
                 ephemeral: true
             });
-            const botMember = await interaction.guild.members.fetchMe();
-            const channel = interaction.guild.channels.cache.get(interaction.channelId);
+            const guild = interaction.guild!;
+            const botMember = await guild.members.fetchMe();
+            const channel = guild.channels.cache.get(interaction.channelId)!;
 
             if (!channel.permissionsFor(botMember).has(PermissionFlagsBits.ViewChannel)) {
                 return await interaction.reply({
@@ -95,11 +97,11 @@ export default {
                 .setStyle(TextInputStyle.Short)
                 .setRequired(false);
 
-            const firstActionRow = new ActionRowBuilder().addComponents(postText);
-            const secondActionRow = new ActionRowBuilder().addComponents(postDescription);
-            const thirdActionRow = new ActionRowBuilder().addComponents(postColor);
-            const fourthActionRow = new ActionRowBuilder().addComponents(postImage);
-            const fifthActionRow = new ActionRowBuilder().addComponents(postAuthor);
+            const firstActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents(postText);
+            const secondActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents(postDescription);
+            const thirdActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents(postColor);
+            const fourthActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents(postImage);
+            const fifthActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents(postAuthor);
 
             modal.addComponents(firstActionRow, secondActionRow, thirdActionRow, fourthActionRow, fifthActionRow);
 

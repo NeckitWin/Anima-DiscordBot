@@ -65,7 +65,7 @@ export default {
             .setRequired(false)),
     async execute(interaction: ChatInputCommandInteraction) {
         try {
-            const target = interaction.options.getString(`reaction`);
+            const target = interaction.options.getString(`reaction`)!;
             const mentionUser = interaction.options.getUser(`user`);
             const gender = interaction.options.getInteger(`gender`);
             const lang = await getLang(interaction);
@@ -74,22 +74,23 @@ export default {
                 .setColor("#ba0000");
 
             const action = mentionUser ? "interactions" : "reactions";
+            // @ts-ignore
             const gifs = data[action][target];
-            const filterGifs = gender ? gifs.filter(gif => gif.g === gender || gif.g === 3) : gifs;
+            const filterGifs = gender ? gifs.filter((gif: any) => gif.g === gender || gif.g === 3) : gifs;
             const randomGif = filterGifs[Math.floor(Math.random() * filterGifs.length)];
 
 
             const embed = new EmbedBuilder()
                 .setAuthor({name: ` `, iconURL: interaction.user.displayAvatarURL()})
-                .setDescription(`${interaction.user} ${local[action][target]}` + (mentionUser ? ` ${mentionUser}` : ""))
+                .setDescription(`${interaction.user} ${local[action][target!]}` + (mentionUser ? ` ${mentionUser}` : ""))
                 .setImage(randomGif.gif);
 
             if (action === "interactions") {
-                if (interaction.user.id === mentionUser.id) return await interaction.reply({
+                if (interaction.user.id === mentionUser!.id) return await interaction.reply({
                     embeds: [embedError.setTitle(lang.error.dontyourself)],
                     ephemeral: true
                 });
-                if (!interaction.guild.members.cache.get(mentionUser.id)) return await interaction.reply({
+                if (!interaction.guild!.members.cache.get(mentionUser!.id)) return await interaction.reply({
                     embeds: [embedError.setTitle(lang.error.usernotfound)],
                     ephemeral: true
                 })
