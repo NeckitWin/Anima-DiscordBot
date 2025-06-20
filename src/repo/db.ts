@@ -24,7 +24,7 @@ const pool = mariadb.createPool({
 });
 
 
-const executeQuery = async (sql, params=[]) => {
+const executeQuery = async (sql: string, params=[]) => {
     let conn;
     try {
         conn = await pool.getConnection();
@@ -37,11 +37,11 @@ const executeQuery = async (sql, params=[]) => {
     }
 };
 
-const sqlGet = async (sql, params=[]) => {
+const sqlGet = async (sql: string, params=[]) => {
     return await executeQuery(sql, params);
 }
 
-const sqlPost = async (sql, params=[]) => {
+const sqlPost = async (sql: string, params=[]) => {
     await executeQuery(sql, params);
     return true
 }

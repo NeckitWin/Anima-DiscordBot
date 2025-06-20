@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } from 'discord.js';
+import {SlashCommandBuilder, EmbedBuilder, AttachmentBuilder, ChatInputCommandInteraction} from 'discord.js';
 import fetch from 'node-fetch';
 import { createCanvas, loadImage } from 'canvas';
 import path from 'node:path';
@@ -6,7 +6,7 @@ import url from 'node:url';
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
 
-async function createCircularAvatar(imageUrl, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowBlur = 10) {
+async function createCircularAvatar(imageUrl: string, size = 200, shadowColor = 'rgba(255, 0, 0, 0.5)', shadowBlur = 10) {
     const canvas = createCanvas(size + shadowBlur * 2, size + shadowBlur * 2);
     const ctx = canvas.getContext('2d');
 
@@ -34,7 +34,7 @@ async function createCircularAvatar(imageUrl, size = 200, shadowColor = 'rgba(25
     return canvas;
 }
 
-function createText(text, fontSize, fillColor = 'white', strokeColor = null, strokeWidth = 0, center = false) {
+function createText(text: string, fontSize: number, fillColor = 'white', strokeColor: string | null = null, strokeWidth: number = 0, center: boolean = false) {
     const canvas = createCanvas(240, fontSize + 10);
     const ctx = canvas.getContext('2d');
 
@@ -90,7 +90,7 @@ export default {
             })
             .setRequired(true)
         ),
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         try {
             const lang = await getLang(interaction);
 
@@ -99,8 +99,8 @@ export default {
                 .setColor(`#ff0062`);
             await interaction.reply({embeds: [embedLoading]});
 
-            const user1 = interaction.options.getUser('user1');
-            const user2 = interaction.options.getUser('user2');
+            const user1 = interaction.options.getUser('user1')!;
+            const user2 = interaction.options.getUser('user2')!;
 
             if (user1.id === user2.id) {
                 embedLoading.setTitle(lang.error.otherpeople).setColor(`#bf0000`);
