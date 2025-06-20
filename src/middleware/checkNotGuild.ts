@@ -1,8 +1,8 @@
 import {getLang} from "../utils/lang.ts";
 import {errorEmbed} from "../components/embeds/errorEmbed.ts";
-import {CommandInteraction} from "discord.js";
+import {CommandInteraction, Interaction} from "discord.js";
 
-export const checkNotGuild = async (interaction: CommandInteraction) => {
+export const checkNotGuild = async (interaction: CommandInteraction | Interaction) => {
     const lang = await getLang(interaction);
     if (!interaction.guild) {
         const embed = errorEmbed(lang, lang.error.notguild);

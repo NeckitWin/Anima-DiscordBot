@@ -1,5 +1,12 @@
-import { Events, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } from 'discord.js';
-import fetch from 'node-fetch2';
+import {
+    Events,
+    EmbedBuilder,
+    ButtonBuilder,
+    ActionRowBuilder,
+    ButtonStyle,
+    Interaction
+} from 'discord.js';
+import fetch from 'node-fetch';
 import { commandLog } from '../utils/commandLog.ts';
 import {getStickerFormat} from "../utils/utility.ts";
 import errorLog from "../utils/errorLog.ts";
@@ -9,7 +16,7 @@ export default [
     {
         // emoji-sticker
         name: Events.InteractionCreate,
-        async execute(message) {
+        async execute(message: Interaction) {
             if (!message.isMessageContextMenuCommand()) return;
             if (message.commandName !== `emoji-sticker`) return;
             try {
@@ -18,13 +25,12 @@ export default [
                 const messageID = message.targetId;
                 const getMessage = await message.channel?.messages.fetch(messageID) || false;
                 if (!getMessage) return await message.editReply({
-                    content: `I don't have access to this guild`,
-                    ephemeral: true
+                    content: `I don't have access to this guild`
                 });
                 const sticker = getMessage.stickers?.first() || false;
 
                 const emojiContent = getMessage.content.match(/<a?:\w+:\d+>/g);
-                const emojiID = emojiContent ? emojiContent[0].match(/\d+/g)[0] : false;
+                const emojiID: string | false = emojiContent ? emojiContent[0].match(/\d+/g)![0] : false;
 
                 if (emojiID) {
                     const imageGif = `https://cdn.discordapp.com/emojis/${emojiID}.gif`
@@ -53,10 +59,10 @@ export default [
                     const components = [buttonPng, buttonWebp];
                     if (checkResponse.ok) components.push(buttonGif);
 
-                    const row = new ActionRowBuilder()
+                    const row = new ActionRowBuilder<ButtonBuilder>()
                         .addComponents(components);
 
-                    await message.editReply({embeds: [embed], components: [row], ephemeral: true});
+                    await message.editReply({embeds: [embed], components: [row]});
                 } else if (sticker) {
                     const stickerID = sticker.id;
                     const stickerType = sticker.format;
@@ -66,15 +72,15 @@ export default [
 
                     const buttonSticker = new ButtonBuilder()
                         .setURL(stickerURL)
-                        .setLabel(getStickerFormat(stickerType).toUpperCase())
+                        .setLabel(getStickerFormat(stickerType)!.toUpperCase())
                         .setStyle(ButtonStyle.Link);
 
-                    const row = new ActionRowBuilder()
+                    const row = new ActionRowBuilder<ButtonBuilder>()
                         .addComponents(buttonSticker);
 
-                    await message.editReply({embeds: [embed], components: [row], ephemeral: true});
+                    await message.editReply({embeds: [embed], components: [row]});
                 } else {
-                    await message.editReply({content: `No emoji or sticker found`, ephemeral: true});
+                    await message.editReply({content: `No emoji or sticker found`});
                 }
             } catch (err) {
                 await errorLog(err);

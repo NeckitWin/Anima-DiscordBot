@@ -1,8 +1,8 @@
-import { EmbedBuilder } from 'discord.js';
-import { updateAura } from '../repo/auraRepository.ts';
-import { getLang } from '../utils/lang.ts';
-import { commandLog } from '../utils/commandLog.ts';
-import { setCooldown } from '../utils/customCooldown.ts';
+import {EmbedBuilder, Message, MessageFlags, TextChannel} from 'discord.js';
+import {updateAura} from '../repo/auraRepository.ts';
+import {getLang} from '../utils/lang.ts';
+import {commandLog} from '../utils/commandLog.ts';
+import {setCooldown} from '../utils/customCooldown.ts';
 import errorLog from "../utils/errorLog.ts";
 
 const PlusAura = [
@@ -22,25 +22,25 @@ const MinusAura = [
 export default {
     cooldown: 60,
     name: 'messageCreate',
-    async execute(message) {
+    async execute(message: Message) {
         try {
             if (!(message.content === '-aura' || message.content === '+aura')) return;
-            if(!await commandLog("auraButtons", message, 0)) return;
+            if (!await commandLog("auraButtons", message, 0)) return;
 
             const lang = await getLang(message);
             const local = lang.aura;
+            const channel = message.channel! as TextChannel;
 
             const replyUser = message.mentions.repliedUser;
             if (replyUser === null || replyUser === undefined) return message.reply({
-                content: lang.error.mustreply,
-                ephemeral: true
+                content: lang.error.mustreply
             });
             if (replyUser.id === message.author.id) return message.reply(local.cantyourself);
             if (replyUser.bot) return message.reply(local.cantbot);
 
             if (!await setCooldown("aura", message, 60)) return;
 
-            const random = parseInt(Math.random() * (10000 - 100) + 100);
+            const random = Math.random() * (10000 - 100) + 100;
 
 
             const embed = new EmbedBuilder()
@@ -60,9 +60,9 @@ export default {
                     .setImage(PlusAura[Math.floor(Math.random() * PlusAura.length)]);
             }
 
-            await updateAura(replyUser.id, message.guild.id, sign, random, replyUser.displayName, replyUser.username);
+            await updateAura(replyUser.id, message.guild!.id, sign, random, replyUser.displayName, replyUser.username);
 
-            await message.channel.send({embeds: [embed]});
+            await channel.send({embeds: [embed]});
         } catch (err) {
             await errorLog(err);
         }

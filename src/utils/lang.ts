@@ -3,20 +3,20 @@ import ru from '../../data/langs/ru.json' with {type: 'json'};
 import uk from '../../data/langs/uk.json' with {type: 'json'};
 import pl from '../../data/langs/pl.json' with {type: 'json'};
 import {getServer} from "../repo/serverRepository.js";
-import {ButtonInteraction, CommandInteraction} from "discord.js";
+import {ButtonInteraction, CommandInteraction, Interaction, Message} from "discord.js";
 import {Record} from "openai/core";
+import errorLog from "./errorLog.js";
 
 type LangCode = 'ru' | 'en' | 'uk' | 'pl';
 
 const lang: Record<LangCode, any> = {ru, en, uk, pl};
 const langCache = new Map();
 
-const getLang = async (interaction: CommandInteraction | ButtonInteraction) => {
+const getLang = async (interaction: CommandInteraction | Interaction | ButtonInteraction | Message) => {
     try {
-        const {guild, locale} = interaction;
+        const {guild} = interaction;
         if (guild) {
             const guildId = guild.id;
-            const guildName = guild.name;
 
             if (langCache.has(guildId)) {
                 const cachedLang = langCache.get(guildId) as LangCode;
@@ -28,11 +28,11 @@ const getLang = async (interaction: CommandInteraction | ButtonInteraction) => {
 
             langCache.set(guildId, serverLang);
             return lang[serverLang] || lang[`en`];
-        } else {
-            return lang[locale as LangCode] || lang[`en`];
+        } else if (!(interaction instanceof Message) && interaction.locale) {
+            return lang[interaction.locale as LangCode] || lang[`en`];
         }
     } catch (error) {
-        console.error(error);
+        await errorLog(error);
         return lang[`en`];
     }
 }
