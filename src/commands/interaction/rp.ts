@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction} from "discord.js";
-import data from "../../../data/jsons/reactions.json" with {type: 'json'};
+import data from "../../../tempData/jsons/reactions.json" with {type: 'json'};
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
 

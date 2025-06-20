@@ -111,7 +111,7 @@ export default {
             const avatar2 = await createCircularAvatar(user2.displayAvatarURL({extension: 'png', size: 256}));
 
             const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-            const bgPath = path.join(__dirname, "../../../data/img/heartbg.png");
+            const bgPath = path.join(__dirname, "../../../tempData/img/heartbg.png");
             const bgImage = await loadImage(bgPath);
 
             const compatibilityScore = Math.floor(Math.random() * 101);

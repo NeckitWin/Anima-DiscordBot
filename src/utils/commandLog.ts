@@ -1,4 +1,4 @@
-import blacklist from '../../data/jsons/blacklist.json' with {type: 'json'};
+import blacklist from '../../tempData/jsons/blacklist.json' with {type: 'json'};
 import {updateUsedCommandsCount} from "../repo/statsRepository.ts";
 import {webhooks} from "../config/webhooks.ts";
 

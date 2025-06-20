@@ -1,5 +1,5 @@
 import {CommandInteraction, EmbedBuilder, SlashCommandBuilder} from "discord.js";
-import animals from "../../../data/jsons/aianimals.json" with {type: 'json'};
+import animals from "../../../tempData/jsons/aianimals.json" with {type: 'json'};
 import errorLog from "../../utils/errorLog.ts";
 
 export default {
