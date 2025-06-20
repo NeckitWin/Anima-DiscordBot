@@ -2,7 +2,7 @@ FROM oven/bun:latest
 COPY package.json ./
 COPY bun.lock ./
 COPY src ./src
-COPY Data ./data
+COPY data ./data
 COPY tsconfig.json ./
 RUN bun install
 ARG CLIENT_ID
