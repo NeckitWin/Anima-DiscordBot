@@ -34,7 +34,7 @@ export default {
         }),
     async execute(interaction: CommandInteraction) {
         try {
-            await interaction.deferReply({ephemeral: true});
+            await interaction.deferReply();
             const lang = await getLang(interaction);
             const local = lang.anime;
             if (!interaction.guild) return await interaction.editReply({content: lang.error.notguild});

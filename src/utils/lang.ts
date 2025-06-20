@@ -3,7 +3,7 @@ import ru from '../../data/langs/ru.json' with {type: 'json'};
 import uk from '../../data/langs/uk.json' with {type: 'json'};
 import pl from '../../data/langs/pl.json' with {type: 'json'};
 import {getServer} from "../repo/serverRepository.js";
-import {CommandInteraction} from "discord.js";
+import {ButtonInteraction, CommandInteraction} from "discord.js";
 import {Record} from "openai/core";
 
 type LangCode = 'ru' | 'en' | 'uk' | 'pl';
@@ -11,7 +11,7 @@ type LangCode = 'ru' | 'en' | 'uk' | 'pl';
 const lang: Record<LangCode, any> = {ru, en, uk, pl};
 const langCache = new Map();
 
-const getLang = async (interaction: CommandInteraction) => {
+const getLang = async (interaction: CommandInteraction | ButtonInteraction) => {
     try {
         const {guild, locale} = interaction;
         if (guild) {
