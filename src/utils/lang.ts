@@ -1,7 +1,7 @@
-import en from '../../tempData/langs/en.json' with {type: 'json'};
-import ru from '../../tempData/langs/ru.json' with {type: 'json'};
-import uk from '../../tempData/langs/uk.json' with {type: 'json'};
-import pl from '../../tempData/langs/pl.json' with {type: 'json'};
+import en from '../../data/langs/en.json' with {type: 'json'};
+import ru from '../../data/langs/ru.json' with {type: 'json'};
+import uk from '../../data/langs/uk.json' with {type: 'json'};
+import pl from '../../data/langs/pl.json' with {type: 'json'};
 import {getServer} from "../repo/serverRepository.js";
 import {CommandInteraction} from "discord.js";
 import {Record} from "openai/core";

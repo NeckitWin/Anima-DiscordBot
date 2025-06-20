@@ -6,7 +6,7 @@ import {
     ActionRowBuilder,
     CommandInteraction
 } from "discord.js";
-import anime from "../../../tempData/jsons/anime.json" with {type: 'json'};
+import anime from "../../../data/jsons/anime.json" with {type: 'json'};
 import { getLang } from "../../utils/lang.ts";
 import errorLog from "../../utils/errorLog.ts";
 
