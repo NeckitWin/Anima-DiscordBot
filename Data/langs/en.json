@@ -6,6 +6,7 @@
   "request": "Request from",
   "indev": "In development",
   "error": {
+    "errortest": "test",
     "notguild": "This command can only be used in servers",
     "commandforadmin": "This command is only for server administrators",
     "commandformanageserver": "You need permission to manage the server",
